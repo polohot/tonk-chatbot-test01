@@ -1,0 +1,471 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ",What is the purpose of the parameter P 2942[0] POWF_VOn in the context of power failure detection?,P 2942[0] POWF_VOn is used to define the power failure detection limit.,The parameter POWF_VOn sets the threshold at which a power failure is detected.,"To specify the voltage level that triggers power failure detection, configure POWF_VOn in P 2942[0].",POWF_VOn in P 2942[0] determines the minimum voltage level before a power failure is acknowledged.,"Defining the detection limit for power failures is the role of POWF_VOn, set in parameter P 2942[0]."
+1,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ",How does mode 6 differ from mode 2 in terms of voltage levels and checks?,Mode 6 is the same as mode 2 but uses absolute voltage levels and omits validation checks.,"Unlike mode 2, mode 6 operates with absolute voltages and does not perform validation checks.",Mode 6 mirrors mode 2's functionality but applies absolute voltage levels and skips validation.,"The key difference is mode 6's use of absolute voltages and absence of validation checks, compared to mode 2.","Mode 6 and mode 2 are similar, but mode 6 features absolute voltage levels and lacks validation checks."
+2,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ","What is the significance of the parameter P 737[0] MON_MNCTL, bit 4 in monitoring for single-phase failure?","Setting P 737[0] MON_MNCTL, bit 4 to 1 initiates the PowerFail state of the control.",Bit 4 of MON_MNCTL in P 737[0] must be set to 1 to configure the PowerFail state for single-phase failure monitoring.,"The PowerFail state is activated when MON_MNCTL's bit 4 in P 737[0] is set to 1, crucial for single-phase failure monitoring.","For monitoring single-phase failures, ensure MON_MNCTL's bit 4 in P 737[0] is 1 to trigger the PowerFail state.","Initiation of the PowerFail state, necessary for single-phase failure monitoring, requires setting bit 4 of MON_MNCTL in P 737[0] to 1."
+3,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ","What does the parameter P 2942[1] POWF_VRef define, and what is the user's responsibility regarding it?","P 2942[1] POWF_VRef defines the voltage setpoint, with the user responsible for ensuring the values make sense.","POWF_VRef in P 2942[1] sets the voltage reference value, and the user must verify its validity.","The voltage setpoint is defined by POWF_VRef in P 2942[1], requiring the user to confirm its appropriateness.","Defining the voltage reference value, POWF_VRef in P 2942[1] places the onus on the user to ensure logical values.","P 2942[1] POWF_VRef specifies the voltage setpoint, with no validation checks, making user verification essential."
+4,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ",What is the function of mode 7 in relation to mode 6?,Mode 7 is the same as mode 6 but includes pulse operation.,Adding pulse operation to mode 6's characteristics defines mode 7.,Mode 7 operates like mode 6 but with the addition of pulse functionality.,The distinction between mode 7 and mode 6 is mode 7's incorporation of pulse operation.,"Mode 7 mirrors mode 6's absolute voltage levels and lack of validation checks, plus it features pulse operation."
+5,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ","What parameters are involved in power failure bridging, and what do they control?","Parameters like CON_POWF_VCtrl, CON_POWF_VLim, and CON_POWF_RetTime control aspects such as gain, voltage limit, and restoration time window in power failure bridging.","Power failure bridging involves parameters controlling gain (CON_POWF_VCtrl), voltage limits (CON_POWF_VLim), and the time window for power restoration (CON_POWF_RetTime).","Key parameters for power failure bridging include settings for gain, voltage limits, and the duration allowed for mains power restoration.","In power failure bridging, parameters define the gain, maximum current, minimum speed, and voltage limits, among others.","The power failure bridging mechanism uses various parameters to manage gain, reset time, current limits, and voltage thresholds."
+6,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ","How is the voltage reference value for power failure defined, and what caution is advised?","The voltage reference value is defined by POWF_VRef in P 2942[1], with users cautioned to ensure the values are sensible as they're not validated.","POWF_VRef in P 2942[1] sets the voltage reference value, with the warning that users must check the values themselves.","Defined by POWF_VRef in P 2942[1], the voltage reference value requires user verification due to the absence of validation checks.","The voltage reference value, specified by POWF_VRef in P 2942[1], lacks automatic checks, placing responsibility on the user.","P 2942[1] POWF_VRef determines the voltage reference value, emphasizing the need for user diligence in value selection."
+7,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ",What does the parameter CON_POWF_RetTime specify in the context of power failure?,CON_POWF_RetTime specifies the time window during which mains power can be restored after a failure.,The parameter CON_POWF_RetTime defines the allowable duration for restoring mains power post-failure.,"In power failure scenarios, CON_POWF_RetTime sets the permissible timeframe for mains power recovery.",CON_POWF_RetTime in parameter 2943 determines the window for mains power restoration following a failure.,Setting the time window for mains power restoration after a failure is the role of CON_POWF_RetTime.
+8,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ",What are the monitoring parameters for undervoltage threshold and braking chopper threshold?,"The undervoltage threshold is monitored by u_zkoff (VDC), and the braking chopper threshold by u_bc_on (VDC).","u_zkoff (VDC) monitors the undervoltage threshold, while u_bc_on (VDC) tracks the braking chopper threshold.","Monitoring the undervoltage threshold involves u_zkoff (VDC), and the braking chopper threshold is monitored via u_bc_on (VDC).","The parameters u_zkoff (VDC) and u_bc_on (VDC) are used to monitor the undervoltage and braking chopper thresholds, respectively.",Undervoltage and braking chopper thresholds are monitored through u_zkoff (VDC) and u_bc_on (VDC) parameters.
+9,msd_servo_drive.txt,8,a0d79f6d9cd50c0cdbb60ecd08a9b3f422dd9cbd03495be25a60f4414c1bb4b9,"Return of power not allowed - > Trigger error upon return.|
+|-|-|NOLIM(3)|-|Function enabled. Return of power cannot be detected.|
+|-|-|RETABS(5)|-|Same as ""RET(1)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABS(6)|-|Same as “NORET(2)"", bit with absolute voltages and without validation checks.|
+|-|-|NORETABSPULSE(7)|-|Same as ""NORETABS(6)"", but with pulse operation.|
+
+# Mode 6
+
+Same as mode 2, but with absolute voltage levels and without a validation check.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Mode 7
+
+Same as mode 6, but with pulse operation.
+
+# Parameters
+
+|P 2942[0]|-|POWF_VOn|-|is used to define the power failure detection limit.|
+|---|---|---|---|---|
+|P 2942[1]|-|POWF_VRef|-|is used to define the voltage setpoint. The configured values will not be checked to see if they are valid. The user themselves will be responsible for ensuring that the values entered make sense.|
+
+# Power failure bridging
+
+|2941|0|CON_POWF_VCtrl|Power failure bridging: Gain| | |
+|---|---|---|---|---|---|
+|1|Tn|ms|Power failure bridging: Reset time| | |
+|2|imax|A|Power failure bridging: Maximum (negative) current| | |
+|3|imax_pos|A|Power failure bridging: Maximum q current| | |
+|4|n_min|rpm|Power failure bridging: Minimum speed for voltage controller| | |
+|2942|0|CON_POWF_VLim|Voltage limit for power failure| | |
+| | |POWF_Von|V|Power failure detection limit| |
+|1|POWF_VRef|V|Voltage reference value| | |
+| |2943|0|CON_POWF_RetTime|ms|Setting of time window in which mains power can be restored|
+|701|-|MON_ActValues|-|-| |
+|12|u_zkoff|VDC|UZK undervoltage threshold| | |
+|17|u_bc_on|VDC|Braking chopper threshold| | |
+
+# Table 4.7: “Power failure bridging” parameters
+
+# 4.2.2 Monitoring for single-phase failure
+
+If the parameter is P 737[0] MON_MNCTL, bit 4 = 1, the PowerFail state of the control is initiated. This must therefore be configured. ",What is the role of the parameter CON_POWF_VCtrl in power failure bridging?,CON_POWF_VCtrl controls the gain in power failure bridging.,The gain for power failure bridging is adjusted by the CON_POWF_VCtrl parameter.,"In power failure bridging, CON_POWF_VCtrl is responsible for setting the gain.",CON_POWF_VCtrl parameter defines the gain used during power failure bridging.,Setting the gain in the power failure bridging process is the function of CON_POWF_VCtrl.

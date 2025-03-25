@@ -1,0 +1,3721 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ",What is the purpose of the 'Compendium Part B - Process Safety (V9.0)' operating manual?,"The 'Compendium Part B - Process Safety (V9.0)' operating manual provides detailed instructions and guidelines for configuring and managing process safety systems, including setting system parameters, configuring safety programs, and handling safety-related communications.","It serves as a comprehensive guide for setting up and maintaining process safety configurations, covering topics from system parameters to safety program compilation and download.","This manual is designed to assist users in implementing and operating safety-related functions within their systems, ensuring compliance with safety standards and operational requirements.","Aimed at professionals, the manual details procedures for configuring fail-safe systems, including parameter assignments, safety program creation, and monitoring times calculation.","The operating manual 'Compendium Part B - Process Safety (V9.0)' is essential for engineers and technicians working on safety-critical systems, offering step-by-step instructions on various safety configurations and operations."
+1,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ",How can you assign parameters for the SM326; DI 8 x NAMUR module as described in the 'Compendium Part B - Process Safety (V9.0)'?,"Parameter assignment for the SM326; DI 8 x NAMUR module is detailed in section 6.4.5 of the manual, providing specific instructions for configuring this module.","To assign parameters for the SM326; DI 8 x NAMUR module, refer to the dedicated section in the manual that outlines the necessary steps and considerations for proper configuration.","The manual specifies the parameter assignment process for the SM326; DI 8 x NAMUR module, ensuring users can accurately set up the module for their safety systems.","Section 6.4.5 covers the parameter assignment for the SM326; DI 8 x NAMUR module, guiding users through the configuration to meet safety and operational requirements.","For the SM326; DI 8 x NAMUR module, the manual provides a detailed parameter assignment procedure, essential for integrating the module into safety-related applications."
+2,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ",What are the key components of configuring the safety program in the 'Compendium Part B - Process Safety (V9.0)'?,"Configuring the safety program involves creating the program structure, assigning parameters to F-blocks, and setting up F-runtime and F-shutdown groups, as outlined in section 7.2.","Key components include defining the program structure, creating CFC charts, and configuring fail-safe AS-AS communication, detailed in various subsections of chapter 7.","The process includes steps like interconnecting F-blocks, setting up F-runtime groups, and managing data exchange between F user and standard user programs.","Section 7 highlights essential steps such as creating the safety program, configuring communications, and handling F-STOP scenarios for comprehensive safety program setup.","From defining the program structure to compiling and downloading the safety program, the manual covers all necessary steps for a complete safety program configuration."
+3,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ",What does the 'Compendium Part B - Process Safety (V9.0)' say about passivation and reintegration of input/output channels?,"The manual discusses passivation and reintegration in section 7.7, covering general passivation, group passivation, and procedures for reintegration following error elimination.",It provides guidelines on handling passivation - the process of deactivating faulty channels - and the steps for their reintegration once errors are resolved.,Section 7.7 details automatic reintegration on channel error and programming reintegration for module errors or channel errors requiring acknowledgment.,"The manual outlines the concepts of passivation and reintegration, essential for maintaining system safety and functionality in the presence of faults.","For input/output channels, the manual explains passivation as a safety measure and the conditions under which reintegration can be safely performed."
+4,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ",How is the safety mode activated and deactivated according to the 'Compendium Part B - Process Safety (V9.0)'?,"Safety mode activation and deactivation procedures are described in sections 7.9.2 and 7.9.3, providing step-by-step instructions for these critical operations.","The manual specifies how to deactivate safety mode in section 7.9.2 and activate it in 7.9.3, ensuring users can safely toggle this mode as needed.","Activating safety mode involves specific steps to ensure the system's safety functions are enabled, while deactivation requires careful consideration to maintain system integrity.","Sections dedicated to safety mode cover both activation and deactivation processes, highlighting the importance of these operations in safety program management.","The manual provides clear instructions for switching safety mode on and off, crucial for testing and operational phases of safety systems."
+5,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ",What are the monitoring times and system response times discussed in the 'Compendium Part B - Process Safety (V9.0)'?,"Monitoring times and system response times are critical for safety functions, with section 7.11 detailing how to calculate and configure these parameters.","The manual explains the importance of monitoring times, such as F-cycle monitoring time and communication monitoring time, for ensuring timely system responses.","Section 7.11 covers various monitoring times, including those for safety-related communication between F-CPUs and within F-shutdown groups.",It provides methodologies for calculating monitoring times and understanding system response times to enhance safety function reliability.,"Detailed in section 7.11, the manual addresses how to manage and calculate monitoring and response times to optimize safety system performance."
+6,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ",How does the 'Compendium Part B - Process Safety (V9.0)' guide the configuration of redundant F-signal modules?,"Section 6.5 provides instructions for configuring redundant F-signal modules, ensuring system reliability through redundancy.","The manual outlines the steps for setting up redundant F-signal modules, a key feature for enhancing system safety and availability.","Configuring redundant F-signal modules involves specific procedures detailed in section 6.5, aimed at achieving fault tolerance in safety systems.","Redundancy configuration for F-signal modules is covered, offering strategies to maintain operational continuity in case of module failure.","The manual details the configuration process for redundant F-signal modules, critical for systems requiring high levels of safety and reliability."
+7,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ",What is the significance of Marshalled Termination Assemblies (MTAs) in the 'Compendium Part B - Process Safety (V9.0)'?,"Marshalled Termination Assemblies (MTAs) are discussed in section 6.6, highlighting their role in simplifying wiring and improving system reliability.","The manual describes MTAs as components that facilitate organized wiring and voting architectures, contributing to system safety and efficiency.","Section 6.6 explains how MTAs support the implementation of 'Wiring and Voting' architectures, essential for certain safety configurations.","MTAs are presented as a solution for managing complex wiring in safety systems, with benefits for maintenance and operational clarity.","The significance of MTAs lies in their ability to streamline wiring processes and enhance the reliability of safety-related systems, as outlined in the manual."
+8,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ","How are changes, tracking changes, and acceptance handled in the safety program according to the 'Compendium Part B - Process Safety (V9.0)'?","Chapter 9 covers procedures for making changes, tracking these changes, and the acceptance process, ensuring modifications are safely implemented.","The manual provides guidelines for preparing, executing, and documenting changes in the safety program, including changes in CFC and HW Config.","It outlines steps for tracking changes and ensuring they meet safety standards before acceptance, crucial for maintaining system integrity.","Section 9 details the importance of documenting and approving changes, with procedures for downloading changes and complete downloading.","Handling changes involves careful planning, execution, and documentation, with the manual offering a comprehensive approach to managing modifications in safety programs."
+9,pcs7_compendium_part_b_en-US_en-US.txt,4,36265c8c9f4e250b1df27ec426614fa45d04b60cdecbff1de3aee1290788f203,"Calculating monitoring times...................................................................................................36
+3. Communications module parameters/Networks.....................................................................40
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 6.4 Setting system parameters for F-signal modules
+
+.................................................................. 43
+
+# 6.4.1 Operating mode
+
+..................................................................................................................... 43
+
+# 6.4.2 PROFIsafe addresses
+
+............................................................................................................ 43
+
+# 6.4.3 Module parameters - general
+
+................................................................................................. 45
+
+# 6.4.4 Activating channels
+
+................................................................................................................ 46
+
+# 6.4.5 Parameter assignment for SM326; DI 8 x NAMUR
+
+............................................................................................... 49
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+.............................................................................................. 50
+
+# 6.4.7 Assigning parameters for the SM326; DO 10 x DC 24V/2A
+
+.................................................................................. 52
+
+# 6.4.8 Parameter assignment for SM326; F DO 10 x DC 24V/2A PP
+
+.............................................................................. 53
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+............................................................................... 56
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+........................................................................................ 57
+
+# 6.4.11 Assigning parameters for the SM336; F-AI 6 x 0/4...20mA HART
+
+........................................................................ 60
+
+# 6.4.12 Parameter assignment for EM 8 F-DI NAMUR Ex
+
+................................................................................................. 63
+
+# 6.4.13 Parameter assignment for EM 4 F-DO Ex 17.4V/40mA
+
+........................................................................................ 65
+
+# 6.4.14 Parameter assignment for EM 4 F-AI Ex HART
+
+............................................................................................ 67
+
+# 6.5 Configuring redundant F-signal modules
+
+............................................................................... 70
+
+# 6.6 Marshalled Termination Assemblies (MTAs)
+
+......................................................................... 72
+
+# 6.7 ""Wiring and Voting"" architectures for ET 200M
+
+..................................................................... 74
+
+# 6.7.1 Voting on the module or in the CPU
+
+...................................................................................... 74
+
+# 6.7.2 2oo3 Voting with F-AI
+
+............................................................................................................. 76
+
+# 7 Configuring the safety program
+
+............................................................................................................. 77
+
+# 7.1 Introduction
+
+............................................................................................................................ 77
+
+# 7.2 Creating the safety program
+
+.................................................................................................................. 79
+
+# 7.2.1 Defining the program structure
+
+.............................................................................................. 80
+
+# 7.2.2 Creating CFC charts
+
+.............................................................................................................. 81
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+......................................................................................... 82
+
+# 7.2.4 Run sequence of F-blocks
+
+..................................................................................................... 83
+
+# 7.2.5 F-runtime groups
+
+.................................................................................................................... 85
+
+# 7.2.6 F-shutdown groups
+
+................................................................................................................ 87
+
+# 7.2.7 Data exchange between the F user program and standard user program
+
+............................................................................................ 90
+
+# 7.2.8 How F-blocks with floating-point operations respond to number range overflows
+
+.................................................................................. 91
+
+# 7.3 Configuring fail-safe AS-AS communication
+
+.......................................................................................................... 93
+
+# 7.3.1 Configuring S7 connections
+
+................................................................................................... 94
+
+# 7.3.2 Configuring F-communications blocks
+
+................................................................................................. 95
+
+# 7.4 F-STOP
+
+.................................................................................................................................. 98
+
+# 7.4.1 Complete shutdown
+
+............................................................................................................... 98
+
+# 7.4.2 Partial shutdown
+
+..................................................................................................................... 98
+
+# 7.4.3 Parameter assignment for shutdown behavior
+
+...................................................................................................... 99
+
+# 7.4.4 Causes of errors
+
+................................................................................................................... 100
+
+# 7.4.5 Execution of an F-STOP in S7 F/FH systems
+
+............................................................................................. 101
+
+# 7.4.6 Exiting an F-STOP
+
+............................................................................................................... 102
+
+# 7.5 F startup and (re)start protection
+
+......................................................................................... 102
+
+# 7.5.1 F-startup
+
+............................................................................................................... 102
+
+# 7.5.2 (Re)start protection
+
+.............................................................................................................. 103
+
+# 7.6 I/O access via F channel driver blocks
+
+................................................................................ 104
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Table of contents
+
+# 7.7 Passivation and reintegration of input/output channels
+
+105
+
+# 7.7.1 Passivation - general
+
+105
+
+# 7.7.2 Group passivation
+
+106
+
+# 7.7.3 Reintegration following elimination of errors
+
+108
+
+# 7.7.4 Automatic reintegration on channel error
+
+109
+
+# 7.7.5 Programming reintegration following module errors or channel errors requiring acknowledgment
+
+109
+
+# 7.8 Compiling the F-program
+
+111
+
+# 7.8.1 Password protection for safety-related functions and settings
+
+111
+
+# 7.8.2 Parameterizing the maximum F cycle monitoring time
+
+112
+
+# 7.8.3 Compiling the S7 program
+
+113
+
+# 7.9 Safety mode and downloading the safety program
+
+115
+
+# 7.9.1 Information on safety mode
+
+115
+
+# 7.9.2 Deactivating safety mode
+
+115
+
+# 7.9.3 Activating safety mode
+
+117
+
+# 7.9.4 Downloading the safety program
+
+118
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+119
+
+# 7.10.1 Fail-safe acknowledgment (SWC_QOS)
+
+120
+
+# 7.10.2 Change process values (SWC_CHG)
+
+123
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+126
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+129
+
+# 7.10.5 Operator authorizations for Secure Write Command
+
+133
+
+# 7.11 Monitoring times and system response times
+
+137
+
+# 7.11.1 Diagnostic block ""CPU_RT""
+
+139
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+140
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+144
+
+# 7.11.4 Monitoring time for safety-related communication between F-CPUs
+
+153
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+155
+
+# 7.11.6 Response times of safety functions
+
+155
+
+# 8 Configuration with Safety Matrix
+
+163
+
+# 8.1 Creating and configuring a Safety Matrix
+
+163
+
+# 8.2 Documenting a Safety Matrix
+
+165
+
+# 8.3 Organizing matrices into different shutdown groups
+
+165
+
+# 8.4 Duplicating matrices
+
+170
+
+# 8.5 User authorizations for the Safety Matrix Viewer
+
+172
+
+# 8.6 Interconnections between the matrix and safety program
+
+174
+
+# 8.7 Using imported F channel drivers in the matrix
+
+174
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+5
+
+# Table of contents
+
+# 9 Changes, tracking changes, and acceptance
+
+|9.1|General information|175|
+|---|---|---|
+|9.2|Preparing for changes|176|
+|9.3|Changes in CFC|178|
+|9.4|Changes in HW Config|179|
+|9.5|Downloading changes/Complete downloading|180|
+|9.6|Tracking changes in the safety program|180|
+|9.7|Printing program data|184|
+|9.8|Plant acceptance|186|
+
+# 10 Service and support
+
+187
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Security information
+
+Siemens provides products and solutions with industrial security functions that support the secure operation of plants, solutions, machines, equipment and/or networks.
+
+In order to protect plants, systems, machines and networks against cyber threats, it is necessary to implement – and continuously maintain – a holistic, state-of-the-art industrial security concept. ",What industrial security information is provided in the 'Compendium Part B - Process Safety (V9.0)'?,"The manual emphasizes the importance of implementing a holistic industrial security concept to protect against cyber threats, as mentioned in the security information section.","It highlights Siemens' commitment to providing products with industrial security functions, supporting secure operation of plants and networks.",The security information section advises on the necessity of continuously maintaining an up-to-date industrial security concept for safeguarding systems.,"Siemens outlines its approach to industrial security, stressing the need for comprehensive protection measures in the face of evolving cyber threats.",The manual's security information underscores the critical role of industrial security in ensuring the safe and reliable operation of safety-related systems.

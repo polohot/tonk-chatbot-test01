@@ -1,0 +1,1501 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","What are the recommended steps for changing a computer name in a PCS 7 plant according to the 'Configuration Manual, 03/2018, A5E43228900-AA'?","For bundle PCs outside of the restore process, perform a new installation with the Restore DVD. For a PC installed by yourself, reinstall Windows.","To change the computer name for bundle PCs not in the restore process, use the Restore DVD for a new installation. For self-installed PCs, a Windows reinstallation is necessary.",The manual specifies two methods: using the Restore DVD for bundle PCs outside restore processes and reinstalling Windows for self-installed PCs.,"For bundle PCs, a new installation via Restore DVD is required if changing the name outside restore. Self-installed PCs need Windows reinstalled.","Change computer names by reinstalling with Restore DVD for bundle PCs outside restore or reinstalling Windows for self-installed PCs, as per the manual."
+1,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","What are the key differences between operating computers in a workgroup versus a domain environment in PCS 7 as outlined in the 'Configuration Manual, 03/2018, A5E43228900-AA'?","Domains centralize user information and safety databases, suitable for large networks, while workgroups require local settings and are best for limited PC stations.","In domains, user info and safety are centralized, ideal for scalability. Workgroups need local management, fitting small networks with few PCs.","Domains offer centralized administration and scalability for large networks, whereas workgroups involve distributed management, suited for smaller setups.","Centralized user and safety management in domains contrasts with workgroups' local settings, making domains scalable and workgroups limited.","Domains centralize management and scale for large networks; workgroups manage locally, suitable for small, limited PC setups."
+2,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","What is the requirement for using a DHCP server in a PCS 7 plant according to the 'Configuration Manual, 03/2018, A5E43228900-AA'?","DHCP servers must use address reservation, with all PC stations operating on reserved addresses.","The manual mandates address reservation for DHCP servers, ensuring all PCs work with reserved addresses.","In PCS 7, DHCP servers are only allowed with address reservation, requiring all PC stations to have reserved addresses.","Address reservation is compulsory for DHCP servers in PCS 7, with every PC station needing a reserved address.","For DHCP servers in PCS 7, the configuration must include address reservation, with all PCs on reserved addresses."
+3,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","How does adding a new user differ between domain and workgroup environments in PCS 7 as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?","In domains, new users are added centrally in AD and available on all PCs. In workgroups, each PC station must add the user individually.","Domains allow central AD creation of new users, instantly accessible across PCs. Workgroups require manual addition on each PC.","Adding users in domains is centralized via AD, making them immediately available. Workgroups need the user added separately on each PC.","Central AD in domains simplifies user addition across all PCs, while workgroups demand individual PC station updates.",Domains streamline user addition through AD; workgroups necessitate manual updates on every PC station.
+4,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","What are the recommended user roles for a PCS 7 system according to the 'Configuration Manual, 03/2018, A5E43228900-AA'?","Recommended roles include PCS 7 installation (local admin), Windows users for operator/engineering stations, OS Runtime login, and SIMATIC Manager login.","The manual suggests roles like installation user (local admin), operator/engineering station users, OS Runtime, and SIMATIC Manager logins.","For PCS 7, roles encompass installation (admin rights), operator/engineering users, OS Runtime, and SIMATIC Manager access.","Key roles: installation with admin rights, separate users for stations, OS Runtime, and SIMATIC Manager configuration.","PCS 7 system planning should include installation admin, station users, OS Runtime, and SIMATIC Manager roles."
+5,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","What is the significance of DNS in a domain configuration for PCS 7 as mentioned in the 'Configuration Manual, 03/2018, A5E43228900-AA'?","DNS is mandatory for name resolution in domain configurations, ensuring proper network communication.","The manual specifies DNS as essential for domain name resolution, critical for network functionality.","In domain setups, DNS is required for resolving names, a key component for operational networks.","DNS plays a crucial role in domains by enabling name resolution, as highlighted in the manual.","For domains, DNS's role in name resolution is indispensable, as per the configuration guidelines."
+6,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","How are security settings managed differently in domain versus workgroup environments in PCS 7 according to the 'Configuration Manual, 03/2018, A5E43228900-AA'?","Domains centralize security settings via AD and distribute them with group policies, while workgroups require local changes on each PC.","In domains, AD centrally manages and disseminates security settings. Workgroups need individual PC adjustments.","Security settings in domains are AD-centralized, applied via group policies. Workgroups demand manual PC-by-PC updates.",Domains streamline security through AD; workgroups necessitate manual setting adjustments on all PCs.,Central AD management in domains contrasts with workgroups' local security setting requirements.
+7,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","What are the advantages of using a domain environment for Microsoft Updates distribution in PCS 7 as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?","Domains allow central WSUS settings in AD, simplifying update management across all PC stations.",Central AD configuration in domains facilitates streamlined WSUS settings for updates.,"Using domains, WSUS settings are centrally managed in AD, easing update distribution.","Domains enable centralized WSUS setup via AD, optimizing Microsoft Updates management.",The manual highlights domain's central AD WSUS settings as efficient for updates distribution.
+8,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","What considerations are advised when selecting between workgroup and domain environments for PCS 7 plants according to the 'Configuration Manual, 03/2018, A5E43228900-AA'?","Beyond technical criteria, consider organizational factors like IT resources, Microsoft expertise, and maintenance workload.","The manual recommends evaluating organizational aspects, including IT capabilities and maintenance, alongside technical needs.","Selection should weigh technical against organizational criteria, such as expertise and resources.","Advises assessing plant-specific IT, expertise, and maintenance in choosing between workgroup and domain.","Decision-making should integrate technical and organizational considerations, per the manual."
+9,pcs7_compendium_part_a_en-US_en-US.txt,8,5dde0f3f82404d8404a95146fb78ac48c6c308ae459983c7156160f2ec874698,"Changing computer names often leads to problems in practice (e.g. in the case of multi-station systems with the SQL server installed).
+
+The following rules must be adhered to:
+
+- If you want to change the computer name for bundle PCs outside of the restore process, perform a new installation with the Restore DVD.
+- If you want to change the computer name for a PC you have installed yourself, reinstall Windows.
+
+# 4.2.6 Workgroup and domain
+
+# Working environment
+
+You have the option of operating the computers in your PCS 7 plant in a workgroup or domain environment.
+
+The following tables present a comparison of the advantages and disadvantages (from a technical perspective) as well as scenarios (examples) and their use in workgroups and domains.
+
+Note
+
+This information is provided as a basis for discussion to assist you in the selection of the appropriate environment for your computers. In addition to the technical criteria, also consider organizational criteria (for example, plant-specific IT, Microsoft expertise, resources, workload and maintenance, etc.).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Advantages and disadvantages
+
+|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|
+|The user information is stored centrally.|Standard user settings are required at each PC station.|
+|Central safety database|Local safety database|
+|Suitable for very large networks (scalability)|Suitable for short distances in the plant and a limited number of PC stations.|
+|Permissions for devices and files are managed in the AD.|Permissions for devices and files are managed by individual PC stations.|
+|The administrator must have comprehensive knowledge (substantially higher qualifications).|The administrator must be familiar with the setup and management of PC stations in the workgroup network.|
+|Central administration in the AD.|Distributed administration on each PC station.|
+|Comprehensive planning is required.|Less comprehensive planning is required.|
+|Additional PC stations required to manage the AD. Windows server required to store central security information.|Windows server only required if this is used to set up the infrastructure, for example, as a DHCP server.|
+|- The users set up for the AD are used.
+- High reliability through the use of redundant domain controllers.
+|- The users can be managed at a central PC station.
+- No redundancy is available for the central logon station to be set up.
+|
+
+# DHCP server
+
+Note: In PCS 7, the use of a DHCP server is only permitted with address reservation. All PC stations must work with reserved addresses.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# DNS / WINS server
+
+The use of DNS for name resolution is mandatory for the domain configuration.
+
+# Scenarios
+
+|Scenarios (examples)|Domain (AD; Active Directory)|Workgroup (WG)|
+|---|---|---|
+|New user is added.|The new user is created centrally in the AD and is then available immediately on all PC stations.|The new user must be added on each PC station.|
+|User password is changed.|The password is changed centrally in the AD.|The password must be changed on each PC station.|
+|Add or replace computer|The settings are applied automatically in accordance with the group policies of the corresponding organizational unit.|The settings must be adapted locally on the PC station.|
+|Modify security settings|The settings are changed centrally in the AD and distributed by means of group policies.|All settings must be changed locally.|
+|Microsoft Updates are to be distributed.|The settings for the Microsoft Windows Software Update Service (WSUS) are made centrally in the domain.|The settings for the Microsoft Windows Software Update Service (WSUS) are made at each PC station.|
+|Devices are added (e.g. printer, fax or scanner).|The devices are announced by AD.|Devices not announced. The information for connecting to the device must be known.|
+| |The security settings can be made centrally for each device.|Each user that uses the device must be created locally at this PC station and log on with local user information.|
+|One user uses multiple computers.|The user profile can be saved centrally. This applies the settings to all PC stations at logon.|The user has a local profile on each PC station.|
+| |If the profile is not saved centrally, every user will have their own local profile.| |
+
+The lists above are not weighted in terms of importance; you must determine which advantage or disadvantage is the most significant for the PCS 7 plant in question.
+
+# Domain example
+
+Changes can be made centrally, fast and conveniently in the domain structure. However, the administration of a domain requires know-how, experience and additional work.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+23
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Workgroup example
+
+In the workgroup, the majority of settings have to be made on the local computer. If a PCS 7 plant is running with fixed settings, however, and few changes are expected, these settings only need to be made once. In this case, additional time for creating a domain and providing extra training for the operating personnel is not required.
+
+Note
+
+You can find additional information in the following manuals:
+
+- SIMATIC Process Control System PCS 7 Security concept PCS 7 & WinCC (Basic)
+- SIMATIC Process Control System PCS 7 Support and Remote Dialup
+- SIMATIC Process Control System PCS 7 Patch management and security updates
+- SIMATIC Process Control System PCS 7 Managing virus scanners
+
+# Integration in a domain
+
+All PCs in the PCS 7 product bundles are configured for a Windows workgroup. If you include preconfigured PC systems in a Windows domain, you must reactivate the security settings using the SIMATIC ""Security Controller"" software.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.7 User administration
+
+# User concept
+
+Use of the following roles for a PCS 7 system is recommended when planning the user concept:
+
+- PCS 7 installation
+A user account which is a member of the local administrator group is required to start the PCS 7 set-up.
+- Windows users for operator stations and engineering stations
+Working permanently with administrator rights on the PCS 7 system is not recommended once the installation is complete for security reasons. This means that at least one additional Windows user is required on each station. In addition to the user groups required by PCS 7 components (e.g. SIMATIC HMI), membership in the ""user"" group will suffice.
+
+Note
+
+For some PCS 7 components (e.g. SIMATIC Management Console, Process Historian [PH]), belonging to the group of administrators and logging in with administrator rights to the station and to the component is required. You will find further information on the SIMATIC Management Console in the manual ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" (https://support.industry.siemens.com/cs/ww/en/view/109748755). You can find additional information on the Process Historian in the manual ""Process Historian: Administration"" (https://support.industry.siemens.com/cs/ww/de/view/109753689).
+- Logging onto OS Runtime (with SIMATIC Logon)
+For each operator you can create a Windows user who logs on with the allocated user rights with activated OS runtime. For this a Windows user only needs rights in the corresponding groups that are also set up in the OS configuration. The same applies analogously to the PCS 7 ""SIMATIC BATCH"" and ""SIMATIC Route Control"" options.
+- Logging onto SIMATIC Manager
+For each project engineer you can create a Windows user in order to record configuration changes in the change log. Windows users only require rights in the corresponding SIMATIC logon groups.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+The following guidelines apply to creating a new user account in accordance with Microsoft Windows Help:
+
+- A user name may not be the same as another user or group name on the computer being managed.
+- The name may contain up to 20 small or upper case letters and figures.
+","What is the recommended approach for user administration in PCS 7 systems according to the 'Configuration Manual, 03/2018, A5E43228900-AA'?","Create specific roles like installation admin, station users, and separate logins for OS Runtime and SIMATIC Manager.","Implement roles including installation with admin rights, operator/engineering users, and dedicated logins for runtime and configuration.","Plan for installation admins, station users, and distinct access for runtime and SIMATIC Manager activities.","Adopt a structured user concept with roles for installation, operation, and configuration access.","The manual suggests a multi-role approach: admin for setup, users for stations, and specific logins for runtime and management."

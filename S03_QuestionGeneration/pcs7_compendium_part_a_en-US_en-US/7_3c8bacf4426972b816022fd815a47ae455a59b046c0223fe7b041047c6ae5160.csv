@@ -1,0 +1,1561 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",What are the benefits of adhering to GAMP 5 guidelines?,"Adherence to GAMP 5 guidelines positively influences compliance with legal regulations, product quality, production efficiency, and cost savings.","Following GAMP 5 guidelines ensures legal compliance, enhances product quality, boosts production efficiency, and leads to cost savings.","The benefits include improved legal compliance, higher quality products, more efficient production processes, and reduced costs.","GAMP 5 adherence impacts legal regulation compliance, product quality, efficiency in production, and savings in costs.","Positive effects of GAMP 5 compliance are on regulations, quality, efficiency, and cost reduction."
+1,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",What is the 'GAMP light' approach mentioned in the text?,"The 'GAMP light' approach is a toned-down version of GAMP 5, used in projects with fewer legal regulations and less stringent quality and efficiency requirements, utilizing only selected terms and phases from GAMP 5.","A simplified approach called 'GAMP light' applies GAMP 5 terms and phases selectively, suitable for projects with lower regulatory and quality demands.","'GAMP light' refers to a less rigorous application of GAMP 5, tailored for projects needing minimal compliance and quality standards.","It's a modified GAMP 5 approach, 'GAMP light', for projects with relaxed legal and quality requirements, focusing on essential terms and phases.","For less demanding projects, 'GAMP light' offers a streamlined version of GAMP 5, emphasizing key elements."
+2,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",What documents are specified for quality assurance in the plant's lifecycle according to GAMP 5?,"The specified documents include User Requirement Specification (URS), Functional Specification (FS), Design Specification (DS), Factory Acceptance Test (FAT), Site Acceptance Test (SAT), and Performance Qualification (PQ).","Quality assurance documents are URS, FS, DS for specifications, and FAT, SAT, PQ for testing adherence.","URS, FS, DS define requirements, while FAT/IQ, SAT/OQ, PQ test compliance, ensuring quality throughout the plant's lifecycle.","Key documents: URS, FS, DS for planning; FAT, SAT, PQ for testing, all crucial for lifecycle quality assurance.","The lifecycle is supported by URS, FS, DS specifications and FAT, SAT, PQ tests for continuous quality."
+3,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",What components are included in the example plant concept for process automation?,"The example includes 1 engineering station (ES), 2 automation systems (AS 410S and AS 410H), 1 OS server with a redundant partner, and 4 OS clients.","Components: ES for configuration, AS 410S and AS 410H for automation, redundant OS servers, and 4 OS clients for operation.","An ES, two AS units (410S, 410H), a redundant OS server pair, and four OS clients form the example automation concept.","The concept features an ES, AS 410S and AS 410H, redundant OS servers, and four OS clients for scalable automation.","ES, AS 410S, AS 410H, redundant OS servers, and four OS clients comprise the scalable plant automation example."
+4,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",What are the recommendations for PC hardware in PCS 7 systems?,"Recommendations include sufficient RAM, fast hard drives, industrial compatibility, and using SIMATIC PCS 7 industrial workstations for reduced maintenance.","Opt for ample RAM, speedy hard drives, industrial-grade compatibility, and pre-installed SIMATIC IPC workstations to minimize upkeep.","Ensure high RAM, quick hard drives, industrial suitability, and consider SIMATIC IPC-based workstations for easier maintenance.","Key hardware advice: prioritize RAM, disk speed, industrial use compatibility, and SIMATIC PCS 7 workstations for efficiency.","For best performance, select hardware with enough RAM, fast disks, industrial compatibility, and SIMATIC IPC solutions."
+5,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",Which operating systems are recommended for PCS 7 V9.0 components?,"Recommended OS: Windows Server 2012 R2 for OS server and ES, Windows 10 Enterprise 2015 LTSB for OS clients.","OS server and ES should use Windows Server 2012 R2; OS clients, Windows 10 Enterprise 2015 LTSB.","For PCS 7 V9.0, use Windows Server 2012 R2 on servers and ES, and Windows 10 Enterprise 2015 LTSB on clients.","Servers and ES on Windows Server 2012 R2, clients on Windows 10 Enterprise 2015 LTSB, as per PCS 7 V9.0 recommendations.",PCS 7 V9.0 advises Windows Server 2012 R2 for servers/ES and Windows 10 Enterprise 2015 LTSB for clients.
+6,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",What are the rules for naming computers in PCS 7 projects?,"Rules: names must be uppercase letters and numbers, start with a letter, and not exceed 15 characters.","Computer names should be uppercase alphanumeric, begin with a letter, and be under 16 characters.","Naming conventions require uppercase letters and numbers, starting with a letter, within a 15-character limit.","For PCS 7, computer names must be uppercase alphanumeric, start with a letter, and be 15 characters max.","Guidelines: computer names uppercase, begin with a letter, alphanumeric, up to 15 chars."
+7,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",Why is it important to ensure hardware compatibility for PCS 7 systems?,"Hardware compatibility ensures performance, avoids limitations, and supports industrial use, especially with specific 64-bit Windows OS.",Compatibility prevents performance issues and ensures smooth operation with recommended 64-bit Windows versions.,"To avoid future performance problems and ensure industrial suitability, especially with designated Windows OS.",Ensuring compatibility is crucial for optimal performance and to meet industrial application requirements.,Compatible hardware is vital for performance and suitability in industrial environments with specific OS.
+8,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",What documentation provides detailed information on GMP engineering and system configuration?,"Detailed information is found in 'GMP Engineering Compendium Part A - Configuration Guidelines (V9.0)' and 'Configuration Manual, 03/2018, A5E43228900-AA'.","'GMP Engineering Compendium Part A' and the 'Configuration Manual, 03/2018' offer in-depth details on GMP engineering.","For GMP engineering specifics, consult 'GMP Engineering Compendium Part A' and the referenced Configuration Manual.",The 'GMP Engineering Compendium Part A' and its Configuration Manual provide comprehensive guidance on system setup.,Refer to 'GMP Engineering Compendium Part A' and the 03/2018 Configuration Manual for engineering details.
+9,pcs7_compendium_part_a_en-US_en-US.txt,7,3c8bacf4426972b816022fd815a47ae455a59b046c0223fe7b041047c6ae5160,"GAMP 5 is a recognized standard that is used as a guideline for the validation. Adherence to the guidelines has a positive influence on the following aspects:
+
+- Compliance with legal regulations
+- Quality of the products
+- Production efficiency
+- Cost savings
+
+Even in projects where there are fewer legal regulations to be complied with and less stringent requirements regarding quality and efficiency, a similar and possibly toned down approach (e.g. the so-called GAMP light) can be applied whereby only terms and phases from GAMP 5 are used.
+
+Note
+
+You can find detailed information about the requirements in the GMP-regulated industry and how they are implemented in product selection, configuration and operation of a system, including examples, in the manual: GMP Engineering
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# Specifications/guidelines
+
+The following figure shows the specifications/guidelines that are meaningful at the start of a project:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+In accordance with the V model of the GAMP 5 approach, the documents build on each other and become increasingly more detailed. However, it is not only creation of the PCS 7 solution that is defined and regulated with these guidelines. They also form a very good basis for all future work on a PCS 7 plant and provide consistent quality over the plant's entire lifecycle.
+
+The following specifications must be observed:
+
+- User Requirement Specification (URS)
+- Functional Specification (FS)
+- Design Specification (DS)
+
+The test documents used for reviewing and documenting adherence to the specifications are just as important:
+
+- Factory Acceptance Test (FAT), also known as Installation Qualification (IQ)
+- Site Acceptance Test (SAT) also known as Operational Qualification (OQ)
+- Performance Qualification (PQ)
+
+These documents are used for quality assurance purposes during a plant's entire lifecycle. The PCS 7 compendia should be taken into account for the design guidelines and test specifications.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.2 Plant concept
+
+Introduction
+
+The following plant concept is used in this documentation as an example for implementing process automation:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+The concept presented consists of the following components:
+
+- 1 engineering station (ES): Central station for configuring the complete automation solution.
+- 2 automation systems (AS 410S and AS 410H): for automation of two plant areas, for example, ""Reactor 1"" and ""Reactor 2"".
+- 1 OS server with redundant OS server as a partner station for providing the process pictures and process data for operating the plant.
+- 4 OS clients for centralized and decentralized process operation.
+
+This structure can be easily scaled to larger quantity structures by adding further automation systems or redundant OS server pairs.
+
+Note
+
+Derivation of the appropriate automation solution for a process plant is explained in more detail through an overview of typical questions in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual. Taking this overview into account is recommended for effective planning of the plant.
+
+# 4.2.3 Hardware selection
+
+# Recommended hardware configuration
+
+The PC hardware should correspond to the recommended hardware configuration, which is described in the supplied ""PCS 7 Readme"" documentation for the PCS 7 version to be installed.
+
+Above all, it should be ensured that there is sufficient RAM, fast hard drives and industrial compatibility for the place of use in order to avoid performance limitations at a later date.
+
+# Recommended hardware (as part of Lifecycle agreements)
+
+Use SIMATIC PCS 7 industrial workstations based on SIMATIC IPC. These are system-tested and pre-installed with the relevant PCS 7 version. Expenditure from installation, maintenance and repair of the PC hardware is thereby reduced considerably.
+
+Note
+
+Special attention should be paid to hardware compatibility for the following 64-bit Windows operating systems released for PCS 7 V9.0: Windows 7, Windows 10 Enterprise 2015 LTSB and Windows Server 2012 R2. Refer to the hardware compatibility matrix in the ""PCS 7 Readme V9.0"" (https://support.industry.siemens.com/cs/ww/en/view/109744312) document in this regard.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+# 4.2.4 Operating system selection
+
+Various configurations are available for PCS 7. The technical requirements, e.g. support for a large number of client connections as well for compatibility, dictate the possible operating systems for the PCS 7 application.
+
+The following operating systems were used in connection with an Industrial Workstation IPC for the example configuration:
+
+- OS server: Windows Server 2012 R2
+- Engineering system (ES): Windows Server 2012 R2
+- OS clients: Windows 10 Enterprise 2015 LTSB
+
+Note
+You can find an overview of the supported operating systems and PCS 7 configurations in the ""Compatibility list PCS 7 configurations and operating systems"" in PCS 7 Readme. Likewise, you can use the compatibility tool (www.siemens.com/kompatool) to check individual PCS 7 applications and operating systems for compatibility.
+
+# 4.2.5 Naming concept
+
+Rules for computer names
+
+The selection of the computer name is crucial to the project configuration. Select short and descriptive computer names that provide some information about the function of the PC station in the overall plant. Note the following rules:
+
+- The computer name may only contain uppercase letters and numbers.
+- The computer name must start with a letter.
+- The computer name may only contain up to 15 characters (limited by the operating system).
+
+Note
+The following names must be identical when you configure an OS or BATCH Server and an Engineering Station:
+
+- Computer name
+- Name of the PC station
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Preparation and administration
+
+# 4.2 Preparatory planning
+
+Note
+
+You can find additional information about the naming conventions in the following documentation:
+
+- PCS 7 Readme V9.0 (https://support.industry.siemens.com/cs/ww/en/view/109744312)
+- ""SIMATIC Process Control System PCS 7 Engineering System (https://support.industry.siemens.com/cs/ww/en/view/109746533)"" manual
+- WinCC online help (search string ""illegal characters"")
+
+# Changing computer names
+
+The computer name can no longer be changed after the installation of PCS 7. If you do change the computer name, you will have to install the computer again (Restore DVD). ",How can one check the compatibility of PCS 7 applications with operating systems?,Use the 'Compatibility list PCS 7 configurations and operating systems' in PCS 7 Readme or the compatibility tool at www.siemens.com/kompatool.,Check compatibility via the PCS 7 Readme's list or the online tool at Siemens' website.,Refer to PCS 7 Readme's compatibility list or the Siemens compatibility tool for OS and application checks.,The PCS 7 Readme document and Siemens' online tool are resources for verifying application and OS compatibility.,"For compatibility verification, consult PCS 7 Readme or use Siemens' kompatool online."

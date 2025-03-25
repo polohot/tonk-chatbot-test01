@@ -1,0 +1,3671 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",What are the two methods for creating a motor data set for the rotary synchronous motor as described in the 'MSD ServoDrive - DeviceHelp'?,The two methods are Variant 1: Motor calculation and Variant 2: Motor identification.,"For the rotary synchronous motor, the methods include Motor calculation (Variant 1) and Motor identification (Variant 2), as detailed in the 'MSD ServoDrive - DeviceHelp'.","Variant 1 involves motor calculation, while Variant 2 involves motor identification, both methods for creating a motor data set for the rotary synchronous motor.","In the 'MSD ServoDrive - DeviceHelp', it's mentioned that motor data sets can be created either through calculation (Variant 1) or identification (Variant 2) for rotary synchronous motors.","Two approaches are outlined: manually calculating motor data (Variant 1) or automatically identifying motor parameters (Variant 2), specifically for rotary synchronous motors."
+1,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",What must be done if the moment of inertia of the motor (P 461 - Mot_J) is not known during motor calculation?,A value roughly corresponding to the motor's moment of inertia must be applied.,"If Mot_J is unknown, an approximate value matching the motor's moment of inertia should be used.",The documentation specifies applying an estimated value for the motor's moment of inertia when P 461 - Mot_J is not known.,"When the moment of inertia isn't known, the 'MSD ServoDrive - DeviceHelp' advises using a rough estimate that corresponds to the motor's moment of inertia.",An approximate value for the motor's moment of inertia is required if the exact value (P 461 - Mot_J) is not available.
+2,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",What parameters are overwritten when a standard motor data set is transferred according to the 'MSD ServoDrive - DeviceHelp'?,Preset parameters are overwritten.,"Upon transfer of a standard motor data set, existing preset parameters are replaced.",The 'MSD ServoDrive - DeviceHelp' states that transferring a standard motor data set results in the overwriting of preset parameters.,Preset parameters get overwritten when a standard motor data set is loaded into the device.,The documentation mentions that preset parameters are overwritten during the transfer of a standard motor data set.
+3,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",How can the calculation process be monitored in the Moog DRIVEADMINISTRATOR 5?,"Via the menu, View, Messages.",The calculation process is monitored through the Messages option under the View menu in Moog DRIVEADMINISTRATOR 5.,"In Moog DRIVEADMINISTRATOR 5, navigate to the View menu and select Messages to monitor the calculation.",Monitoring is done by accessing the Messages section from the View menu in Moog DRIVEADMINISTRATOR 5.,The 'MSD ServoDrive - DeviceHelp' instructs users to monitor calculations via View > Messages in Moog DRIVEADMINISTRATOR 5.
+4,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",What does the parameter P 490 - MOT_ISLinRot = LIN(1) automatically set for the motor?,It automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1.,Setting P 490 to LIN(1) causes the motor's pole pairs (P 463 - Mot_PolePairs) to be automatically set to 1.,The parameter P 490 - MOT_ISLinRot = LIN(1) adjusts P 463 - Mot_PolePairs to 1 automatically.,"When P 490 is set to LIN(1), it automatically configures P 463 - Mot_PolePairs to 1, as per the 'MSD ServoDrive - DeviceHelp'.","Automatically sets Mot_PolePairs (P 463) to 1, according to the documentation."
+5,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",What are the key steps involved in Variant 1: Motor calculation for an asynchronous motor?,"Enter the motor data from the data sheet, click 'Start calculation', and monitor the process in Moog DRIVEADMINISTRATOR 5.","The process includes manually entering motor data, initiating calculation, and monitoring via Moog DRIVEADMINISTRATOR 5's Messages.","Key steps are data entry from the sheet, calculation initiation, and process monitoring in Moog DRIVEADMINISTRATOR 5.","For asynchronous motors, Variant 1 involves data entry, calculation start, and monitoring through Moog DRIVEADMINISTRATOR 5.","Documentation outlines entering data, starting calculation, and monitoring as essential steps in Variant 1 for asynchronous motors."
+6,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",What is the significance of the motor parameters specified by the manufacturer according to the 'MSD ServoDrive - DeviceHelp'?,"They ensure the motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.","Manufacturer-specified parameters guarantee the motor's ability to handle loads as per its operational characteristics, with adequate controller power.","These parameters are crucial for the motor to withstand loads in line with its operational specs, given sufficient controller power.","The 'MSD ServoDrive - DeviceHelp' emphasizes that manufacturer parameters enable load handling per operational needs, contingent on controller power.","Ensures operational load capacity is met, assuming the controller delivers the necessary power, as per manufacturer specs."
+7,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",What does the 'Synchronous motor settings' screen (Image 5.2) in the 'MSD ServoDrive - DeviceHelp' depict?,"It shows the interface for configuring synchronous motor settings, including motor calculation and identification options.","The screen displays settings for synchronous motors, highlighting calculation and identification methods.","Depicts the configuration interface for synchronous motor parameters, featuring both calculation and identification variants.","Illustrates the setup for synchronous motor parameters, with options for motor calculation and identification.","The 'MSD ServoDrive - DeviceHelp' presents a screen for synchronous motor settings, detailing calculation and identification processes."
+8,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",What is the purpose of the 'Motor protection' section in the 'MSD ServoDrive - DeviceHelp'?,To detail parameters and settings that safeguard the motor from overheating and overcurrent conditions.,It outlines configurations to prevent motor damage due to excessive temperature and current.,The section provides guidelines for protecting the motor against thermal and electrical overloads.,Focuses on settings that ensure motor safety by monitoring temperature and current limits.,Describes mechanisms within the 'MSD ServoDrive - DeviceHelp' for motor protection against overheating and overcurrent.
+9,msd_servo_drive.txt,13,27ab89ae4416ce4985bca0cd4c919e5c2c6a5177b5074c3ee960799b6d667e0e,"The two methods differ in that when the motor data set is calculated, the impedances must be taken from the data sheet. The impedances are measured automatically during identification. Each motor can only be operated if its field model and the control parameters are correctly set.
+
+On transfer of a standard motor data set the motor name, electrical data and motion mode are loaded. Preset parameters are overwritten. The motor data must then be saved in the device. The motor parameters specified by the manufacturer ensure that a motor can be subjected to load according to its operational characteristic, provided the corresponding power is supplied by the controller.
+
+# Image 5.2: “Synchronous motor settings” screen
+
+There are two ways to create a motor data set for the rotary synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+NOTE
+
+- Each motor can only be operated if its field model and the control parameters are correctly set.
+
+# Variant 1: Motor calculation
+
+ID
+
+|Index|Name|Unit|Description|
+|---|---|---|---|
+|451|MOT_Name| |Name of motor parameter set|
+|455|MOT_FNom|Hz|Motor rated frequency|
+|456|MOT_VNom|V|Motor rated voltage|
+|457|MOT_CNom|A|Motor rated current|
+|458|MOT_SNom|rpm|Motor rated speed|
+|459|MOT_PNom|kW|Motor rated power|
+|460|MOT_TNom|Nm|Motor rated torque|
+|461|MOT_J|kg m*m|Motor inertia|
+|1530|SCD_SetMotorControl| |Determination of default control settings|
+
+The motor data relevant to the calculation must be entered manually from the data sheet.
+
+Click on “Start calculation”.
+
+If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+
+Calculation of operating point: Flux P 462 - MOT_FLUXNom
+
+Calculation of: current, speed and position control parameters
+
+# NOTE
+
+All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: the current controller is dimensioned based on the actual switching frequency set.
+- Speed controller and position controller gain: here a moderately stiff mechanism and mass inertia matching from load to motor with a ratio of 1:1 is to be assumed.
+- V/F characteristic
+
+# NOTE
+
+All existing control parameters are overwritten.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 34
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 35
+
+# 5.2.1 Synchronous motor electronic data
+
+| |ID|Index Name|Unit|Description|
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+|480|0|MOT_Lsq|mH|Motor stator q-inductance (0=>Lq=MOT_Lsig*MOT_LsigDiff)|
+
+Table 5.2: “Synchronous motor electronic data” parameters
+
+Image 5.3: “Synchronous motor electronic data” screen
+
+# 5.3 Linear synchronous motor
+
+The calculation process can be monitored in the Moog DRIVEADMINISTRATOR via the menu, View, Messages.
+
+- Calculation of operating point: Flux P 462 - MOT_FLUXNom
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- P 490 - MOT_ISLinRot = LIN(1): The parameter automatically sets the number of pole pairs for the motor to P 463 - Mot_PolePairs = 1. As a result, a North to North pole pitch corresponds to one virtual revolution (P 492 - Mot_MagnetPitch).
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Translation of the linear nominal quantities into virtual rotary nominal quantities
+- Default values for auto commutation
+
+There are two methods of creating a motor data set for the linear synchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (see Section ""Motor identification"" on page 45)
+
+# Variant 1: Motor calculation
+
+- Enter the motor data
+- The motor data relevant to the calculation must be entered from the data sheet.
+
+Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+
+# MOOG
+
+ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+36
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 37
+
+# 5.3.1 Linear synchronous motor electronic data
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|451|0|MOT_Name| |Name of motor parameter set|
+|457|0|MOT_CNom|A|Motor rated current|
+|491|0|MOT_CalcLin2Rot| |Calculate from linear to rotary motor data|
+|492|0|MOT_MagnetPitch|mm|Width of one motor pole pair|
+|493|0|MOT_SpeedMax|m/s|Motor rated speed|
+|494|0|MOT_ForceNom|N|Motor rated force|
+|496|0|MOT_MassMotor|kg|Mass of motor slide|
+|497|0|MOT_MassSum|kg|Total mass, moved by the motor|
+|498|0|MOT_EncoderPeriod|um|Period of line signals|
+
+Table 5.3: “Linear synchronous motor” parameters
+
+Image 5.5: “Linear synchronous motor electronic data” screen
+
+# 5.4 Asynchronous motor
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|479| |MOT_TorqueSat| |Inductor saturation: Motor torque as function of q-axis current (saturation)|
+|479|0|Torque@I0|Nm|Torque @ current I0|
+|479|1|Torque@I1|Nm|Torque @ current I1|
+|479|2|Torque@I2|Nm|Torque @ current I2|
+|479|3|Torque@I3|Nm|Torque @ current I3|
+|479|4|Torque@IMax|Nm|Torque @ current I4|
+|479|5|CurrentI0|A|Current I0|
+|479|6|CurrentI1|A|Current I1|
+|479|7|CurrentI2|A|Current I2|
+|479|8|CurrentI3|A|Current I3|
+|479|9|CurrentIMax|A|Current I4|
+
+Table 5.4: “Linear synchronous motor electronic data” parameters
+
+Image 5.6: “Asynchronous motor configuration” screen
+
+There are two methods of creating a motor data set for the asynchronous motor.
+
+- Variant 1: Motor calculation
+- Variant 2: Motor identification (For details see Section ""Motor identification"" on page 45)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 38
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 39
+
+# Variant 1: Motor calculation
+
+|l|Enter the motor data|451|0|MOT_Name|Name of motor parameter set|
+|---|---|---|---|---|---|
+| |The motor data relevant to the calculation must be entered from the data sheet.|452|0|MOT_CosPhi|Motor rated power factor|
+| | |455|0|MOT_FNom|Hz Motor rated frequency|
+| | |456|0|MOT_VNom|V Motor rated voltage|
+| | |457|0|MOT_CNom|A Motor rated current|
+| | |458|0|MOT_SNom|rpm Motor rated speed|
+| | |459|0|MOT_PNom|kW Motor rated power|
+| | |460|0|MOT_TNom|Nm Motor rated torque|
+| | |461|0|MOT_J|kg m*m Motor inertia|
+| | |1530|0|SCD_SetMotorControl|Determination of default control settings|
+
+Table 5.5: “Asynchronous motor configuration” parameters
+
+# 5.4.1 Asynchronous motor electrical data
+
+- l Click on “Start calculation”.
+- If the moment of inertia of the motor P 461 - Mot_J is not known, a value roughly corresponding to the motor's moment of inertia must be applied.
+- The calculation process can be monitored in the Moog DRIVEADMINISTRATOR 5 via the menu, View, Messages.
+- Calculation of operating point: Flux P 462 - MOT_FluxNom, P 340 - CON_FM_Imag.
+- Calculation of: current, speed and position control parameters
+
+NOTE
+
+- All existing motor parameters are overwritten.
+
+# Calculated values
+
+- Flux settings (including for torque constant)
+- Control settings for current controller: The current controller is dimensioned dependent on the switching frequency setting.
+- Speed controller and position controller gain: In this, a moderately rigid mechanism and a 1:1 moment of inertia adjustment from the load to the motor are to be assumed.
+- V/F characteristic
+
+Image 5.7: “Asynchronous motor electrical data” screen
+
+# 5.5 Motor protection
+
+|ID|Index Name|Unit|Description| |
+|---|---|---|---|---|
+|340|0|CON_FM_Imag|A|Magnetizing current (RMS)|
+|462|0|MOT_FluxNom|Vs|Motor rated flux linkage|
+|463|0|MOT_PolePairs| |Motor number of pole pairs|
+|470|0|MOT_Rstat|Ohm|Motor stator resistance|
+|471|0|MOT_Lsig|mH|Motor leakage inductance (ASM) / stator inductance (PSM)|
+|472| |MOT_LsigDiff| |q-axis stator inductance variation (relative to MOT_Lsig)|
+|472|0|Lsig_q@I0|%|Inductance @ CurrentI0|
+|472|1|Lsig_q@I1|%|Inductance @ CurrentI1|
+|472|2|Lsig_q@I2|%|Inductance @ CurrentI2|
+|472|3|Lsig_q@I3|%|Inductance @ CurrentI3|
+|472|4|CurrentI0|%|Current I0 relative to MOT_CNom|
+|472|5|CurrentI1|%|Current I1 relative to MOT_CNom|
+|472|6|CurrentI2|%|Current I2 relative to MOT_CNom|
+|472|7|CurrentI3|%|Current I3 relative to MOT_CNom|
+|473| |MOT_LmagTab| |Main inductance as a function of isd|
+|473|0|MOT_LmagTab|mH|(0.1*index*LmagIdMax)|
+|473|1|MOT_LmagTab|mH| |
+|473|2|MOT_LmagTab|mH| |
+|473|3|MOT_LmagTab|mH| |
+|473|4|MOT_LmagTab|mH| |
+|473|5|MOT_LmagTab|mH| |
+|473|6|MOT_LmagTab|mH| |
+|473|7|MOT_LmagTab|mH| |
+|473|8|MOT_LmagTab|mH| |
+|473|9|MOT_LmagTab|mH| |
+|473|10|MOT_LmagTab|mH| |
+|474|0|MOT_LmagIdMax|A|Maximum magnetizing current (RMS)|
+|475|0|MOT_LmagScale|%|Motor main inductance, scaling factor|
+|476|0|MOT_Rrot|Ohm|Motor rotor resistance|
+|477|0|MOT_RrotScale|%|Motor rotor resistance, scaling factor|
+|478|0|MOT_LmagNom|mH|Main inductance at nominal magnetizing current|
+
+# Table 5.6: “Asynchronous motor electrical data” parameters
+
+| | | | |P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|---|---|---|---|
+| | | | |731| |MON_MotorTempMax| |Maximum motor temperature (switch-off value)|
+| | | | | |0|TempMax X5|degC|Maximum sensor temperature X5|
+| | | | | |1|TempMax X6|degC|Maximum sensor temperature X6|
+
+# Table 5.7: “Temperature monitoring” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 40
+
+# 5 Motor
+
+MOOG                             ID No.:CB40859-001 Date:11/2020
+
+|P No.|Index|P Name / Setting|Unit|Function|P No.|
+|---|---|---|---|---|---|
+|732|MON_MotorPTC|Selection of sensor type| | | |
+| |0|Type| | | |
+| | |Off (0)| |No motor temperature sensor| |
+| | |KTY (1)| |KTY84-130 Sensor| |
+| | |PTC (2)| |PTC sensor (three) with short circuit monitoring below 50 ohms or hardware detection| |
+| | |TSS (3)| |Switch (Klixon)| |
+| | |PTC1 (4)| |PTC sensor (one) without short circuit monitoring| |
+| | |PT100 (5)| |PTC100 in line with DIN EN 60751| |
+| | |NTC220 (6)| |NTC Sensor 220 kOhm type 2322 633 1)| |
+| | |NTC1000 (7)| |NTC Sensor 1000 kOhm| |
+| | |NTC_K227 (8)| |NTC Sensor K227 32 kOhm| |
+| | |KTY83-110 (9)| |KTY83-110 Sensor| |
+| | |NTC50 (10)| |NTC sensor 50 kOhm| |
+| | |NTC10 (11)| |NTC Sensor 10 kOhm| |
+| | |PTC2 (12)| |PTC sensor (simple) with short circuit monitoring under 5 ohms| |
+| | |PT1000 (13)| |PT1000 Sensor| |
+|2)| |PT1000-2 (14)| |PT1000-2 sensor, Rx value via internal table with measurement values (from the application)| |
+| | |PT1000-3 (15)| |Rx values over calculated values (from circuit diagram) (no table)| |
+| | |NTC220 (16)| |NTC Sensor 220 kOhm type 2381 640 (interpolation points)| |
+| | |NTC220 (17)| |NTC Sensor 220 kOhm type 2381 640 (about formula)| |
+| |1|Contact| |Termination variant| |
+| | |X5(0)| |Connection of the sensor to terminal X5|733|
+| | |X6/7(1)| |Sensor connection is routed in encoder cable| |
+| | |X5_X6/7(2)| |Use of both inputs possible| |
+| | |X8(3)| |X8 connector temperature sensor (tech opt module)| |
+| | |X5_X8(4)| |X5 and X8 connector temperature sensor (tech opt module)| |
+
+# Table 5.7: “Temperature monitoring” parameters (continue)
+
+MSD ServoDrive     - DeviceHelp        41
+
+# MON_MotorI2t
+
+I2t characteristic setting
+
+|0|INom|%|Rated current of the motor|
+|---|---|---|---|
+|1|I0|%|First current interpolation point of motor protection characteristic: Maximum|
+|2|I1|%|Permissible standstill current Second current interpolation point of motor protection characteristic referred to maximum|
+
+# MSD Single-Axis Servo
+
+# Index
+
+|P No.|Index|P Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|3|F1|Hz|First frequency interpolation point of motor|Sensor Parameters|
+|4|FNom|Hz|protection characteristic|type|
+|5|IMax|%|Rated frequency|Maximum overload current in relation to the rated current of the motor|
+|6|Time|s|Time for which the maximum current may be connected| |
+|7|Ttherm|s|Set thermal time constant in seconds|Motor protection module. Selection of I2T monitoring method|
+|735|0|MON_MotorI2tType| | |
+
+# Protection Settings
+
+Off(-1) Protection disabled
+
+FREQU(0) Motor frequency-dependent evaluation i(f),
+
+THERM(1) default setting
+
+Evaluation with thermal time constant iTth. The thermal time constant is set via parameter P 733[7] in [s]. ",How does the 'MSD ServoDrive - DeviceHelp' describe the process for linear synchronous motor data set creation?,"Similar to rotary motors, it involves Variant 1: Motor calculation and Variant 2: Motor identification.","The process mirrors that of rotary motors, with options for calculation or identification.","For linear synchronous motors, the documentation specifies two methods: calculation and identification.",Creation of data sets for linear synchronous motors can be done via calculation (Variant 1) or identification (Variant 2).,The 'MSD ServoDrive - DeviceHelp' notes that linear synchronous motors also use calculation and identification for data set creation.
