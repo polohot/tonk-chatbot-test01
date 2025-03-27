@@ -1,0 +1,3541 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ",What steps are required to activate the 'Manual mode' window in the MSD ServoDrive - DeviceHelp?,"First, click on the 'Activate manual mode' button, then confirm the safety prompt that appears.","To activate, press the 'Activate manual mode' button and acknowledge the subsequent safety warning.",Activation involves clicking the 'Activate manual mode' button and confirming the safety prompt.,The process includes pressing the activation button for manual mode and then confirming the safety message.,"Begin by selecting the 'Activate manual mode' button, followed by accepting the safety prompt to enable the window."
+1,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ",What configuration tabs appear in the 'Manual mode' window of the MSD ServoDrive - DeviceHelp after selecting a control mode?,"Depending on the control mode, one to four tabs appear: parameters specific to the control mode, Homing, Jog mode, and Reversing operation.","After choosing a control mode, tabs for specific parameters, Homing, Jog mode, and Reversing operation may be displayed.","The window shows up to four tabs: control mode parameters, Homing, Jog mode, and Reversing operation, based on the selected mode.","Tabs for relevant parameters, Homing, Jog mode, and Reversing operation appear, varying with the control mode selected.","Selection of a control mode reveals tabs including specific parameters, Homing, Jog mode, and Reversing operation configurations."
+2,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ",How can the 'Manual mode control status' window be accessed in the MSD ServoDrive - DeviceHelp?,Double-clicking on 'Manual mode control status' opens the window displaying the MSD Servo Drive's status word in hexadecimal format.,"Access is gained by double-clicking 'Manual mode control status', which then shows the drive's status word in hex.","The window is opened via a double-click on 'Manual mode control status', revealing the status word in hexadecimal.","To view, double-click 'Manual mode control status' to display the servo drive's status information in hex format.","By double-clicking the 'Manual mode control status' option, the window appears with the drive's hexadecimal status word."
+3,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ",What information does the electronic rating plate provide in the MSD ServoDrive - DeviceHelp?,"It includes device model, serial number, communication and technology options, hardware and software versions, and operating time.","The plate details the device's model, serial number, options, versions of hardware and software, and total operating time.","Details such as model, serial number, available options, hardware/software versions, and operation duration are provided.","Information on the device's model, serial number, technology options, versions, and how long it has been operating is included.","The electronic rating plate lists the device model, serial number, options, hardware and software versions, and operating time."
+4,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ","What is the purpose of the parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID, and P 99 - PARA_DataSetLdVal in the MSD ServoDrive - DeviceHelp?",They allow for the adaptation of individual parameter values by defining them with special character strings and assigning them to a data set ID.,These parameters enable the customization of specific parameter values through character strings linked to a data set ID.,Their function is to adjust individual parameters by using defined strings associated with a particular data set ID.,They provide a means to modify selected parameter values by associating them with a data set ID via special strings.,The parameters facilitate the adjustment of individual values by assigning them to a data set ID with specific character strings.
+5,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ",How is the data set ID determined when using the parameter P 97 - PARA_DataSetLdCfg in the MSD ServoDrive - DeviceHelp?,"The parameter value is multiplied by 'Para_Scale', then 'Para_Offset' is added, and the result is rounded to the nearest integer to obtain the data set ID.","By scaling the parameter value with 'Para_Scale', adding 'Para_Offset', and rounding to the closest whole number.","Determination involves scaling the value, applying an offset, and rounding to the nearest integer for the data set ID.","The ID is found by multiplying the value by 'Para_Scale', adding 'Para_Offset', and rounding to the nearest integer.","It's calculated by scaling the parameter, adding the offset, and then rounding to the nearest whole number to get the ID."
+6,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ",What must be entered in P 99 - PARA_DataSetLdVal for configuring the data set in the MSD ServoDrive - DeviceHelp?,"The configuration data for the new parameters must be entered in the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….","Enter the parameter configurations in the format <INDEX>,<SUBINDEX>,<VALUE>; repeated for each parameter to be changed.","Data should be input as <INDEX>,<SUBINDEX>,<VALUE>; sequences, defining each parameter's new settings.","The syntax <INDEX>,<SUBINDEX>,<VALUE>; must be used for each parameter adjustment in the configuration.","Configurations are entered using the <INDEX>,<SUBINDEX>,<VALUE>; format to specify each parameter's new value."
+7,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ",What is the function of the 'Jog mode' in the MSD ServoDrive - DeviceHelp?,It allows the motor to be moved step-by-step in a positive or negative direction with two different speeds.,Jog mode enables incremental movement of the motor in either direction at two distinct speed settings.,"This mode provides for step-by-step motor movement in both directions, offering two speed options.","It facilitates the motor's movement in steps, either forward or backward, with a choice of two speeds.","The function permits the motor to move in steps, positively or negatively, at two different speed levels."
+8,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ",What does the 'Reversing operation' mode in the MSD ServoDrive - DeviceHelp allow?,The motor can be moved back and forth with adjustable accelerations and speeds.,This mode enables the motor to oscillate with customizable acceleration and speed settings.,"It allows for the motor's movement in alternating directions, with adjustments for acceleration and speed.","Reversing operation permits the motor to toggle directions, with configurable acceleration and velocity.","The mode supports the motor's bidirectional movement, with settings for adjusting its acceleration and speed."
+9,msd_servo_drive.txt,245,c66abcda3e6d1d4538303008a6ce3c4c0b41b12ccd6ef4bd8cdbeb811810799a,"These device settings will be re-enabled after the “Manual mode” window is closed.
+
+The manual mode window will appear, but be disabled at first. Once you click on the “Activate manual mode” button, a safety prompt that needs to be confirmed will appear.
+
+# Chapter overview
+
+# Pictogram
+
+# Navigation
+
+►Project tree ►Device setup ►Manual mode
+
+# Brief description
+
+This chapter describes the configuration and control options for the “Manual mode” window.
+
+# Contents
+
+- 15.1 Manual mode window 449
+- 15.2 Manual mode control status 450
+
+Image 15.1: Safety information
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 449
+
+# Manual mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Once the safety prompt is confirmed, the “Manual mode” window will be enabled, after which you can select a control mode and configure it for manual operation. Depending on the control mode you selected, one to four configuration tabs will appear:
+
+- A table with the parameters that are specific to the relevant control mode but that will only apply when using manual mode (e.g. acceleration, deceleration, setpoint, speed, etc.)
+- Homing (see Section ""Homing"" on page 249)
+- Jog mode, which can be used to move the motor step-by-step in a positive or negative direction with two different speeds.
+- Reversing operation, in which the motor can be moved back and forth with adjustable accelerations and speeds.
+
+# 15.2 Manual mode control status
+
+Double-clicking on “Manual mode control status” will open a window that will show the status word for the MSD Servo Drive in hexadecimal format.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+| | | | |229|0|MPRO_PARA_CTRL|Drive commissioning: Control word|
+|230|0|MPRO_PARA_PRef|mDegree|Drive commissioning: Position reference value / amplitude| | | |
+|231|0|MPRO_PARA_SRef|rev/min|Drive commissioning: Speed reference value / amplitude| | | |
+|232|0|MPRO_PARA_Acc|rev/min/s|Drive commissioning: Acceleration| | | |
+|233|0|MPRO_PARA_Dec|rev/min/s|Drive commissioning: Deceleration| | | |
+|234|0|MPRO_PARA_TRef|Nm|Drive commissioning: Torque reference value| | | |
+|235|0|MPRO_PARA_Frequency|Hz|Drive commissioning: Frequency of test signal in IP mode| | | |
+|236|0|MPRO_PARA_SignalType| |Drive commissioning: Type of test signal in IP mode| | | |
+|237|0|MPRO_PARA_WatchDog|ms|Drive commissioning: Watchdog tick| | | |
+|238|0|MPRO_PARA_Time|ms|Drive commissioning: Reverse control timer| | | |
+|297|0|MPRO_FG_ActualSpeedFac| |Factor group: actual speed factor (1/min to user speed)| | | |
+
+Table 15.2: “Manual mode control status” parameters
+
+Table 15.1: “Manual mode” parameters
+
+# 16 Drive description
+
+The electronic rating plate provides a variety of information concerning the MSD Servo Drive, including the device model, serial number, communication and technology options, hardware and software versions, and operating time. This information is also available in the form of parameters.
+
+# Contents
+
+16.1 Electronic rating plate
+
+# 16.1 Electronic rating plate
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1|0|DV_DeviceId|Device family/series ID|
+|2|0|DV_DeviceName|Device name / product name|
+|3|0|DV_DeviceAliasName|Application-specific device name alias|
+|4|0|DV_SwVersion|Firmware version of the device in plain text.|
+|5|0|DV_DeviceFamilyName|Total software version of device (plain text) Device family name|
+|6|0|DV_SwVersionId|Firmware version of the device|
+|7|0|DV_SwModulVersion|Version numbers of supported software modules which have a parameter interface|
+|7|1|DV_SwModulVersion| |
+|7|2|DV_SwModulVersion| |
+|7|3|DV_SwModulVersion| |
+|8|0|DV_VendorName|Manufacturer name|
+|49|0|DV_SwStatus|Flag representation of several software functions|
+|59|0|DV_SwOptionX11Ver|Software version option on X11|
+|63|0|DV_BuildDate|Build date and firmware info|
+|79|0|DV_LoadedParamDataSet|Name of the currently loaded parameter data set|
+|662|0|DV_CAL_ChopperGuard|Internal chopper guarding enable|
+|672|0|DV_CAL_SerialNumServo|Production information: serial number of device|
+|679|0|DV_CAL_ArticleNumber|Controller board article number|
+|697|0|DV_CAL_SafeFirmDataCrc|Safety firmware data CRC|
+|707|0|MON_OpTime_Raw|Operation time|
+|708|0|MON_OpEnTime_Raw|Operation enabled time|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 451
+
+# 16 Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 452
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|9|0|DV_SwVersionVar| |Software version variant of device (plain text)|
+|24| |USB_IO_Statistic| |Statistic data of USB-IO Infineon driver|
+|80|0|DV_SwBootVersion| |Bootloader information, version|
+|24|0|uReset| |Reset statistics data|
+|24|1|uIntEp0| | |
+|24|2|uIntEp1| |Calling count of handler for end point 1 ACK interrupts|
+|24|3|uIntEp2| |Calling count of handler for end point 2 interrupts|
+|24|4|uSetup| |Calling count of SUI setup handler|
+|24|5|uConfiguration| |Calling count of CFI configuration handler|
+|24|6|uRxMsgCnt| |Number of received data packets|
+|24|7|uRxMsgBytes| |Number of received data bytes|
+|24|8|uTxMsgCnt| |Number of transmitted data packets|
+|24|9|uTxMsgBytes| |Number of transmitted data bytes|
+|24|10|uRxAck| |Calling count of receive acknowledge interrupt|
+|24|11|uTxAck| |Calling count of transmit acknowledge interrupt|
+|24|12|uIntTmtEp0| |Calling count of endpoint 0 transmit interrupt|
+|24|13|uIntWrn| |Calling count of warning level interrupt|
+|24|14|iRetryCount| |Number of second attempts to transmit a data packet|
+|24|15|ResetCount| |Number of received reset command sequences|
+|24|16|CriticalErrorCount| |Number of critical basic USB driver errors|
+|24|17|CriticalErrorCount1| |Number of critical basic USB driver errors|
+|24|18|CriticalErrorCount2| |Number of critical basic USB driver errors|
+|24|19|CriticalErrorCount3| |Number of critical basic USB driver errors|
+|24|20|CriticalErrorCount4| |Number of critical basic USB driver errors|
+|24|21|AppliErrorCount| |Number of critical errors in application layer|
+|24|22|RxFifoHandlerCnt| |Calling count of receive handler|
+|24|23|USBdriveMode| |ID of USB driver mode (0 = none, 1 = old, 2 = secure)|
+|24|24|BlockChecksumError| |Number of failed 64 byte blocks|
+|60|0|DV_SwOptionX12ID| |ID software option on X12|
+|64|0|DV_SwBaseVersion| |Software base version|
+|65|0|DV_SwCompatibilityLevel| |Software compatibility level|
+
+# Table 16.2: “Drive description - Software details” parameters
+
+# Table 16.3: Parameter “Drive description - Hardware version""
+
+# Table 16.4: Parameter “Drive description - Interface""
+
+# Drive description
+
+|ID|Index Name|Unit|Description|ID|
+|---|---|---|---|---|
+|15|11|GroupId|Identification number of parameter group to which this parameter belongs to|19|
+|15|12|SaveGroups|Flag representation of device save group to|19|
+|16| |PARA_DSC_SubPara|which this parameter belongs|20|
+|16|0|ParaId|Description of a single sub parameter|20|
+|16|1|SubParaId|Sub parameters no.|20|
+|16|2|Name|Sub parameters name|20|
+|16|3|Unit|Sub parameters unit|20|
+|16|4|Introduction|Sub parameters short introduction|20|
+|16|5|DataType|Sub parameters data type identification|20|
+|16|6|DataTypeName|Sub parameters data type name|20|
+|16|7|Attributes|Sub parameter attributes|20|
+|16|8|Minimum|Sub parameter minimum value as float32|20|
+|16|9|Maximum|Sub parameter maximum value as float32| |
+|16|10|Default|Sub parameter default value as float32|20|
+|16|11|StringMinimum|Minimum value as text| |
+|16|12|StringMaximum|Maximum value as text|20|
+|16|13|StringDefault|Manufacture-specific default value as text|20|
+|16|14|NativeMinimum|Native sub parameter minimum value as 4-byte data stream|20|
+|16|15|NativeMaximum|Native sub parameter maximum value as 4-byte data stream|21|
+|16|16|NativeDefault|Native sub parameter default value as 4-byte data stream|21|
+|17| |PARA_DSC_Groups|List of names of parameter groups|21|
+|17|0|PARA_DSC_Groups| |21|
+|17|...|PARA_DSC_Groups| |21|
+|17|21|PARA_DSC_Groups| |21|
+|18| |PARA_DSC_SaveGroups|List of names of parameter save groups|21|
+|18|0|PARA_DSC_SaveGroup| |21|
+|18|...|PARA_DSC_SaveGroup| |21|
+|18|12|PARA_DSC_SaveGroup| |21|
+
+# Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# MOOG ID No.:CB40859-001 Date:11/2020
+
+# Device description concerning parameter list
+
+|Index Name|Unit|Description|
+|---|---|---|
+|PARA_DSC_Device| |Device description concerning parameter list|
+|0|ParaCount|Number of registered parameters|
+|1|GroupCount|Number of parameter groups|
+|2|SaveGroupCount|Number of parameter save groups|
+
+# Detailed description of a parameter
+
+| |Index|ID|SubParameterCount|Name|Introduction|ReadLevel|WriteLevel|Attributes|DisplayAttributes|IsComplex|IsInteractive|GroupId|SaveGroups|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_Para2| |Detailed description of a parameter| | | | | | | | | | |
+|0|Index|Index (consecutive numbering) of parameter in actual parameter listing| | | | | | | | | | | |
+|1|ID|Parameter identification number| | | | | | | | | | | |
+|2|SubParameterCount|Number of sub parameters| | | | | | | | | | | |
+|3|Name|Parameter name| | | | | | | | | | | |
+|4|Introduction|Short parameter introduction| | | | | | | | | | | |
+|5|ReadLevel| |Essential level for parameter read access| | | | | | | | | | |
+|6|WriteLevel| |Essential level for parameter write access| | | | | | | | | | |
+|7|Attributes|Manufacturer dependent attributes| | | | | | | | | | | |
+|8|DisplayAttributes|Harmonized attributes for parameter representation| | | | | | | | | | | |
+|9|IsComplex|True if parameter consists of individually different sub parameters| | | | | | | | | | | |
+|10|IsInteractive| |True if parameter access triggers an interactive| | | | | | | | | | |
+| |11|GroupId|Identification number of parameter group to| | | | | | | | | | |
+| |12|SaveGroups|Flag representation of device save group to| | | | | | | | | | |
+
+# Short description of a single sub parameter
+
+|ParaId|SubParaId|Name|Unit|Introduction|DataType|DataTypeName|Attributes|Minimum|
+|---|---|---|---|---|---|---|---|---|
+| |PARA_DSC_SubPara2| |Short description of a single sub parameter| | | | | |
+|0|ParaId| |Short description of a single sub parameter| | | | | |
+|1| |SubParaId|Sub parameters no.| | | | | |
+| | |2|Name|Sub parameters name| | | | |
+| | |3|Unit|Sub parameters unit| | | | |
+| | |4|Introduction|Sub parameters short introduction| | | | |
+| | |5|DataType|Sub parameters data type identification| | | | |
+|6| |DataTypeName|Sub parameters data type name| | | | | |
+|7|Attributes| |Sub parameter’s attributes| | | | | |
+|8|Minimum| |Sub parameters minimum value as float32| | | | | |
+
+# Drive description
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 454
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|21|9| |Maximum - Sub parameters maximum value as float32|
+|21|10| |Default - Sub parameters default value as float32|
+|21|11| |StringDefault - Manufacture-specific default value as text|
+|21|12| |NativeMinimum - Native sub parameter minimum value as 4-byte data stream|
+|21|13| |NativeMaximum - Native sub parameter maximum value as 4-byte data stream|
+|21|14| |NativeDefault - Native sub parameter default value as 4-byte data stream|
+|22|PARA_DSC_Groups2| |List of names of parameter groups|
+|22|0| |PARA_DSC_Groups|
+|22|...| |PARA_DSC_Groups|
+|22|21| |PARA_DSC_Groups|
+|48|PARA_DSC_| |List of names of parameter save groups|
+|48|0| |PARA_DSC_SaveGroup|
+|48|...| |PARA_DSC_SaveGroup|
+|48|12| |PARA_DSC_SaveGroup|
+
+Table 16.4: Parameter “Drive description - Interface"" (continue)
+
+# 17 Enhanced/additional functions
+
+# 17.1 Reloading individual parameters
+
+The parameters P 97 - PARA_DataSetLdCfg, P 98 - PARA_DataSetLdID and P 99 - PARA_DataSetLdVal provide the option of adapting individual parameter values as needed.
+
+The parameters and values to be loaded can be defined by means of special character strings and assigned to an associated data set ID. Determination of the data set ID can be accomplished by means of digital inputs or a parameter, for example. One possible application would be storing two motor data sets in one device which can be switched over in dependence on a certain event.
+
+# 17.1.1 Parameters used
+
+P 97 - PARA_DataSetLdCfg
+
+The parameter P 97 - PARA_DataSetLdCfg is used to activate the function and to make the general settings for the generation of the data set ID.
+
+P 98 - PARA_DataSetLdID
+
+The desired data set IDs are entered in P 98 - PARA_DataSetLdID. Up to 100 entries can be made (subindex 0 ....99). The parameter ID entered here makes reference to the subindex in PARA_DataSetLdVal via the associated subindex of PARA_DataSelLdID.
+
+P 99 - PARA_DataSetLdVal
+
+The character strings associated with the respective data set IDs (linked via the subindex with P 98) which define the parameters and values to be loaded are entered in P 99 - PARA_DataSetLdVal.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 455
+
+# Enhanced/additional functions
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameter list
+
+The parameter P 97 - PARA_DataSetLdCfg[1] FS is the function selector and specifies which source is used for determining the data set ID.
+
+|ID|Index|Name/Setting|Unit|Description|
+|---|---|---|---|---|
+|97|PARA_DataSetLdCfg|DataSet Loader Configuration| |The parameter P 97 - PARA_DataSetLdCfg[2] (= PARA_DataSetLd_Mask) functions in this case as the bitmask for selecting (e.g. the desired digital inputs).|
+| |0|Opt| |Configuration options|
+| | |OFF (0)| |Function not active|
+| | |ON(1)| |Activate function|
+| |1|FS:| |Function selector|
+| | |0 = OFF| |No data set ID is determined.|
+| | |1 = TERM| |Determination via digital inputs (MPRO_INPUT_STATE & PARA_DataSetLdCfg[1])|
+| | |2 = PARA| |The data set ID is determined from a selectable parameter. The value of the parameter (Para_ID/ParaSubID) is used to generate the data set ID.|
+| |2|Mask| |Bitmask|
+| |3|ActID| |Currently selected data set ID|
+| |4|Para_ID| |Parameter index for generating the data set ID (if FS=PARA)|
+| |5|Para_SubID| |Parameter subindex for generating the data set ID (if FS=PARA)|
+| |6|Para_Scale| |The parameter value is scaled (multiplication) for the generation of the data set ID using the value indicated.|
+| |7|Para_Offset| |Parameter offset for generating the data set ID|
+|98|PARA_DataSetLdID| | |Automatic data set ID determination|
+| |0 -99|PARA_DataSetLdID| |List of the possible data set IDs|
+|99|PARA_DataSetLdVal| | |Associated character strings which describe parameters and values which are to be changed|
+
+# Table 16.5: Parameter “Reloading individual parameters”
+
+Activation
+
+The function is activated by the setting of the parameter P 97 - PARA_DataSetLdCfg[0] Opt = 1.
+
+# Determining the data set ID
+
+Using P 97 - PARA_DataSetLdCfg[6] - Para_Scale and P 97 - PARA_DataSetLdCfg[7] - Para_Offset, the parameter value is now first multiplied by “Para_Scale” and then “Para_Offset” is added. The resulting value is rounded to the nearest integer to obtain the data set ID.
+
+NOTE
+
+Currently, only float32 parameters are supported. If the specified parameter cannot be read or if it is not a float32 parameter, the data set ID generated is always “0”.
+
+# Configuring the data set for the determined data set ID
+
+The settings in parameters P 98 and P 99 must now be made for the data set ID that has been determined.
+
+P 97 - PARA_DataSetLd [3] = ActId shows the currently determined or entered data set ID.
+
+Enter this data set ID under P 98 - PARA_DataSetLdID - Index X for the required subindex. The system then uses the subindex of P 98 to branch to the subindex of P 99 - PARA_DataSetLdVal - Index X. The configuration data for the new parameters must be entered in this index.
+
+Select parameter P 99 - PARA_DataSetLdVal - Index X. This must be the same index as the index selected under P 98 - PARA_DataSetLdID - Index X.
+
+Then enter the configuration data for the parameters for the selected index of P 99 - Para_DataSelLdVal under ""Value"". This must have the syntax <INDEX>,<SUBINDEX>,<VALUE>;<INDEX>,<SUBINDEX>,<VALUE>; ….
+
+# 17 Enhanced/additional functions
+
+# 17.1.3 Procedure
+
+Activate the function using:
+
+P 97 - PARA_DataSetLdCfg[0] = 1
+
+Generate the data set ID using:
+
+P 97 - PARA_DataSetLdCfg[1] = 2
+
+Set Para_ID and Para_SubID using P 97 - PARA_DataSetLdCfg[4] and P 97 - PARA_DataSetLdCfg[5].
+
+Set Para_Scale and Para_Offset using P 97 - PARA_DataSetLdCfg[6] and P 97 - PARA_DataSetLdCfg[7].
+
+The data set ID is now displayed under P 97 - PARA_DataSetLdCfg[2] = ActID.
+
+Enter the determined data set ID under P 98 - PARA_DataSetLdID[x] = Subindex X.
+
+Now enter the configuration of the parameter under P 99 - PARA_DataSetLdID[x] = Subindex X.
+
+Compare the data set ID with elements of P 98- PARA_DataSetLdID[x]
+
+The parameter P 98 - PARA_DataSetLdID[x], which consists of 100 elements (0 . . ",How is the 'Manual mode' window described in the MSD ServoDrive - DeviceHelp?,It describes the configuration and control options available for manual operation of the device.,The window is outlined as providing settings and controls for manually operating the ServoDrive.,It details the manual operation configurations and controls within the MSD ServoDrive interface.,The description covers the manual control and setup options accessible through the window.,It explains the manual operation features and settings that can be adjusted via the window.

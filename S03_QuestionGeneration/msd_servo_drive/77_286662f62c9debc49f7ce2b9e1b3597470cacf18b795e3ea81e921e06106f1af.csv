@@ -1,0 +1,1081 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",What parameter is used to define the engagement distance in the 'MSD ServoDrive - DeviceHelp' manual?,P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.,The engagement distance is defined by MPRO_ECAM_Egear_GearInDist at P 257[0].,"In the 'MSD ServoDrive - DeviceHelp' manual, engagement distance is specified by the parameter MPRO_ECAM_Egear_GearInDist located at P 257[0].","MPRO_ECAM_Egear_GearInDist, found at P 257[0], sets the engagement distance.","Engagement distance is determined by the value at P 257[0], named MPRO_ECAM_Egear_GearInDist."
+1,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",How is the acceleration for the 'RAMP (1)' mode defined in the 'MSD ServoDrive - DeviceHelp' manual?,P 255[0] - MPRO_ECAM_Egear_GearInAcc defines the acceleration for the 'RAMP (1)' mode.,The 'RAMP (1)' mode's acceleration is set by MPRO_ECAM_Egear_GearInAcc at P 255[0].,Acceleration for the 'RAMP (1)' mode is specified by MPRO_ECAM_Egear_GearInAcc in P 255[0] of the 'MSD ServoDrive - DeviceHelp' manual.,MPRO_ECAM_Egear_GearInAcc at P 255[0] is the parameter that defines the 'RAMP (1)' mode's acceleration.,"For the 'RAMP (1)' mode, acceleration is defined by the value at P 255[0], known as MPRO_ECAM_Egear_GearInAcc."
+2,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",What are the modes available for disengagement in the 'MSD ServoDrive - DeviceHelp' manual?,"The modes are FADE (2), DIRECT (0), and RAMP (1).","Disengagement can be performed in FADE (2), DIRECT (0), or RAMP (1) modes.","In the 'MSD ServoDrive - DeviceHelp' manual, disengagement modes include FADE (2) for fade-out, DIRECT (0) for direct disengagement, and RAMP (1) for linear speed ramp.","Available disengagement modes are FADE (2), DIRECT (0), and RAMP (1), each serving different disengagement functions.","The manual lists three disengagement modes: FADE (2), DIRECT (0), and RAMP (1), catering to various disengagement needs."
+3,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",What parameter defines the deceleration for the 'RAMP (1)' mode during disengagement in the 'MSD ServoDrive - DeviceHelp' manual?,P 256[0] - MPRO_ECAM_Egear_GearOutDec defines the deceleration for the 'RAMP (1)' mode.,Deceleration for the 'RAMP (1)' mode is set by MPRO_ECAM_Egear_GearOutDec at P 256[0].,The 'MSD ServoDrive - DeviceHelp' manual specifies MPRO_ECAM_Egear_GearOutDec at P 256[0] for the 'RAMP (1)' mode's deceleration.,"MPRO_ECAM_Egear_GearOutDec, located at P 256[0], determines the deceleration in 'RAMP (1)' mode.","For 'RAMP (1)' mode deceleration, refer to MPRO_ECAM_Egear_GearOutDec at P 256[0]."
+4,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",What is the function of the virtual master in the 'MSD ServoDrive - DeviceHelp' manual?,The virtual master must be activated for operation of a synchronized movement.,It remains active for synchronized movement operation once started.,"In the 'MSD ServoDrive - DeviceHelp' manual, the virtual master is essential for initiating and maintaining synchronized movements.",Activating the virtual master by clicking 'Start' enables synchronized movement operations.,"The virtual master's role is to facilitate synchronized movements, requiring activation via the 'Start' button."
+5,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",What are the parameters associated with the virtual master in the 'MSD ServoDrive - DeviceHelp' manual?,"Parameters include MPRO_ECAM_VM_ for reference speed, amplitude, actual position, acceleration, deceleration, jerk, and actual speed.","Virtual master parameters cover speed, amplitude, position, acceleration, deceleration, jerk, and more.","The 'MSD ServoDrive - DeviceHelp' manual lists virtual master parameters such as reference speed, amplitude, and actual speed under MPRO_ECAM_VM_.","Key virtual master parameters are reference speed, amplitude, actual position, and others, all prefixed with MPRO_ECAM_VM_.","Virtual master settings include various MPRO_ECAM_VM_ parameters for speed, position, and movement dynamics."
+6,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",How is the disengagement distance defined in the 'MSD ServoDrive - DeviceHelp' manual?,P 258[0] - MPRO_ECAM_Egear_GearOutDist defines the disengagement distance.,Disengagement distance is set by MPRO_ECAM_Egear_GearOutDist at P 258[0].,The 'MSD ServoDrive - DeviceHelp' manual specifies disengagement distance with MPRO_ECAM_Egear_GearOutDist in P 258[0].,MPRO_ECAM_Egear_GearOutDist at P 258[0] determines the range for disengagement.,"Disengagement distance is outlined by the value at P 258[0], named MPRO_ECAM_Egear_GearOutDist."
+7,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",What is the purpose of the 'Common master' parameters in the 'MSD ServoDrive - DeviceHelp' manual?,"They include control word, status word, and data for common master and phasing.","'Common master' parameters manage source, destination, reverse lock mode, and more for value processing.","In the 'MSD ServoDrive - DeviceHelp' manual, 'Common master' parameters facilitate various control and status functionalities.","These parameters encompass control and status words, alongside detailed settings for master and phasing data.","'Common master' parameters provide comprehensive control over processing values, including source, destination, and operational modes."
+8,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",What is noted about the cam group (CAM switch) function in the 'MSD ServoDrive - DeviceHelp' manual?,It is not available as standard and must be specially requested.,The cam group function requires a special request as it's not standard.,The 'MSD ServoDrive - DeviceHelp' manual mentions that the cam group (CAM switch) function is only available upon special request.,"Availability of the cam group (CAM switch) function is conditional, needing a specific request.","For the cam group (CAM switch) function, a special request is necessary since it's not provided by default."
+9,msd_servo_drive.txt,77,286662f62c9debc49f7ce2b9e1b3597470cacf18b795e3ea81e921e06106f1af,"There always remains a variation between reference and actual position. P 257[0] (see below) is used to define the engagement distance. The actual engagement occurs within this range (between the dashed lines).
+
+P 255[0] - MPRO_ECAM_Egear_GearInAcc is used to define the acceleration for the ""RAMP (1)” mode.
+
+P 257[0] - MPRO_ECAM_Egear_GearInDist is used to define the engagement distance.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|253|MPRO_ECAM_Egear_GearInMode| |EGEAR: GearIn - engagement mode|
+|255|MPRO_ECAM_Egear_GearInAcc|rev/min/s|EGEAR: GearIn - acceleration ramp for engagement|
+|257|MPRO_ECAM_Egear_GearInDist|incr|EGEAR: GearIn - engagement distance|
+|263|MPRO_ECAM_Egear_GearInJerk|rpm/s2|EGEAR: GearIn - acceleration ramp jerk for engagement|
+
+Table 8.39: “Synchronized motion - Electronic gearing - Engagement” parameters
+
+# 8.11.7 Disengagement
+
+l  FADE (2) = Engagement fade-out
+
+Disengagement with fade-out function (5th order polynomial): jerk limited. The position is ignored. There always remains a variation between reference and actual position. P 254[0] - MPRO_ECAM_Egear_GearOutMode is used to define the mode for disengagement.
+
+l  DIRECT (0) = Direct
+
+Direct disengagement: With jerking (no ramps).
+
+l  RAMP (1) = Linear speed ramp
+
+Disengagement with linear deceleration: With jerking. P 256[0] (see below) is used to define the deceleration for the ""RAMP (1)” mode.
+
+P 258[0] - MPRO_ECAM_Egear_GearOutDist is used to define the disengagement distance. The actual disengagement occurs within this range (between the dashed lines).
+
+MOOG                       ID No.:CB40859-001 Date:11/2020                                                                                  MSD ServoDrive  - DeviceHelp    285
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 286
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|254|MPRO_ECAM_Egear_GearOutMode| |EGEAR: GearOut - disengagement mode|
+|256|MPRO_ECAM_Egear_GearOutDec|rev/min/s|EGEAR: GearOut - deceleration ramp for disengagement|
+|258|MPRO_ECAM_Egear_GearOutDist|incr|EGEAR: GearOut - disengagement distance|
+|264|MPRO_ECAM_Egear_GearOutJerk|rpm/s²|EGEAR: GearOut - acceleration ramp jerk for disengagement|
+
+Table 8.40: “Synchronized motion - Electronic gearing - Disengagement” parameters
+
+Image 8.74: ""Virtual master"" screen
+
+Click ""Start"" to start the engagement and click ""Stop"" and ""Halt"" correspondingly to stop it.
+
+NOTE
+
+The virtual master must be activated by clicking the ""Start"" button, and remains active for operation of a synchronized movement.
+
+# 8 Motion profile
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|244|0|MPRO_ECAM_VM_|Virtual master reference speed|
+|245|0|MPRO_ECAM_VM_|Virtual master amplitude|
+|246|0|MPRO_ECAM_VM_|Virtual master actual position|
+|259|0|MPRO_ECAM_VM_|Virtual master acceleration|
+|260|0|MPRO_ECAM_VM_|Virtual master deceleration|
+|261|0|MPRO_ECAM_VM_|Virtual master jerk|
+|262|0|MPRO_ECAM_VM_|Virtual master actual speed|
+|267|0|MPRO_ECAM_VM_|Virtual master actual speed|
+
+# Table 8.41: “Virtual master” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|1407|0|MPRO_CMST_|Control word|
+|1408|0|MPRO_CMST_|Status word|
+|1409| |MPRO_CMST_Para|Data of common master|
+|1409|0|Source|Source of value processing|
+|1409|1|Destination|Destination of value processing|
+|1409|2|RevLoclMode|Reverse lock mode|
+|1409|3|Amplitude|incr Amplitude|
+|1409|4|GearNum|Gear numerator|
+|1409|5|GearDen|Gear denominator|
+|1409|6|SpeedFilType|Speed filter: Filter type|
+|1409|7|SpeedFilTs|ms Speed filter: Filter time|
+|1409|8|SpeedFactor|Speed filter: Factor|
+|1409|9|Offset|incr Position offset|
+|1410| |MPRO_CMST_|Data of common master phasing|
+|1410|0|Position|incr Position phasing difference|
+|1410|1|Velocity|rpm Position phasing velocity|
+|1410|2|Acceleration|rpm/s Position phasing acceleration|
+|1411| |MPRO_CMST_ActVal|Actual values of common master|
+|1411|0|PosST|incr Position singleturn part|
+|1411|1|PosMT|r Position multiturn part|
+|1411|2|Vel|rpm Velocity|
+
+# Table 8.42: ""Common master” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 287
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 288
+
+# 8.14 Cam group (CAM switch)
+
+The function is not available as standard. It must be specially requested. ",What actions are required to start and stop the engagement in the 'MSD ServoDrive - DeviceHelp' manual?,Click 'Start' to begin and 'Stop' followed by 'Halt' to end engagement.,Initiate engagement with 'Start' and terminate with 'Stop' and 'Halt'.,The 'MSD ServoDrive - DeviceHelp' manual instructs to use 'Start' for engagement commencement and 'Stop' plus 'Halt' for cessation.,Engagement starts with 'Start' button and stops with sequential 'Stop' and 'Halt' commands.,"To manage engagement, activate with 'Start' and deactivate by pressing 'Stop' then 'Halt'."

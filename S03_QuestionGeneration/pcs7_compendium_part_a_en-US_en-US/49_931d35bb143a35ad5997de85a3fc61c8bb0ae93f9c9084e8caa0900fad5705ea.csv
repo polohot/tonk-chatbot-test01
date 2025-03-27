@@ -1,0 +1,841 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",What operating system is recommended for the central engineering server in a multiproject setup?,A Windows server operating system is recommended for the central engineering server for performance reasons.,"For optimal performance, the central engineering server should run on a Windows server operating system.",The recommendation is to use a Windows server OS on the engineering server to ensure good performance.,Performance reasons dictate the use of a Windows server operating system on the central engineering server.,Using a Windows server OS on the engineering server is advised for performance enhancements.
+1,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",How can the Sybase server be set up to run without a user being logged in on the central server computer?,The Sybase server can be set up as a service using the 'setsybserv.exe' application to run without a user logged in.,"To eliminate the need for a logged-in user, configure the Sybase server as a service with 'setsybserv.exe'.","Using 'setsybserv.exe', the Sybase server can be established as a service, removing the login requirement.",The condition of needing a logged-in user is removed by setting up the Sybase server as a service via 'setsybserv.exe'.,"For the Sybase server to operate without a user login, it must be configured as a service using 'setsybserv.exe'."
+2,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",What functions are safeguarded in CFC and SFC when multiple users access the same data simultaneously?,CFC and SFC include failsafe functions to protect system integrity and data consistency during simultaneous multi-user access.,Simultaneous access by multiple users is safeguarded in CFC and SFC through failsafe functions ensuring data consistency and system integrity.,"To maintain system integrity and data consistency, CFC and SFC have failsafe functions for when several users access the same data at once.",Failsafe functions in CFC and SFC ensure that system integrity and data consistency are preserved during concurrent user access.,"When multiple users access the same data simultaneously in CFC and SFC, failsafe functions are in place to safeguard system integrity and data consistency."
+3,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",What message does a user receive when attempting to open a CFC chart that is already being edited by another user in PCS 7 V8.1 and later?,"In PCS 7 V8.1 and later, a user trying to open a CFC chart already in use will see the message 'Chart is being edited'.",The message 'Chart is being edited' appears when a user attempts to open a CFC chart that another editor has already opened in PCS 7 V8.1 onwards.,"From PCS 7 version V8.1, opening a CFC chart already under edit by another user triggers the 'Chart is being edited' notification.",Users are informed that a CFC chart is already being edited by another user via the 'Chart is being edited' message in PCS 7 V8.1 and newer.,PCS 7 V8.1 introduced the 'Chart is being edited' message to alert users when a CFC chart they're trying to open is already in use by another editor.
+4,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",What is the System ID in SIMATIC PCS 7 V9.0 and how is it used?,"The System ID is a unique identification number for a PCS 7 system, generated upon registration at www.siemens.com/SIDregistry and used throughout the system's life cycle.","In SIMATIC PCS 7 V9.0, the System ID serves as a unique identifier for the system, assigned during registration and used for support and documentation purposes.","A System ID, created when registering a new PCS 7 system at Siemens, uniquely identifies the system and aids in technical support over its life cycle.","The System ID in PCS 7 V9.0 is a system-specific number that identifies the system uniquely, facilitating targeted support and error correction.","SIMATIC PCS 7 V9.0 uses the System ID, obtained through registration, as a lifelong unique identifier for the system, enhancing support efficiency."
+5,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",What are the advantages of registering your PCS 7 system and obtaining a System ID?,"Registering your PCS 7 system offers faster and more targeted support, holistic error correction, and lasting troubleshooting through documented requests.","Benefits include quicker support, comprehensive error fixes based on current configuration, and durable solutions via request documentation.","System registration provides advantages like time-saving support, error correction aligned with system configuration, and troubleshooting history.","The main perks are expedited support, accurate error resolution, and a documented history of all support requests for the system.","Obtaining a System ID through registration ensures efficient support, precise error handling, and a complete record of system inquiries."
+6,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",What CPUs and software versions support dataset routing to the internal PROFIBUS DP interface in SIMATIC PDM?,S7-400 CPUs with firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support this routing.,Dataset routing to the internal PROFIBUS DP interface is supported by S7-400 CPUs firmware 5.1+ and Win AC RTX V4.6+.,"For SIMATIC PDM, S7-400 CPUs from firmware 5.1 onwards and Win AC RTX from version V4.6 support internal PROFIBUS DP dataset routing.",Internal PROFIBUS DP interface dataset routing is possible with S7-400 CPUs at firmware 5.1 or later and Win AC RTX V4.6 or newer.,Support for dataset routing to the internal PROFIBUS DP interface requires S7-400 CPUs firmware 5.1+ and Win AC RTX software V4.6+.
+7,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",What is recommended regarding the default CPU settings in PCS 7 for a given project?,"PCS 7 provides optimized default CPU settings, requiring only a few parameters to be adjusted for specific projects.","For most projects, PCS 7's default CPU settings are optimal, with minimal parameter adjustments needed.","The default CPU settings in PCS 7 are designed for efficiency, necessitating few changes for individual project requirements.","PCS 7 comes with pre-optimized CPU settings, meaning only select parameters may need modification per project.","In PCS 7, the CPU settings are optimized by default, allowing projects to proceed with only minor parameter tweaks."
+8,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",Where can detailed information on CPU parameters for PCS 7 be found?,Detailed CPU parameter information is available in the HW Config online help and PCS 7-specific subsections of the manual.,The HW Config online help and specialized PCS 7 manual sections provide in-depth details on CPU parameters.,"For comprehensive CPU parameter details, consult the HW Config online help and relevant PCS 7 manual parts.","CPU parameter specifics are outlined in the HW Config online help, with PCS 7 contexts further explained in manual subsections.","Information on CPU parameters is detailed in the HW Config online help, supplemented by PCS 7-focused explanations in the manual."
+9,pcs7_compendium_part_a_en-US_en-US.txt,49,931d35bb143a35ad5997de85a3fc61c8bb0ae93f9c9084e8caa0900fad5705ea,"The multiproject is filed on the central engineering station. Using a Windows server operating system on the engineering server is recommended for performance reasons. The individual projects from multiple engineering stations are opened and processed via a network.
+
+Note
+
+In order for the required Sybase server to run on the central server computer, a user must be logged in on the central server computer. In order to remove this condition, you can set up the Sybase server as a service using the ""setsybserv.exe"" application. You can find extensive information on this in the section ""This is how you prepare the engineering station for multi-user operation"" in the ""SIMATIC PCS 7 PC – Configuration"" (https://support.industry.siemens.com/cs/ww/en/view/109749317) manual.
+
+Parallel working on a project via a combined network is restricted to CFC and SFC. Specific improvements were implemented in CFC and SFC, including failsafe functions to safeguard system integrity and data consistency when several users access the same data at the same time.
+
+Starting with PCS 7 V8.1, when a CFC chart is opened, the user receives the message ""Chart is being edited"" if another editor has already opened this chart. From PCS 7 version V8.1 onwards, the OS station can be opened and edited remotely by all connected engineering stations. The individual editors or images can only be opened by one user simultaneously in each case. Sometimes a ""read only"" mode is also possible for looking at the configured data if editors are already opened.
+
+Note
+
+Additional information on this is available in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Creating and managing a PCS 7 project
+
+# 5.8 System Registration – System ID
+
+A new service concept was introduced with SIMATIC PCS 7 V9.0, which is based on a system-specific system identification number – the System ID (SID).
+
+The System ID is generated once when you register your new system for free at www.siemens.com/SIDregistry and is stored centrally at Siemens Technical Support. It then serves as the unique identification of your PCS 7 system over its entire life cycle.
+
+The System ID is assigned to your PCS 7 multiproject by entering the System ID in the properties of the multiproject in SIMATIC Manager. The System ID entered there is also an integral component of the inventory data that you read out with the SIMATIC Management Console and can be sent to Siemens Technical Support via a Support Request.
+
+Technical Support adds the transmitted inventory data and all the requests you make over the system's life cycle to your basic data. Registering your system offers you the following advantages:
+
+- Faster and more targeted support saves you time and may shorten or prevent system stoppages.
+- Holistic and fast error correction based on the current system configuration
+- Lasting troubleshooting through documentation of all previous requests
+
+Note
+
+The ""Determine inventory data"" and ""Export inventory data"" functions of the SIMATIC Management Console can be used without a license starting in V9.0.
+
+Note
+
+You can find additional information on the System ID in the ""SIMATIC Process Control System PCS 7 Engineering System"" manual.
+
+Note
+
+You can find additional information on determining the inventory data in the ""SIMATIC Process Control System PCS 7 SIMATIC Management Console"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# Introduction
+
+This section describes the settings in the hardware configuration (HW Config) of the example project (""Comp_MP"").
+The screenshots provide an overview of the properties of the following configurations:
+
+- H-system with CPU 410-5H and CP 443-1/CP 443-5 Ext.
+- Standard AS with a CPU 410-5H and CP 443-1/CP 443-5 Ext.
+
+For other CPUs or CPs, the properties dialog boxes may differ slightly. Note the following when using SIMATIC PDM in the project:
+S7-400 CPUs firmware version 5.1 and higher and Win AC RTX software version V4.6 and higher support dataset routing to the internal PROFIBUS DP interface.
+For this purpose, the CPUs must also be configured in this firmware version. For all other S7-400 CPUs, the required routing functions must be implemented with a CP 443-5 Ext.
+
+# 6.1 General CPU settings (H system and standard AS)
+
+PCS 7 features optimized default settings for a CPU so that only a few parameters need to be set for a given project.
+Detailed information on the parameters can be found in the HW Config online help. Special contexts for PCS 7 are explained in greater detail in the following sub-sections.
+These subsections also contain relevant recommendations, the parameters to be left at their default settings, and the parameters you may need to adapt to your particular project.
+
+CPU parameters highlighted in blue can be changed during operation on an H system. All special information for the CPU settings in the H system is given in the section titled ""Special settings for an H system"".
+The following settings are made in the object properties of the CPU in HW Config.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.1 General CPU settings (H system and standard AS)
+
+# 6.1.1 Startup
+
+The parameters relating to the CPU startup characteristics can be checked on the ""Startup"" tab. We recommend that you retain the default settings. ",What is the significance of CPU parameters highlighted in blue in an H system configuration?,"Blue-highlighted CPU parameters in an H system can be modified during operation, offering flexibility in system adjustments.","In H systems, CPU parameters marked in blue are adjustable during runtime, allowing for dynamic configuration changes.",The blue highlighting indicates that these CPU parameters in an H system are changeable without stopping operations.,Parameters highlighted in blue in an H system's CPU settings are those that can be altered while the system is running.,"For H systems, CPU settings shown in blue are the ones that permit modifications during active system operation."

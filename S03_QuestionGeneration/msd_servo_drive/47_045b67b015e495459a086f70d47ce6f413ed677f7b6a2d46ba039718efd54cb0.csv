@@ -1,0 +1,2641 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",What is the purpose of the measurement variable remaining high until the next zero pulse appears in the 'MSD ServoDrive - DeviceHelp' document?,To make the zero pulse clearly visible.,It ensures visibility of the zero pulse by staying high until the next zero pulse appears.,The measurement variable remains high to clearly indicate the presence of a zero pulse until another one is detected.,"For clear visibility of zero pulses, the measurement variable stays high until the subsequent zero pulse is observed.",Maintaining the measurement variable high until the next zero pulse ensures zero pulses are distinctly visible.
+1,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",How are zero pulses counted in the 'MSD ServoDrive - DeviceHelp' document?,Zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3.,They are counted using specific counter evaluations: P 411[31] for channel 1 and P 411[32] for channel 3.,"In the document, zero pulse counting is facilitated through P 411[31] for channel 1 and P 411[32] for channel 3.",The counting mechanism for zero pulses involves P 411[31] for channel 1 and P 411[32] for channel 3.,"P 411[31] and P 411[32] are used for counting zero pulses on channels 1 and 3, respectively."
+2,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",What does the 'MSD ServoDrive - DeviceHelp' document say about zero pulse evaluation during homing?,Zero pulse evaluation will not be available during homing when in zero pulse test mode.,"During homing in zero pulse test mode, the evaluation of zero pulses is disabled.",The document specifies that zero pulse evaluation is unavailable during homing if zero pulse test mode is active.,"In zero pulse test mode, homing operations do not include zero pulse evaluation.",Zero pulse evaluation is turned off during homing when the system is in zero pulse test mode.
+3,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",What are the recommended settings for resolver and Sin/Cos encoders according to the 'MSD ServoDrive - DeviceHelp' document?,"Resolver: 1-2 ms, Sin/Cos encoder (low-track): 0.5 - 1 ms, Sin/Cos encoder (high resolution): 0.2 - 0.6 ms.","For resolvers, 1-2 ms; for low-track Sin/Cos encoders, 0.5 - 1 ms; and for high resolution Sin/Cos encoders, 0.2 - 0.6 ms.","The document recommends 1-2 ms for resolvers, 0.5 - 1 ms for low-track Sin/Cos encoders, and 0.2 - 0.6 ms for high resolution ones.","Settings should be 1-2 ms for resolvers, 0.5 - 1 ms for low-track Sin/Cos encoders, and 0.2 - 0.6 ms for high resolution Sin/Cos encoders.","Optimal settings include 1-2 ms for resolvers, 0.5 - 1 ms for low-track Sin/Cos encoders, and 0.2 - 0.6 ms for high resolution versions."
+4,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",What is the sequence for controller setup as described in the 'MSD ServoDrive - DeviceHelp' document?,"1. Current controller setup, 2. Speed controller setup.","First, set up the current controller, followed by the speed controller.",The sequence starts with the current controller setup and then proceeds to the speed controller setup.,"Begin with the current controller, then move on to configuring the speed controller.","Initial setup involves the current controller, with the speed controller setup following thereafter."
+5,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",What does the 'MSD ServoDrive - DeviceHelp' document caution about before starting the motor control function?,Ensure a valid setpoint is entered to prevent unexpected motor acceleration.,It warns to confirm a valid setpoint is configured to avoid sudden motor acceleration.,"The document cautions that without a valid setpoint, the motor might accelerate unexpectedly upon starting.","Before starting, verify the setpoint to prevent the motor from accelerating unexpectedly.","To avoid unexpected motor movement, a valid setpoint must be entered before initiating the motor control function."
+6,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",How is the mass inertia of a motor defined in the 'MSD ServoDrive - DeviceHelp' document?,Through the 'automatic mass inertia definition' function when the hardware is enabled.,By using the automatic mass inertia definition feature with hardware enablement.,"The document describes using an automatic function to define mass inertia, requiring hardware to be enabled.","Mass inertia is determined automatically via a specific function, activated once the hardware is enabled.","An automatic function defines the mass inertia, operational only when the hardware is enabled."
+7,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",What is the effect of setting the rigidity to less than 100% in the 'MSD ServoDrive - DeviceHelp' document?,It reduces the dynamic performance of the controller setting.,Setting rigidity below 100% decreases the controller's dynamic performance.,A rigidity setting under 100% lowers the dynamic capabilities of the controller.,The dynamic performance of the controller is diminished when rigidity is set to less than 100%.,Reduced dynamic performance results from a rigidity setting that's under 100%.
+8,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",What are the objectives of optimizing the current control loop in the 'MSD ServoDrive - DeviceHelp' document?,"A current controller with moderate dynamism, current control time < 1 ms, and overshoot < 5%.",To achieve moderate dynamism with control time under 1 ms and overshoot below 5%.,"Optimization aims for a current controller that's moderately dynamic, with <1 ms control time and <5% overshoot.","The goal is a current controller featuring moderate dynamism, sub-1 ms control time, and less than 5% overshoot.","Achieving a balance of moderate dynamism, control time under 1 ms, and overshoot below 5% is the objective."
+9,msd_servo_drive.txt,47,045b67b015e495459a086f70d47ce6f413ed677f7b6a2d46ba039718efd54cb0,"To make the zero pulse clearly visible, the measurement variable remains high until the next zero pulse appears. Conversely, the measurement variable remains low until another zero pulse appears. Bear in mind that the pulse width of the scope signal does not match the pulse width of the actual zero pulse.
+
+# Table 6.39: Parameters for shifting the multi-turn overflow
+
+Image 6.16: Zero pulse recording via measurement variable CH1/3_Np
+
+# NOTE
+
+- When in zero pulse test mode, zero pulse evaluation will not be available during homing.
+- Regardless of this, all zero pulse events will be counted. The zero pulses are counted by counter evaluation P 411[31] for channel 1 and P 411[32] for channel 3 (under ►Actual values ►All values in the Moog DRIVEADMINISTRATOR 5).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 107
+
+# 7 Control
+
+# 7.1 Overview of control structure
+
+This chapter describes the various control types, settings and optimisation options and recommended procedures.
+
+# Contents
+
+- 7.1 Overview of control structure 108
+- 7.2 Basic settings 110
+- 7.3 Torque controller 113
+- 7.4 Speed controller 131
+- 7.5 Position controller settings 140
+- 7.6 Asynchronous motor field weakening 143
+- 7.7 Field weakening and LookUpTable (LUT), synchronous motor 146
+- 7.8 Synchronous motor auto commutation 156
+- 7.9 V/Hz mode 165
+- 7.10 Process controller 166
+- 7.11 Hydraulic control 173
+
+Image 7.1: Overview of control structure
+
+|Position control|Speed control|Digital filter|Current control|
+|---|---|---|---|
+|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|Interpolation and feed-forward control|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 108
+
+# Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Legend for figure Control Structure
+
+# 3. Setting for position controller / Pre-control
+
+Position Controller/Feed see 7.5 Position controller settings
+
+# 7.1.1 Setting
+
+Forward Control
+
+Position controller see 7.5 Position controller settings When using a standard Moog motor data set, the control parameters are preset for the specific motor model (external mass inertia = motor inertia). If using third-party motors, a manual setting must be made for the drive by way of the motor identification or by calculation in order to define the appropriate control parameters for the motor model.
+
+Speed controller see 7.4 Speed controller
+
+Digital filter see 7.4.2 Digital filter
+
+Current Controller see 7.3 Torque controller
+
+Filter/observer see 7.3.6 Advanced torque control
+
+Field weakening, asynchronous see 7.6 Asynchronous motor field weakening
+
+Field weakening, synchronous see 7.7 Field weakening and LookUpTable (LUT), synchronous motor
+
+The setting of the speed controller with the associated filters is dependent on the motor parameters (moment of inertia, torque/force constant, load inertia/mass, friction, rigidity of the connection and encoder quality). Consequently, a manual or automatic optimization is often required.
+
+# 7.1.1.1 Speed control loop
+
+Scanning times of the individual control circuits:
+
+|Switching frequency|Current Controller|Sampling time|Speed controller|Position controller|
+|---|---|---|---|---|
+|2 kHz|250µs|250µs|250µs| |
+|4 kHz (12 kHz)|125µs|125µs|125µs| |
+|8 kHz (Presetting)|62.5µs|125 µs|125µs| |
+|16 kHz|62.5µs|125µs|125µs| |
+
+Table 7.1: Scanning times of the individual control circuits
+
+The control system is set up in a cascaded configuration. The position, speed and current controllers are configured in sequence. The sequence of controller setup must always be observed in controller optimization.
+
+1. Current controller setup
+2. Speed controller setup
+
+# 7.2 Basic settings
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner.
+
+The basic settings for the control are selected and parametrized using the ""Motor control setup"" screen. This screen aids navigation to the basic settings, various controllers and the control mode.
+
+Improper conduct can cause damage to your system/machine.
+
+- Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# 7.2.1 Motor control basic settings
+
+Click on the ""Basic settings"" button opens the wizard to determine the mass inertia, the rigidity wizard, as well as the speed and position controllers.
+
+Image 7.2: “Motor control settings” screen
+
+NOTE
+
+- P 300[0] - CON_CfgCon specifies the control mode with which the drive is to be run. This parameter takes effect online. Uncontrolled online switching can cause an extreme jerk, a very high speed or an overcurrent, which may cause damage to the system.
+
+Image 7.3: “Motor control basic settings” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 110
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 111
+
+# 7.2.1.1 Adjustment of the mass inertia
+
+The speed controller gain is scaled separately using the percentage value KP Scale. The damping of the control is affected by the speed filter. If the mass inertia value is not known, the wizard can be used to determine it (see Section ""Automatic inertia detection"" on page 111).
+
+Useful settings are:
+
+- Resolver: 1-2 ms
+- Sin/Cos encoder (low-track): 0.5 - 1 ms
+- Sin/Cos encoder (high resolution): 0.2 - 0.6 ms
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+NOTE
+
+After a power-off the speed and position control settings remain stored. The percentage value for rigidity, however, is set to 100% again.
+
+CAUTION! Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+# 7.2.2 Automatic inertia detection
+
+To define the mass inertia of a motor easily, the ""automatic mass inertia definition"" function is available. In the standard motor data set, the speed controller is preset for a moderately stiff mechanical system. The automatic mass inertia definition function is started when the hardware has been enabled. Clicking the ""Automatic Inertia Definition"" button enters the latest value obtained in SCD_Jsum.
+
+# 7.2.1.2 Adaptation to the rigidity of the drive train
+
+The settings for the speed and position control with feed forward control are determined automatically by setting the rigidity. The rigidity is stated in percent in the wizard.
+
+- The setting &lt; 100% reduces the dynamic performance of the controller setting (e.g. for a toothed belt drive).
+- The setting &gt; 100% increases the dynamic performance of the controller setting (low play and elasticity).
+
+# CAUTION!
+
+Your system/motor may be damaged if put into operation in an uncontrolled or inappropriate manner. Improper conduct can cause damage to your system/machine.
+
+Before the “Start” step, make absolutely sure that a valid setpoint has been entered, as the configured setpoint will be immediately transmitted to the motor after the motor control function starts, which may result in the motor accelerating unexpectedly.
+
+# NOTE
+
+Image 7.4: “Determining the mass inertia” screen
+
+This function is not recommended for horizontal axes. Attention must be paid to the mechanical end stops with this function. This function is only to be used with a freely rotating motor shaft.
+
+# NOTE
+
+In systems with high static friction, the inertia determination can be assigned an additional additive speed setpoint. P 404[0] - CON_SCON_AddSRamp can be used for this.
+
+# NOTE
+
+If no values are entered for ""Hysteresis Speed"" and ""Hysteresis Torque"", 20% of the rated speed and 20% of the rated torque is set. The distance covered results from the preset values.
+
+# NOTE
+
+While the mass inertia is being determined the motor executes movements. There is a risk that the system and the motor may be destroyed.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 112
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 113
+
+# 7.3 Torque controller
+
+# 7.3.1 Current controller optimization
+
+The torque controller is executed as a PI controller. The gain (P-component) and the integral-action time (I-component) of the individual controllers are programmable. In order to optimize the current control loop, two rectangular reference steps are preset. The object of the optimization is a current controller with moderate dynamism and the following values:
+
+- Current control time: &lt; 1 ms
+- Overshoot: &lt; 5%
+
+The faster the actual value approaches the setpoint, the more dynamically the controller is set. The overshoot of the actual value should not be more than 5-10 % of the setpoint (general figure) during the settling process.
+
+- The first step (stage 1, time 1) moves the rotor to a defined position.
+- The second step (stage 2, time 2) is used to optimize the torque control (step response). The magnitude of the 2nd step should not be too large, so as to ensure that the voltage setpoint will not go all the way to the limit (low-level signal response required).
+- The current and time settings automatically adjust to the motor data. The current is equal to In • .
+- ISDSH and ENPO (hardware enable) must be set to ""High"".
+- Click ""Start test signal"" button.
+- Observe the safety notice: When you confirm the safety notice a step response is executed.
+- The oscilloscope is set automatically.
+
+Image 7.5: “Current/torque controller settings” screen
+
+# 7 Control
+
+# 7.3.2 Creating the transfer function
+
+The oscilloscope automatically records the amount and phase response of the controller according to the controller settings. This produces an initial estimate of the control quality. To determine the transfer function the noise amplitude (motor rated current) and the sampling time (default 0.125 ms) must be specified. Click the ""Start Test Signal"" button.
+
+Image 7.7: “Noise amplitude, sampling time” screen
+
+Image 7.6: Current controller optimization
+
+Image 7.8: Current controller transfer function
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 114
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 115
+
+① Green curve = amount
+
+Y-axis left = absolute value of isd/isdref
+
+② Blue curve = phase response
+
+Y-axis right = Phase response Isd/isdref
+
+# 7.3.3 Decoupling
+
+The current control has a decoupling of the d- and q-axis by means of feed-forward control of the corresponding coupling voltages. The decoupling depends on the stator inductance P 471 MOT_Lsig and can be scaled with parameter P 434.3. This is helpful, for example, if the inductance has been estimated inaccurately. If the decoupling is set too high, current control is unstable.
+
+# 7.3.4 Current actual value filter
+
+A first-order digital filter (PT1) can be configured in order to smooth the measured “isd” and “isq” actual current values. This is particularly useful when using drives with high speeds.
+
+NOTE
+
+l The control dynamic performance will be reduced when using the current actual value filter. Using the current actual value filter is not advisable for drives that require a high control dynamic performance.
+
+The current actual value filter is configured with P 1960[0] - CON_ACT_ISDQ_TF, with the filter time constant being defined in milliseconds. Filtered actual currents “isd” and “isq” can be visualized with scope signals 25 and 26. The unfiltered values can be visualized using scope signals “isd_unfil” (129) and “isq_unfil” (130).
+
+In speed and position-controlled operation, the ripple of the torque and power causes a current ripple in the q-current. When detent torque compensation is used, these q-current input data are imported to a teach table in the controller (teaching routine, learning). The compensation table is created from this (calculation) which is then ultimately used for the feed forward control of the q-current in the controller (compensation).
+
+In the low speed range, these disturbance torques can be eliminated well by the control system. In the medium to high speed range, the disturbance torques can be reduced very well using the table-based compensation described here. In the high speed range, the disturbance torques can be reduced very well using the table-based compensation described here.
+
+Image 7.9: Typical positioning sequence
+
+speed range, however, this feed forward control with its finite resolution no longer provides an advantage: the detent torque compensation is eliminated linearly via the fade function (ramp).
+
+In a broader sense, detent torque compensation can always be used when a disturbance torque occurs ‘regularly’ as a function of the position.
+
+the teach table (which cannot be saved): the compensation table is filled in immediately and is ready for the compensation. After the ‘calculation' is complete, the parameter P 385[0] automatically jumps back to P 385[0] - CON_TCoggTeachCon = READY(0). The teaching and calculation are thus finished. The position source used by the teaching has been stored internally. Now the control system can (should) be stopped. The compensation table still needs to be saved, e.g. using the MDA5 button “Save setting non volatile inside device” (= persistently). The position source used by the teaching is also saved. ",What does the 'MSD ServoDrive - DeviceHelp' document say about the use of current actual value filter?,It reduces control dynamic performance and is not advisable for drives requiring high control dynamic performance.,"Using the filter decreases dynamic performance, making it unsuitable for high-performance drives.","The document notes that the filter lowers dynamic performance, advising against its use in high-performance scenarios.","The current actual value filter diminishes dynamic performance, thus it's not recommended for high-performance drives.","For drives needing high dynamic performance, the current actual value filter is not recommended due to its performance-reducing effect."

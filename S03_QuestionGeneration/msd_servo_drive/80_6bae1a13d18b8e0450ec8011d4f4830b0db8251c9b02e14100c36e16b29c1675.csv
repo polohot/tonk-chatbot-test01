@@ -1,0 +1,3581 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",What are the function selectors available for analog outputs in the MSD Servo Drive as described in the book 'MSD ServoDrive - DeviceHelp'?,"The function selectors for analog outputs include OFF (0), NACT(1), TACT(2), IRMS(3), PARA (4), ACTPOS(5), VDC(6), ACTPOS_MODULO(7), ACT_POWER(8), and APP_POWER(9).","In 'MSD ServoDrive - DeviceHelp', the analog outputs can be set to various functions such as actual speed (NACT), actual torque/force (TACT), effective current (IRMS), and more, as listed in Table 9.14.","Table 9.14 in 'MSD ServoDrive - DeviceHelp' lists function selectors for analog outputs including OFF, actual speed, actual torque/force, effective current, parameter value, position actual value, DC link voltage, actual modulo position, power, and apparent power.","The book 'MSD ServoDrive - DeviceHelp' details that analog outputs can be configured for no function, actual speed, actual torque/force, effective current, among others, through specific function selectors.","For analog outputs in MSD Servo Drive, 'MSD ServoDrive - DeviceHelp' specifies options like OFF, NACT for actual speed, TACT for actual torque/force, and others up to APP_POWER for apparent power."
+1,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",How can the motor brake output be monitored in the MSD Servo Drive according to 'MSD ServoDrive - DeviceHelp'?,The motor brake output can be monitored using P 748[0] - MON_MotorBrkGuard for both wire breaks and current monitoring.,"According to 'MSD ServoDrive - DeviceHelp', monitoring the motor brake output involves activating P 748[0] - MON_MotorBrkGuard to check for wire breaks and current.","In 'MSD ServoDrive - DeviceHelp', it's mentioned that P 748[0] - MON_MotorBrkGuard enables monitoring mechanisms for the motor brake output, including wire break and current checks.","The book 'MSD ServoDrive - DeviceHelp' explains that motor brake output monitoring is achieved through P 748[0] - MON_MotorBrkGuard, which oversees wire integrity and current flow.","Monitoring the motor brake output, as per 'MSD ServoDrive - DeviceHelp', is facilitated by P 748[0] - MON_MotorBrkGuard, ensuring wire and current are within safe parameters."
+2,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",What parameters are involved in the motor brake details in the 'MSD ServoDrive - DeviceHelp'?,"Parameters include MPRO_BRK_LastTorqFact, MPRO_BRK_StartTorq, MPRO_BRK_LastTorq, and MPRO_BRK_Lock among others.","The 'MSD ServoDrive - DeviceHelp' lists motor brake details parameters such as lift time, close time, rise time, and fade time, alongside torque factors and locks.","In 'MSD ServoDrive - DeviceHelp', motor brake details cover parameters like MPRO_BRK_LiftTime, MPRO_BRK_CloseTime, MPRO_BRK_RiseTime, and MPRO_BRK_FadeTime.","Detailed in 'MSD ServoDrive - DeviceHelp', motor brake parameters encompass factors for last torque application, initial torque, and specific timings for brake operations.","The book 'MSD ServoDrive - DeviceHelp' outlines motor brake parameters including torque application factors, initial torque settings, and operational timings for precise brake control."
+3,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",What is the purpose of the P 329[0] - CON_SCON_TMax parameter in the MSD Servo Drive as mentioned in 'MSD ServoDrive - DeviceHelp'?,"P 329[0] - CON_SCON_TMax limits the torque to a maximum, defaulting to the motor's rated torque.","In 'MSD ServoDrive - DeviceHelp', P 329[0] - CON_SCON_TMax is described as setting the maximum torque limit, initially matching the motor's rated torque.","The parameter P 329[0] - CON_SCON_TMax in 'MSD ServoDrive - DeviceHelp' serves to cap the torque, with a default value equal to the motor's rated torque.","As per 'MSD ServoDrive - DeviceHelp', P 329[0] - CON_SCON_TMax defines the upper torque limit, preset to the motor's rated torque for safety.","'MSD ServoDrive - DeviceHelp' indicates that P 329[0] - CON_SCON_TMax parameter restricts torque to a maximum level, typically the motor's rated torque."
+4,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",How is the maximum speed limit set in the MSD Servo Drive according to 'MSD ServoDrive - DeviceHelp'?,"The maximum speed limit is set using P 328[0] - CON_SCON_SMax, defaulting to the motor's rated speed.","According to 'MSD ServoDrive - DeviceHelp', P 328[0] - CON_SCON_SMax adjusts the maximum speed limit, initially aligned with the motor's rated speed.","In 'MSD ServoDrive - DeviceHelp', setting the maximum speed limit involves P 328[0] - CON_SCON_SMax, which by default matches the motor's rated speed.","The book 'MSD ServoDrive - DeviceHelp' explains that P 328[0] - CON_SCON_SMax is used to define the top speed limit, preset to the motor's rated speed.","P 328[0] - CON_SCON_SMax, as detailed in 'MSD ServoDrive - DeviceHelp', configures the maximum speed limit, with a default setting equal to the motor's rated speed."
+5,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",What is the role of P 2235[0] - MPRO_402_SoftwarePosLimit in the MSD Servo Drive as per 'MSD ServoDrive - DeviceHelp'?,P 2235[0] - MPRO_402_SoftwarePosLimit defines the lower position limit in positioning mode.,"In 'MSD ServoDrive - DeviceHelp', P 2235[0] - MPRO_402_SoftwarePosLimit is used to set the lower boundary for position limits, known as software limit switches.",The parameter P 2235[0] - MPRO_402_SoftwarePosLimit in 'MSD ServoDrive - DeviceHelp' establishes the minimum position limit for the drive.,"As per 'MSD ServoDrive - DeviceHelp', P 2235[0] - MPRO_402_SoftwarePosLimit specifies the lower position limit, acting as a negative software limit switch.","'MSD ServoDrive - DeviceHelp' mentions P 2235[0] - MPRO_402_SoftwarePosLimit for setting the lower position limit, crucial for defining the valid range of motion."
+6,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",How does the MSD Servo Drive respond to a power failure according to 'MSD ServoDrive - DeviceHelp'?,"Upon detecting a power failure via P 747 [0] - MON_PF_OnLimit, it triggers error ERR-34 and executes the configured error reaction.",The 'MSD ServoDrive - DeviceHelp' states that exceeding P 747 [0] - MON_PF_OnLimit's DC link voltage value reports ERR-34 and initiates the set error response.,"In 'MSD ServoDrive - DeviceHelp', a power failure is identified when DC link voltage surpasses P 747 [0] - MON_PF_OnLimit, leading to ERR-34 and the predefined error action.","According to 'MSD ServoDrive - DeviceHelp', the drive reacts to power failures by checking P 747 [0] - MON_PF_OnLimit, then signaling ERR-34 and performing the error reaction.","The book 'MSD ServoDrive - DeviceHelp' describes that a power failure triggers ERR-34 if P 747 [0] - MON_PF_OnLimit is exceeded, followed by the specified error response."
+7,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",What warnings can be monitored through P 34[0] - ERR_WRN_State in the MSD Servo Drive as detailed in 'MSD ServoDrive - DeviceHelp'?,"Warnings include I2xt integrator warnings, temperature alerts, excessive speed, undervoltage, and more.","In 'MSD ServoDrive - DeviceHelp', P 34[0] - ERR_WRN_State monitors warnings like heat sink temperature, motor temperature, and overvoltage among others.","The status word P 34[0] - ERR_WRN_State in 'MSD ServoDrive - DeviceHelp' tracks various warnings including integrator thresholds, temperature levels, and speed limits.","As per 'MSD ServoDrive - DeviceHelp', P 34[0] - ERR_WRN_State provides warnings on integrator status, temperature exceedances, and voltage conditions.","'MSD ServoDrive - DeviceHelp' lists that P 34[0] - ERR_WRN_State checks for warnings such as I2xt integrator exceedances, temperature thresholds, and speed violations."
+8,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",What is the significance of the 'CANopen + 2AO' technology option in the MSD Servo Drive according to 'MSD ServoDrive - DeviceHelp'?,The 'CANopen + 2AO' option provides two analog outputs but is not available for the MSD Single-Axis Servo Drive Compact.,"In 'MSD ServoDrive - DeviceHelp', the 'CANopen + 2AO' technology option is described as offering additional analog outputs, excluding the compact single-axis version.","The book 'MSD ServoDrive - DeviceHelp' specifies that the 'CANopen + 2AO' option enables two analog outputs, with exceptions for certain drive models.","According to 'MSD ServoDrive - DeviceHelp', 'CANopen + 2AO' enhances the drive with analog outputs, though it's incompatible with the single-axis compact servo drive.","'MSD ServoDrive - DeviceHelp' notes that the 'CANopen + 2AO' option adds analog output functionality, but it's not supported on the MSD Single-Axis Servo Drive Compact."
+9,msd_servo_drive.txt,80,6bae1a13d18b8e0450ec8011d4f4830b0db8251c9b02e14100c36e16b29c1675,"The sampling time set in P 306[0] - CON_IpRefTS for the interpolation takes effect.
+
+# 9.5 Analog outputs (option only for MSD Servo Drive)
+
+# 9.5.1 Function selectors
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|129, 130|0|MPRO_OUTPUT_FS_OEAxx| |Function selectors for analog outputs|
+| | |OFF (0)| |No function|
+| | |NACT(1)| |Actual speed|
+| | |TACT(2)| |Actual torque/force|
+| | |IRMS(3)| |Effective current|
+| | |PARA (4)| |Value of parameter 134[0]|
+| | |ACTPOS(5)| |Position actual value|
+| | |VDC(6)| |DC link voltage|
+| | |ACTPOS_MODULO(7)| |Actual modulo position|
+| | |ACT_POWER(8)| |Power|
+| | |APP_POWER(9)| |Apparent power|
+
+Table 9.14: “Analog outputs” function selectors
+
+NOTE
+
+- For a full description of the analog outputs in the ""CANopen+2AO"" communication option (technical data, connections, configuration), see the ""CANopen + 2 analog outputs Specification"" (ID No.: CA79904-001).
+- The technology option “CANopen + 2AO” is not available for MSD Single-Axis Servo Drive Compact.
+- To determine whether your MSD Servo Drive comes with the ""CANopen + 2AO"" technology option, you can check the electronic rating plate (see Section ""Electronic rating plate"" on page 451).
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 307
+
+# 9 Inputs/Outputs settings
+
+# 9 Inputs/Outputs settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 308
+
+# 9.6 Motor brake output
+
+P 748[0] - MON_MotorBrkGuard can be used to activate a monitoring mechanism at the motor brake output that will monitor both wire breaks and current. The brake function can also be used in the other digital outputs, though without current and wire break monitoring.
+
+If the output is set to BRAKE(2), the brake can be configured with the “Options...” button (see Section ""Motor brake details"" on page 309).
+
+Image 9.15: “Motor brake settings” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|125|0 MPRO_OUTPUT_FS_MOTOR_BRAKE| |Function of motor brake (X13)|
+|748|0 MON_MotorBrkGuard| |Motor brake guarding|
+
+NOTE
+
+On the MSD Single-Axis Servo Drive Compact, the motor brake output for frame sizes 2 to 5 will be found on connector X13.
+
+On the MSD Servo Drive (Single-Axis System and Multi-Axis System), the motor brake output...
+
+- For frame sizes 1 to 4 will be found on connector X13
+- For frame sizes 5 to 6a will be found on connector X20
+- For frame size 7 will be found on connector X44
+
+An optional holding brake built-in to motor provides protection against unwanted motion when the power is cut and in case of error. If the brake is mounted on the axis mechanism and not directly on the shaft, note that undesirably severe torsional forces may occur on sudden engagement of the brake.
+
+The P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE function selector can be used to select any function (similar to those for the digital outputs) for the motor brake output. However, the special motor brake control section hardware will be used for the selected function.
+
+However, when using a motor brake with P 125[0] - MPRO_OUTPUT_FS_MOTOR_BRAKE = BRAKE(2), the criteria for braking need to be defined. This criteria can consist of a variety of states, limits, threshold values, input signals, and fieldbus commands.
+
+# 9.6.1 Motor brake details
+
+| |ID|Index Name| |Unit|Description|
+|---|---|---|---|---|---|
+| |217|0|MPRO_BRK_LastTorqFact|%|Motor brake: factor for application of last torque|
+| |218|0|MPRO_BRK_StartTorq|Nm|Motor brake: initial torque (constant)|
+| |219|0|MPRO_BRK_LastTorq|Nm|Motor brake: torque sampled at last closing time|
+| |220|0|MPRO_BRK_Lock| |lock brake|
+
+Table 9.16: “Motor brake details” parameters (continue)
+
+NOTE
+
+Please check the settings of the stop ramps if use of a holding brake is specified (see Section ""Stop ramps"" on page 248).
+
+Image 9.16: “Motor brake details” screen
+
+The brake response can be adapted to the requirements of the application. This function can be used in both speed as well as position controlled operation.
+
+| | | | |ID|Index Name|Unit|Description|
+|---|---|---|---|---|---|---|---|
+|213|0|MPRO_BRK_LiftTime|ms|Motor brake lift time| | | |
+|214|0|MPRO_BRK_CloseTime|ms|Motor brake close time| | | |
+|215|0|MPRO_BRK_RiseTime|ms|Motor brake: torque rise time| | | |
+|216|0|MPRO_BRK_FadeTime|ms|Motor brake: Torque fade time| | | |
+
+Table 9.16: “Motor brake details” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 309
+
+# 9 Inputs/Outputs settings
+
+# 10 Limitations / Thresholds
+
+# Chapter overview
+
+Pictogram
+
+Navigation &nbsp;&nbsp;&nbsp;&nbsp; ►Project tree ►Device setup ►Limits / thresholds
+
+# Brief description
+
+This chapter describes the available limits and threshold values for the MSD Servo Drive and MSD Single-Axis Servo Drive Compact.
+
+# Contents
+
+- 10.1 Settings &nbsp;&nbsp;&nbsp;&nbsp; 310
+- 10.2 Torque- / force limits &nbsp;&nbsp;&nbsp;&nbsp; 311
+- 10.3 Speed- / velocity limits &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.4 Position limitation &nbsp;&nbsp;&nbsp;&nbsp; 312
+- 10.5 Power stage &nbsp;&nbsp;&nbsp;&nbsp; 313
+
+Image 10.1: “Limitations and thresholds” screen
+
+To protect the device, the motor and the complete plant it is necessary to limit the variables torque, speed and position. These limits act independently of other limitations within the motion profile.
+
+The limits are specified as percentages of the rated quantities (current, torque, speed,...), so that following calculation logical default settings are available. The defaults relate to 100% of the ratings. The parameters must therefore be adapted to application and motor. The motor quantity limits can be read out in P 338[0] - CON_SCON_ActMax.
+
+# Limitations in closed-loop controlled mode
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 310
+
+# 10 Limitations / Thresholds
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+l Torque- / force limits
+
+l Speed- / velocity limits
+
+l Position limitation
+
+l The torque is limited to a maximum by P 329[0] - CON_SCON_TMax. In the default setting the torque limit corresponds to the rated torque of the motor.
+
+l Power stage (see Section ""Power stage"" on page 313)
+
+The possible setting range is 0-1000 %. The parameter can be changed during operation.
+
+P 745 - MON_RefWindow and P 746[0] - MON_UsrPosWindow indicate the status of the configured limits and are incorporated into the general P 151[0] - MPRO_DRVCOM_STAT_DWord status word.
+
+P 737[0] - MON_MNCTL and P 737[1] - MON_MNSTAT can be used to monitor and output the status of the mains connection.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|338|CON_SCON_ActMax|Motor control limits| |
+|338|Max_Speed_Motor|rpm|Maximum motor speed|
+|338|Max_Current_Motor|A|Maximum motor current|
+|338|Max_Torque_Motor|Nm|Maximum motor torque|
+|338|Max_UsrSpeed_Motor|rev/min|Maximum motor speed in user units|
+|338|MaxCurrent_Inverter|A|Maximum current @ actual voltage level|
+|338|Reserved|-|switching freq.|
+|338|Reserved|-|Reserved|
+|338|MaxCurrent_Limit|A|Maximum current limit (motor or inverter)|
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|737|MON_MNCTL| |Monitoring control and status word|
+|737|MON_MNCTL| |Monitoring control word|
+|737|MON_MNSTAT| |Monitoring status word|
+|745|MON_RefWindow| |Speed Setpoint reached window|
+|745|TargetReached|rpm|Window for speed control target reached|
+|745|Standstill|rpm|Window for motor standstill|
+|745|TorqueTargetReached|Nm|Window for torque target reached|
+|745|Hyst. TargetReached|rpm|Hysteresis window for speed control target reached|
+|745|Hyst. Standstill|rpm|Hysteresis window for speed control standstill|
+|746|MON_UsrPosWindow|mDegree|Setpoint reached pos. window|
+
+Table 10.2: “Limits / thresholds - Torque / force limits” parameters
+
+NOTE
+
+l When using homing methods -8, -9, -10, and -11, P 332[0] - CON_SCON_TMaxScale is replaced by P 225[0] - MPRO_REF_HOMING_TMaxScale.
+
+l To protect against overspeed if a requested torque is not reached, P 337[0] - CON_SCON_SMaxScale is used to limit the speed controller to a percentage of the rated speed.
+
+# 10.3 Speed- / velocity limits
+
+- P 328[0] - CON_SCON_SMax can be used to set the maximum speed limit. In the default setting the speed limit is the same as the rated speed of the motor. The possible setting range is 0-2000%. The parameter cannot be changed during operation. A change is only effective after restarting the control.
+- P 337[0] - CON_SCON_SMaxScale enables the torque limit set in P 328[0] to be scaled online – that is, during operation.
+- It is additionally possible via P 333[0] - CON_SCON_TMaxNeg and P 334[0] - CON_SCON_TMaxPos to change the torque limit for different directions of rotation during operation.
+- P 744[0] - MON_SDiffMax is used to specify the permissible difference between the setpoint speed and the actual speed (tracking error) in revolutions.
+- P 745[0] - MON_RefWindow is used to define the point at which the setpoint is considered to have been reached.
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|167|0|MPRO_REF_OVR|%|Motion profile override factor|
+|328|0|CON_SCON_SMax|%|Speed control maximum speed|
+|333|0|CON_SCON_SMaxNeg|%|Scaling of negative motor speed limit|
+|334|0|CON_SCON_SMaxPos|%|Scaling of positive motor speed limit|
+|335|0|CON_SCON_DirLock| |Direction lock for speed reference value|
+|337|0|CON_SCON_SMaxScale|%|Scaling of motor speed limit|
+|740|0|MON_SpeedThresh|rpm|Monitoring speed threshold|
+|744|0|MON_SDiffMax|rpm|Speed tracking error|
+
+Table 10.3: “Limits / thresholds - Speed limits” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 10 Limitations / Thresholds
+
+# 10.4 Position limitation
+
+- Position limiting is only applicable in positioning mode and will be enabled only once homing is successfully completed (see Section ""Homing"" on page 249).
+- P 2235[0] - MPRO_402_SoftwarePosLimit is used to define the lower position limit. P 2235[1] - MPRO_402_SoftwarePosLimit is used to define the upper position limit. This function is also referred to as “software limit switches”.
+- In addition, P 743[0] - MON_UsrPosDiffMax can be used to define the maximum tracking error.
+- P 746[0] - MON_UsrPosWindow can be used to define the zero speed window (position setpoint reached).
+
+Positioning mode
+
+Before enabling an absolute motion task, a check is made whether the target is in the valid range – that is, within the software limit switches. If the target is outside, no motion task is signalled and the programmed error reaction as per P 30 Error Reactions is executed.
+
+This mode can only be used when using speed-controlled operation. The drive travels until a software limit switch is detected. Then the programmed error reaction is executed.
+
+Table 10.4: Positioning mode
+
+MSD ServoDrive - DeviceHelp 312
+
+# 10 Limitations / Thresholds
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|224|0|MPRO_REF_|Target reached option code|
+|743|0|TargetReachedOpC| |
+| |MON_UsrPosDiffMax|mDegree|Position difference threshold|
+|2235| |MPRO_402_|607DH DS402 software position limit (SW limit switch)|
+|2235|0|SoftwarePosLimit|Minimum position limit (negative software limit switch)|
+|2235|1|MPRO_402_|mDegree Maximum position limit (positive software limit switch)|
+|746|0|SoftwarePosLimit| |
+
+Table 10.5: “Limits / thresholds - Position limits” parameters
+
+NOTE
+
+- The response when a position limit is reached (P 2235 - MPRO_402_SoftwarePosLimit) will depend on the error response that has been configured (see Section ""Error reactions"" on page 325).
+
+# 10.5 Power stage
+
+- If the value for the DC link voltage exceeds the value set in parameter P 747 [0] - MON_PF_OnLimit, error ERR-34 ""Power failure detected"" is reported and the parameterized error reaction is triggered (see Section ""Error reactions"" on page 325).
+- By setting a quickstop as the error reaction in the parameters using an adequately steep deceleration ramp, the DC link voltage can be maintained above the undervoltage threshold (see Section ""Power failure bridging"" on page 28). This reaction lasts until the drive has been braked to a lower speed.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|747|0|MON_PF_ONLimit|V Voltage limit for power failure|
+|749|0|MON_DevOverVoltage|V Overvoltage DC-link|
+|750| |MON_CurrToGround|Fault current|
+|750|0|Current to ground|A Maximum fault current to ground|
+|750|1|Current in power-off|A Maximum fault current in power-off|
+|757|0|MON_PwrActVal_Tf|ms Filter time constant for actual power values|
+
+Table 10.6: “Limits / thresholds - Power stage” parameters
+
+# 11 Alarms & warnings
+
+# 11.1 Warning status
+
+The status for the most important warnings can be checked with...
+
+The “Warnings” pictogram on the quick launch toolbar or via
+
+►Project tree ►Device setup ►Alarms & warnings ►Warning status.
+
+A visual representation of the most important bits in status word P 34[0] - ERR_WRN_State will appear.
+
+As soon as there is a warning, the corresponding bit will be set in status word P 34[0] and the visual representation will display it in the form of an LED with a solid light. The bits can also be displayed and recorded over time in the form of an oscilloscope signal.
+
+The individual trigger thresholds for setting and resetting a warning are defined in P 730 - MON_WarningLevel (see Section ""Warning thresholds"" on page 323).
+
+# Contents
+
+- 11.1 Warning status 314
+- 11.2 Alarms and warnings (Details) 316
+- 11.3 Warning thresholds 323
+- 11.4 Error display 324
+- 11.5 Error reactions 325
+- 11.6 Error list 328
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 314
+
+# 11 Alarms & warnings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp 315
+
+|Bit-No.|Meaning|
+|---|---|
+|(0)|I2xt integrator (motor) warning threshold exceeded|
+|(1)|Heat sink temperature|
+|(2)|Motor temperature|
+|(3)|Interior temperature|
+|(4)|Reserved for SERCOS|
+|(5)|Excessive speed|
+|(6)|Reserved for SERCOS|
+|(7)|Reserved for SERCOS|
+|(8)|Reserved for SERCOS|
+|(9)|Undervoltage|
+|(10)|Reserved for SERCOS|
+|(11)|Reserved for SERCOS|
+|(12)|Reserved for SERCOS|
+|(13)|Reserved for SERCOS|
+|(14)|Reserved for SERCOS|
+|(15)|Reserved for SERCOS|
+
+Image 11.1: Warning status window
+
+# Table 11.1: “Warning status” parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|34|0|ERR_WRN_State|Device warning status word|
+
+# Table 11.2: Device warning status word
+
+|(16)|I2xt integrator (device) exceeded|
+|---|---|
+|(17)|Monitoring of apparent current|
+|(18)|Overvoltage|
+
+# 11.2 Alarms and warnings (Details)
+
+|Bit-No.|Meaning|
+|---|---|
+|(19)|Protection of brake chopper, warning threshold exceeded|
+|(20)|Overtorque|
+|(21)|Spindle monitoring|
+|(22)|Reserved|
+|(23)|Reserved|
+|(24)|Speed reference limitation active|
+|(25)|Current reference limitation|
+|(26)|Right limit switch active|
+|(27)|Left limit switch active|
+|(28)|External warning via input|
+|(29)|Software limit switches positive|
+|(30)|Software limit switches negative|
+|(31)|Reserved|
+
+To open an overview of the current error and a history containing the most recent 20 errors, go to ►Project tree ►Device setup ►Alarms & warnings ►Alarms & warnings (Details). The screen will also show a counter for the most common errors.
+
+",How can the electronic rating plate be used to verify the 'CANopen + 2AO' technology option in the MSD Servo Drive as per 'MSD ServoDrive - DeviceHelp'?,The electronic rating plate can be checked to determine if the MSD Servo Drive includes the 'CANopen + 2AO' option.,"In 'MSD ServoDrive - DeviceHelp', it's mentioned that the presence of the 'CANopen + 2AO' option is verifiable through the electronic rating plate.",The book 'MSD ServoDrive - DeviceHelp' advises consulting the electronic rating plate to confirm the 'CANopen + 2AO' technology option's availability.,"As per 'MSD ServoDrive - DeviceHelp', the electronic rating plate serves as a reference to check for the 'CANopen + 2AO' feature in the servo drive.",'MSD ServoDrive - DeviceHelp' indicates that the electronic rating plate is the resource for identifying the 'CANopen + 2AO' option in the MSD Servo Drive.

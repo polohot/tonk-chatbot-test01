@@ -1,0 +1,341 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",What are the two actual speed values used in the control scheme for high dynamic performance and steady-state accuracy?,The two actual speed values are the speed from the angular derivative (n_eps) and the speed from the Kalman filter (n_kal).,"n_eps, derived from the angular change, and n_kal, from the Kalman filter, are used.",They are n_eps (angular derivative speed) and n_kal (Kalman filter speed).,"For achieving high dynamic performance and accuracy, the scheme uses n_eps and n_kal.","The control scheme combines n_eps, the noisy but steady-state accurate speed, with n_kal, the smoother Kalman filter speed."
+1,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",Why is the speed from the angular derivative (n_eps) noisier than the Kalman filter speed?,"Because it is calculated by dividing the angular change (eps_diff) by the sampling time, which introduces noise.","The calculation method of n_eps, involving division of eps_diff by sampling time, results in higher noise levels.",n_eps is noisier due to the direct derivation from consecutive angular positions without the smoothing effect of a Kalman filter.,Its noise stems from the raw angular difference data used in its computation.,"Unlike the Kalman filter, which smooths out variations, n_eps reflects immediate angular changes, making it noisier."
+2,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",What is the first step in commissioning sensorless control according to the text?,Correctly determining the motor data and control parameters and configuring them accordingly.,The initial step involves setting up motor data and control parameters accurately.,It starts with the accurate determination and configuration of motor data and control parameters.,Ensuring the motor's d and q axes inductance difference is correctly set is the first step.,"Commissioning begins with configuring motor data and parameters, focusing on inductance differences."
+3,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",How can the inductance difference between the motor’s d and q axes be set correctly?,"Using P 480[0] - MOT_Lsq or, for older firmware, P 472[0] - MOT_LsigDiff to set the difference as a percentage.","By configuring P 480[0] - MOT_Lsq, or P 472[0] - MOT_LsigDiff in older systems.","The correct setting is achieved through specific parameters: MOT_Lsq for new firmware, MOT_LsigDiff for old.",Adjust P 480[0] for new firmware or P 472[0] for older versions to specify the inductance difference.,It involves using designated parameters to accurately define the d and q axes inductance difference.
+4,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",What are the methods suggested for obtaining accurate d and q inductances values?,"From the motor manufacturer’s data sheet, requested from the manufacturer, measured by Moog, or approximated with a routine.","Obtain from data sheets, request from manufacturers, Moog measurements, or use approximation routines.","Sources include manufacturer data, direct requests, Moog's advanced identification, or approximation methods.","Accurate values can be sourced from official data, manufacturer inquiries, or specific measurement routines.","Options include consulting data sheets, contacting manufacturers, utilizing Moog's services, or applying approximations."
+5,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",What is a rough setting suggestion for Lq if accurate inductance values are unavailable?,"Lq = 110% • Ld for a servomotor test, with readiness for limited operation in a narrow speed range.","Set Lq to 110% of Ld as a provisional measure, expecting restricted operational speeds.","A preliminary setting of 110% Ld for Lq is advised, acknowledging potential speed limitations.","For initial tests, Lq can be roughly set at 110% of Ld, accepting some operational constraints.","In absence of precise data, starting with Lq at 110% of Ld is suggested, though it may limit speed range."
+6,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",What does parameter 792 represent in the context of the provided diagrams?,"Parameter 792 is depicted in Image 6.8, related to Id [A], but its specific significance isn't detailed in the text.","It's shown in Image 6.8 alongside Id [A], though the text doesn't elaborate on its exact meaning.","Appearing in Image 6.8, parameter 792's role is not explicitly described beyond its association with Id [A].","The diagram includes parameter 792 in relation to Id [A], without further explanation in the provided text.","Parameter 792 is illustrated in Image 6.8 concerning Id [A], but the text lacks specific details about its function."
+7,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",What are the components of parameter 796 as shown in Image 6.9?,"Parameter 796 includes components 796[0], 796[1], and 796[2], associated with Iq [A].","It comprises 796[0], 796[1], and 796[2], linked to Iq [A] in the diagram.","The diagram displays parameter 796 with elements 796[0] to 796[2], related to Iq [A].","Components 796[0], 796[1], and 796[2] of parameter 796 are shown in connection with Iq [A].","Image 6.9 presents parameter 796's parts as 796[0], 796[1], and 796[2], alongside Iq [A]."
+8,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",What is the consequence of using a rough setting for Lq and Ld without accurate data?,Limited operation within a narrow speed range is expected.,The motor may only operate effectively within a restricted speed range.,Operational capabilities could be confined to a limited speed spectrum.,Expectations should be set for constrained performance across speeds.,Such a setup likely results in diminished operational flexibility regarding speed.
+9,msd_servo_drive.txt,35,7108904d9743cd11439407bd697ccddac1958f2c38bf3fc583043ab476c7a386,"Because of this, the speed from the angular derivative is used for “normal” speed control. The angular change describes the difference between two predicted angular positions from consecutive sampling steps. Dividing eps_diff by the observer’s sampling time yields speed n_eps, which, although admittedly noisier than the calculated Kalman filter speed, is accurate in a steady state. However, the heavy noise means that relatively long filter times are required, resulting in the loss of some of the control circuit’s dynamic performance.
+
+In order to be able to use a control scheme with high dynamic performance and steady-state accuracy, a circuit must be put together using two actual speed values (the speed from the angular derivative [n_eps] and the speed from the Kalman filter [n_kal]).
+
+# Image 6.8: Parameter 792 diagram
+
+Id [A]
+
+0 792[9]
+
+# Image 6.9: Parameter 796 diagram
+
+0 796[0]
+
+Iq [A]
+
+796[1]
+
+796[2]
+
+# 6.8.1.4 Commissioning
+
+The first step in commissioning sensorless control is correctly determining the motor data and control parameters and configuring them accordingly. At this point, it is especially important to ensure that the inductance difference between the motor’s d and q axes is set correctly. This can be done with P 480[0] - MOT_Lsq. If this parameter is not available (older firmware), P 472[0] - MOT_LsigDiff can be used to set the difference as a percentage.
+
+In order to obtain an accurate number, the values for the d and q inductances should:
+
+- Be obtained from the motor manufacturer’s data sheet or the motor data set OR
+- Be requested from the motor manufacturer OR
+- Be measured by Moog with an “advanced motor identification” routine OR
+- Be determined as an approximation for most motors with the motor identification routine
+
+If none of these options is available, it is possible to start with a rough setting of Lq = 110% • Ld for a test with a servomotor. However, you must then be ready for limited operation within a narrow speed range.
+
+",What is the importance of the inductance difference between the motor’s d and q axes in sensorless control?,It is crucial for the accurate commissioning and performance of sensorless control.,Accurate setting of this difference is essential for proper sensorless control operation.,The correct inductance difference ensures the sensorless control functions as intended.,This difference plays a key role in the effectiveness of sensorless control systems.,"For sensorless control to work correctly, the d and q axes inductance difference must be accurately configured."

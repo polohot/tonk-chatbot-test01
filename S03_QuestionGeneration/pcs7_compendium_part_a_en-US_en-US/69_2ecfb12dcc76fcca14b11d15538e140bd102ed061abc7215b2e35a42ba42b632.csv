@@ -1,0 +1,1491 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",What is the purpose of redundant I/O modules in PCS 7 as described in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,Redundant I/O modules in PCS 7 ensure high availability on the field level by allowing a redundant configuration of distributed I/O.,"They provide high availability in PCS 7 through redundant distributed I/O configurations, using ET 200M for PROFIBUS DP and ET 200SP HA for PROFINET.","The purpose is to achieve high availability by enabling redundant connections and IO redundancy, specifically with ET 200M for PROFIBUS DP and ET 200SP HA for PROFINET.","To maintain system reliability, redundant I/O modules allow for continuous operation even if one module fails, using technologies like ET 200M and ET 200SP HA.","Ensuring uninterrupted operation, redundant I/O modules in PCS 7 support configurations that prevent downtime, utilizing ET 200M and ET 200SP HA for different network types."
+1,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",How can you activate Configuration in Run (CiR) for PROFIBUS DP according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"Activate CiR by right-clicking on the subnet in HW Config and selecting 'Activate CiR capability', then download the AS in STOP mode once.","To activate CiR, right-click the DP master system in HW Config, choose 'Activate CiR capability', and perform a one-time download in STOP mode.","Activation involves selecting the subnet in HW Config, using the shortcut menu to enable CiR, and downloading the configuration with the AS in STOP.","By enabling CiR capability on the subnet in HW Config and completing a one-time download in STOP mode, CiR is activated for PROFIBUS DP.",The procedure includes activating CiR via HW Config's subnet options and ensuring a one-time download in STOP mode to enable the feature.
+2,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",What are the prerequisites for using Configuration in Run (CiR) on PROFINET as per the 'Compendium Part A - Configuration Guidelines (V9.0)'?,Prerequisites include CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher.,"For CiR on PROFINET, you need at least CPU 410 Firmware V8.2 and PCS 7 V9.0.",Using CiR on PROFINET requires CPU 410 with Firmware V8.2+ and PCS 7 V9.0+.,The system must have CPU 410 Firmware V8.2 or later and PCS 7 V9.0 or later to support CiR on PROFINET.,Essential requirements are CPU 410's Firmware V8.2+ and PCS 7 V9.0+ for enabling CiR functionality on PROFINET.
+3,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",What changes are possible with CiR/H-CiR on PROFINET for devices with CiR support according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"Adding or removing IO devices and submodules, reassigning submodule parameters, and interface parameter assignment are possible.","Devices supporting CiR allow adding/removing IO devices and submodules, parameter reassignment, and interface configuration.","With CiR support, you can add/remove IO devices and submodules, reassign parameters, and configure interfaces.","Supported operations include IO device and submodule addition/removal, parameter reassignment, and interface parameter assignment.","For CiR-supported devices, possible changes encompass IO device and submodule management, parameter adjustments, and interface settings."
+4,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",What is the maximum CiR synchronization time for CPU 410-5H during a download operation as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,The maximum CiR synchronization time is 60 ms.,CPU 410-5H has a max CiR sync time of 60 milliseconds.,"During download, CPU 410-5H's CiR sync time does not exceed 60 ms.",60 ms is the upper limit for CiR synchronization time with CPU 410-5H.,"For CPU 410-5H, the CiR synchronization time is capped at 60 milliseconds."
+5,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",How is the integration of field devices into PCS 7 described in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"Integration involves two steps: configuration and parameter assignment, supporting PROFIBUS DP, PA, HART, and FF devices.","Field devices are integrated via configuration and parameter assignment, compatible with PROFIBUS DP, PA, HART, and FF from PCS 7 V7.0.","The process includes configuring and assigning parameters to devices like PROFIBUS DP, PA, HART, and FF in PCS 7.","Devices are integrated by configuring and setting parameters, with support for various protocols including PROFIBUS and FF.","Integration entails device configuration and parameter setup, accommodating PROFIBUS DP, PA, HART, and FF devices in PCS 7."
+6,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",Where can you find a list of components supported by the module wizard as per the 'Compendium Part A - Configuration Guidelines (V9.0)'?,In the document 'SIMATIC Process Control System PCS 7 Released Modules' at https://support.industry.siemens.com/cs/ww/en/view/109748745.,The list is available in 'SIMATIC Process Control System PCS 7 Released Modules' online.,Check 'SIMATIC Process Control System PCS 7 Released Modules' on Siemens' support site for the list.,Supported components are listed in the specified document accessible via the provided URL.,Refer to the online document 'SIMATIC Process Control System PCS 7 Released Modules' for the comprehensive list.
+7,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",What documents provide information on installing and configuring redundant I/O modules based on ET 200M and PROFIBUS according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,'Configuration of Redundant I/O Modules' document.,Details are in the 'Configuration of Redundant I/O Modules' guide.,Refer to the 'Configuration of Redundant I/O Modules' for installation and setup instructions.,The 'Configuration of Redundant I/O Modules' document covers this topic.,Installation and configuration info is found in 'Configuration of Redundant I/O Modules'.
+8,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",What additional changes are possible with H-CiR in H-systems beyond standard CiR operations as described in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,Changes to some CPU parameters and hardware configuration via the H-CiR wizard.,H-CiR allows modifying CPU parameters and hardware configurations using the H-CiR wizard.,"Beyond standard CiR, H-CiR enables CPU parameter adjustments and hardware changes through a specialized wizard.",Additional capabilities include CPU parameter modifications and hardware configuration updates with H-CiR.,H-systems support extra changes like CPU parameter updates and hardware reconfigurations via H-CiR.
+9,pcs7_compendium_part_a_en-US_en-US.txt,69,2ecfb12dcc76fcca14b11d15538e140bd102ed061abc7215b2e35a42ba42b632,"This procedure saves you configuring time.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.6 Configuration of the I/O devices
+
+# Redundant I/O modules
+
+High availability in PCS 7 is achieved on the field level through the use of redundant distributed I/O. When PROFIBUS DP is used, the ET 200M enables the redundant configuration. When PROFINET is used, the ET 200SP HA provides the option of a redundant connection and IO redundancy.
+
+Note
+
+You can find information on installing, wiring and configuring redundant I/O modules based on ET 200M and PROFIBUS in the ""Configuration of Redundant I/O Modules"" document.
+
+You can find information on installing, wiring and configuring the ET 200SP HA in the following documents:
+
+- ""SIMATIC ET 200SP HA Distributed I/O system ET 200SP HA""
+- ""Configuration of the ET 200SP HA in PCS 7 based on different configuration examples""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.7 Plant changes during operation
+
+# Introduction
+
+With CiR (Configuration in RUN) it is possible to make certain hardware configuration changes in RUN mode. Typical reasons for doing this include the complexity of the automated process and high restart costs.
+The Configuration in RUN function is available for use on PROFIBUS DP and PROFINET. For Configuration in Run (CiR) on PROFINET, CPU 410 Firmware V8.2 or higher is required.
+
+# 6.7.1 Configuration in Run on PROFIBUS DP
+
+In the case of standard automation systems and PROFIBUS DP, Configuration in Run (CiR) is available only after activation of the function in HW Config and a one-time download of the AS in STOP.
+
+# Procedure
+
+1. To activate CiR in HW Config, right-click on the subnet (DP master system) and select ""Activate CiR capability"" from the shortcut menu. This attaches a CiR object to the respective master system. It offers the possibility of configuring an adjustable number of DP slaves in the future and downloading the changes without a CPU STOP. Each existing DP slave automatically receives an orange colored title as a sign that it can be changed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+1. Adapt the object properties of the CiR object to your plans. If the guaranteed number of additional DP slaves has been exhausted then a planned STOP of the AS can be used to increase the number and to activate through a complete download.
+2. When CiR is activated, you have a CiR module in the first free slot within ET 200M and ET 200SP. It offers the possibility of configuring and loading an adjustable number of modules in the future. Adapt the object properties of the CiR modules to your plans.
+3. After activating CiR and checking the CiR settings in the CiR objects and CiR modules, save and compile the hardware configuration and download it to the automation system in the STOP operating mode. Following this you can run the ""Download in RUN mode"" function in HW Config.
+
+# Changes to the hardware configuration of an H-system
+
+The CiR functionality described above is available in the H system without any special settings. There are no CiR objects or CiR modules in the H system and the function does not need to be explicitly activated. You can use the ""Download in RUN mode"" function immediately. This opens an additional dialog, in which you can start the tasks required for changing the configuration.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+In addition, all parameters marked in blue in the CPU properties dialog can be modified in RUN.
+
+Note
+
+You can find a detailed description of the possible hardware changes with CiR on PROFIBUS DP in the following manuals:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""SIMATIC Process Control System PCS 7 Engineering System""
+
+# 6.7.2 Configuration in Run on PROFINET
+
+A prerequisite for the ""Configuration in Run"" function (CiR) on PROFINET is the use of CPU 410 Firmware V8.2 or higher and PCS 7 V9.0 or higher. The scope of the ""Configuration in Run"" function is different for standard automation systems (CiR) and H-systems (H-CiR). In contrast to PROFIBUS DP, no CiR objects are needed for CiR/H-CiR on PROFINET and no address spaces have to be reserved.
+
+Which changes are possible as a CiR/H-CiR operation is dependent on whether the utilized (changed) IO device supports CiR functionality.
+
+|CiR/ H-CiR operation|Device without CiR|Device with CiR|
+|---|---|---|
+|Adding IO device|✓|✓|
+|Removing IO device|✓|✓|
+|Adding submodule|x|✓|
+|Removing submodule|x|✓|
+|Reassigning submodule parameters|x|✓|
+|Interface parameter assignment|x|✓|
+
+Changes to the hardware configuration of a standard AS
+
+When CiR is used in a standard automation system, processing is stopped briefly for the download operation (CiR synchronization time). During this time, process inputs and outputs keep their last value. When the CPU 410-5H is used, the maximum CiR synchronization time is 60 ms.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.7 Plant changes during operation
+
+Changes to the hardware configuration of an H-system
+
+In addition to the changes that are possible as a CiR operation on the standard automation system, changes such as changes to some CPU parameters are possible for H-systems. Changes to the hardware configuration of H-systems are made by downloading with the H-CiR wizard.
+
+Note
+
+You can find more information on the possible changes with CiR on PROFINET, as well as instructions, in the following documents:
+
+- ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation""
+- ""PROFINET in SIMATIC PCS 7 – Guidelines and Blueprints""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.8 Integrating field devices
+
+# 6.8.1 Basic information about device integration
+
+Integrating field devices
+
+The configuring of field devices is divided into two steps: configuration and parameter assignment.
+
+The following image provides an overview of the ways in which a device can be integrated in PCS 7. In principle, all PROFIBUS DP, PROFIBUS PA, HART, and Foundation Fieldbus (FF) devices can be integrated in PCS 7 (as of PCS 7 V7.0).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+139
+
+# Configuration of the hardware (AS and I/O)
+
+# 6.8 Integrating field devices
+
+Note
+
+You can find a list of components supported by the module wizard in the document
+""SIMATIC Process Control System PCS 7 Released Modules""
+(https://support.industry.siemens.com/cs/ww/en/view/109748745).
+You can find the following lists on the installation DVD:
+
+- ListOfIntegratedDevices: Overview of integrated devices
+- FF_Dynamic_Blocks_List: FOUNDATION Fieldbus devices with the support of dynamic blocks
+
+# Integration via the object manager
+
+The object manager is available for many SIEMENS devices, such as the ET 200M. In this
+case, the correct terminology is ""S7 slave"". ",What lists related to device integration can be found on the installation DVD as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,ListOfIntegratedDevices and FF_Dynamic_Blocks_List.,The DVD includes ListOfIntegratedDevices and FF_Dynamic_Blocks_List.,Find ListOfIntegratedDevices and FF_Dynamic_Blocks_List on the installation DVD.,Available lists are ListOfIntegratedDevices and FF_Dynamic_Blocks_List.,The installation DVD contains ListOfIntegratedDevices and FF_Dynamic_Blocks_List for reference.

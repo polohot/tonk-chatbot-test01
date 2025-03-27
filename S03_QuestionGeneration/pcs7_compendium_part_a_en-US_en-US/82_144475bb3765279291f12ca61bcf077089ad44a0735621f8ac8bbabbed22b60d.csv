@@ -1,0 +1,2021 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",What are the two object types in SFC as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,The two object types in SFC are 'SFC chart' and 'SFC type'.,"In SFC, you will find 'SFC chart' and 'SFC type' as the object types.",'SFC chart' and 'SFC type' are the object types available in SFC.,The SFC includes 'SFC chart' and 'SFC type' as its object types.,Object types in SFC consist of 'SFC chart' and 'SFC type'.
+1,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",How can SFC types be centrally edited as of PCS 7 V7.0 according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"SFC types can be centrally edited in the master data library, and all instances in the project can be automatically updated.","As of PCS 7 V7.0, editing SFC types centrally in the master data library allows for automatic updates to all project instances.","Central editing of SFC types is possible in the master data library, enabling automatic updates across all project instances.","From PCS 7 V7.0, the master data library supports central editing of SFC types for automatic instance updates.",The feature to edit SFC types centrally in the master data library and auto-update instances was introduced in PCS 7 V7.0.
+2,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",What is the PCS 7 Plant Automation Accelerator (PAA) and its main purpose as described in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems, offering functionalities for bulk engineering based on control module types and serving as a project execution and documentation tool.","PAA is designed for integrated engineering in PCS 7 systems, providing bulk engineering functionalities and acting as a tool for project execution and documentation.",Its main purpose is to facilitate integrated engineering in PCS 7 through bulk engineering functionalities and to serve as a documentation and project execution tool.,PAA supports integrated engineering in PCS 7 by enabling bulk engineering and functioning as a project execution and documentation tool.,"The primary role of PAA is to offer integrated engineering solutions for PCS 7, including bulk engineering and project documentation features."
+3,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",What are the two methods of data exchange between PAA and PCS 7 mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"The two methods are direct data exchange over an integrated interface when both are on the same computer, and indirect data exchange using XML files when on different computers.","Direct exchange via an integrated interface for same-computer installations, and indirect exchange via XML files for different computers.","Data can be exchanged directly through an integrated interface or indirectly using XML files, depending on the installation setup.","For same-computer setups, direct exchange is used; for different computers, XML files facilitate indirect exchange.",Exchange methods include direct (integrated interface) and indirect (XML files) based on the installation configuration of PAA and PCS 7.
+4,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",What advantages does the PCS 7 Plant Automation Accelerator (PAA) offer according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"PAA reduces customizations and planning time, shortens project execution times, increases system availability, and enhances engineering efficiency.","Advantages include reduced planning time, faster project execution, higher system availability, and better engineering efficiency.","It offers benefits like less customization time, quicker project completion, improved system reliability, and more efficient engineering.","PAA's benefits encompass minimized planning efforts, accelerated project timelines, enhanced system uptime, and greater engineering productivity.","The tool provides significant improvements in planning efficiency, project speed, system reliability, and engineering effectiveness."
+5,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",What is the Import/Export Assistant (IEA) used for in PCS 7 as per the 'Compendium Part A - Configuration Guidelines (V9.0)'?,The IEA is used for frequently using multiple models or process tag types in a project (bulk data processing) and easily changing block parameter descriptions.,It facilitates bulk data processing and simplifies modifications to block parameter descriptions in PCS 7 projects.,"For projects requiring bulk data handling and easy parameter adjustments, the IEA serves as a valuable tool.","The assistant supports bulk operations with process tag types and models, along with straightforward parameter updates.",Its primary use is in managing bulk data and streamlining parameter description changes within PCS 7 projects.
+6,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",What functions does the Import/Export Assistant (IEA) support in PCS 7 according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"IEA supports importing plant data, automatic AS configuration generation, plant hierarchy creation, editing process tags, and more.","Functions include data import, AS configuration automation, hierarchy setup, process tag editing, and additional engineering tasks.","It enables data import, automated configuration, hierarchy management, tag editing, and other engineering functionalities.","Supported operations encompass importing data, generating configurations, setting up hierarchies, and modifying tags.","The tool aids in data import, configuration generation, hierarchy creation, and tag editing among other features."
+7,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",How does the process object view benefit users during FAT and commissioning in PCS 7 as described in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"It allows efficient centralized editing of all changeable tags/values, displaying and documenting all aspects consistently, and enabling jumps to various editing interfaces.","Benefits include centralized tag/value editing, consistent documentation, and quick access to different editing tools.","Users gain from efficient data management, comprehensive documentation, and easy navigation to editing interfaces.","The view offers streamlined editing, thorough documentation, and direct links to other configuration tools.","Advantages encompass efficient centralized editing, unified documentation, and seamless navigation across tools."
+8,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",What new feature was added to the process object view in PCS 7 version V8.1 according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"The 'Charts' tab was added, displaying all charts in the multiproject, including those without PH assignment, for quick access.","Version V8.1 introduced the 'Charts' tab, showing all multiproject charts for easier navigation.","A new 'Charts' tab was included, listing all project charts to simplify finding and accessing them.","The addition of the 'Charts' tab allows for viewing all charts in one place, enhancing accessibility.","With V8.1, the 'Charts' tab was introduced to aggregate all charts for straightforward access."
+9,pcs7_compendium_part_a_en-US_en-US.txt,82,144475bb3765279291f12ca61bcf077089ad44a0735621f8ac8bbabbed22b60d,"Block icons for SFCs and SFC types are generated automatically during OS compilation.
+
+Note
+
+Additional information on this is available in the ""Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# Configuring AS functions
+
+# 8.4 Creating step sequences
+
+# SFC types
+
+In the SFC, there are the ""SFC chart"" and ""SFC type"" object types. The SFC type allows the definition of sequential controls and of an expandable interface. You can read about the advantages and disadvantages of SFC types/instances in the manual mentioned above.
+
+Note The creation of SFC types is described in detail in ""Compendium Part C - Technical Functions with SFC Types"".
+
+An SFC type is generally preferred if a step sequencer (SFC) is used several times in the project. The instances are placed in the CFC chart similar to a function block. The SFC type is contained in the associated chart folder.
+
+As of PCS 7 V7.0, the SFC type can be centrally edited in the master data library and all instances in the project can be automatically updated. In addition, ways of accessing the SFC instances are listed in the chart reference data of the CFC.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+189
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.1 PCS 7 Plant Automation Accelerator
+
+Introduction
+
+The PCS 7 Plant Automation Accelerator (PAA) enables integrated engineering of PCS 7 systems. For this purpose, the PAA offers functionalities for bulk engineering based on control module types and also operates as a project execution and documentation tool. Based on consistent data management from product design to product operation, the PAA enables users to reduce configuration and commissioning costs when improving engineering quality.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Method of operation
+
+The Plant Automation Accelerator includes an interface for bidirectional exchange of engineering data with SIMATIC PCS 7. This enables the PAA to also work alternatingly in both programs. For transferring data, the PAA supports a delta view for synchronizing between PAA and PCS 7. The user decides on the requirements and performs supervised bulk data engineering.
+
+The PAA offers the following options for transferring and synchronizing:
+
+- Direct data exchange: If PAA and PCS 7 are installed on the same computer, data is exchanged over an integrated interface in PAA.
+- Indirect data exchange: If PAA and PCS 7 are installed on different computers, data is exchanged using XML files.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+191
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Functions
+
+- Bidirectional import/export of control module types (CMTs)
+- Bidirectional import/export of control modules (CMs) and parameters, messages and signals
+- Update of instances of control modules (CMs)
+- Bidirectional import/export of signal interconnections
+- Implementation of channels to signals
+- Block logic in function block diagrams
+- Bidirectional import/export of hardware including symbol tables
+- Bidirectional import/export of redundant CPU hardware including symbol tables
+- Bidirectional import/export of hierarchy folders
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized
+- Renamed objects are recognized again during data exchange and displayed and compared when the data is synchronized.
+
+# Advantages
+
+- Reduction of customizations and planning time with integrated workflows between engineering, automation and operation
+- Shorter project execution times through consistent and easy data synchronization between engineering and automation
+- Increased system availability through error-free data transmission and system documentation that is always up to date
+- Increased engineering efficiency and reduced costs through optimal change management
+
+# Note
+
+You can find additional information on the Plant Automation Accelerator in the ""SIMATIC PCS 7 Plant Automation Accelerator using a practical example"" (https://support.industry.siemens.com/cs/ww/en/view/109742154) application example.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# 8.5.2 Import/Export Assistant (IEA)
+
+Introduction
+
+During the planning of a plant, a wide variety of data is created, often at a time where no definite control system is planned. By using the import function, this data can be made available to the control system engineering. You use the import/export assistant if you want to frequently use multiple models or process tag types in a project (bulk data processing) and change block parameter descriptions easily.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+193
+
+# Configuring AS functions
+
+# 8.5 Bulk data and integrated engineering
+
+# Scope of functions
+
+The functions that can be used with the IEA include:
+
+- Standardized plant libraries with tested process tag types and models
+- Import of plant data (e.g. process tag lists or I/O lists) from the higher-level CAD/CAE environment
+- Automatic generation of the AS configuration based on imported process tag lists and process tag types (CMTs cannot be used).
+- Creation of the plant hierarchy
+- Editing stored process tags
+- Automatic derivation of the OS picture hierarchy, automatic connection of blocks, and positioning within pictures
+- Automatic creation of an OS archive
+- Creation of individual process objects using appropriate graphical tools such as CFC and SFC
+- Export of optimized parameters back to the CAD/CAE environment
+
+# Working with the import / export assistant (IEA)
+
+The Import Export Assistant offers the convenient option of creating function charts using process tag types and models. You also are given the option of exporting the files created in PCS 7 (for plant documentation, for example), editing them in Excel, and then importing them back into PCS 7.
+
+The following procedure should be followed when creating process tag types and models:
+
+- Create the process tag types and test them to ensure that they function correctly. Changes made at a later cost time.
+- All workers in a multiproject should use the same process tag types. Each worker should be assigned a name band for IEA files he creates. This allows the files to be easily entered into the multiproject. The workers should be able to use the process tag type for import, but should not be allowed to change the template. Changes should always be made from a central location, and then made available to the workers.
+- The IEA should be only be used during the configuration phase. Changes to parameters and interconnections in the charts should be made during the FAT (Factory Acceptance Test) or during commissioning. Since users make changes in the charts and not in the IEA files, any new IEA import may overwrite the changes.
+- During the FAT and subsequently while the plant is in process mode, the process object view offers the possibility of editing charts created via the IEA in tabular form. You also have the option here of exporting and importing (see also section:""Managing process tag types with the process object view (Page 195)"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+Note
+
+Information on working with the IEA can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+# 8.6 Managing process tag types with the process object view
+
+# Introduction
+
+In the process object view, all the data of the basic control can be displayed in a process control oriented view throughout the project. This means that a multiproject encompasses the data of all the projects within it.
+
+The process object view is mainly used during the FAT and commissioning. These tasks involve working efficiently with great amount of data at a centralized location. The process object view has the advantage that all changeable tags/values of an object (white background) can be centrally edited.
+
+When editing process tags and CFCs, all aspects (automation, I/O connection, messages, operation, and monitoring) can be consistently displayed and documented. Jumps to CFCs, SFCs, HW Config, and to the OS enable you to edit tags/values which cannot be edited in the table (e.g. parameter definition of the models, picture contents).
+
+Note
+
+Information on the structure and on working with the process object view can be found in the ""SIMATIC Process Control System PCS 7 Engineering System"" (https://support.industry.siemens.com/cs/ww/en/view/109746533) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+195
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+# Filter function of the process object view
+
+Filtering in the process object view is a comprehensive tool. A filter with a variety of criteria is shown here as an example:
+
+- Process tag type ""FI"" (flow measurements)
+- Blocks of type ""MonAnL""
+- ""PV_OPScale.High"" connections (measuring range high limit for the faceplate bar graph)
+
+Values can be easily selected, checked, and modified using the different filter functions ""General"", ""Block"", and ""I/O"".
+
+In PCS 7 version V8.1, the process object view has been supplemented with the ""Charts"" tab. All charts contained in the multiproject, including charts without PH assignment, are shown in this tab. This enables charts to be found quickly and simply. Switching from one project to another is not necessary, since all charts are displayed in one tab.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring AS functions
+
+# 8.6 Managing process tag types with the process object view
+
+The relevant chart can be selected using a filter and opened directly from the process object view. Furthermore, the assignment of charts to an AS is visible immediately.
+
+# Exporting and importing inputs/outputs and messages
+
+Through the exporting and importing of attributes you have the option of exporting information on parameters, signals and messages to a file, processing it with standard applications and inputting it (importing it) again.
+
+Note
+
+Filters are ignored during import/export. ",What can be achieved by exporting and importing attributes in the process object view as per the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"Users can export parameter, signal, and message information to a file for external processing, then reimport it back into PCS 7.","It enables the external editing of parameter, signal, and message data before reimporting it into the system.",This functionality allows for the modification of attributes outside PCS 7 and their subsequent reintegration.,Exporting and importing attributes facilitates the external adjustment of project data for enhanced flexibility.,"The feature supports the external processing of project attributes, offering greater control over data management."

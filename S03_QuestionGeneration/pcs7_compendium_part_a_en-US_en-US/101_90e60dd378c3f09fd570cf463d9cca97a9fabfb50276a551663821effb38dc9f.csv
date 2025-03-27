@@ -1,0 +1,2811 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",What affects the time stamp of messages in PCS 7 according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"The origin of the message affects its time stamp, as messages are generated in different areas and at various positions within PCS 7.","Messages' time stamps in PCS 7 are influenced by their origin, requiring time synchronization between all components for accuracy.","Depending on where a message is generated in PCS 7, its time stamp will vary, necessitating proper time synchronization across the project.","The time stamp of a message in PCS 7 is determined by its place of origin, with AS and I/O messages already containing their time stamps when forwarded.","In PCS 7, the correct time stamp for messages is ensured by configuring time synchronization among all project components, as the origin affects the stamp."
+1,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",How are messages archived and displayed in PCS 7 as per the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"All messages in PCS 7 are archived and displayed uniformly, regardless of their origin, with AS and I/O messages forwarded separately to OS servers.","Messages in PCS 7 undergo archiving and are displayed in the same manner for all origins, with separate forwarding paths for AS and I/O messages.","Regardless of where they originate, PCS 7 archives and displays all messages similarly, ensuring AS and I/O messages are separately processed.","PCS 7 ensures that all messages, no matter their source, are archived and displayed uniformly, with distinct handling for AS and I/O messages.","Uniform archiving and display of messages in PCS 7 is maintained for all origins, with AS and I/O messages being separately forwarded to OS servers."
+2,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",What is required to ensure the correct time stamp for messages in PCS 7 according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,Time synchronization between all components of the PCS 7 project is required to ensure the correct time stamp for messages.,Ensuring accurate time stamps in PCS 7 messages necessitates configuring time synchronization across all project components.,"For correct message time stamps in PCS 7, it's essential to set up time synchronization among all system components.",Accurate time stamping in PCS 7 messages demands the configuration of time synchronization throughout the project's components.,"To guarantee precise time stamps for messages in PCS 7, time synchronization must be established between all project parts."
+3,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",What types of data can be archived in a PCS 7 plant as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"In a PCS 7 plant, process values (analog and binary) and messages can be archived.",The data types eligible for archiving in PCS 7 include both analog and binary process values along with messages.,"PCS 7 allows for the archiving of various data types, specifically process values (both analog and binary) and messages.","Archivable data in PCS 7 encompasses process values, whether analog or binary, and messages produced during process mode.","Process values, including analog and binary types, and messages are the data types that can be archived in a PCS 7 plant."
+4,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",How are process values marked for archiving in PCS 7 according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,Process values are marked for archiving in PCS 7 by setting the 'Archive' attribute in the SIMATIC Manager for block I/Os intended for operator control and monitoring.,"To mark process values for archiving in PCS 7, the 'Archive' attribute must be assigned in the SIMATIC Manager for relevant block I/Os.","In PCS 7, marking process values for archiving involves assigning the 'Archive' attribute in the SIMATIC Manager to applicable block I/Os.","The 'Archive' attribute in the SIMATIC Manager is used to designate process values for archiving in PCS 7, specifically for operator-monitored block I/Os.","For archiving in PCS 7, process values are flagged by applying the 'Archive' attribute within the SIMATIC Manager to pertinent block I/Os."
+5,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",What are the four classes of process tags for display purposes in PCS 7 as per the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"The four classes are Temperature measurement (CT) with 10 s to 20 s, Level measurement (CL) with 5 s to 10 s, Pressure measurement (CP) with 3 s to 5 s, and Flow measurement (CF) with 0.5 s to 3 s.","Process tags in PCS 7 are categorized into Temperature (CT), Level (CL), Pressure (CP), and Flow (CF) measurements, each with specific time ranges.","Display classes for process tags in PCS 7 include Temperature (CT), Level (CL), Pressure (CP), and Flow (CF) measurements, defined by distinct intervals.","PCS 7 organizes process tags into four display classes: Temperature (CT), Level (CL), Pressure (CP), and Flow (CF), each associated with unique time frames.","Temperature (CT), Level (CL), Pressure (CP), and Flow (CF) measurements represent the four classes of process tags in PCS 7, each with designated display intervals."
+6,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",How is archiving performed by default in PCS 7 according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"By default, archiving in PCS 7 is performed locally on the OS servers, distinguishing between TagLogging Fast and TagLogging Slow based on archiving intervals.","Default archiving in PCS 7 occurs locally on OS servers, with tags categorized into TagLogging Fast (under one minute) and TagLogging Slow (over one minute).","PCS 7 defaults to local archiving on OS servers, separating tags into TagLogging Fast for sub-minute intervals and TagLogging Slow for longer intervals.","In PCS 7, the standard archiving method is local OS server storage, with tags divided into TagLogging Fast and Slow based on their archiving frequency.","Local archiving on OS servers is PCS 7's default, where tags are classified as TagLogging Fast or Slow depending on their required archiving intervals."
+7,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",What is the structure of archives in PCS 7 as described in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"Archives in PCS 7 are structured as circular logs using single segments, with archive values saved in a compressed state without impairing quality.","PCS 7 archives are designed as circular logs with single segments, where values are compressed yet maintain their original quality.","The archive structure in PCS 7 features circular logs with single segments, ensuring data is compressed while preserving value integrity.","In PCS 7, archives utilize a circular log and single segment structure, with compression applied to archive values without quality loss.","Circular logs with single segments form the archive structure in PCS 7, where data compression is implemented without affecting the quality of values."
+8,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",What are the criteria for specifying the archive size in PCS 7 according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,The criteria for specifying archive size in PCS 7 include the definition of a time period and the physical size in bytes.,"PCS 7 archive size can be determined by either a set time period or the physical size in bytes, with the latter being crucial for the entire circular log.","In PCS 7, archive size specification relies on two criteria: a defined time period and the physical size in bytes, the latter being key for circular logs.","Specifying archive size in PCS 7 involves choosing between a time period or physical size in bytes, with byte size defining the circular log's total capacity.","Two main criteria guide archive size specification in PCS 7: a time period and physical size in bytes, where byte size dictates the circular log's limits."
+9,pcs7_compendium_part_a_en-US_en-US.txt,101,90e60dd378c3f09fd570cf463d9cca97a9fabfb50276a551663821effb38dc9f,"(https://support.industry.siemens.com/cs/ww/en/view/89279751).
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.3 Message system
+
+# 10.3.7 Time stamp
+
+Messages are generated in different areas and at various positions within PCS 7. The origin of the message will, therefore, affect its time stamp.
+
+All messages are archived and are displayed in the same way, regardless of their origin. AS and I/O messages are forwarded to the OS servers separately via the plant bus. They already contain the appropriate time stamp. The OS server arranges all messages in the correct order.
+
+To ensure that the correct time stamp is always available, you must configure time synchronization between all the components of the PCS 7 project.
+
+|Origin|Configuration of the message text|Time stamp place of origin|Meaning in PCS 7|
+|---|---|---|---|
+|Operator station (OS)|In OS ""alarm logging""|In the OS|OS system messages|
+|Automation system (AS)|In the instances of the function block (e.g. CTRL_PID or MEAS_MON)|In the AS|Process messages and AS system messages from the SIMATIC station|
+|Distributed I/O (ET 200SP HA, ET 200M, ET 200iSP, SimcodePro)|In the instances of function block IM_DRV or EventTS|In the I/O|Selected events of the initial value acquisition in the event of a system failure (up to 1 ms accuracy)|
+
+Note
+
+You can find information on time stamping in the distributed I/O in the following manuals:
+
+- ""SIMATIC Process Control System PCS 7; High-Precision Time Stamping""
+- ""SIMATIC Process Control System PCS 7 High-Precision Time Stamping with Use of ET 200SP HA""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.1 Introduction
+
+Backing up process values and messages
+
+In a PCS 7 plant, you can archive various types of data which are produced in process mode. This data includes process values (analog and binary) and messages.
+
+PCS 7 provides the option of automatically creating archive tags for process values that are marked accordingly. In order for this to happen, the process values must be labeled as relevant for archiving in the SIMATIC Manager using the ""Archive"" attribute. This attribute can only be set for block I/Os intended for operator control and monitoring. The available labels, ""Archiving"" and ""Long-term archiving"", specify whether the process value should also be saved for the long term if a Process Historian is used. If you have selected the ""Create archives"" option, PCS 7 then creates the labeled archive tags automatically when the ""Compile OS"" function is executed.
+
+The recording and archiving times can be adapted to the physical type of the process tag immediately after this step in a clear display (in the SIMATIC Manager process object view, for example).
+
+The individual process tags can be roughly divided into four classes for display purposes:
+
+- Temperature measurement (CT) 10 s to 20 s
+- Level measurement (CL) 5 s to 10 s
+- Pressure measurement (CP) 3 s to 5 s
+- Flow measurement (CF) 0.5 s to 3 s
+
+Depending on how the components have been dimensioned, their values may differ from the example values given here.
+
+By default, archiving is performed locally on the OS servers. The PCS 7 system distinguishes between archive tags which must be archived in intervals of under one minute (TagLogging Fast) and those which must be archived in intervals of over one minute (TagLogging Slow), where one minute is the default setting. The system assigns the tags to two separate archive databases accordingly in online mode. If these archive values are mixed together in the configurable ""process value archives"" or the system archive, this will not have any effect on the process of assigning them to different databases.
+
+# 10.4 Archiving
+
+The following figure shows the structure of the archives, which are designed as circular logs and use single segments.
+
+The archive values associated with TagLogging Fast and also with TagLogging Slow (as of PCS 7 V7.0) are saved in the database in a compressed state, although this does not impair the quality of the values.
+
+The compression factor which can be achieved depends on a number of factors, particularly on whether or not the archive values can be combined during the acquisition of measured values by means of a sufficiently large hysteresis setting.
+
+Compression ensures that the size of the values will be reduced by a factor of 0.5. This results in a value that is usually around 6 bytes per measured value, but which can sometimes reach up to 16 bytes per measured value.
+
+A message with the maximum number of associated values and comments requires 4 KB. The minimum value for a message is 172 bytes.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+# Archive settings
+
+The system always offers two criteria for specifying the archive size of a single segment and
+the overall size of the circular log:
+
+- Definition of a time period
+- Physical size in bytes
+
+If one of these two criteria is exceeded, this will lead to a switch to the next segment in the
+case of a single segment, or to the overwriting of the first segment of the entire circular log.
+As the total hard disk capacity available for archiving is predefined, the specification in bytes
+is the only criterion which is relevant for the entire circular log.
+
+This specification must be standardized for all three archive databases (TagLogging Fast,
+TagLogging Slow, and AlarmLogging) in line with the available hard disk capacity.
+A time period during which the Tag Logging should be referred back to is set in the practical
+implementation. The required memory is roughly calculated.
+
+When using a Process Historian (PH), we also recommend saving the time range required
+for the operator in the process mode of typically 1 to 3 months on the OS servers.
+
+# 10.4.2 Archive configuration for TagLogging Fast and TagLogging Slow
+
+# Calculation
+
+Calculation of the memory requirements of all segments for a specified period of y months
+for TagLogging Fast:
+
+To perform this calculation, you will need to know how many archive values are saved per
+second on average. The archive variables are displayed in a clear form in the process object
+view of the SIMATIC Manager. The average archive load can be determined using the
+memory cycle of the variables.
+
+The memory requirements for x bytes are generally calculated as follows:
+
+number of archive values/s * x bytes * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y
+months
+
+A specification comprising days or weeks is usually used for a single segment. A segment
+change faster than one day may not be used, as this would make the number of segments to
+be connected to the MS SQL database when the OS server starts up too large, thus
+impairing performance.
+
+Note
+
+As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and
+AlarmLogging archive databases) may be generated in total.
+The maximum size of a single segment should not exceed 700MB (up to PCS 7 V8.0) or
+2GB (from PCS 7 V8.1).
+The size of a single segment in bytes can also be calculated using the definition provided
+above. It is not the decisive criterion, but it does need to be checked.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Example
+
+You are planning on using a period of around 2 months: You have calculated a mean value of 750 archive values/s for TagLogging Fast.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 60 GB
+
+(750 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 22 GB
+
+(750 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 30 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Fast"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You proceed in exactly the same way for ""TagLogging Slow"". You have calculated a mean value of 100 archive values/s for TagLogging Slow.
+
+- The maximum size for all segments is calculated as follows:
+- - Where a memory requirement of 16 bytes per measured value is assumed: approx. 8 GB (100 archive values/s * 16 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- Where a memory requirement of 6 bytes per measured value is assumed: approx. 3 GB (100 archive values/s * 6 bytes/value * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+
+In our example, we have selected 5 GB.
+
+The following is calculated for a single segment per day:
+
+You must then make the following corresponding settings in the ""TagLogging Slow"" configuration of the ""TagLogging"" editor:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.3 Archive configuration for AlarmLogging
+
+Calculation
+
+Unlike with TagLogging, messages occur as events and you must make assumptions, for example, as regards an average message load which is continuously present. These assumptions can differ from one another considerably, depending on the technology/sector in question.
+
+In practice, however, you can also proceed in another way, by calculating the TagLogging requirement and adding the available, unused hard disk memory space to the AlarmLogging database. This would then become the specification for the maximum size of all segments.
+
+The memory requirements are generally calculated as follows:
+
+Number of messages/s * 4 KB/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * y months
+
+# Example
+
+You assume that the number of events in your plant is 1 message/s.
+
+- The maximum size for all segments is calculated as follows: approx. 20 GB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 31 days/month * 2 months)
+- The following is calculated for a single segment per day: approx. 330 MB (1 message/s * 4,000 bytes/message * 60 s/min * 60 min/h * 24 h/day * 1 day)
+
+Deliberately set this limit higher so that you can still achieve a daily swap-out even if a message burst occurs. In our example, we have selected 700 MB.
+
+Note: As a rule, no more than 200 single segments (for the TagLogging Fast/Slow and AlarmLogging archive databases) may be generated in total.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.4 Archiving
+
+You must then make the following settings in the ""AlarmLogging"" editor:
+
+In our example, therefore, the hard disk not only has to provide the TagLogging memory requirements, but also an additional 60 GB on the OS server for archiving purposes (total of ""Max. size of all segments"").
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+275
+
+# 10.4 Archiving
+
+# 10.4.4 Long-term archiving using SIMATIC PCS 7 Process Historian
+
+# 10.4.4.1 Introduction
+
+Process Historian and Information Server
+
+PCS 7 Process Historian (PH) is a long-term archiving server for process data. Tags, alarms and SIMATIC BATCH data can be archived on the PH. The Information Server (IS) can be used to create reports based on the data saved in the PH. In so doing, reports can be created using a web application or a corresponding add-in in an Office application (Excel, Word or PowerPoint).
+
+The following image shows a schematic configuration in the SIMATIC PCS 7 environment:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+Note
+
+The ""Process Historian"" and ""Information Server"" components can be installed on a computer.
+
+The new Process Historian (PH) with reporting system has been introduced in parallel with the Central Archive Server (CAS) archiving system as part of the introduction of SIMATIC PCS 7 V8.0. From SIMATIC PCS 7 V8.1 onwards, the CAS is no longer supported.
+
+Note
+
+A migration of the CAS/StoragePlus data from the PCS 7 versions greater than V7.0 to PH data is possible in the PH version from PCS 7 V8.1 onwards.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+277
+
+# 10.4 Archiving
+
+How the Process Historian and Information Server work
+
+All OS servers and OS single stations for which there is a Process Historian (PH) configured in the PCS 7 project swap out your alarms to the PH in runtime. In addition all OS archive tags identified as ""Long-term archiving"" are archived on the PH for runtime.
+
+The Information Server (IS) is a web-based reporting system. The IS provides the user with the data from the PH database using the Internet Information Service (IIS).
+
+The following image provides an overview of the Process Historian and Information Server mode of operation:
+
+1. Prompt data archiving of the OS single stations and the OS server on the PH.
+2. SIMATIC BATCH swaps out its batch data to the PH in the manner in which this is also available in the BATCH database (native archiving).
+3. IS client access to the IS for report creation.
+
+Note
+A redundant operation of the PH is possible.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.4 Archiving
+
+# 10.4.4.2 Process Historian (PH)
+
+Introduction
+
+The Process Historian (PH) is used to archive process values, messages and batch data of the SIMATIC PCS 7 process control system. The process values and messages managed in the PH database can be displayed on OS clients and OS single stations clearly and graphically (with WinCC Alarm or WinCC Trend Control). ",How is the memory requirement calculated for TagLogging Fast in PCS 7 as per the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"The memory requirement for TagLogging Fast is calculated by multiplying the number of archive values per second by bytes per value, then by time constants for the specified period.","To calculate TagLogging Fast memory needs in PCS 7, multiply archive values per second by bytes per value and time factors over the desired months.","Calculating TagLogging Fast memory in PCS 7 involves archive values per second, bytes per value, and time multipliers for the target duration.","Memory for TagLogging Fast in PCS 7 is determined by archive values per second times bytes per value, extended over time for the planned period.","In PCS 7, TagLogging Fast memory calculation is based on archive values per second, bytes per value, and cumulative time factors for the specified months."

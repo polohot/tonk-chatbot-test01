@@ -1,0 +1,3051 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A_NUMBER,A,helpfulness,correctness,coherence,complexity,verbosity
+0,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does linear interpolation function in speed-controlled mode as per the 'MSD ServoDrive - DeviceHelp'?,A1,"In speed-controlled mode, linear interpolation is always applied, and pre-control is not active.",1.7890625,1.78125,3.59375,1.390625,0.40625
+1,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does linear interpolation function in speed-controlled mode as per the 'MSD ServoDrive - DeviceHelp'?,A2,The 'MSD ServoDrive - DeviceHelp' states that linear interpolation operates without pre-control in speed-controlled scenarios.,1.7265625,1.7578125,3.546875,1.390625,0.462890625
+2,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does linear interpolation function in speed-controlled mode as per the 'MSD ServoDrive - DeviceHelp'?,A3,"Linear interpolation in speed-controlled mode, according to the document, ignores pre-control and is consistently used.",1.546875,1.609375,3.40625,1.453125,0.42578125
+3,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does linear interpolation function in speed-controlled mode as per the 'MSD ServoDrive - DeviceHelp'?,A4,"According to 'MSD ServoDrive - DeviceHelp', when in speed-controlled mode, the system employs linear interpolation and deactivates pre-control.",2.40625,2.453125,3.71875,1.6484375,0.71875
+4,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does linear interpolation function in speed-controlled mode as per the 'MSD ServoDrive - DeviceHelp'?,A5,"The document specifies that speed-controlled mode utilizes linear interpolation exclusively, with pre-control features turned off.",1.5546875,1.59375,3.40625,1.4609375,0.53125
+5,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does the smoothing time affect the jerk limitation in the 'MSD ServoDrive - DeviceHelp'?,A1,Increasing the smoothing time P 166[0] extends acceleration and deceleration times under jerk limitation.,2.234375,2.265625,3.59375,1.4765625,0.51953125
+6,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does the smoothing time affect the jerk limitation in the 'MSD ServoDrive - DeviceHelp'?,A2,The 'MSD ServoDrive - DeviceHelp' notes that a higher smoothing time P 166[0] results in longer acceleration and deceleration phases when jerk is limited.,2.5,2.65625,3.6875,1.484375,0.53125
+7,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does the smoothing time affect the jerk limitation in the 'MSD ServoDrive - DeviceHelp'?,A3,"Smoothing time P 166[0] impacts jerk limitation by prolonging the time taken to accelerate or decelerate, as per the document.",1.6328125,1.671875,3.515625,1.734375,0.578125
+8,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does the smoothing time affect the jerk limitation in the 'MSD ServoDrive - DeviceHelp'?,A4,"According to 'MSD ServoDrive - DeviceHelp', setting a smoothing time P 166[0] increases the duration of acceleration and braking under jerk constraints.",2.21875,2.3125,3.640625,1.4765625,0.58984375
+9,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How does the smoothing time affect the jerk limitation in the 'MSD ServoDrive - DeviceHelp'?,A5,The document explains that the smoothing time parameter P 166[0] directly influences how much longer acceleration and deceleration take when jerk limitation is active.,1.96875,2.09375,3.53125,1.4765625,0.62109375
+10,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How is position control in IP mode described in the 'MSD ServoDrive - DeviceHelp'?,A1,Position control in IP mode involves preset position reference values from a higher-level PLC and their transfer to a fine interpolator.,2.046875,1.9140625,3.1875,1.7890625,0.453125
+11,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How is position control in IP mode described in the 'MSD ServoDrive - DeviceHelp'?,A2,The 'MSD ServoDrive - DeviceHelp' describes IP mode position control as using PLC-preset position references sent to a fine interpolator.,2.234375,2.203125,3.421875,1.6875,0.61328125
+12,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How is position control in IP mode described in the 'MSD ServoDrive - DeviceHelp'?,A3,"According to the document, IP mode's position control features PLC-derived position references that are finely interpolated.",2.453125,2.71875,3.65625,1.65625,0.52734375
+13,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How is position control in IP mode described in the 'MSD ServoDrive - DeviceHelp'?,A4,"In 'MSD ServoDrive - DeviceHelp', IP mode position control is outlined as a process where a PLC sets position references for fine interpolation.",2.046875,2.09375,3.453125,1.6171875,0.5859375
+14,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",How is position control in IP mode described in the 'MSD ServoDrive - DeviceHelp'?,A5,The document details IP mode position control as relying on higher-level PLC position references that are processed by a fine interpolator.,2.125,2.125,3.4375,1.734375,0.5625
+15,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What are the pre-control values switched to in IP mode with position control according to the 'MSD ServoDrive - DeviceHelp'?,A1,Pre-control values for speed and acceleration are switched to the control loops in IP mode with position control.,2.4375,2.578125,3.625,1.484375,0.470703125
+16,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What are the pre-control values switched to in IP mode with position control according to the 'MSD ServoDrive - DeviceHelp'?,A2,The 'MSD ServoDrive - DeviceHelp' states that speed and acceleration pre-control values are directed to the control loops during IP mode position control.,2.421875,2.578125,3.515625,1.5859375,0.640625
+17,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What are the pre-control values switched to in IP mode with position control according to the 'MSD ServoDrive - DeviceHelp'?,A3,"In IP mode with position control, pre-control values related to speed and acceleration are fed into the control loops, as per the document.",1.859375,1.9453125,3.3125,1.703125,0.66015625
+18,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What are the pre-control values switched to in IP mode with position control according to the 'MSD ServoDrive - DeviceHelp'?,A4,"According to the document, the control loops receive pre-control values for speed and acceleration when operating in IP mode with position control.",2.484375,2.703125,3.59375,1.59375,0.60546875
+19,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What are the pre-control values switched to in IP mode with position control according to the 'MSD ServoDrive - DeviceHelp'?,A5,'MSD ServoDrive - DeviceHelp' mentions that IP mode's position control involves sending pre-control values for speed and acceleration to the control loops.,1.0546875,1.171875,3.1875,1.3984375,0.640625
+20,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document indicate about the images 8.28 and 8.29?,A1,Images 8.28 and 8.29 illustrate speed and position control in IP mode within the Motion Profile subject area.,2.109375,2.25,3.5,1.28125,0.51171875
+21,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document indicate about the images 8.28 and 8.29?,A2,The 'MSD ServoDrive - DeviceHelp' uses images 8.28 and 8.29 to depict IP mode's speed and position control under Motion Profile.,2.421875,2.703125,3.65625,1.40625,0.5390625
+22,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document indicate about the images 8.28 and 8.29?,A3,"According to the document, images 8.28 and 8.29 show examples of IP mode's speed and position control in the Motion Profile section.",2.171875,2.375,3.671875,1.3671875,0.72265625
+23,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document indicate about the images 8.28 and 8.29?,A4,Images 8.28 and 8.29 in 'MSD ServoDrive - DeviceHelp' visually represent the operation of speed and position controls in IP mode.,2.015625,2.171875,3.5625,1.265625,0.53515625
+24,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document indicate about the images 8.28 and 8.29?,A5,The document references images 8.28 and 8.29 as visual aids for understanding speed and position control mechanisms in IP mode.,1.96875,2.15625,3.59375,1.3828125,0.443359375
+25,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document say about the interpolation problem?,A1,The document describes interpolation as estimating function values between known points to solve interpolation problems.,0.80078125,0.73046875,3.0,1.21875,0.41796875
+26,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document say about the interpolation problem?,A2,"According to 'MSD ServoDrive - DeviceHelp', interpolation involves calculating unknown values between known data points.",0.83203125,0.828125,3.109375,1.1328125,0.40625
+27,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document say about the interpolation problem?,A3,"Interpolation, as per the document, is the process of determining intermediate values based on existing data points.",0.80078125,0.8125,3.125,1.3359375,0.373046875
+28,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document say about the interpolation problem?,A4,The 'MSD ServoDrive - DeviceHelp' explains that interpolation methods estimate values between known points to address interpolation challenges.,1.140625,1.140625,3.234375,1.3671875,0.5703125
+29,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What does the 'MSD ServoDrive - DeviceHelp' document say about the interpolation problem?,A5,"In the document, interpolation is defined as the technique of predicting function values between established points to resolve interpolation issues.",0.875,0.859375,3.09375,1.234375,0.44140625
+30,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the effect of speed override P 167[0] - MPRO_REF_OVR in the 'MSD ServoDrive - DeviceHelp'?,A1,Speed override P 167[0] scales the maximum preset speed reference in percentage terms.,1.9453125,1.9765625,3.421875,1.421875,0.39453125
+31,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the effect of speed override P 167[0] - MPRO_REF_OVR in the 'MSD ServoDrive - DeviceHelp'?,A2,The 'MSD ServoDrive - DeviceHelp' explains that P 167[0] adjusts the maximum speed reference by a specified percentage.,1.953125,1.9609375,3.40625,1.3359375,0.3828125
+32,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the effect of speed override P 167[0] - MPRO_REF_OVR in the 'MSD ServoDrive - DeviceHelp'?,A3,"According to the document, the speed override parameter P 167[0] modifies the top speed reference setting proportionally.",2.453125,2.46875,3.65625,1.59375,0.51953125
+33,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the effect of speed override P 167[0] - MPRO_REF_OVR in the 'MSD ServoDrive - DeviceHelp'?,A4,P 167[0] in 'MSD ServoDrive - DeviceHelp' is described as a setting that percentage-wise alters the maximum allowed speed reference.,2.4375,2.421875,3.59375,1.5859375,0.4765625
+34,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the effect of speed override P 167[0] - MPRO_REF_OVR in the 'MSD ServoDrive - DeviceHelp'?,A5,The document indicates that the speed override feature P 167[0] allows for the scaling of the speed reference limit in percent.,2.296875,2.375,3.453125,1.6328125,0.51171875
+35,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the purpose of jerk limitation in the MSD ServoDrive according to the 'MSD ServoDrive - DeviceHelp' document?,A1,Jerk limitation is used to limit the maximum rate of change of the torque to prevent oscillation in elastic transfer paths from the motor to the mechanism.,3.0625,3.109375,3.8125,1.6171875,0.57421875
+36,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the purpose of jerk limitation in the MSD ServoDrive according to the 'MSD ServoDrive - DeviceHelp' document?,A2,"To avoid oscillations in elastic mechanisms, the MSD ServoDrive implements jerk limitation, which controls the torque's rate of change.",2.609375,2.578125,3.8125,1.640625,0.6953125
+37,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the purpose of jerk limitation in the MSD ServoDrive according to the 'MSD ServoDrive - DeviceHelp' document?,A3,"In the 'MSD ServoDrive - DeviceHelp', jerk limitation is advised to minimize oscillations by restricting how quickly torque can change.",2.328125,2.359375,3.75,1.4296875,0.58984375
+38,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the purpose of jerk limitation in the MSD ServoDrive according to the 'MSD ServoDrive - DeviceHelp' document?,A4,The document 'MSD ServoDrive - DeviceHelp' suggests jerk limitation as a method to reduce susceptibility to oscillation in elastic motor-to-mechanism paths by capping torque change rates.,2.953125,3.171875,3.90625,1.75,0.796875
+39,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the purpose of jerk limitation in the MSD ServoDrive according to the 'MSD ServoDrive - DeviceHelp' document?,A5,"For systems with elastic components, 'MSD ServoDrive - DeviceHelp' recommends jerk limitation to stabilize operation by limiting the speed at which torque adjustments occur.",2.75,2.75,3.84375,1.5703125,0.796875
+40,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the significance of the profile type P 2243[0] - MPRO_402_MotionProf type in the 'MSD ServoDrive - DeviceHelp'?,A1,Setting P 2243[0] to JerkLin(3) enables the jerk limitation feature and displays the smoothing setting box.,1.7421875,1.796875,3.421875,1.46875,0.439453125
+41,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the significance of the profile type P 2243[0] - MPRO_402_MotionProf type in the 'MSD ServoDrive - DeviceHelp'?,A2,The 'MSD ServoDrive - DeviceHelp' indicates that selecting JerkLin(3) for P 2243[0] activates jerk limitation and reveals smoothing options.,1.5546875,1.703125,3.3125,1.5,0.5390625
+42,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the significance of the profile type P 2243[0] - MPRO_402_MotionProf type in the 'MSD ServoDrive - DeviceHelp'?,A3,"Profile type P 2243[0] must be set to JerkLin(3) to access jerk limitation and smoothing configurations, as mentioned in the document.",1.9921875,2.15625,3.53125,1.5859375,0.59375
+43,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the significance of the profile type P 2243[0] - MPRO_402_MotionProf type in the 'MSD ServoDrive - DeviceHelp'?,A4,"According to the document, the JerkLin(3) setting for P 2243[0] is necessary to implement jerk limitation and adjust smoothing parameters.",1.8125,1.890625,3.40625,1.5703125,0.546875
+44,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What is the significance of the profile type P 2243[0] - MPRO_402_MotionProf type in the 'MSD ServoDrive - DeviceHelp'?,A5,'MSD ServoDrive - DeviceHelp' specifies that the JerkLin(3) option in P 2243[0] is key for enabling jerk limitation and related smoothing settings.,1.765625,1.765625,3.390625,1.6171875,0.640625
+45,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What role does the sampling time play in IP mode with position control in the 'MSD ServoDrive - DeviceHelp'?,A1,Sampling time must be synchronized between the PLC and controller P 0306 CON_IpRefTS for accurate position reference values.,2.25,2.21875,3.46875,1.53125,0.44921875
+46,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What role does the sampling time play in IP mode with position control in the 'MSD ServoDrive - DeviceHelp'?,A2,"In IP mode with position control, the 'MSD ServoDrive - DeviceHelp' emphasizes balancing sampling time between the PLC and controller to ensure precise position references.",1.8046875,1.7890625,3.453125,1.53125,0.6015625
+47,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What role does the sampling time play in IP mode with position control in the 'MSD ServoDrive - DeviceHelp'?,A3,"The document highlights that for IP mode's position control, sampling time coordination between the PLC and controller is crucial for transferring position references correctly.",2.578125,2.609375,3.609375,1.5234375,0.73828125
+48,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What role does the sampling time play in IP mode with position control in the 'MSD ServoDrive - DeviceHelp'?,A4,"Accurate position control in IP mode requires the sampling time to be aligned between the PLC and the controller, as noted in 'MSD ServoDrive - DeviceHelp'.",2.34375,2.453125,3.6875,1.6640625,0.451171875
+49,msd_servo_drive.txt,69,9a111d1bd3651ae02a1137d7ace702f0e1f9faab8118e67a091f85174e409dc2,"MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 243
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 244
+
+|Referencevalue|P 0165|-OFF (0)|Interpolation|
+|---|---|---|---|
+|-ANA0 (1)|Referencevalue|Normalization|IP-Mode|
+|-ANA0 (2)|Userunit|Referencevalue| |
+|Referencevalue|-Tab (3)|-DS402|Increments|
+|-leer (4)|-SERCOS|Samplingtime|Interpolation|
+|-iPLC (5)|-User-specific|1 ms|≥ 125 µs|
+|-PARA (6)|-CiA DS402 (7)|-SERCOS (8)|-PROFIBUS (9)|
+|-VARAN (10)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|Image 8.29: Position control in IP mode (Motion Profile subject area)|
+|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|Image 8.28: Speed control in IP mode (Motion Profile subject area)|
+
+NOTE
+
+- In linear interpolation the pre-control is ignored.
+- Linear interpolation is always applied in speed-controlled mode. Pre-control is not active.
+
+# 8.3.5 Jerk limitation and speed offset
+
+# 8.3.4 IP mode with position control
+
+- Position reference values are preset by a higher-level PLC with an appropriate sampling time.
+- The sampling time must be balanced between the PLC and controller P 0306 CON_IpRefTS.
+- The position references are then transferred to the fine interpolator.
+- Pre-control values for speed and acceleration are switched to the control loops.
+- For more information on the cycle time see the field bus documentation.
+
+# 8.3.5.1 Jerk limitation (Profile mode)
+
+The transfer path from the motor to the mechanism may be elastic and so susceptible to oscillation. For that reason, it is advisable to also limit the maximum rate of change of the torque and thus the jerk. Due to the jerk limitation the acceleration and deceleration times rise by the smoothing P 166[0] - MPRO_REF_JTIME. The smoothing setting box appears on-screen as soon as the profile type P 2243[0] - MPRO_402_MotionProf type is set to JerkLin(3).
+
+# 8.3.5.2 Speed offset (limitation)
+
+With speed override P 167[0] - MPRO_REF_OVR the maximum preset speed reference is scaled in percent.
+
+# 8 Motion profile
+
+Image 8.30: Profile type, smoothing profile type without smoothing
+
+Image 8.31: Maximum jerk: Red = actual speed; grey = actual position
+
+The acceleration and braking ramp = 0, so the jerk is maximum (red curve).
+
+The acceleration and braking ramp with preset smoothing time (smoothing time = 2000 ms, red curve)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 245
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 246
+
+By using a suitable interpolation method, the function’s values between known points can be estimated. This is termed an interpolation problem. ",What role does the sampling time play in IP mode with position control in the 'MSD ServoDrive - DeviceHelp'?,A5,'MSD ServoDrive - DeviceHelp' advises that proper sampling time alignment is essential in IP mode for the effective transfer of position references from the PLC to the controller.,2.109375,2.0625,3.59375,1.4453125,0.447265625

@@ -1,0 +1,1401 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A_NUMBER,A,helpfulness,correctness,coherence,complexity,verbosity
+0,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the quadratic ripple of the DC link voltage utilized in failure detection?,A1,It's calculated and compared against P 760[2] Max_var to detect failures if exceeded for P 760[3] Max_time.,1.0390625,1.296875,3.296875,1.484375,0.359375
+1,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the quadratic ripple of the DC link voltage utilized in failure detection?,A2,By assessing if the ripple surpasses Max_var for longer than Max_time.,0.8515625,0.8203125,2.9375,1.203125,0.15234375
+2,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the quadratic ripple of the DC link voltage utilized in failure detection?,A3,The ripple's variance is evaluated against set thresholds to identify failures.,1.546875,1.6796875,3.3125,1.390625,0.162109375
+3,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the quadratic ripple of the DC link voltage utilized in failure detection?,A4,Detection relies on the ripple exceeding predefined variance and duration limits.,1.171875,1.203125,3.09375,1.3515625,-0.0089111328125
+4,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the quadratic ripple of the DC link voltage utilized in failure detection?,A5,Failure is identified when the calculated ripple exceeds allowed variance over a specified time.,1.3046875,1.2890625,3.28125,1.2578125,0.1142578125
+5,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the single-phase power failure detection configured in the device?,A1,It is configured with P 737[0] MON_MNCTL - bit 3 = 1.,1.234375,1.3828125,3.171875,1.28125,0.29296875
+6,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the single-phase power failure detection configured in the device?,A2,By setting bit 3 of P 737[0] MON_MNCTL to 1.,1.1796875,1.03125,3.015625,1.2265625,0.27734375
+7,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the single-phase power failure detection configured in the device?,A3,Configuration involves setting a specific bit in P 737[0] MON_MNCTL to 1 for detection.,1.2578125,1.171875,2.953125,1.3046875,0.33203125
+8,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the single-phase power failure detection configured in the device?,A4,The detection is activated through P 737[0] MON_MNCTL by enabling bit 3.,1.546875,1.5703125,3.125,1.3359375,0.333984375
+9,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",How is the single-phase power failure detection configured in the device?,A5,Single-phase failure detection is enabled via P 737[0] MON_MNCTL's third bit set to 1.,1.59375,1.59375,3.203125,1.4453125,0.27734375
+10,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What are the potential consequences of a single-phase failure of the device supply?,A1,"The DC link voltage is maintained temporarily, but the input rectifier can be damaged at high output power.",2.203125,2.21875,3.484375,1.125,0.30078125
+11,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What are the potential consequences of a single-phase failure of the device supply?,A2,"While operation continues initially, high output power may damage the input rectifier.",2.0625,2.28125,3.390625,1.171875,0.25390625
+12,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What are the potential consequences of a single-phase failure of the device supply?,A3,"Continued operation is possible short-term, but risks input rectifier damage under high load.",2.140625,2.265625,3.484375,1.3125,0.3125
+13,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What are the potential consequences of a single-phase failure of the device supply?,A4,"Temporary maintenance of DC link voltage occurs, with potential rectifier damage during high power output.",2.015625,2.0,3.28125,1.3125,0.275390625
+14,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What are the potential consequences of a single-phase failure of the device supply?,A5,"Initial operation persists, yet the input rectifier faces damage risk at elevated output power levels.",1.7734375,1.859375,3.328125,1.0859375,0.328125
+15,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What does P 701[28] VDC_Variance represent?,A1,It shows the actual quadratic ripple (variance) of the DC link voltage.,2.46875,2.53125,3.4375,1.3125,0.44921875
+16,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What does P 701[28] VDC_Variance represent?,A2,P 701[28] displays the current DC link voltage's variance value.,2.640625,2.671875,3.421875,1.4453125,0.359375
+17,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What does P 701[28] VDC_Variance represent?,A3,This parameter indicates the existing variance in the DC link voltage.,2.15625,2.25,3.3125,1.3671875,0.322265625
+18,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What does P 701[28] VDC_Variance represent?,A4,Represents the real-time variance measurement of the DC link voltage.,2.625,2.703125,3.390625,1.3984375,0.34375
+19,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What does P 701[28] VDC_Variance represent?,A5,VDC_Variance under P 701[28] provides the live variance reading of the DC voltage.,2.3125,2.375,3.40625,1.4453125,0.52734375
+20,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What error code is triggered by the monitoring of DC link voltage variance?,A1,Error 54-1 (Emergency code 6100h) is triggered.,1.9921875,2.140625,3.5625,0.96875,0.1806640625
+21,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What error code is triggered by the monitoring of DC link voltage variance?,A2,"The monitoring triggers error 54-1, with an emergency code of 6100h.",1.7578125,1.7109375,3.53125,1.015625,0.33203125
+22,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What error code is triggered by the monitoring of DC link voltage variance?,A3,"Upon triggering, the system reports error 54-1, referenced by emergency code 6100h.",2.03125,2.15625,3.625,1.140625,0.330078125
+23,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What error code is triggered by the monitoring of DC link voltage variance?,A4,"Error code 54-1, indicated by 6100h in emergencies, is activated.",2.390625,2.40625,3.65625,1.1171875,0.2734375
+24,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What error code is triggered by the monitoring of DC link voltage variance?,A5,"The system displays error 54-1, corresponding to emergency code 6100h, when monitoring is triggered.",1.90625,2.03125,3.546875,1.203125,0.44921875
+25,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What is the recommended method to determine the monitoring threshold for VDC Variance?,A1,"Measure P 701[28] VDC Variance at maximum output power and proper operation, then use about 5-10 times that value.",1.6640625,1.75,3.28125,1.3359375,0.3125
+26,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What is the recommended method to determine the monitoring threshold for VDC Variance?,A2,Use 5-10 times the value of P 701[28] measured at max output power as the threshold.,1.6796875,1.6015625,3.328125,1.3515625,0.275390625
+27,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What is the recommended method to determine the monitoring threshold for VDC Variance?,A3,"After measuring VDC Variance under full load, multiply that value by 5 to 10 for the threshold.",1.9140625,2.03125,3.578125,1.53125,0.322265625
+28,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What is the recommended method to determine the monitoring threshold for VDC Variance?,A4,The threshold should be approximately 5-10 times the VDC Variance observed at peak performance.,2.3125,2.5,3.609375,1.375,0.287109375
+29,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What is the recommended method to determine the monitoring threshold for VDC Variance?,A5,Determine by scaling up the maximum operational VDC Variance measurement by a factor of 5-10.,1.8984375,2.0625,3.3125,1.4140625,0.14453125
+30,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What parameters are involved in monitoring the DC link voltage?,A1,"Parameters include P 760 MON_VDC_Guard settings like Tfilt_av, Tfilt_var, Max_var, Max_time, and Check_time.",2.0625,1.9609375,3.40625,1.40625,0.455078125
+31,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What parameters are involved in monitoring the DC link voltage?,A2,"Monitoring involves P 760's settings: filter time constants, max variance, max time, and check interval.",1.75,1.5703125,3.21875,1.3828125,0.380859375
+32,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What parameters are involved in monitoring the DC link voltage?,A3,"Key parameters are Tfilt_av, Tfilt_var, Max_var, Max_time, and Check_time under P 760.",1.8515625,1.765625,3.375,1.4140625,0.4140625
+33,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What parameters are involved in monitoring the DC link voltage?,A4,"P 760 encompasses necessary settings for DC link voltage monitoring, including thresholds and timings.",1.7265625,1.5859375,3.265625,1.359375,0.3203125
+34,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What parameters are involved in monitoring the DC link voltage?,A5,"The process uses P 760's configurations for filtering, variance limits, and timing checks.",1.5859375,1.6015625,3.28125,1.3203125,0.3203125
+35,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What should the error reaction be set to in the case of a voltage failure detection as described in chapter 4.2.1?,A1,The error reaction should be set to 'Ignore'.,1.234375,1.28125,3.5,0.80078125,0.1123046875
+36,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What should the error reaction be set to in the case of a voltage failure detection as described in chapter 4.2.1?,A2,Set to 'Ignore' for voltage failure detection.,2.03125,2.109375,3.40625,0.96484375,0.1591796875
+37,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What should the error reaction be set to in the case of a voltage failure detection as described in chapter 4.2.1?,A3,"In chapter 4.2.1, it's specified to set the error reaction to 'Ignore'.",2.703125,2.953125,3.796875,1.1796875,0.50390625
+38,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What should the error reaction be set to in the case of a voltage failure detection as described in chapter 4.2.1?,A4,'Ignore' is the required setting for the error reaction in voltage failure scenarios.,2.53125,2.71875,3.703125,1.1171875,0.423828125
+39,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What should the error reaction be set to in the case of a voltage failure detection as described in chapter 4.2.1?,A5,"For detecting voltage failures, the setting 'Ignore' is recommended for the error reaction.",2.96875,3.1875,3.78125,1.1796875,0.474609375
+40,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What triggers the monitoring of the DC link voltage variance?,A1,Monitoring is triggered if the quadratic ripple exceeds P 760[2] Max_var for longer than P 760[3] Max_time.,2.53125,2.59375,3.671875,1.6015625,0.5234375
+41,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What triggers the monitoring of the DC link voltage variance?,A2,Exceeding the Max_var threshold for the duration specified by Max_time triggers it.,2.359375,2.421875,3.453125,1.4375,0.263671875
+42,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What triggers the monitoring of the DC link voltage variance?,A3,"When the DC link voltage's variance surpasses P 760[2] for over P 760[3], monitoring starts.",2.109375,2.109375,3.5,1.4453125,0.62109375
+43,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What triggers the monitoring of the DC link voltage variance?,A4,Triggering occurs upon the variance threshold being exceeded beyond the maximum allowed time.,2.15625,2.25,3.390625,1.390625,0.3203125
+44,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",What triggers the monitoring of the DC link voltage variance?,A5,The monitoring activates if variance exceeds set limits for a specified time period.,2.171875,2.3125,3.40625,1.375,0.33984375
+45,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",Where can one find more information about error 54-1 triggered by DC link voltage monitoring?,A1,Refer to chapter 11.6 Error list for details on error 54-1 (Emergency code 6100h).,1.1640625,1.2265625,3.265625,0.93359375,0.12060546875
+46,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",Where can one find more information about error 54-1 triggered by DC link voltage monitoring?,A2,"Chapter 11.6 contains the error list, including error 54-1 with code 6100h.",0.9140625,1.109375,3.375,0.92578125,0.26953125
+47,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",Where can one find more information about error 54-1 triggered by DC link voltage monitoring?,A3,"Details on this error are available in the error list section, specifically chapter 11.6.",1.0390625,1.03125,3.390625,0.98828125,0.361328125
+48,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",Where can one find more information about error 54-1 triggered by DC link voltage monitoring?,A4,"For comprehensive information, consult the error list in chapter 11.6 regarding error 54-1.",1.34375,1.375,3.59375,1.0390625,0.400390625
+49,msd_servo_drive.txt,9,cf24e707f4ce3dc214371342f12e1493b99f469ea83f0a9395fe4c8a33083527,"See chapter 4.2.1 Detection of a voltage failure. In this case, the error reaction should be set to ""Ignore"".
+
+|P No.|Index|Name / Setting|Unit|Function|
+|---|---|---|---|---|
+|701|28|VDC_Variance|V²|DC voltage variance|
+|737| |MON_MNCTL| |Monitoring control and status word|
+|737|0|MON_MNCTL| |Monitoring control word|
+|737|1|MON_MNSTAT| |Monitoring status word|
+|760| |MON_VDC_Guard| |Monitoring of DC link voltage|
+| |0|Tfilt_av|ms|Filter time constant for average|
+| |1|Tfilt_var|ms|Filter time constant for variance|
+| |2|Max_var|V²|Max allowed variance|
+| |3|Max_time|s|Max time with variance threshold exceeded|
+| |4|Check_time|s|Interval to check return of failed phase|
+
+Table 4.8: Parameter - Single-phase failure of the device power supply
+
+In the event of a single-phase failure of the device supply, e.g. a burned-out non-renewable fuse, the DC link voltage is maintained and the device continues to operate for the time being. However, the input rectifier can be damaged at a high output power.
+
+The single-phase power failure detection is set with P 737[0] MON_MNCTL - bit 3 = 1.
+
+The quadratic ripple (variance) of the DC link voltage is calculated. If it exceeds the threshold value P 760[2]-MON_VDC_Guard - MaxVar for the time P 760[3]-MON_VDC_Guard - Max_time, the monitoring is triggered.
+
+The actual value is shown in P 701[28] - VDC Variance. Measure this value at maximum output power and proper operation, then use about 5-10 times that as the monitoring threshold.
+
+The monitoring triggers error 54-1 (Emergency code 6100h). See chapter 11.6 Error list.
+
+",Where can one find more information about error 54-1 triggered by DC link voltage monitoring?,A5,"Error 54-1's specifics, marked by emergency code 6100h, are outlined in chapter 11.6's error list.",1.0546875,1.3359375,3.25,1.140625,0.302734375

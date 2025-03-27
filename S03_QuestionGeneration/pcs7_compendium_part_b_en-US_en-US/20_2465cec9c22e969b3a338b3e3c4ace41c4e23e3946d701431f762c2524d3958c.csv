@@ -1,0 +1,821 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",What is the operating mode for the SM326; DI 24 x DC 24V module as described in the 'Compendium Part B - Process Safety (V9.0)'?,The operating mode is 'Safety mode'.,Safety mode is the specified operating mode for the SM326; DI 24 x DC 24V module.,"As per the manual, the module operates in 'Safety mode'.",Operating mode: Safety mode.,The 'Compendium Part B - Process Safety (V9.0)' specifies 'Safety mode' as the operating mode for this module.
+1,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",How can you activate short-circuit detection for the F signal module according to the 'Compendium Part B - Process Safety (V9.0)'?,By using the parameter to activate short-circuit detection for sensors supplied by the F signal module.,Short-circuit detection is activated through specific parameters for sensors powered by the F signal module.,The manual states that activating short-circuit detection is possible via parameter settings for module-supplied sensors.,Activation requires setting the appropriate parameter for the F signal module's sensor supply.,"According to the compendium, short-circuit test activation is parameter-based for module-supplied sensors."
+2,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",What safety classes can be achieved with 1-channel and 2-channel evaluations as per the 'Compendium Part B - Process Safety (V9.0)'?,"1-channel can achieve SIL 2, and 2-channel can achieve SIL 3.",SIL 2 for 1-channel and SIL 3 for 2-channel evaluations.,The manual specifies SIL 2 for single-channel and SIL 3 for dual-channel configurations.,Achievable safety classes: 1-channel - SIL 2; 2-channel - SIL 3.,"With 1-channel evaluation, SIL 2 is possible, whereas 2-channel allows for SIL 3, as detailed in the compendium."
+3,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",What are the types of sensor interconnection available for '1oo2 sensor evaluation' in the 'Compendium Part B - Process Safety (V9.0)'?,"2-channel equivalent, 2-channel non-equivalent, and 1-channel.","Available types include 2-channel equivalent, 2-channel non-equivalent, and 1-channel.","The manual lists three types: 2-channel equivalent, non-equivalent, and single-channel.","Types: 2-channel equivalent, 2-channel non-equivalent, 1-channel.","For '1oo2 evaluation', the compendium mentions 2-channel equivalent, non-equivalent, and 1-channel interconnections."
+4,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",What must be used if '2-channel non-equivalent' or '1-channel' type of sensor interconnection is selected with internal sensor supply and short-circuit test parameterized?,The Vss supply voltage from the left-hand side of the F signal module.,Vss supply voltage on the module's left side is required.,"According to the manual, the left-hand side Vss supply voltage must be utilized.",Required: Vss supply voltage from the F signal module's left-hand side.,The compendium specifies using the left-hand side Vss supply voltage for these configurations.
+5,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",What is the discrepancy behavior for the SM326; DI 24 x DC 24V module in the 'Compendium Part B - Process Safety (V9.0)'?,Supply last valid value.,"During discrepancy, the module supplies the last valid value.",The manual indicates that the last valid value is provided during discrepancies.,Behavior at discrepancy: Supply last valid value.,"As per the compendium, the module is set to supply the last valid value during discrepancies."
+6,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",What is the monitoring time set for the SM326; DI 24 x DC 24V module in the 'Compendium Part B - Process Safety (V9.0)'?,2500 ms.,The monitoring time is configured to 2500 milliseconds.,"According to the manual, the monitoring time is set at 2500 ms.",Monitoring time (ms): 2500.,The compendium specifies a monitoring time of 2500 ms for this module.
+7,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",How does the F signal module respond to a detected short-circuit according to the 'Compendium Part B - Process Safety (V9.0)'?,It triggers a diagnostics interrupt on the CPU and sends a corresponding process control message to the OS.,"Upon detecting a short-circuit, the module initiates a diagnostics interrupt to the CPU and notifies the OS.","The manual states that a diagnostics interrupt is triggered, and a message is sent to the OS.",Response: Diagnostics interrupt to CPU and process control message to OS.,The compendium details that the module responds with a diagnostics interrupt and OS notification for short-circuits.
+8,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",What is the target address for the SM326; DI 24 x DC 24V module in the 'Compendium Part B - Process Safety (V9.0)'?,1020.,The target address is specified as 1020.,"As per the manual, the target address is set to 1020.",Target_address: 1020.,The compendium lists the target address as 1020 for this module.
+9,pcs7_compendium_part_b_en-US_en-US.txt,20,2465cec9c22e969b3a338b3e3c4ace41c4e23e3946d701431f762c2524d3958c,"Therefore, select the lowest possible number of channels with discrepancy evaluation.
+
+# 6.4.6 Parameter assignment for SM326; DI 24 x DC 24V
+
+|Properties|FDIRAxDC24V (R-/55)|
+|---|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|Operating mode|Safety mode|
+|parameters|source_address|
+| |CPU 410-5H|
+|target_address|1020|
+|DIP switch setting|to 0)|
+|monitoring time (ms)|2500|
+|Module parameters| |
+|Diagnostic interrupt| |
+|Behavior after channel faults|Passivate the channel|
+|Supply group IVs{3Vs| |
+|Sensor supply via module| |
+|Short-circuit test| |
+|Channel|Enabled|
+|Evaluation of the sensors|10o2 evaluation|
+|Type of sensor interc,|2-channel non-equivalent|
+|Behavior at discrepancy|Supply last valid value|
+|Discrepancy time (ms)| |
+|Channel| |
+
+Figure 6-1
+
+# Sensor supply via module
+
+You can set whether the sensor is supplied via the F signal module using these parameters. Additionally, you can also activate a short-circuit test for the supply through the F signal module.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Short-circuit test
+
+You can use this parameter to activate short-circuit detection for the F signal module. The short-circuit test can only be activated for sensors that are supplied by the F signal module. Short-circuit detection disconnects the sensor supply briefly and tests the input signal. In so doing, a cross circuit is detected between the channels and an ""L+"" fault at the active inputs. Whenever a short-circuit is detected, the F signal module will trigger a diagnostics interrupt on the CPU and send a corresponding process control message to the OS.
+
+# Sensor evaluation
+
+- 1oo1 (1v1) evaluation
+A sensor connected to the F signal module via a single channel.
+- 1oo2 (2v2) evaluation
+For a process signal one or two sensors are connected to two opposite inputs of an F signal module. The signal states of inputs (equivalence or non-equivalence) are compared internally.
+
+The following safety classes can be achieved:
+
+- 1-channel – SIL 2; in the case of multiple channels, SIL 3 can be achieved by means of voting in the CPU.
+- 2-channel – SIL 3 (voting on module)
+
+# Type of sensor interconnection
+
+If ""1oo2 sensor evaluation"" is selected, you can select the type of sensor interconnection for each input channel (exception: SM 326; DI 8 x NAMUR, for which this parameter does not exist. For this module, only 2-channel equivalent sensor interconnection can generally be selected where ""1oo2 evaluation"" is concerned.):
+
+- ""2-channel equivalent""
+A two-channel sensor or two single-channel sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""2-channel non-equivalent""
+One non-equivalent sensor or two single-channel, non-equivalent sensors (2-channel connection) is/are connected to two opposite input channels.
+- ""1-channel""
+A sensor (1-channel) is connected to two opposite inputs.
+
+Note
+If you are using the ""2-channel non-equivalent"" or ""1-channel"" type of sensor interconnection, and the internal sensor supply and the short-circuit test are parameterized, the Vss supply voltage from the left-hand side of the F signal module must be used.
+
+Compendium Part B - Process Safety (V9.0)
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Discrepancy behavior
+
+For ""discrepancy behavior"", parameterize the value provided to the safety program in the F CPU during the discrepancy between the two affected input channels – i.e. during running discrepancy time. ",What is the behavior after channel faults for the SM326; DI 24 x DC 24V module in the 'Compendium Part B - Process Safety (V9.0)'?,Passivate the channel.,The module is set to passivate the channel following faults.,The manual specifies that the channel is passivated after faults.,Behavior after channel faults: Passivate the channel.,"According to the compendium, the channel is passivated in response to faults."

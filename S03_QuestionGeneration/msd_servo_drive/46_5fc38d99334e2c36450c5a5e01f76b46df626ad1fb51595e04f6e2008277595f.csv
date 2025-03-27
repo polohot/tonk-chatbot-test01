@@ -1,0 +1,621 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",What must be ensured when using oversampling units according to the text?,It must be certain that the encoder does not dramatically exceed the specified limit frequencies.,The encoder's frequency limits should not be significantly exceeded when oversampling units are in use.,Ensuring the encoder stays within its specified frequency limits is crucial when oversampling units are applied.,Oversampling units require that the encoder's operation does not far exceed the set frequency boundaries.,"The text specifies that with oversampling units, the encoder must not operate well beyond its designated frequency limits."
+1,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",What should you do before using oversampling as advised in the text?,Consult with your project supervisor or the Moog Helpline.,"Before applying oversampling, seek advice from either your project supervisor or Moog Helpline.",The text recommends consulting with a project supervisor or Moog Helpline prior to using oversampling.,"Prior to oversampling use, it's advised to get guidance from your project supervisor or Moog Helpline.",Seeking consultation from a project supervisor or Moog Helpline is suggested before employing oversampling.
+2,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",How is the absolute position information determined in encoders with increment-coded reference marks?,By counting the individual measuring increments between two reference marks.,The absolute position is found by tallying the measuring increments that lie between two reference marks.,Determining the absolute position involves counting the measuring increments separating two reference marks.,Absolute position information is derived from the count of measuring increments between adjacent reference marks.,"In encoders with increment-coded reference marks, the absolute position is calculated by increment counting between reference marks."
+3,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",What is required before an absolute reference can be created or the last selected reference point found in encoders with increment-coded reference marks?,The reference mark must be passed over.,Passing over the reference mark is necessary before establishing an absolute reference or locating the last reference point.,"Before creating an absolute reference or finding the last reference point, the encoder must pass over the reference mark.",A prerequisite for absolute reference creation or last reference point retrieval is the traversal of the reference mark.,The text states that the reference mark needs to be crossed before any absolute reference can be made or the last reference point identified.
+4,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",What is the worst-case scenario for passing over a reference mark in encoders with increment-coded reference marks?,A rotation of up to 360° may be required.,"In the worst case, the encoder might need to rotate up to a full 360 degrees to pass over the reference mark.",The maximum rotation needed to pass the reference mark could reach 360 degrees in extreme situations.,Up to a complete 360-degree rotation might be necessary to traverse the reference mark under the worst conditions.,"The text mentions that, in the worst-case scenario, passing over the reference mark could entail a 360-degree rotation."
+5,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",How do encoders with increment-coded reference marks determine the absolute reference over the shortest possible distance?,By determining the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.,The tracking electronics quickly establishes the absolute reference as soon as two neighboring reference marks are traversed with minimal rotation.,Absolute reference is swiftly identified by the electronics upon passing two adjacent reference marks within a small rotational angle.,"With minimal rotation needed to pass two adjacent reference marks, the system efficiently determines the absolute reference.",The text explains that passing two adjacent reference marks after a slight rotation allows the electronics to promptly ascertain the absolute reference.
+6,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",What is the purpose of the function described in '6.14 Overflow in multi-turn range'?,To shift the multi-turn range in order to avoid a possible overflow.,The function allows the multi-turn range to be adjusted to prevent overflow occurrences.,Avoiding potential overflow by shifting the multi-turn range is the function's primary goal.,Its main purpose is to enable the multi-turn range's relocation to circumvent overflow.,"As per the text, this function is designed to shift the multi-turn range, thereby preventing overflow."
+7,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",For which encoder channels is the overflow avoidance function available?,For encoder channels 1 and 3.,The function is accessible for both encoder channel 1 and encoder channel 3.,Encoder channels 1 and 3 are the ones that can utilize the overflow avoidance feature.,Availability of the overflow prevention function is limited to encoder channels 1 and 3.,The text specifies that the overflow avoidance function is provided for encoder channels 1 and 3 only.
+8,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",What is the unit for the parameters P 547[0] and P 584[0] as mentioned in the text?,Increments.,The parameters P 547[0] and P 584[0] are measured in increments.,Increments serve as the unit of measurement for parameters P 547[0] and P 584[0].,The text indicates that the unit for these parameters is increments.,"Parameters P 547[0] and P 584[0] have their values expressed in increments, according to the text."
+9,msd_servo_drive.txt,46,5fc38d99334e2c36450c5a5e01f76b46df626ad1fb51595e04f6e2008277595f,"If the oversampling units are used, it must always be certain that the encoder does not dramatically exceed the specified limit frequencies.
+
+Before using oversampling, consult with your project supervisor or the Moog Helpline.
+
+# 6.13 Increment-coded reference marks
+
+In the case of encoders with increment-coded reference marks, multiple reference marks are distributed evenly across the entire travel distance. The absolute position information, relative to a specific zero point of the measurement system, is determined by counting the individual measuring increments between two reference marks. The absolute position of the scale defined by the reference mark is assigned to precisely one measuring increment. Before an absolute reference can be created or the last selected reference point found, the reference mark must be passed over. In the worst-case scenario this requires a rotation of up to 360°. To determine the reference position over the shortest possible distance, encoders with increment-coded reference marks are supported (e.g. HEIDENHAIN ROD 280C).
+
+The reference mark track contains multiple reference marks with defined increment differences. The tracking electronics determines the absolute reference when two adjacent reference marks are passed over after just a few degrees of rotation.
+
+# Image 6.13: Schematic view of circular graduations with increment-coded reference
+
+|Number of pulses (P 542)|Number of reference marks|Basic increment G Nominal Increment A (P 610)|Basic increment G Increment-coded reference measure B, large increment (1001 lines): P 611[0] -|
+|---|---|---|---|
+|18 x 1000 lines|18 basic marks + 18 coded marks = Σ 36|Reference measure A = 1000 lines corresponding to 20°|Reference measure B = 1001 lines|
+
+Zero point: Parameter P 542[0] - ENC_CH1_Lines is used to enter the number of lines (e.g. 18 x 1000). A sector increment difference of +1, +2, +3 and +4 is supported. One mechanical revolution is precisely one whole multiple of the basic increment A.
+
+# Legend for Schematic view of circular graduations with increment-coded reference marks
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 105
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# 6.14 Overflow in multi-turn range
+
+With this function the multi-turn range can be shifted in order to avoid a possible overflow. The function is available for encoder channels 1 and 3.
+
+# Example
+
+If a portion of the travel distance is to the left of the threshold (MT Base), it is appended to the end of the travel range (to the right of the 2048) via parameter P 547[0] - ENC_CH1_MTBase for encoder channel 1 and P 584[0] - ENC_CH3_ for encoder channel 3 (unit: increments).
+
+For more information see Section ""Main parameters for encoder channel Ch1"" on page 60 and Section ""Sin/Cos incremental encoders with absolute value interface"" on page 65.
+
+# Image 6.14: Schematic diagram of a linear scale
+
+- ① Pitch periods (TP): (P 542[0] - ENC_CH1_Lines)
+- ② Reference marks
+- ③ Increment-coded reference measure A (small reference mark interval) (P 610[0] - ENC_CH1 Nominalinkrement A)
+- ④ Increment-coded reference measure B (large reference mark interval) (P 611[0] - ENC_CH1 Nominalinkrement B)
+
+# Legend for Schematic diagram of a linear scale
+
+# Homing methods for increment-coded encoders
+
+- l Method -6: Increment-coded encoders with negative direction of rotation
+- l Method -7: Increment-coded encoders with positive direction of rotation
+
+# Image 6.15: Multi-turn range shifting
+
+# 6 Encoder
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|547|0 ENC_CH1_MTBase| |Definition of point of discontinuity in multi-turn range|
+|584|0 ENC_CH3_MTBase| |Definition of point of discontinuity in multi-turn range|
+
+To enable evaluation for the zero pulse test, P 541/P 571 = ON (1) is set. On the oscilloscope it can then be depicted with the measurement variables CH1/3_Np. ",How can the zero pulse test evaluation be enabled according to the text?,By setting P 541/P 571 = ON (1).,Enabling the zero pulse test evaluation requires setting P 541/P 571 to ON (1).,The text states that setting P 541/P 571 to ON (1) activates the zero pulse test evaluation.,"To enable zero pulse test evaluation, one must set P 541/P 571 to the ON (1) position.","Activation of zero pulse test evaluation is achieved by configuring P 541/P 571 as ON (1), as mentioned in the text."

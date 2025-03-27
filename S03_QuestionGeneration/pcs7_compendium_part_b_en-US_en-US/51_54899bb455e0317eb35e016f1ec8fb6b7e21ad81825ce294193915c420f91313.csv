@@ -1,0 +1,1271 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",What is the purpose of the 'S7 F Systems Migration Tool'?,The 'S7 F Systems Migration Tool' is used to migrate existing projects with configurations for 'Safety Data Write' (SDW) and fail-safe acknowledgment via the 'F_QUITES' block to configurations with 'Secure Write Command' (SWC).,It facilitates the migration from 'Safety Data Write' and 'F_QUITES' configurations to 'Secure Write Command' configurations by automatically replacing specific blocks with their SWC counterparts.,"To transition projects from using 'F_CHG_BO', 'F_CHG_R', and 'F_QUITES' blocks to their corresponding SWC solutions, ensuring updated safety program configurations.","The tool automates the replacement of legacy safety data write and acknowledgment blocks with secure write command blocks, streamlining the migration process.","Designed for updating safety-related configurations, the tool replaces 'F_QUITES' and similar blocks with SWC solutions, affecting the safety program's signature."
+1,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",Where can the 'S7 F Systems Migration Tool' be found?,The tool is available as 'S7FMigrationTool.exe' in a zip file on the installation CD in the 'Options\S7FMigrationTool' directory.,"On the installation CD, specifically within the 'Options\S7FMigrationTool' folder, as a zip file named 'S7FMigrationTool.exe'.","It can be located in the 'Options\S7FMigrationTool' directory on the installation CD, packaged in a zip file.",The executable 'S7FMigrationTool.exe' is stored in a zip file located in the 'Options\S7FMigrationTool' path on the installation CD.,"Found in the 'Options\S7FMigrationTool' folder of the installation CD, the tool comes as a zip file containing 'S7FMigrationTool.exe'."
+2,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",What blocks are replaced during the migration process using the 'S7 F Systems Migration Tool'?,"Blocks of types 'F_CHG_BO', 'F_CHG_R', and 'F_QUITES' are automatically replaced by their corresponding SWC solutions.","The migration process replaces 'F_CHG_BO', 'F_CHG_R', and 'F_QUITES' blocks with SWC equivalents to update the safety program.","During migration, 'F_CHG_BO', 'F_CHG_R', and 'F_QUITES' blocks are substituted with their SWC counterparts for enhanced safety configurations.","The tool replaces legacy blocks 'F_CHG_BO', 'F_CHG_R', and 'F_QUITES' with new SWC blocks as part of the migration.","Automatic replacement of 'F_CHG_BO', 'F_CHG_R', and 'F_QUITES' blocks with SWC solutions is a key feature of the migration tool."
+3,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",What is required before starting the migration process with the 'S7 F Systems Migration Tool'?,The affected project must be closed in the SIMATIC Manager before starting the migration process.,Ensure the project is not open in the SIMATIC Manager to proceed with the migration using the tool.,Closing the project in SIMATIC Manager is a prerequisite for initiating the migration process with the tool.,"Before migration, it's necessary to have the project closed in SIMATIC Manager to avoid conflicts.","A critical step before migration is to close the project in SIMATIC Manager, ensuring a smooth process."
+4,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",What happens after selecting 'File > Migrate selected CFCs' in the 'S7 F Systems Migration Tool'?,The password for the safety program is requested to prevent unauthorized changes to the safety program.,"Upon initiating migration, the tool prompts for the safety program's password to ensure only authorized personnel can make changes.","A password prompt appears for the safety program, safeguarding against unauthorized modifications during migration.",The tool asks for the safety program password to authenticate the user before proceeding with the migration.,"To proceed, the tool requires the safety program password, ensuring that only authorized users can execute the migration."
+5,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",What options are available for placing the protocol block 'F_SWC_P' during migration?,"One option is 'One F_SWC_P device per SWC instance', allowing several simultaneous operations from the OS.",Users can choose 'One F_SWC_P device per SWC instance' to enable multiple simultaneous operations from the OS.,The 'One F_SWC_P device per SWC instance' option facilitates several concurrent operations from the OS.,Selecting 'One F_SWC_P device per SWC instance' permits multiple operations to be performed simultaneously from the OS.,"The tool offers the 'One F_SWC_P device per SWC instance' option, enhancing operational flexibility from the OS."
+6,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",What replaces the 'F_QUITES' block after a successful migration?,"The 'F_QUITES' block is replaced by 'F_SWC_P', 'F_SWC_BO', and 'SWC_QOS' blocks when the 'One F_SWC_P module per SWC instance' option is selected.","After migration, 'F_QUITES' is substituted with 'F_SWC_P', 'F_SWC_BO', and 'SWC_QOS' blocks under the specified option.","The migration tool replaces 'F_QUITES' with 'F_SWC_P', 'F_SWC_BO', and 'SWC_QOS' blocks if the appropriate option is chosen.","Successful migration results in 'F_QUITES' being replaced by a combination of 'F_SWC_P', 'F_SWC_BO', and 'SWC_QOS' blocks.","Choosing 'One F_SWC_P module per SWC instance' leads to 'F_QUITES' being replaced by 'F_SWC_P', 'F_SWC_BO', and 'SWC_QOS' blocks."
+7,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",What is the consequence of an error occurring during the migration process?,"If an error occurs, the migration is not performed, and the CFC remains in its pre-migration state.","Errors during migration halt the process, leaving the CFC unchanged from its original state.",The CFC to be migrated reverts to its state before the migration attempt if an error arises.,"Migration errors result in no changes to the CFC, preserving its pre-migration configuration.","An error during migration ensures the CFC remains as it was, with no migration effects applied."
+8,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",How can the migration log be displayed after the migration process?,The log can be displayed using the menu command 'File > Print migration log'.,"After migration, select 'File > Print migration log' from the menu to view the log.","To view the migration log, use the 'File > Print migration log' option in the tool's menu.",The migration log is accessible via the 'File > Print migration log' command post-migration.,Accessing the migration log is possible by choosing 'File > Print migration log' after the process completes.
+9,pcs7_compendium_part_b_en-US_en-US.txt,51,54899bb455e0317eb35e016f1ec8fb6b7e21ad81825ce294193915c420f91313,"First enter an appropriate simulation value. With the second BOOL value a fault at the channel driver is acknowledged. Both BOOL values are reset after 4h.
+
+|Swc MOS/SIM_F-Kanal_R|Maintenance Override Switch| |
+|---|---|---|
+|Identifier|Maintenance Override| |
+|Tag name|Value|Bypass V_MOD|
+|SIM_ON CHO2|18,81469|18,81469|
+|SIM_ON_CHO3|3,999974|3,999974|
+|SIMON_CHO4|999974|999974|
+|Fail-safe value| | | |
+|Reset time| | | |
+|Time remaining:|52s|52s| |
+
+Operation was verified and can be activated!
+
+Confirm Cancel
+
+# 7.10.4 Migration from a ""Safety Data Write""/F_QUITES configuration to the ""Secure Write Command"" configuration (SWC)
+
+# Introduction
+
+The ""S7 F Systems Migration Tool"" can be used to migrate existing projects with configurations for ""Safety Data Write"" (SDW) and fail-safe acknowledgment via the ""F_QUITES"" block in configurations with ""Secure Write Command"" (SWC).
+
+- During migration, blocks of types ""F_CHG_BO"", ""F_CHG_R"" and ""F_QUITES"" are automatically replaced by their corresponding SWC solutions.
+- The migration affects the signature of the safety program. Therefore, acceptance of changes to the plant is also required.
+
+The tool is available as ""S7FMigrationTool.exe"" in a zip file. You can find the file on the installation CD in the ""Options\S7FMigrationTool"" directory.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example for migration of an F_QUITES configuration
+
+The starting point for using the ""S7 F Systems Migration Tool"" is fail-safe acknowledgment via the ""F_QUITES"" block.
+
+|DDO_CHO|CH_DO|OB35|Fall-| |
+|---|---|---|---|---|
+| | |16#0|CHADDR|PASS|
+| | |6#0-|CHADDR_|QBAD|
+| | |1680-|CHIMF|QSIN|
+| | |16#0|CH_IMF_R|YALUE|
+| | | |QUALITY| |
+| | |SIM_|ACK_REQ| |
+| | |SIM_JOD| | |
+| |ACK_RET_OS|SIM_OI| | |
+| |QUITES|0B35| | |
+| |Ackno|8L16| | |
+| |QUT|ACK_REL| | |
+
+Close the affected project in the SIMATIC Manager during the migration. Start the file ""S7FMigrationTool.exe"" and select ""File > Open Project"" from the menu bar.
+
+057 F Systems Migration Tool
+
+Options Help
+
+Open Project Ctrl+o Protocol
+
+Start Migration for Selected CFC Plans Ctrl+Shift+c
+
+Protocol  _
+
+Exit Alt+F4
+
+After successful selection, all CFCs found are displayed in the window ""CFCs to be migrated"". In the list, clear the check boxes for the CFCs that are not to be migrated.
+
+Before you start the migration process via the menu command ""File > Migrate selected CFCs"", select how a protocol block ""F_SWC_P"" is to be placed in the ""Options"" area. If you select the option ""One F_SWC_P device per SWC instance"", several simultaneous operations are possible from the OS.
+
+Note
+
+Once the migration is started, the password for the safety program is requested, so that unauthorized persons are not able to change the safety program.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+After migration, the corresponding logs are displayed in the ""Migration log"" and ""Application log"" windows. If required, you can display the log using the menu command ""File > Print migration log"".
+
+|0 57 F Systems Migration Tool|cptins|CC Fl|Mizate|Migction Prolocdl|
+|---|---|---|---|---|
+|Ack_Req|Discronency|HS_10}|Execuig migration fcr CFC plan 'SIF_Ack'.|Ls_IOO|
+|PT_MI|~START Mioaton|ChG_BOto|(ende SWC|SIF_Ack|
+|Aonjon|Mioaon|CHG_BOto|SWC_CB|(ende SWC|
+|wd|EStartMigaton|CHG_A lo F_SwC_CR|(singk SWC_P per PSGT|Presuie|
+|CFC 'SIF_Ack'|No Mo&onteces*8""|SIF_PT_SIM|LEND Migdon|CHG_R to F_SwC_CR|
+|(sinrgk SWC|X_110|Xv_121|#START Migaon|QUITES to SwC_QOS|
+|(tingle SwC Ppa|X_13|Swc liom S7 F Syxxer: Lib V1_|Xv_140|Impoited bbck type -|
+|irto projecl|Impaited bbck type SwC_BD' lom S7 F Syclem: Lib VI_3irko prcjecl|Impoited bbck type 'SwiC_QOS'|liom Sy-ler: Lib V1 rto Nolecl|Migialirg irou bbck 'SlF_Ackiack_REI_OS'|
+|dboe|Cieded bbck 'ACK_AEI_OST'|SwC_BO'|oci 0ct uir Onc'|ArolcatonLog|
+|[[2208 201709.35 35[Execung migtalicn|CHG_BO to SwC CB (irk SwC_F per PSG] la CFC plan 'SIF_Ack_|12208.2017 09.35 35j Searchingic Eock instance:|cCnliquednpu block lype:|[2208.2017 09.35 35iFound 0Elck:|
+|CHG_BO n CFC Plen \'SIF_Ack""|[22.08.2017 03.35 35iCFC 'SIF_Ack' No rigatonfecesee|[22.08.2017 03.35 35iExecung migralicn|CHG_Rlo F_SWC_CR(ende SWC per PSGI for CFC plan SIF_Ack _.|Opbons|
+|122.08 2017 03.3535Found @Ekckecf lypeB|CHG_Rin CFC Plan SIF_Ack|122.03,2017 03.35 5ICFC 'SIF_Ack' No rigaton tecesear!|Sige SwC_ Mock|22.03,2017 03.35 S1Execung migralicn|
+|QUITES lo SWC_OOS (snde SWC_Pper PSG for CFC plan SIF_Ack' _|122.03,2017 03.35 35]Scaiching|Hockin-hnces ccnligured nput Elock types_|Sige SWC Elock per SwC instance|122.03 2017 09.35- Fond Hock|
+|Quites n CFC Plon 'SIF|2203 217 a3575| | | |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+If the migration was completed, the previously used ""F_QUITES"" block was replaced by the ""F_SWC_P"", ""F_SWC_BO"" and ""SWC_QOS"" blocks when the option ""One F_SWC_P module per SWC instance"" was selected beforehand.
+
+|AcK REI|ACX_REI_05|
+|---|---|
+|ACK_PEI_032|FIO_CHO|
+|SVC_BO|F Ck DO|
+|hutoiali|AET_SAL|
+|Cibbn|PNss_CUT|
+|CHADIR_R|QUALITC|
+|3IL I|ACE FZO|
+|SIA_Eob|SIA_c|
+|FASS_| |
+
+Note
+
+If an error occurs during the migration, the respective migration is not performed! The CFC to be migrated is then in the state it was before the migration. ",What manual is referenced for the 'S7 F Systems Migration Tool' and its version?,"The 'Compendium Part B - Process Safety (V9.0)' and 'Operating Manual, 04/2018, A5E43228905-AA' are referenced.","References include 'Compendium Part B - Process Safety (V9.0)' and the 'Operating Manual, 04/2018, A5E43228905-AA'.","The tool's documentation is found in 'Compendium Part B - Process Safety (V9.0)' and the 'Operating Manual, 04/2018, A5E43228905-AA'.",Documentation for the tool is provided in 'Compendium Part B - Process Safety (V9.0)' and the operating manual with the number A5E43228905-AA.,The 'S7 F Systems Migration Tool' is documented in 'Compendium Part B - Process Safety (V9.0)' and its operating manual dated 04/2018.

@@ -1,0 +1,971 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",What is the purpose of smoothing speeds n_kal and n_eps before feeding them into the circuit in the book 'MSD ServoDrive - DeviceHelp'?,To ensure smoother operation and better performance of the speed control circuit.,Smoothing these speeds helps in reducing noise and improving the accuracy of the control circuit.,The smoothing process is essential for minimizing fluctuations and enhancing the stability of the speed control.,"It prepares the speeds for more effective processing within the circuit, leading to optimized control dynamics.",Smoothing n_kal and n_eps is a preparatory step that contributes to the overall efficiency and reliability of the speed control system.
+1,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",How can the expanded speed control circuit be started according to the book 'MSD ServoDrive - DeviceHelp'?,By setting P 350[0] to a value of 4.,Initiate the circuit by adjusting the control parameter P 350[0] to '4' for Kalman.,The circuit starts when the SEL_ObserverMethod parameter (P 350[0]) is configured to 4.,Setting the parameter P 350[0] to '4' activates the expanded speed control circuit using the Kalman method.,"Activation requires configuring P 350[0] as '4', which selects the Kalman filter for the expanded speed control."
+2,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",What role does the inductance difference play in sensorless control as described in 'MSD ServoDrive - DeviceHelp'?,It allows the Kalman filter to determine the motor's position.,The inductance difference is crucial for the Kalman filter to estimate position without physical sensors.,"By analyzing the inductance difference, the Kalman filter enables accurate position detection in sensorless control.",Sensorless control relies on the inductance difference for the Kalman filter to compute the motor's position.,The Kalman filter uses the inductance difference to facilitate position determination in a sensorless setup.
+3,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",What must be set accurately for sensorless operation of motors with marked saliency in 'MSD ServoDrive - DeviceHelp'?,The total moment of inertia from the motor and connected load.,Accurate setting of the combined moment of inertia of the motor and its load is essential.,"For optimal sensorless operation, the system's total moment of inertia must be precisely configured.",The key requirement is the accurate determination of the total moment of inertia affecting the motor.,Precise adjustment of the motor and load's combined moment of inertia is necessary for effective sensorless control.
+4,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",How is the Kalman filter configured for sensorless control in 'MSD ServoDrive - DeviceHelp'?,By automatically or manually configuring noise covariance matrices Q and R and setting specific parameters.,Configuration involves setting P 783[0] to 6 for automatic setup or to 3 for a general initialization routine.,"Steps include adjusting control parameters and, optionally, manually configuring the test signal generator.",The process requires setting encoder channel 4 parameters and possibly manual test signal adjustments.,Configuring the Kalman filter entails parameter adjustments for noise matrices and test signal specifications.
+5,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",What function can be activated to simplify the encoderless control commissioning process in 'MSD ServoDrive - DeviceHelp'?,A function to calculate the position difference between encoderless control and a real encoder.,Activating a comparison function between encoderless control and actual encoder data simplifies commissioning.,The process is eased by enabling a feature that contrasts encoderless control positions with those from a real encoder.,Simplification is achieved through a function that evaluates discrepancies between virtual and physical encoder outputs.,Commissioning is streamlined by utilizing a function that assesses position variances between sensorless and encoder-based controls.
+6,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",What are the recommended settings for the test signal generator in 'MSD ServoDrive - DeviceHelp'?,"Sinusoidal test signal in d axis, P 792[09] = 1, P 792[19] = 500 Hz, among others.",Recommendations include a 500 Hz sinusoidal signal and specific current and speed percentages.,Optimal settings involve a d-axis sinusoidal signal at 500 Hz with defined current and speed thresholds.,The guide suggests a sinusoidal test signal configuration with precise frequency and amplitude parameters.,"For the test signal generator, a sinusoidal d-axis signal at 500 Hz with set current and speed values is advised."
+7,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",What is the significance of setting P 350[0] to '4' in 'MSD ServoDrive - DeviceHelp'?,It starts the expanded speed control circuit using the Kalman filter.,This setting initiates the expanded control circuit with Kalman filter-based speed observation.,"Choosing '4' enables the expanded speed control feature, leveraging the Kalman method for enhanced dynamics.","The value '4' activates the expanded speed control circuit, optimizing performance through Kalman filtering.","Setting P 350[0] to '4' engages the expanded speed control circuit, improving dynamic control with the Kalman filter."
+8,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",How is sensorless control activated for asynchronous motors in 'MSD ServoDrive - DeviceHelp'?,By setting the motor type to asynchronous and configuring specific parameters including encoder and control settings.,"Activation involves selecting the motor type, entering motor details, and adjusting encoder and control parameters.","The process includes setting the motor as asynchronous, specifying encoder settings, and configuring control parameters.","For asynchronous motors, sensorless control is enabled through a series of parameter adjustments and motor identification.","Enabling sensorless control for asynchronous motors requires motor type selection, parameter entry, and specific encoder and control configurations."
+9,msd_servo_drive.txt,36,cd9a6c3d43aee09fd8ea49d961e129d8ce140335b4efd00b1c6c207c901b75b1,"Before being fed into the circuit, speeds n_kal and n_eps can each be smoothed with a filter (P 351[0] for n_eps and P 339[0] for n_kal). The expanded speed control circuit can be started with P 350[0] (“4” => Kalman).
+
+The inductance difference is important when it comes to sensorless control, as the Kalman filter can determine the position based on the inductance difference in.
+
+Image 6.10: Expanded speed controller layout
+
+Measurements have shown that, when using the expanded control circuit, motors with a marked saliency can be operated in a sensorless manner even without a test signal.
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 96
+
+In combination with a test signal when the motor is stopped. In addition, the total moment of inertia resulting from the motor and the connected load must be set as accurately as possible.
+
+The encoder communications will be used to calculate and pass the actual speed and actual position. Accordingly, in order to select the sensorless method, a value of 2 must be set for encoder channel 4 in the selector (P 508[0] - ENC_CH4_Sel = 2), and a value of 4 must be set for P 520[0] - ENC_MCon, P 521[0] - ENC_SCon and P 522[0] - ENC_PCon.
+
+The Kalman filter needs to be configured further by following the steps below:
+
+|Step|Action|
+|---|---|
+|1|Automatically configure noise covariance matrices Q and R by setting the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 6.|
+| |Manually configure the test signal generator:|
+| |Recommendation: Sinusoidal test signal in d axis|
+| |P 792[09] = 1|
+| |P 792[19] = 500 Hz|
+| |P 792[2] = P 792[9] = 10% of rated motor current|
+| |P 792[79] = 15% of rated motor speed|
+| |P 792[89] = 5% of rated motor speed|
+| |P 792[9] = 30% of rated motor current|
+| |Set the other values to 0|
+|2|Or set the control parameter for encoder channel 4 (P 783[0] - ENC-CH4-Ctrl) to a value of 3, which will trigger a general initialization routine in which steps 1 and 2, as well as encoder initialization, will be automatically carried out based on the motor parameters.|
+
+# Table 6.30: Configuring the Kalman filter for sensorless control
+
+# Step
+
+# Action
+
+In order to make the encoderless control commissioning process easier, a function used to calculate the position difference between encoderless control and a real encoder can be activated. To use this function, the encoder channel that will be used for the comparison must be selected in P 797[0] - ENC_CH4_Kalman_Compare.
+
+As described in Section ""Auto commutation"" on page 92 or Recommendation:
+
+- P 390[0] = 1
+- P 392[0] = 500
+- P 392[1] = 500
+- P 392[2] = 500
+- P 392[3] = 500
+- P 393[0] = Rated motor current
+- P 393[1] = Rated motor current
+
+# Mode 2
+
+Parameters 792.1 and 792.2 are used as the measuring frequency and measuring amplitude (see step 2)
+
+Recommendation:
+
+- P 794[0] = 100 ms
+- P 794[1] = 50% of rated motor current
+- P 794[2] = 250 ms
+
+Starting the expanded speed control circuit is not absolutely necessary, but will result in control with better dynamic performance. The circuit can be started by setting P 350[0] - SEL_ObserverMethod to a value of 4. P 339 - CON_SCON_Kalman can be used for tuning purposes. If necessary, adjust the noise covariance matrices and the filter time constants for the expanded speed control circuit (changes will take effect in real-time).
+
+# Table 6.30: Configuring the Kalman filter for sensorless control (continue)
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 97
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 6.8.2.1 Activation of sensorless control for asynchronous motors
+
+Proceed as follows:
+
+|No.|Activity|
+|---|---|
+|1|Set motor type (P 450[0] - MOT_Type) to “2 (ASM) = asynchronous motor”.|
+|2|Enter the motor name (P 451[0] - MOT_Name).|
+|3|Copy the motor variables from the rating plate into the appropriate input box.|
+|4|Start motor identification to identify other motor parameters. In the “Encoder selection” screen (see also section ""Encoder selection"" on page 53) under “Encoder for commutation and torque control,” set P 520[0] - ENC_MCon to “CH4(4) = virtual encoder (Channel 4)”.|
+|5|Under “virtual encoder (Channel 4)” ""Encoder selection"" set (P 508[0] - ENC_CH4_Sel) to ""SFC(8) = take values of SFC model"".|
+|6|In the “Basic Control Settings” screen (see section “Basic settings” on page 101) set “Speed filter TF” (P 351[0] - CON_SCALC_Tf) to 10 ms. In the “Asynchronous motor control settings identification” screen (see also section ""Asynchronous motor"" on page 38) enter the “Total moment of inertia” of the system (P 1516[0] - SCD_JSum). Enter a value that is too small rather than too big to avoid a tendency to oscillate. Automatic detection is not advisable due to the control dynamics and accuracy required.|
+|7|In the same screen under “Control design by stiffness” set P 1515[0] - SCD_ConDesign (Stiffness) to 10%.|
+
+# Table 6.31: Commissioning a sensorless-controlled asynchronous motor
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|351|CON_SCALC_Tf| |Speed filter|
+| |0|ms|Filter time const. speed control (motor)|
+| |1|ms|Filter time const. ",What is the recommended approach for entering the total moment of inertia in 'MSD ServoDrive - DeviceHelp'?,Enter a value that is too small rather than too big to avoid oscillation tendencies.,Prefer underestimating the total moment of inertia to prevent system oscillations.,It's advised to input a slightly lower value to minimize the risk of oscillatory behavior.,Choosing a smaller value for the total moment of inertia helps in maintaining control stability.,"To ensure smooth operation, the manual suggests erring on the side of a smaller total moment of inertia."

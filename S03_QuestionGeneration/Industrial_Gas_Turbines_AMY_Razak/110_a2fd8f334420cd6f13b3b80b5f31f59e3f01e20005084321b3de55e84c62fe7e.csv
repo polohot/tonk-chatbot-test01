@@ -1,0 +1,1331 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",What are the initial parameters specified for the matching process in the gas turbine performance prediction?,"The initial parameters specified are the required power output, gas turbine speed (N), compressor inlet pressure (P1), temperature (T1), and humidity.","For the matching process, the gas turbine speed (N), compressor inlet pressure (P1), temperature (T1), and humidity are specified, along with the required power output.","Specified parameters include gas turbine speed (N), compressor inlet conditions (P1, T1), humidity, and the desired power output.","The matching process begins with specifying the gas turbine's speed (N), compressor inlet pressure (P1) and temperature (T1), humidity, and the required power output.","Initial specifications for the process are the required power output, gas turbine speed (N), and compressor inlet conditions (pressure P1, temperature T1, and humidity)."
+1,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",How are the gas constant R and the isentropic index γ determined in the matching process?,The gas constant R and the isentropic index γ are determined using the compressor inlet temperature (T1) and humidity.,Temperature (T1) and humidity at the compressor inlet are used to calculate the gas constant R and isentropic index γ.,R and γ are found based on the compressor inlet's temperature (T1) and humidity levels.,Determination of R and γ involves the use of the specified compressor inlet temperature (T1) and humidity.,The values of R and γ are derived from the given compressor inlet temperature (T1) and humidity.
+2,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",What simplifications are made regarding inlet and exhaust losses and turbine blade cooling air requirements?,"Inlet and exhaust losses are ignored, making P4 equal to P1, and turbine blade cooling air requirements are also ignored for simplicity.",The process simplifies by assuming no inlet and exhaust losses (P4 = P1) and disregarding turbine blade cooling air needs.,"Simplifications include ignoring inlet and exhaust losses, hence P4 equals P1, and not accounting for turbine blade cooling air.","For simplicity, the model ignores inlet and exhaust losses (setting P4 = P1) and omits turbine blade cooling air requirements.",The analysis simplifies by neglecting inlet and exhaust losses (thus P4 = P1) and turbine blade cooling air demands.
+3,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",What is the first step in the off-design performance prediction of a gas turbine?,"The first step is to estimate the compressor inlet flow (W1), pressure ratio (P2), and turbine entry temperature (T3).","Step 1 involves estimating the compressor inlet flow (W1), pressure ratio (P2), and combustion exit temperature (T3).","Initially, estimates are made for the compressor inlet flow (W1), pressure ratio (P2), and turbine entry temperature (T3).","The process starts with estimating the compressor's inlet flow (W1), pressure ratio (P2), and the temperature at turbine entry (T3).","First, the compressor inlet flow (W1), pressure ratio (P2), and turbine entry temperature (T3) are estimated."
+4,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",How is the compressor exit mass flow pressure calculated?,The compressor exit mass flow pressure (P2) is calculated as P1 multiplied by the pressure ratio (P2).,"P2, the exit mass flow pressure, is found by multiplying the inlet pressure (P1) by the pressure ratio (P2).","To find P2, multiply the compressor inlet pressure (P1) by the estimated pressure ratio (P2).",Calculation of P2 involves multiplying the inlet pressure (P1) with the pressure ratio (P2).,P2 is determined by the product of P1 and the pressure ratio (P2).
+5,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",What equation is used to calculate the compressor power absorbed (cpow)?,"The compressor power absorbed is calculated using cpow = W1 × cpa(T2 – T1), where cpa is the specific heat at constant pressure between T1 and T2.","cpow is determined by the formula W1 × cpa(T2 – T1), with cpa being the specific heat at constant pressure from T1 to T2.","Using the equation cpow = W1 × cpa(T2 – T1), where cpa is the specific heat at constant pressure for the temperature range T1 to T2.","The formula for cpow is W1 multiplied by cpa and the temperature difference (T2 – T1), cpa being the specific heat at constant pressure between T1 and T2.","Compressor power absorbed (cpow) is computed as W1 × cpa(T2 – T1), with cpa representing the specific heat at constant pressure across T1 to T2."
+6,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",How is the fuel flow (mf) calculated in the combustor step?,"Fuel flow (mf) is calculated using the temperature rise (T3–T2), combustor inlet temperature (T2), and combustion charts.","The calculation of mf involves the temperature increase (T3–T2), inlet temperature (T2), and refers to combustion charts for determination.","mf is found by considering the temperature difference (T3–T2), the inlet temperature (T2), and consulting combustion charts.","To calculate mf, use the temperature rise (T3–T2) and combustor inlet temperature (T2) along with combustion charts.","The fuel flow (mf) is determined based on the temperature rise (T3–T2), combustor inlet temperature (T2), and combustion charts."
+7,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",What is the significance of the turbine inlet non-dimensional flow in the turbine step?,The turbine inlet non-dimensional flow is crucial for determining the turbine's performance characteristics and efficiency.,It plays a key role in assessing the turbine's operational parameters and isentropic efficiency.,This parameter is essential for interpolating the turbine's performance from its characteristics.,The turbine inlet non-dimensional flow is vital for evaluating the turbine's efficiency and operational behavior.,It is important for understanding the turbine's performance and efficiency through characteristic interpolation.
+8,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",What checks are performed to ensure the accuracy of the turbine performance prediction?,Checks include comparing calculated turbine inlet non-dimensional flows and ensuring the net turbine power output matches the required power.,Accuracy is verified by matching calculated and characteristic-derived non-dimensional flows and confirming power output requirements are met.,The process involves verifying agreement between calculated non-dimensional flows and ensuring the power output aligns with needs.,Ensuring the turbine's non-dimensional flows agree and the power output meets the specified requirements are key checks.,Checks involve non-dimensional flow agreement and confirming the turbine's power output satisfies the required specifications.
+9,Industrial_Gas_Turbines_AMY_Razak.txt,110,a2fd8f334420cd6f13b3b80b5f31f59e3f01e20005084321b3de55e84c62fe7e,"7.4, the matching process is as follows. The required power output, gas turbine speed, N, compressor inlet pressure, P1, temperature, T1, and humidity are specified. The temperature and humidity are used to determine gas constant R and the isentropic index γ, as discussed in Chapter 2. We shall ignore inlet and exhaust losses and therefore P4 = P1. For simplicity we shall also ignore any turbine blade cooling air requirements on engine performance.
+
+# Step 1 – Estimates
+
+# Step 1.1
+
+Estimate the compressor inlet flow W1, pressure ratio P2 and combustion exit temperature or turbine entry temperature, T3.
+
+# Step 2 – Compressor
+
+# Step 2.1
+
+Calculate the compressor inlet non-dimensional flow W1, pressure ratio P2.
+
+# Step 2.2
+
+Using the compressor non-dimensional flow and pressure ratio P2/P1 determine the compressor non-dimensional speed γ N1 and compressor isentropic efficiency η1-2 by interpolation using the compressor characteristic (Fig. 7.1).
+
+# Step 2.3
+
+Calculate the compressor exit mass flow pressure, temperature and speed using the following, ignoring bleeds:
+
+- W2 = W1 [7.1]
+- P2 = P1 × P2 [7.2]
+- T2 = T1 + (η1-2 (T2 - T1))
+⎛⌈ P2 ⌉γa–1 ⎜
+⎝ P1 ⎠ [7.3]
+
+# Off-design performance prediction
+
+N= γ N1 [7.4]
+
+1 1 × R1 × T1 γ1 R T
+
+where γa is the mean isentropic index between T1 and T2. γ1 and R1 are the isentropic index and gas constant at inlet to the compressor.
+
+# Step 2.4
+
+Calculate the compressor power absorbed (cpow) using:
+
+cpow = W1 × cpa(T2 – T1) [7.5]
+
+Where cpa is the specific heat at constant pressure between T1 and T2.
+
+# Step 3 – Combustor
+
+# Step 3.1
+
+Using the estimated combustor exit temperature or turbine entry temperature, T3, calculate the fuel flow, mf, using the temperature rise, T3–T2, combustor inlet temperature T2 and the combustion charts (Fig. 2.17 in Chapter 2).
+
+# Step 3.2
+
+Calculate the combustor exit pressure, P3 using Equations 7.6 and 7.7.
+
+ΔP23 = PLF × ⌈ W2 R T /γ ⌉2 ⎛ ⌈ T ⌉ ⎜
+
+where PLF is the power loss factor, K1 and K2 are the cold loss (which corresponds to the combustion pressure loss due to friction), and hot loss or fundamental loss (which corresponds to the combustion pressure loss due to heat addition) of the combustor (See Section 6.7 in Chapter 6):
+
+P3 = P2 ⌈ ΔP23 ⌉ [7.6]
+
+P3 = P2 × (1 - P2)
+
+# Step 3.3
+
+Calculate the exit mass flow. In the absence of bleeds:
+
+W3 = W2 + mf [7.8]
+
+# Step 4 – Turbine
+
+# Step 4.1
+
+Calculate the turbine inlet non-dimensional flow, pressure ratio and non-dimensional speed W3 R T /γ P N, respectively.
+
+# Step 4.2
+
+Using the turbine pressure ratio P3 and the calculated non-dimensional speed γ N3 in step 4.1, determine the turbine inlet non-dimensional speed.
+
+# Industrial gas turbines – principles of performance
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋ and isentropic efficiency η3₄ by interpolation using the turbine characteristic (Figs. 7.2 and 7.3).
+
+# Step 4.3
+
+Calculate the turbine exit temperature and power output using:
+
+T4 = T3 – T1 × η34 ⌈ P4 ⌉γg–1 ⎜
+
+⎜ P3 ⎝
+
+tpow = W3 × cpg(T3 – T4) [7.10]
+
+where γg and cpg are the mean isentropic index and specific heat at constant pressure between T3 and T4.
+
+# Step 5 – Check 1
+
+# Step 5.1
+
+Compare the calculated turbine inlet non-dimensional flows
+
+⌈ W3 R T /γ ⌉
+
+⌊ 3 3 3 ⌋
+
+⎜ P3 ⎝
+
+in step 4.1 and the turbine inlet non-dimensional flow determined from the turbine characteristic, in step 4.2. If they do not agree, return to step 3, estimate a different T3 and repeat to step 5.1 until the two values for turbine inlet non-dimensional flows agree.
+
+# Step 6 – Check 2
+
+# Step 6.1
+
+Calculate the net turbine power output, pnet using
+
+pnet = tpow – cpow [7.11]
+
+# Step 6.2
+
+Compare the calculated turbine power output with the required power output from the gas turbine. If they do not agree, return to step 2, estimate a different compressor pressure ratio ⌈ P2 ⌉ and repeat to step 6.2 until the powers agree.
+
+# Step 7 – Check 3
+
+# Step 7.1
+
+Compare the compressor speed, N1 calculated in step 2 with the speed required by the load. If they do not agree, estimate a different compressor inlet mass flow, W1, return to step 2 and repeat to step 7.1 until the speeds agree.
+
+# 7.3 Off-design performance prediction of a two-shaft gas turbine with a free power turbine
+
+Gas turbines employing free power turbines are widely used where the speed of the load changes significantly. Applications where the load speed changes are pumps, gas compressors and fixed pitch propellers used in marine propulsion. They are generally designed for smaller power ranges (up to about 50 MW) compared with single shaft gas turbines and are also employed in power generation when no single shaft gas turbine is available in this power range. A schematic representation of a two-shaft gas turbine using a free power turbine is shown in Fig. 7.5. There is no mechanical coupling between the gas generator turbine and the power turbine but there exists a strong fluid or aerodynamic coupling between the gas generator turbine and the power turbine.
+
+Air enters the compressor at station 1 as shown in Fig. ",What applications are two-shaft gas turbines with a free power turbine particularly suited for?,"They are ideal for applications with significant load speed changes, such as pumps, gas compressors, and marine propulsion.","Two-shaft gas turbines with free power turbines are best for variable speed loads like pumps, compressors, and marine propellers.","Applications include those requiring speed variation, such as pumps, gas compressors, and fixed pitch propellers in marine use.","They are suited for loads with changing speeds, including pumps, gas compressors, and marine propulsion systems.","These turbines are particularly designed for applications where load speed varies, such as in pumps, compressors, and marine propulsion."

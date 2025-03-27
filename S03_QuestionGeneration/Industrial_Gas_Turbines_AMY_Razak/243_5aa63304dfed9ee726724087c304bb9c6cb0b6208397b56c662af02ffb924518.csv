@@ -1,0 +1,821 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","What are the two modes of operation for the single-shaft gas turbine simulator described in 'Gas Turbine Performance, 2nd edition'?","The first mode keeps the variable inlet guide vane (VIGV) fully open during normal power output, while the second modulates the VIGV to maintain exhaust gas temperature (EGT) on its limiting value as power output decreases.",Mode 1: VIGV remains fully open in the normal power output range. Mode 2: VIGV is adjusted to keep EGT at its limit when power output is reduced.,"Two operational modes exist: one with VIGV fully open during standard operation, and another where VIGV modulation controls EGT as power diminishes.","In the book, the simulator operates in two ways: fully open VIGV during normal power and modulated VIGV to control EGT at lower powers.","The simulator's modes include maintaining VIGV fully open or modulating it to sustain EGT at set points, depending on power output."
+1,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","How does the variable inlet guide vane (VIGV) affect the starting power requirements of a single-shaft gas turbine according to 'Gas Turbine Performance, 2nd edition'?","Closing the VIGV during starting reduces airflow, thereby lowering the power needed to start the gas turbine.","VIGV closure at startup decreases compressor airflow, which in turn reduces the starting power demands.","By modulating the VIGV to close during low power operations, the simulator demonstrates reduced starting power requirements due to less airflow.",The book explains that VIGV's role in minimizing starting power involves restricting airflow through compressor closure during initial phases.,"Reduction in starting power is achieved by the VIGV's ability to limit airflow when closed, as detailed in the simulator's operation."
+2,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","What are the set point temperatures for EGT limit and VIGV modulation in the single-shaft gas turbine simulator from 'Gas Turbine Performance, 2nd edition'?","The EGT limit is set at 825 K, and the set point temperature for VIGV modulation is 650 K.","EGT limit: 825 K; VIGV modulation set point: 650 K, as specified in the simulator settings.",825 K for EGT limit and 650 K for VIGV modulation temperature are the critical thresholds used.,"In the simulator, maximum EGT is 825 K, while VIGV modulation aims to maintain EGT at 650 K.",The book details 825 K as the EGT ceiling and 650 K as the target for VIGV adjustment.
+3,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","How does VIGV operation contribute to dry low emission (DLE) combustion systems in single-shaft gas turbines as per 'Gas Turbine Performance, 2nd edition'?","VIGV operation maintains a constant air-fuel ratio, keeping combustion temperatures within limits that minimize NOₓ and CO emissions, akin to DLE systems.","By ensuring stable combustion temperatures (1700 K to 1900 K) through constant air-fuel ratios, VIGV operation mimics DLE combustion effects.",The book notes that VIGV's role in sustaining consistent combustion temperatures aids in achieving low emissions without multi-staged combustion.,"VIGV modulation facilitates DLE combustion by maintaining optimal temperatures, reducing the need for complex combustion systems.",Achieving DLE standards is possible with VIGV by controlling the combustion environment to limit harmful emissions.
+4,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","What is the ISO rating and maximum power limit of the industrial gas turbine modeled in the single-shaft simulator in 'Gas Turbine Performance, 2nd edition'?",The simulator models a turbine with an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures.,"ISO rating: ~40 MW; max power: 45 MW under colder conditions, as described for the simulator's base turbine.","Approximately 40 MW under ISO conditions, peaking at 45 MW in lower temperatures, defines the turbine's capacity.","The book specifies the simulated turbine's standard output as 40 MW, with a 45 MW ceiling in cold ambients.",40 MW ISO and up to 45 MW maximum are the power specifications for the simulator's reference turbine.
+5,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","How does ambient temperature affect the compressor non-dimensional speed in the single-shaft gas turbine simulator according to 'Gas Turbine Performance, 2nd edition'?","A decrease in ambient temperature increases the compressor non-dimensional speed, N₁/√T₁, due to the constant electrical generator speed.","Lower ambient temperatures raise N₁/√T₁, as the compressor speed remains unchanged while T₁ drops.",The book explains that reduced ambient temperatures lead to higher non-dimensional speeds because N₁ stays constant and T₁ falls.,"With generator speed fixed, cooler ambients boost the compressor's non-dimensional speed metric.","Simulator data shows that as T₁ decreases, N₁/√T₁ increases, reflecting the inverse relationship between temperature and non-dimensional speed."
+6,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","What role does the variable inlet guide vane (VIGV) play in improving part-load performance in regenerative cycles and combined cycle plants as mentioned in 'Gas Turbine Performance, 2nd edition'?","VIGV maintains constant maximum EGT during part-load, enhancing thermal efficiency by preserving the T₃/T₁ ratio.","In regenerative and combined cycles, VIGV's EGT regulation at part-load ensures efficient operation by stabilizing temperature ratios.",The book highlights VIGV's contribution to part-load efficiency in these cycles through consistent EGT management.,"By keeping EGT steady at reduced outputs, VIGV aids in maintaining high efficiency in both regenerative and combined setups.",VIGV's ability to control EGT under part-load conditions is key to optimizing performance in advanced cycle configurations.
+7,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","What are the implications of increasing the compressor pressure ratio in the single-shaft gas turbine simulator from 'Gas Turbine Performance, 2nd edition'?","Higher compressor pressure ratios elevate turbine entry temperatures and improve thermal efficiency, as detailed in the simulator's findings.","The book notes that increased pressure ratios lead to greater T₃ and efficiency, aligning with flow compatibility requirements.",Raising the pressure ratio enhances both the turbine's entry temperature and the overall cycle efficiency.,"Simulator results demonstrate that higher pressure ratios boost T₃ and efficiency, crucial for performance optimization.","Elevated compressor pressure ratios are shown to improve thermal efficiency and increase T₃, according to the simulation data."
+8,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","How does the single-shaft gas turbine simulator model the effect of ambient temperature changes on engine performance in 'Gas Turbine Performance, 2nd edition'?",The simulator linearly varies ambient temperature from +35°C to -30°C over 3600 seconds to study performance impacts under constant high power demand.,"By simulating a linear ambient temperature shift over an hour, the model assesses performance at steady high power settings.",A gradual temperature change from hot to cold conditions allows the simulator to evaluate engine behavior at fixed high loads.,"The book describes using a quasi-steady-state model to explore ambient temperature effects, holding power demand constant at 60 MW.","Through controlled ambient variation, the simulator examines performance limits like EGT and power under changing temperatures."
+9,Industrial_Gas_Turbines_AMY_Razak.txt,243,5aa63304dfed9ee726724087c304bb9c6cb0b6208397b56c662af02ffb924518,"Gas Turbine Performance, 2nd edition, Walsh, P. and Fletcher, P., Blackwell Publishing (2004).
+
+# Part III
+
+# Simulating the performance of a single-shaft gas turbine
+
+In Part II the two-shaft gas turbine simulator was used to illustrate the performance, turbine life usage and engine emissions of a two-shaft gas turbine operating with a free power turbine. The simulator was also used to illustrate the behaviour and performance of the engine control system applied to such an engine.
+
+In Part III the single-shaft gas turbine simulator will be used to illustrate these effects and repeat many of the simulations carried out in Part II. The single-shaft gas turbine simulator can be operated in two modes and both modes of operation will be considered in this part of the book. The first of these modes refers to the variable inlet guide vane (VIGV) remaining fully opened during the normal power output range, while in the second mode of operation the VIGV is modulated to maintain the exhaust gas temperature (EGT) on its limiting value as the power output from the gas turbine is reduced. Control of the VIGV is usually achieved using a PID loop as discussed in Chapter 10, Section 10.4.2 and will also be discussed later in Chapter 20.
+
+Unlike the case of the two-shaft gas turbine operating with a free power turbine, there are no unique running lines for a single-shaft gas turbine. The only exception is the variation of the compressor inlet non-dimensional flow with its speed, particularly if the compressor flow speed lines are vertical on the compressor characteristic. This was discussed in Chapter 8.
+
+429
+
+# 430 Industrial gas turbines – single-shaft
+
+# Simulating the effects of ambient temperature on engine performance, emissions and turbine life usage
+
+The single-shaft gas turbine simulator is based on an industrial gas turbine having an ISO rating of about 40 MW and a maximum power limit of 45 MW at low ambient temperatures. As already stated, single-shaft gas turbines are widely used in power generation and therefore the driven load is assumed to be an electrical generator that operates at the synchronous speed determined by the frequency. Thus the gas turbine also operates at a constant speed as the load and ambient conditions change.
+
+The reader is encouraged to run the simulations discussed below to become more familiar with concepts of engine performance, turbine life usage, gas turbine emissions and the behaviour of the engine control system. The single gas turbine simulator user guide gives details on how to use the simulator.
+
+# 16.1 Configuration of the single-shaft simulator
+
+The configuration of the single-shaft gas turbine simulator is similar to that shown in Fig. 2.3 except that the compressor is fitted with VIGV. One of the purposes of the VIGV is to reduce gas turbine starting power requirements (mode 1 as discussed previously, where the fuel flow is varied to maintain the generator output and the VIGV is modulated to maintain the exhaust gas temperature). This is achieved by closing the inlet guide vane during starting and low power operation. The closure of the inlet guide vane results in a reduction in airflow rate through the compressor, thus reducing the starting power demands. The normal operating power range of the gas turbine is between 60% and 100% when the VIGV is fully open. Control of the VIGV is achieved by maintaining the exhaust gas temperature (EGT) on a set point by modulating the inlet guide vane. Thus, when the EGT is below the set point temperature, the guide vane will be fully closed in an attempt to maintain the EGT on the set point, hence reducing starting power requirements. When the EGT is above the set point temperature, the inlet guide vane will therefore be fully opened, which corresponds to the normal operating power range.
+
+# Industrial gas turbines – single-shaft
+
+Thus, the set point temperature for modulating the inlet guide vane needs to be below the maximum exhaust gas temperature limit (EGT limit). The values for the EGT limit and the (exhaust gas) set point temperature for VIGV modulation used by the simulator correspond to 825 K and 650 K respectively.
+
+When regenerative cycles are employed in single-shaft gas turbines, the use of the VIGV is useful in maintaining constant maximum EGT during part-load operation. This results in a much improved thermal efficiency at part-load operation due to near constant maximum to minimum cycle temperature ratio, T₃/T₁, at these operating conditions. Similarly, the use of VIGV improves the part-load performance of combined cycle plants. Maximum EGT operation can be achieved at part-load by setting the temperature set point for variable inlet guide vane operation to the maximum EGT limit (i.e. the EGT for VIGV operation is increased from 650 K to 825 K) – mode 2 as discussed previously. Up to about 65% reduction in power output can be achieved at the maximum EGT by the use of VIGV.
+
+With such VIGV operation, the air–fuel ratio remains approximately constant, resulting in approximately constant combustion temperature with the change in power output. In Section 6.11 it was seen that, if the combustion temperature is kept within certain limits (1700 K to 1900 K), the emissions of NOₓ and CO are small and this approach is the basis of dry low emission (DLE) combustion systems. Thus the application of VIGV (mode 2 operation) in single-shaft gas turbines can achieve DLE combustion without having to resort to multi-staged combustion. In fact, such a combustion system will have similar characteristics to the variable geometry combustion system discussed in Section 6.12.
+
+# 16.2 Effect of ambient temperature on engine performance at high power
+
+The simulator can be used to investigate the effect of change in ambient temperature on engine performance. It has been stated in Part II that the simulators are based on a quasi-steady-state model, thus it is possible to subject the model to significant changes in ambient conditions. In practice, however, rapid changes in ambient conditions are not common and could lead to compressor surge.
+
+In the simulation, the ambient temperature will be changed from +35 degrees Celsius to –30 degrees Celsius linearly over a period of 3600 seconds. The power demand from the simulator will be set above the ISO rating to 60 MW throughout the simulation. This action simulates the effects of the changes in ambient temperature on engine performance when the engine continuously operates on an engine operating limit such as the EGT or.
+
+# Simulating the effects of ambient temperature on performance
+
+power limit. It should be noted that such high power demands from the generator would result in trips due to the frequency shift. However, in a simulator this can be considered as it is a convenient means of maintaining the engine on a limiting condition, such as the EGT or maximum power, as the ambient temperature changes. The ambient pressure is held constant at 1.013 Bar during the change in ambient temperature and the inlet and exhaust pressure losses are set to 100 mm water gauge. The relative humidity is also held constant at 60%. For simplicity, the gas property terms, γ, R and , will be omitted from any non-dimensional terms such as flow and speed but reference will be made to them when relevant.
+
+# 16.2.1 Trends in power, pressure and temperature ratios and compressor characteristics
+
+The gas turbine speed and thus the compressor speed, N₁, remain constant as the electrical generator speed (synchronous speed) remains constant with the change in load. The reduction of ambient temperature will therefore result in an increase in the compressor non-dimensional speed, N₁/√T₁. This is seen in Fig. 16.1, which depicts the operating point on the compressor characteristic during this ambient temperature transient.
+
+The increase in compressor non-dimensional speed will increase the compressor inlet non-dimensional flow, W₁√T₁/P₁. If at first it is assumed
+
+|16|Speed N₁|Exhaust gas|Power|limited|
+|---|---|---|---|---|
+|14|1|1|1|Operating point at the start|
+|12|of simulation (ambient|temperature 35 °C)| | |
+|10| | | | |
+|8|Speed 100%|Speed 103%|Speed 109%| |
+|6|Speed 96%|Operating point at the end of|simulation (ambient|temperature –30 °C)|
+|4|Speed 92%| | | |
+|2|Speed 89%| | | |
+|0| | | | |
+
+Compressor pressure ratio
+
+700
+800
+900
+1000
+1100
+1200
+1300
+
+Compressor inlet non-dimensional flow W₁ R T /γ
+
+1 1 1 P 1
+
+16.1 Operating point on compressor characteristic during temperature transient.
+
+Industrial gas turbines – single-shaft that the maximum to minimum temperature, T₃/T₁, remains constant (by adjusting the power output as the ambient temperature decreases), the compressor pressure ratio, P₂/P₁, must increase to satisfy the flow compatibility (Equation 8.1 assuming a choked turbine, i.e. W₃√T₃/P₃ is constant). The higher compressor pressure ratio will also result in a higher turbine pressure ratio. Also, at high ambient temperatures, the engine power output will be limited by the EGT limit. Thus, an increase in turbine pressure ratio must necessarily increase the turbine entry temperature, T₃. The decrease in ambient temperature will therefore result in an increase in the temperature ratio, T₃/T₁, which in turn further increases the compressor pressure ratio in order to satisfy the flow compatibility (Equation 8.1). This results in a steep operating line on the compressor characteristic, as shown in Fig. 16.1. The higher compressor pressure ratio and temperature ratio, T₃/T₁, will improve the thermal efficiency, as seen in Fig. 16.2.
+
+The higher T₃/T₁ will also increase the specific work, but at these operating pressure ratios the increase in T₃/T₁ will have a greater influence on specific work than will pressure ratio (see Chapter 2, Section 2.15). The higher compressor inlet non-dimensional flow with the reduction in ambient temperature, T₁, will result in an increase in the compressor inlet air flow rate. Both the increased specific work and airflow rate increase the power output from the gas turbine as the ambient temperature decreases, as shown in Fig. 16.2.
+
+","What is the significance of the operating line's steepness on the compressor characteristic during an ambient temperature transient in the single-shaft gas turbine simulator from 'Gas Turbine Performance, 2nd edition'?","A steeper operating line indicates a significant increase in compressor pressure ratio and temperature ratio T₃/T₁, enhancing thermal efficiency.","The steepness reflects the compressor's response to ambient cooling, leading to higher pressure and temperature ratios that boost efficiency.","As shown in the book, a steep line during cooling signifies improved efficiency from elevated pressure and temperature ratios.",This steep operating line demonstrates how ambient temperature drops can dramatically increase efficiency through higher ratios.,The simulator's data reveals that a steep compressor characteristic line under cooling conditions correlates with efficiency gains from increased ratios.

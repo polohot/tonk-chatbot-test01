@@ -1,0 +1,1461 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",What is the purpose of activating the light test in the module described in the 'Compendium Part B - Process Safety (V9.0)'?,The light test is activated to ensure SIL3/Kat.4/PLe can be achieved when the signal does not change daily or more often.,Activating the light test fulfills the condition for achieving SIL3/Kat.4/PLe if it's not reached with a '0' signal.,"To achieve safety standards like SIL3/Kat.4/PLe, the light test must be activated when the output is not active in the 'good condition'.",The light test ensures compliance with safety standards by briefly activating the output during inactive states.,"For modules where the signal doesn't change frequently, activating the light test is necessary to meet SIL3/Kat.4/PLe requirements."
+1,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",How does the 'maximum light test time(s)' parameter affect the module's operation according to the 'Compendium Part B - Process Safety (V9.0)'?,It determines the time frame within which light and dark tests must be conducted for the entire module.,"The 'maximum light test time(s)' sets the duration before tests are repeated, ensuring continuous safety compliance.","This parameter ensures that all necessary tests are completed within a specified time, maintaining module safety.","By defining the maximum light test time, it schedules the repetition of safety tests for the module.","It configures the interval for conducting complete bit pattern tests, including light and dark tests, across the module."
+2,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",What are the consequences of setting the maximum light test time too low for a channel switching high capacitive loads in the 'Compendium Part B - Process Safety (V9.0)'?,The output channel may be passivated due to insufficient charging time within the configured period.,Setting it too low can lead to passivation as the capacitive load won't charge in the allotted time.,A too low maximum light test time for high capacitive loads results in channel passivation from inadequate charging.,Passivation occurs because the connected capacitive load cannot charge within the too short configured time.,Inadequate charging time for high capacitive loads causes the output channel to be passivated.
+3,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",What steps should be taken if an output channel is continuously passivated with an intact F SM according to the 'Compendium Part B - Process Safety (V9.0)'?,Configure the maximum light test time to the maximum value of 5 ms to address potential capacitive load issues.,"First, increase the maximum light test time to 5 ms; if passivation continues, check for external faults or excessive capacity.","Adjust the maximum light test time to 5 ms, and investigate external faults or capacity beyond permitted range if issues persist.",Set the light test time to its maximum value and inspect for external faults or incompatible capacitive loads if passivation doesn't stop.,Maximize the light test time to 5 ms and verify for external faults or out-of-range capacities if the channel remains passivated.
+4,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",How should the maximum light test time be optimized according to the 'Compendium Part B - Process Safety (V9.0)'?,"It should be set as low as possible through trial and error, yet high enough to prevent channel passivation.","Optimize by minimizing the time while ensuring the output channel isn't passivated, balancing safety and performance.","Adjust to the lowest feasible value that avoids passivation, enhancing fault reaction time without compromising safety.","Find the minimal setting that doesn't cause passivation, improving response times while maintaining test effectiveness.","Trial and error should find the shortest time that still prevents passivation, optimizing both safety and efficiency."
+5,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",What is the purpose of dark periods in the module's operation as described in the 'Compendium Part B - Process Safety (V9.0)'?,Dark periods test the output by briefly deactivating it during active states to ensure actuator non-responsiveness.,"They verify that actuators remain activated during brief output deactivations, confirming proper operation.","During dark periods, the output is temporarily deactivated to test actuator stability and non-responsiveness.","These periods check that actuators do not react to short deactivation pulses, ensuring safety and reliability.","Dark periods assess actuator behavior during temporary output deactivation, crucial for safety compliance."
+6,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",What is the recommended action if an output channel is sporadically passivated after setting a maximum light test time in the 'Compendium Part B - Process Safety (V9.0)'?,Increase the maximum light test time to the next higher value to prevent sporadic passivation.,Adjust the setting to the next higher maximum light test time to stabilize the channel's operation.,"To address sporadic passivation, increment the maximum light test time to the next available setting.",Sporadic passivation indicates the need for a higher maximum light test time to ensure consistent performance.,Elevate the maximum light test time setting to mitigate sporadic channel passivation issues.
+7,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",How does redundant interconnection affect the diagnosis of a channel in the 'Compendium Part B - Process Safety (V9.0)'?,"Without activation, it triggers a 'Short circuit of output to L+ or output driver defect' diagnosis.",Failing to activate redundant interconnection leads to specific fault diagnoses related to output short circuits.,Diagnosis of output short circuits or driver defects is reported if redundant interconnection isn't enabled.,Activating redundant interconnection is crucial to avoid diagnoses of output short circuits or driver defects.,The absence of redundant interconnection activation results in diagnostic reports of output-related faults.
+8,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",What is the significance of the diagnostic interrupt in safety mode for F signal modules according to the 'Compendium Part B - Process Safety (V9.0)'?,It must always be activated to ensure immediate detection and response to faults in safety mode.,Activating the diagnostic interrupt is mandatory for real-time fault monitoring in safety operations.,"The diagnostic interrupt provides essential fault detection capabilities, requiring activation in safety mode.","For effective fault management in safety mode, the diagnostic interrupt cannot be deactivated.",Its activation is a prerequisite for maintaining safety standards through prompt fault identification.
+9,pcs7_compendium_part_b_en-US_en-US.txt,25,55da86663aa0de7946292209e8642a456023610ab6791f2b92b1b7fa8031d852,"# Light test activated
+
+The module conducts complete bit pattern tests within the configured maximum test time. If the output is active in the ""good condition"", a dark test is always conducted. If the output is not active in the ""good condition"", activate the light test with this parameter. If the signal changes daily or more often, SIL3/Kat.4/PLe can be achieved even without a light test. If this is not reached with a ""0"" signal, the light test must be activated which then fulfills this condition.
+
+# Maximum light test time
+
+With the parameter ""maximum test time(s)"", you determine the time within which the light and dark tests are to be conducted (in all combinations) for the whole module. After this time elapses the tests are repeated.
+
+Light periods arise during the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is inactive (""0"" output signal). This then activates the output briefly (= ""light period""). A sufficiently inactive actuator does not respond to this and remains deactivated.
+
+Each output channel has its own configurable maximum light test time. The maximum light test time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum light test time is set too low for a controlled capacitive load, the output channel is passivated because charging does not occur within the configured time.
+
+In the event of faulty readback signals, the light test signal is available for the parameterized maximum light test time at the output before the error ""Short circuit to M"" leads to the passivation of the output channel.
+
+# Set maximum light test time:
+
+1. If an output channel is continuously being passivated with an intact F SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the maximum light test time to the maximum value of 5 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault reaction time is extended by the configured maximum light test time, the light test time should be set as low as possible by trial and error (however, high enough to avoid passivating the output channel).
+3. If you have set a maximum light test time in a way that results in the output channel being passivated sporadically, set the next higher value of the maximum light time.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+Maximum dark test readback time
+
+Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal). This deactivates the output briefly (= ""dark period""). A sufficiently inactive actuator does not respond to this and remains activated. Each output channel has its own configurable maximum readback time for the dark test.
+
+The maximum readback time should be set sufficiently high if the affected channel switches high capacitive loads. If the maximum readback time is set too low for a connected capacitive load, the output channel is passivated, since discharge does not occur within the configured time.
+
+Configure these parameters so that the module reads back correctly and your actuator still does not react to the switch-off pulse.
+
+Set readback times:
+
+1. If an output channel is continuously being passivated with an intact F-SM, this can be in contact with a capacitive component of the controlled load that is too large. In such an instance, configure the readback time to the maximum value of 400 ms. If passivation of the channel continues to occur, either an external fault is present or the connected capacity lies outside of the permitted range.
+2. Since the fault response time is extended by the readback time, the readback time should be set as short as possible when testing (but long enough so the output channel is not passivated).
+3. If you have set a readback time in a way that results in the output channel being sporadically passivated, set the next higher value for the maximum readback time dark test. Dark periods arise during deactivation tests and the complete bit pattern test. In this process, a test signal is connected to the output from the fail-safe output module while the output is active (""1"" output signal).
+
+Redundant interconnection
+
+With this parameter you set whether this channel is operated redundantly.
+
+Note
+
+If you do not activate this channel with a redundant interconnection the ""Short circuit of output to L+ or output driver defect"" diagnosis is reported.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.9 Parameter assignment for SM326; F-DO 8 x DC24 V/2A PM
+
+|Properties - FDOBxDC24V/2A (R-/512)|General Addresses|Parameters|Value|
+|---|---|---|---|
+|Operating mode|Safety mode parameters|source_address|CPU 410-5H|
+| | |target_address|1018|
+| | |DIP switch setting (to 0)|111010|
+| | |monitoring time (ms)|2500|
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break|channel|
+|DO channel|Enabled|Diagnostics: wire break| |
+
+The module can only be used in safety mode, not redundantly. For the purpose of switching an actuator, each module is provided with one switch in the plus line (P switch) and one in the minus line (M switch). An actuator must be connected between the P and M switches to enable the module to be used for safety applications up to SIL 3.
+
+Diagnostic interrupt: The diagnostic interrupt for the F signal module must always be activated in safety mode.
+
+Activated: Activates channel processing
+
+Diagnostics: Wire break: Activates wire-break monitoring on the channel
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# 6.4.10 Assigning parameters for the SM336; AI 6 x 13Bit
+
+|Properties|FAI6x13Bit (R-/513)| | |
+|---|---|---|---|
+|General|Addresses|Parameters|Redundancy Parameters|
+|Operating mode|Safety mode| | |
+|Module parameters|Diagnostic interrupt|Behavior after channel faults|Passivate the channel|
+|Evaluation of the sensors|10o2 evaluation|Type of sensor interconnection|Sensors|
+|Interference frequency SUP|50 Hz|Integration time|20 ms|
+|Channel|Group diagnostics|wire break detection|Measuring type|
+|Current (4-Wire Measuring Transducer)|Measuring range|20 mA|Discrepancy time (ms)|
+|Tolerance window (%)|Unit value|MAX| |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+57
+
+# Configuring S7F/FH hardware
+
+# 6.4 Setting system parameters for F-signal modules
+
+# Sensor evaluation (analog inputs)
+
+- 1oo2 evaluation
+- 1 sensor connected to the module via a single-channel redundant connection (voting on module). The module has 6 redundant SIL 3-compatible channels.
+
+Safety class SIL3 can be achieved here:
+
+|SM 336;|21|L+ 24 V|
+|---|---|---|
+|Al 6 x 13Bit|2|L+|
+| |22|M|
+| |23|Vs|
+|Mlot|24|MVo+|
+|CHO Mo|5|P 2-Wire -|
+| |25|Mlot CHO|
+| |26|Mo|
+| |27|MV1+|
+| |28|Ml1t CH1|
+| |29|M1_|
+| |30|MANA|
+| |31|MVz+|
+|CH2 M2|12| |
+| |13|2-Wire - 2-Wire -|
+| |34|N3+|
+|CH3|15| |
+| |16|M3|
+|CHA Mla+|17| |
+| |18|Ma;|
+|CH5 Ml5+|19| |
+| |20|M5|
+
+# Type of sensor interconnection (analog inputs)
+
+When safety mode is activated 1 or 2 sensors can be configured per input channel. Discrepancy handling can be set accordingly.
+
+",What are the requirements for achieving Safety Class SIL3 with the SM 336; AI 6 x 13Bit module as per the 'Compendium Part B - Process Safety (V9.0)'?,The module must be used with 1oo2 evaluation or single-channel redundant connections for SIL3 compliance.,Achieving SIL3 requires configuring the module with 1oo2 evaluation or redundant sensor interconnections.,SIL3 safety class is attainable through proper sensor evaluation and interconnection configurations on the module.,The module supports SIL3 when sensors are connected via 1oo2 evaluation or redundant channels.,Configuring the module with specific sensor evaluations and interconnections is essential for SIL3 certification.

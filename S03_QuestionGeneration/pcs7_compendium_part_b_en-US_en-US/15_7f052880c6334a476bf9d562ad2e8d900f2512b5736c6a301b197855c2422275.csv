@@ -1,0 +1,451 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+",What must be selected as the error reaction if processing is to be paused in the master CPU only at certain times defined by the plant operator?,"""Standby STEO"" must be selected as the error reaction.","The error reaction to select is ""Standby STEO"" for pausing processing at defined times.","For specified timing, choose ""Standby STEO"" as the error reaction.","Selecting ""Standby STEO"" is necessary when pausing is to occur at operator-defined times.","The plant operator should select ""Standby STEO"" for controlled processing pauses."
+1,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+","What action must maintenance personnel take after selecting ""Standby STEO"" as the error reaction?",They must carry out a self-test on both CPUs by performing a non-buffered CPU startup.,Perform a self-test on both CPUs through a non-buffered startup.,A non-buffered CPU startup is required for testing both CPUs.,Maintenance needs to execute a self-test via non-buffered startup on the CPUs.,"After ""Standby STEO"", test both CPUs with a non-buffered startup."
+2,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+",How can time monitoring be prevented during the update of a starting CPU in the H system?,Set the priority of the cyclic interrupt OBs allocated to the F-program to > 15.,Prevent time monitoring by setting F-program cyclic interrupt OBs' priority above 15.,Adjust cyclic interrupt OBs' priority for the F-program to exceed 15.,"To avoid time monitoring, ensure cyclic interrupt OBs for F-program have priority > 15.",Setting cyclic interrupt OBs' priority > 15 stops time monitoring during CPU update.
+3,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+",What is the purpose of the 'Cyclic interrupt OB with special handling' parameter in the H system?,It specifies the cyclic interrupt OB called by the OS when updating the standby CPU with interrupts disabled.,This parameter identifies the OB called during standby CPU updates with interrupts off.,Defines the OB number for special handling during standby CPU updates.,Indicates which cyclic interrupt OB is specifically called during CPU updates.,The parameter sets the OB for special handling in standby CPU update scenarios.
+4,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+",What does the FH system check during the update of the standby CPU?,"It checks scan cycle time extension, communication delay, disabling time for priority classes > 15, and I/O retention time.","The system verifies scan cycle extension, communication delay, priority class disabling times, and I/O retention.","During update, checks include scan cycle, communication delays, priority class times, and I/O retention.","Ensures scan cycle extension, communication delay, priority class times, and I/O retention are within limits.",FH system monitors several parameters including scan cycle and I/O retention during standby CPU update.
+5,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+",Where can the priority of cyclic interrupt OBs be set to prevent time monitoring?,On the 'Cyclic Interrupts' tab in the CPU parameters.,The 'Cyclic Interrupts' tab is where you adjust OB priorities.,Set OB priorities under the 'Cyclic Interrupts' tab to avoid time monitoring.,Adjustments for OB priorities are made in the 'Cyclic Interrupts' section.,Find the priority settings for OBs in the 'Cyclic Interrupts' tab.
+6,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+",What is the significance of setting the priority of cyclic interrupt OBs to > 15?,It prevents the triggering of time monitoring during the update of a starting CPU in the H system.,Setting priority > 15 stops time monitoring from activating during CPU updates.,Higher priority ensures time monitoring isn't triggered in updating CPUs.,"To avoid time monitoring issues, OB priorities must exceed 15.",Priorities above 15 are crucial for preventing time monitoring during updates.
+7,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+",What must be entered for the 'Cyclic interrupt OB with special handling' parameter?,The number of the cyclic interrupt OB with the highest priority assigned to F-blocks in CFC.,Enter the highest priority cyclic interrupt OB number linked to F-blocks in CFC.,The OB number for highest priority F-block assignments in CFC is required.,Specify the cyclic interrupt OB number that has top priority in CFC F-blocks.,Input the highest priority cyclic interrupt OB number for F-blocks in CFC.
+8,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+",How does the FH system ensure the minimum I/O retention time is observed?,By checking that the configured minimum I/O retention time is not exceeded during the standby CPU update.,It monitors to ensure the set I/O retention time is adhered to during updates.,The system verifies I/O retention time compliance during CPU updates.,Ensures the minimum I/O retention time is maintained throughout the update process.,FH system checks confirm I/O retention time limits are respected during updates.
+9,pcs7_compendium_part_b_en-US_en-US.txt,15,7f052880c6334a476bf9d562ad2e8d900f2512b5736c6a301b197855c2422275,"The master CPU remains in RUN (solo system mode).
+
+Note
+
+Processing is also paused briefly in the master CPU for the purpose of updating a CPU that is starting up (see Monitoring times). If this is only to occur at certain times defined by the plant operator, ""Standby STEO"" must be selected as the error reaction. Following this, maintenance personnel must carry out a self-test on both CPUs at an appropriate point in time, by performing a non-buffered CPU startup.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+33
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.2 Cyclic interrupt OB with special handling
+
+Priority class
+
+In order to prevent time monitoring (F-CYC_CO or the monitoring time of modules) from being triggered in the event of a CPU that is starting up in the H system being coupled/updated, you need to set the priority of the cyclic interrupt OBs allocated to the F-program (OB 30 to OB 38) to &gt; 15 on the ""Cyclic Interrupts"" tab (see Monitoring times).
+
+""Cyclic interrupt OB with special handling"" is an H parameter containing the number of the cyclic interrupt OB which is called specifically by the operating system when the standby CPU is updated, once all interrupts have been disabled. Here, enter the number of the cyclic interrupt OB with the highest priority, to which F-blocks are assigned in CFC.
+
+|Properties CPU 410-SH (R0/53)|General|Startup|Cycle/Clock|Memory|Retentive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Irtenupts|Diagnostics /Clock|Protection|Parameters| | |
+|Parameters for Expanded CPU Test|Test scan time [minj;|sce|Reaction to RAMPIQ comparson eror:|STOP the standby CPL|Update the Standby CPU|Maximym number of attempts;| |
+|Cyclic intenupt OB with special handling:|Waiting tirre between two attempts [s];|Monitoring times|Max. scan cycle time extension [ms]:|8000|Calculate|Mar: communication delay [ms]:|3200|
+|Max. disabling time for pronty classes 15 [ms]:|800|Uze only|Min. VO retention time [ms}:|calculated|values| | |
+|Redundant VJO|Data block no::|and 2|Passivation behavior :|channels|Cancel|Help| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring S7F/FH hardware
+
+# 6.2 Adapting CPU parameters (fault-tolerant F system)
+
+# 6.2.3 Monitoring times
+
+While the standby CPU is being updated, the FH system checks that the scan cycle time extension, the communication delay, and the disabling time for priority classes > 15 do not exceed the maximum values you have set. It also ensures that the minimum I/O retention time that has been configured is observed.
+
+","What are the consequences of exceeding the maximum set values for scan cycle time extension, communication delay, or disabling time during standby CPU update?",The FH system will detect and potentially halt operations if these maximums are surpassed.,Exceeding these values may trigger system checks leading to operational pauses.,Surpassing set maximums can cause the system to enforce corrective measures.,The system monitors these parameters closely to prevent exceeding set limits.,"Operations may be interrupted if scan cycle, communication delay, or disabling times exceed maximums."

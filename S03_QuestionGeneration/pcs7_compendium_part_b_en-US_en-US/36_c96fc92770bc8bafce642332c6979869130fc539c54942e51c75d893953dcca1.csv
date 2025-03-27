@@ -1,0 +1,1631 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",What are the requirements for creating a safety program in the SIMATIC Manager?,"You must have created a project structure, configured the hardware components for safety mode, and assigned your safety program to a CPU 41x-xH.","Requirements include a pre-established project structure, hardware configuration for safety mode, and assignment of the safety program to a specific CPU type.","Before programming, ensure the project structure is set, hardware like F-CPU and F-signal modules are configured for safety, and the safety program is linked to a CPU 41x-xH.","The prerequisites involve setting up the project structure, configuring safety mode for hardware components, and associating the safety program with a CPU 41x-xH.","To create a safety program, one needs a defined project structure, hardware configured for safety, and the safety program assigned to a CPU 41x-xH."
+1,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",How are F-runtime groups utilized in the safety program?,F-runtime groups are added to cyclic interrupt OBs (OB 30 to OB 38) and can be combined in F-shutdown groups.,They are assigned to cyclic interrupt OBs and may be grouped into F-shutdown groups for the safety program.,Utilized by adding them to cyclic interrupt OBs and optionally combining them into F-shutdown groups.,F-runtime groups are integrated into cyclic interrupt OBs and can also form part of F-shutdown groups.,"In the safety program, F-runtime groups are placed within cyclic interrupt OBs and can be aggregated into F-shutdown groups."
+2,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",What distinguishes F-blocks in the S7 F-Systems F-library on the CFC chart?,F-blocks appear in yellow on the CFC chart to highlight safety program involvement.,They are marked yellow and with an 'F' to denote their role in the safety program.,The yellow color and 'F' marking distinguish F-blocks as part of the safety program on CFC charts.,"On CFC charts, F-blocks are highlighted in yellow and labeled 'F' for easy identification within the safety program.","F-blocks are visually differentiated by yellow coloring and an 'F' mark on CFC charts, indicating safety program components."
+3,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",What considerations are necessary when drafting a safety program?,Identify fail-safe parts of the user program and determine necessary response times.,Determine which program sections need to be fail-safe and the required response times.,Assess which user program parts must be fail-safe and establish the response times needed.,Key considerations include selecting fail-safe sections of the program and setting achievable response times.,"When drafting, decide on fail-safe program parts and the response times to aim for."
+4,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",How can performance be improved in the safety program?,By programming non-safety functions in the standard user program.,Performance improves when non-safety related parts are coded in the standard user program.,Allocating non-safety functions to the standard user program enhances performance.,Better performance is achieved by placing non-essential safety functions in the standard user program.,Optimize performance by implementing non-critical functions within the standard user program.
+5,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",What are the rules for drafting a safety program in S7 F/FH Systems?,"F-runtime groups must be assigned to OB 30-OB 38, separate runtime groups for F and standard blocks, and access F-signal modules via F-channel driver.","Assign F-runtime groups to specific OBs, use separate groups for different block types, and access F-signal modules correctly.","Rules include assigning F-runtime groups to certain OBs, segregating F and standard blocks, and proper F-signal module access.","Drafting requires F-runtime groups in designated OBs, distinct groups for block types, and F-signal module access via F-channel driver.","Key rules involve OB assignment for F-runtime groups, separation of block types, and F-signal module access methods."
+6,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",How are CFC charts added in the safety program configuration?,Added via SIMATIC Manager or directly in the PH/process object view under 'Insert New Object > CFC'.,Inserted through SIMATIC Manager or within the plant hierarchy by selecting 'Insert New Object > CFC'.,CFC charts are inserted in the chart container or plant hierarchy using the 'Insert New Object > CFC' option.,Addition of CFC charts is done in SIMATIC Manager or the plant hierarchy via the insert new object menu.,"To add CFC charts, use the insert function in SIMATIC Manager or the plant hierarchy, selecting CFC as the new object."
+7,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",What is the process for inserting F blocks into a CFC chart?,Drag and drop from 'S7 F Systems Lib V1_3 SP2 > F User Blocks' in the library.,F blocks are inserted by dragging from the specified library path and dropping into the chart.,Insertion involves selecting F blocks from the library and placing them into the CFC chart via drag and drop.,Use drag and drop from the F User Blocks section of the library to add F blocks to the chart.,The method is to drag F blocks from their library location and drop them into the desired CFC chart.
+8,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",What restrictions apply to interconnecting F blocks and F runtime groups?,"EN/ENO connections cannot be interconnected, and EN I/Os cannot be set to 0 (FALSE).","Interconnecting EN/ENO is prohibited, and assigning FALSE to EN I/Os is not allowed.",No interconnection of EN/ENO connections and no zero values for EN I/Os in F blocks and runtime groups.,Restrictions include no EN/ENO interconnections and preventing EN I/Os from being FALSE.,It's forbidden to interconnect EN/ENO or set EN I/Os to FALSE in F blocks and runtime groups.
+9,pcs7_compendium_part_b_en-US_en-US.txt,36,c96fc92770bc8bafce642332c6979869130fc539c54942e51c75d893953dcca1,"- The F-runtime groups are added to one or more cyclic interrupt OBs.
+- F-runtime groups can be combined in F-shutdown groups (F-SG).
+- The cyclic interrupt OB can also contain standard runtime groups.
+- The F-blocks in the S7 F-Systems F-library appear in yellow on the CFC chart in order to highlight the fact that there is a safety program involved.
+- The CFC charts and F-runtime groups with F-blocks appear in yellow and are marked ""F"" in order to distinguish them from charts and runtime groups associated with the standard user program.
+
+# 7.2 Creating the safety program
+
+# Requirements
+
+- You must have created a project structure in the SIMATIC Manager.
+- Prior to programming, you must have configured the hardware components of your project, in particular the F-CPU and the F-signal modules, for safety mode.
+- You must have assigned your safety program to a CPU 41x-xH.
+
+# Library
+
+The F-user blocks must always be used for configuration.
+
+|57 F Systems Lib V1_3|57 F Systems Lib V1_3|
+|---|
+|Control Blocks|F-User Blocks|
+|All blocks| |
+|BIT _GC| |
+|ZOUT3 [FB3OS: ;Zoo3 evaluation of BOOL Inputs]| |
+|AND4 [FB3O1: ;AND Inputs]| |
+|JNOT [FB304: ;Inverter]| |
+|OR4 [FB302: ;OR Inputs]| |
+|XOR2 [FB303: ;EXOR Inputs]| |
+|XOUTY [FB306: ;Xook evaluation of BOOL Inputs]| |
+|COM_FUNC| |
+|COMPARE| |
+|CONVERT| |
+|DRIVER| |
+|SYSTEM| |
+|FLIPFLOP| |
+|IEC_TC| |
+|IMPULS| |
+|MATH_FP| |
+|MATH_INT| |
+|MULTIPLX| |
+|VOTER| |
+|F-User Blocks Templates| |
+|SafetyMatrix Lib (V1_3)| |
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.1 Defining the program structure
+
+In addition to considering the standard scenario, you need to answer the following questions when drafting a safety program:
+
+- Which parts of the user program need to be fail-safe?
+- Which response times do you need to achieve?
+
+You will need to split your F-program into various cyclic interrupt OBs (OB 30 to OB 38) in accordance with these requirements.
+
+You will improve performance if you program parts of the program which are not needed for the safety functions in the standard user program.
+
+In terms of dividing your program between the standard user program and the safety program, please remember that the standard user program is easier to change and download to the F-CPU. Changes to the standard user program do not usually need to undergo acceptance and approval.
+
+# Rules governing program structure
+
+When drafting a safety program for S7 F/FH Systems, you need to observe the following rules:
+
+- F-runtime groups with F-blocks can only be assigned to cyclic interrupts OB 30 to OB 38.
+- A chart can contain both F-blocks and standard blocks; they need to be inserted in separate runtime groups in this case. You are not permitted to use these charts as F-block types.
+- In the safety program, access to the F-signal modules is only permitted via the F-channel driver (F_CH_xx).
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.2 Creating CFC charts
+
+# Inserting CFC charts
+
+Individual CFC charts are added to the chart folder or plant hierarchy (PH) in the same way as for standard user programs:
+
+- In the SIMATIC Manager, in the chart container ""Insert new object > CFC"".
+- Directly in the PH or process object view in the respective hierarchy folder ""Insert New Object > CFC"".
+
+# Inserting F blocks
+
+Blocks are inserted into the chart from the library ""S7 F Systems Lib V1_3 SP2 > F User Blocks"" using drag-and-drop. There is no limit on the number of times a block can be dragged and dropped.
+
+Note
+
+If a block type has been dragged and dropped from the library before, the process can be completed more quickly the next time by using the ""CFC block catalog"", ""Blocks"" tab.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+# 7.2.3 Assigning parameters to and interconnecting F-blocks
+
+F block inputs and outputs are parameterized and interconnected using the standard CFC procedure.
+
+Note
+
+You are not permitted to interconnect EN/ENO connections of F blocks and F runtime groups. You may not assign a value of 0 (FALSE) to EN I/Os either.
+
+Special F data types in a safety data format are used for fail-safe block connections. The safety data format enables data and address errors to be detected.
+
+In terms of programming, the F data types are implemented as structures in which only the ""DATA"" component is ever relevant for the user.
+
+# Select Structure Element
+
+Structure:
+
+|VHRANGE [STRUCT] 'HIGH RANGE OF PROCESS VALUE'| | |
+|---|---|---|
+|DATA [REAL]:|0.0| |
+|PAR_ID [WORD]:|164484| |
+|COMPLEM [DWORD]:|16#FFFFFFFF| |
+|Block:|F_CH_AIPST_F_AI| |
+|VO:|DATA INQREAL)| |
+|Value:| |Inverted|
+| | |Invisible|
+| | |Watched|
+|Comment:| | |
+| |Archive:| |
+| |Operator authorization level:|OS additional text:|
+
+Close
+
+Force
+
+Add forcing
+
+Forcing active
+
+Force value:
+
+MES-relevant
+
+Cancel
+
+Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.2 Creating the safety program
+
+Example: Structural element F_Real VHRANGE [STRUCT]""HIGH RANGE OF PROCESS VALUE""
+
+You can change the structure comment to whatever you wish. If you wish to change the value (default) of a block connection with an F data type, you may only change the DATA component. ",How are F data types implemented in the safety program?,"As structures where only the 'DATA' component is relevant for the user, enabling error detection.","Implemented as structures with the 'DATA' component being user-relevant, for detecting data and address errors.","F data types are structured, focusing on the 'DATA' part for user interaction and error detection.","They use structures, with emphasis on the 'DATA' element for user relevance and safety data format.","Structured implementation where 'DATA' is key, supporting error detection through safety data formats."

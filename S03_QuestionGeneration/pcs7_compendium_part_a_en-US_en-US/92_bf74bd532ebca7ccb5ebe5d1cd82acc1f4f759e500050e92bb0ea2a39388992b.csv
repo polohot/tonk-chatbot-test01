@@ -1,0 +1,971 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",What is the purpose of assigning a preferred server in the OS client project according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,To achieve even utilization of a redundant server pair and ensure constant operability during a switchover to the redundancy partner.,"Assigning a preferred server helps in balancing the load between master and standby servers, maintaining system operability.","The purpose is for the OS client to connect preferentially to one server in a redundant pair, ensuring data availability as long as that server is operational.","It ensures that OS clients preferentially connect to a designated server in a redundant pair, optimizing performance and reliability.","To preferentially connect OS clients to one server in a redundant pair, enhancing system efficiency and reliability during operations."
+1,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",What happens if no preferred server is entered in the 'Configure the Server Data' dialog in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,The OS clients connect to the OS server designated as the master.,"Without a preferred server entry, clients automatically interconnect to the master server.",OS clients default to connecting with the master server if no preferred server is specified.,"In the absence of a preferred server setting, the master server becomes the default connection for OS clients.",The system defaults to the master server for OS client connections when no preferred server is selected.
+2,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",How is the server data updated in an OS client project according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,Server data is automatically updated when an OS server is downloaded or when the OS client starts process mode.,Updates occur upon downloading an OS server (complete or changes only) or initiating process mode in the OS client.,The client receives new OS server data automatically during server download or at the start of process mode.,Automatic updates to server data happen with OS server downloads or when entering process mode.,Server data is refreshed either through downloading an OS server or when the OS client's process mode begins.
+3,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",What must be done if the project is moved to another path or to another ES in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,The server data must be regenerated and reassigned to the OS client projects.,"Regenerate server data manually or by compiling the OS, then reassign it to OS client projects.","After moving, regenerate and reassign server data to ensure OS client projects have updated information.",Server data regeneration and reassignment are necessary following a project move to a new path or ES.,Update server data through regeneration and reassignment when relocating the project to a different path or ES.
+4,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",What is a 'preferred server' as defined in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,An OS server in a redundant pair that the OS client connects to preferentially.,A server within a redundant pair selected for preferential connection by an OS client.,The preferred server is the one an OS client favors for connection in a redundant server setup.,"In redundant configurations, the preferred server is the OS client's first choice for connection.",A designated server in a redundant pair that OS clients preferentially connect to for data.
+5,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",What are the requirements for a consistent connection configuration on both OS servers in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,No errors in redundancy at the PCS 7 end and a consistent connection configuration on both servers.,Both servers must have identical connection settings and no redundancy errors in PCS 7.,A uniform connection setup across both OS servers and error-free redundancy connections in PCS 7.,Consistency in connection configurations and absence of redundancy errors are required.,The setup demands matching connection configurations on both servers and flawless PCS 7 redundancy.
+6,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",What functions does configuring a standard server for a client in a distributed system serve according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"Receiving messages and alarms, making message classes available, creating operator messages, sharing trend groups, and accessing user archives.","It enables message and alarm reception, availability of message classes, operator message creation, trend group sharing, and user archive access.","Functions include handling messages/alarms, providing message classes, generating operator messages, distributing trend groups, and enabling archive access.","Serves to manage alarms/messages, offer configured message classes, produce operator messages, disseminate trend groups, and allow archive use.","Facilitates alarm and message reception, message class configuration, operator message creation, trend group availability, and archive access."
+7,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",How are referenced OS clients assigned to a preferred server in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,They are automatically assigned to the same preferred server as the basis OS client they reference.,Referenced OS clients inherit the preferred server assignment from their basis OS client.,"Assignment is automatic, matching the preferred server of the referenced basis OS client.",They follow the preferred server setting of the basis OS client they are referenced to.,Automatically aligned with the preferred server of their associated basis OS client.
+8,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",What is the consequence of inconsistent connection configuration or errors in redundancy connections in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,The OS client switches to the OS server with the most active/error-free connections.,Clients will connect to the server exhibiting the least errors and most active connections.,Inconsistencies or errors cause the client to prefer the server with optimal connection status.,The system defaults to the server with the highest operational integrity in such scenarios.,OS clients automatically opt for the server demonstrating superior connection health.
+9,pcs7_compendium_part_a_en-US_en-US.txt,92,bf74bd532ebca7ccb5ebe5d1cd82acc1f4f759e500050e92bb0ea2a39388992b,"You can find details in the help (""Help"" button).
+
+Note
+
+OS server data only has to be assigned once to the OS client project. The client is automatically provided with the new OS server data when an OS server is downloaded (complete or changes only). An update is also performed when the OS client starts process mode.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+When the assignment has been successfully performed, the result can also be seen in the OS client project in the WinCC Explorer under ""Server data"".
+
+Note
+
+The server data includes the computer name of the ES from which the server data is to be downloaded automatically. If the ES cannot be reached, the OS client attempts to download the server data directly from the server when runtime is restarted.
+
+If the project is moved to another path or to another ES (another computer name), the server data must be regenerated (manually or by compiling the OS) and reassigned to the OS client projects.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+219
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.2 Selecting a preferred server
+
+Introduction
+
+In order to achieve even utilization of a redundant server pair and constant operability, even during a switchover to the redundancy partner, you should assign one section of the OS clients to the master server and another to the standby server.
+
+A ""preferred server"" is an OS server in the redundant OS server pair that the OS client connects to preferentially. The OS client receives the data from there as long as this OS server is available.
+
+This requires a consistent connection configuration on both OS servers and no errors (redundancy) at the PCS 7 end. If the connection configuration is inconsistent or if there are errors in the redundancy connections, the OS client switches to the OS server with the most active/error-free connections.
+
+Note
+
+If no preferred server is entered in the ""Configure the Server Data"" dialog, the OS clients interconnect to the OS server that is designated as the master.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+220 Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+The information contained in the ""Configure the Server Data"" dialog originates from server data, which was assigned to the corresponding OS client.
+
+Example
+
+CLIENT01, CLIENT02 &gt; assigned to SERVER1A
+
+CLIENT03, CLIENT04 &gt; assigned to SERVER1B
+
+# Allocation of OS clients
+
+Referenced OS clients are automatically assigned to the same preferred server by the assigned basis OS client. A different assignment is not possible.
+
+Note
+
+You can find more information on this topic in the ""SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems"" (https://support.industry.siemens.com/cs/ww/en/view/109746538) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+221
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.3 Selecting and configuring a standard server
+
+Introduction
+
+You configure a standard server for a client in a distributed system to:
+
+- Receive messages and alarms
+- Make the user-configured message classes available on a client
+- Create operator messages on the client
+- Make trend groups assembled on a client available to other clients
+- Have access to user archives
+
+A standard server setting is required on each client.
+
+Note
+
+Selected standard servers (e.g. ",Where can more information on fault-tolerant process control systems be found according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,In the 'SIMATIC Process Control System PCS 7 Fault-tolerant Process Control Systems' manual at https://support.industry.siemens.com/cs/ww/en/view/109746538.,Additional details are available in the specified SIMATIC PCS 7 manual online.,Refer to the provided link for the SIMATIC PCS 7 fault-tolerant systems manual.,The manual at the given URL covers fault-tolerant process control systems extensively.,"For comprehensive insights, consult the SIMATIC PCS 7 fault-tolerant systems documentation online."

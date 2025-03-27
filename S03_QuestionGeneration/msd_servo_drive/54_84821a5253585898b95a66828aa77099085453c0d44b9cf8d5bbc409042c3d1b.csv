@@ -1,0 +1,511 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",What should be done if the voltage controller oscillates in the Servo Drive?,Reduce the gain.,The gain must be reduced to stop the voltage controller from oscillating.,"To address oscillation in the voltage controller, decreasing the gain is necessary.",Oscillation of the voltage controller requires a reduction in gain.,"If the voltage controller starts to oscillate, the solution is to reduce its gain."
+1,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",What parameter should be checked if there are substantial variations between the q-current reference and actual values during run-up to reference speed in the field-weakening range?,Check P 340[0] - CON_FM_Imag to see if the preset maximum value has been reached.,The parameter P 340[0] - CON_FM_Imag should be verified to ensure the maximum value hasn't been exceeded.,"In case of significant variations, inspect whether P 340[0] - CON_FM_Imag's maximum value is attained.",Verify P 340[0] - CON_FM_Imag's preset maximum value to address variations between q-current reference and actual values.,Substantial discrepancies necessitate a check of P 340[0] - CON_FM_Imag's maximum value setting.
+2,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",How can the available torque be optimized if the voltage controller's response is unproblematic?,Set P 347[0] - CON_FM_VRef to values up to 98%.,Optimize torque by adjusting P 347[0] - CON_FM_VRef up to 98%.,"For torque optimization, increase P 347[0] - CON_FM_VRef to nearly full capacity, up to 98%.",Adjusting P 347[0] - CON_FM_VRef to values as high as 98% can optimize the available torque.,"To maximize torque, set the scaling parameter P 347[0] - CON_FM_VRef to up to 98%."
+3,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",What is the purpose of the 'Auto commutation' function in the MSD ServoDrive?,To determine the commutation position once when the control is started for field-oriented regulation of permanently excited synchronous motors.,The 'Auto commutation' function adjusts the current rotor position to encoder zero for synchronous motors with incremental measuring systems.,It ensures the commutation position is correctly set at control startup for motors without absolute position feedback.,"For initial alignment, the 'Auto commutation' function matches the rotor position to the encoder's zero point.","This function initializes the commutation position upon control enable, crucial for synchronous motor operation."
+4,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",How can the success of auto commutation be checked during commissioning in the MSD ServoDrive?,Use P 394 - CON_ICOM_Check to monitor the commutation angle error against a limit value.,Check P 394[1] - ActVal and compare it with P 394[0] - Limit to verify auto commutation success.,The parameter P 394 provides both the actual commutation angle error and a limit for validation.,Successful auto commutation is confirmed if the angle error in P 394[1] does not exceed P 394[0]'s limit.,Monitoring P 394's values ensures the auto commutation process meets the required accuracy.
+5,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",What does the IENCC(1) method involve in auto commutation?,"The rotor aligns in the direction of the injected current, resulting in a defined position with possible large movement.","This method uses current injection to position the rotor, accommodating movements up to half a rotor revolution.","IENCC(1) aligns the rotor via current injection, noting the potential for significant positional adjustment.","Through injected current, the IENCC(1) method defines the rotor's position, despite possible substantial movement.","Aligning the rotor by current injection, the IENCC(1) method may involve moving up to half a rotor revolution."
+6,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",What parameters are associated with commutation detection in the MSD ServoDrive?,"Parameters include CON_ICOM_KpScale, CON_ICOM_Time, CON_ICOM_Current, and CON_ICOM_Check.","Commutation detection involves settings like gain scaling (CON_ICOM_KpScale), times (CON_ICOM_Time), and currents (CON_ICOM_Current).","Key parameters for commutation detection are gain scaling, timing, current settings, and commutation check.",The system uses various parameters such as CON_ICOM_KpScale and CON_ICOM_Time for effective commutation detection.,"For detecting commutation, the MSD ServoDrive utilizes multiple parameters including those for timing, current, and gain scaling."
+7,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",What caution is advised when operating the MSD ServoDrive?,Damage to the device can result from incorrect operation.,Incorrect operation poses a risk of damaging the MSD ServoDrive.,The device may suffer damage if operated improperly.,"Operational errors can lead to device damage, as cautioned.",A warning is issued about potential damage due to incorrect operation of the device.
+8,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",What is the function of P 390[0] - CON_ICOM in the MSD ServoDrive?,It serves as the control word for selecting the auto commutation method.,P 390[0] - CON_ICOM allows selection among various auto commutation methods.,This parameter is used to choose the desired auto commutation technique.,The control word P 390[0] - CON_ICOM enables the selection of different commutation methods.,"Through P 390[0] - CON_ICOM, users can specify which auto commutation method to employ."
+9,msd_servo_drive.txt,54,84821a5253585898b95a66828aa77099085453c0d44b9cf8d5bbc409042c3d1b,"The more dynamic the operation, the more control reserve is required. In this case it may be that the voltage for rated operation is not sufficient, and also that the controller starts to oscillate.
+
+If the voltage controller oscillates, the gain must be reduced. If substantial variations between the q-current reference and actual values occur during run-up to reference speed in the field-weakening range, the Servo Drive may be at the voltage limit. In this case, a check should first be made as to whether the preset maximum value P 340[0] - CON_FM_Imag has already been reached and can be increased. If the maximum value has not yet been reached, the voltage controller is not dynamic enough and the gain P 345[0] - CON_FM_VConKp must be increased.
+
+If no suitable compromise can be found, the voltage threshold as from which the voltage control intervenes must be reduced by the scaling parameter P 347[0] - CON_FM_VRef. If the response with voltage controller is unproblematic and no particular demands are made in terms of dynamism, the available torque can be optimized by setting P 347[0] - CON_FM_VRef to values up to 98%.
+
+# 7.8 Synchronous motor auto commutation
+
+For field-oriented regulation of permanently excited synchronous motors with a purely incremental measuring system, the commutation position must be determined once when the control is started (adjustment of current rotor position to encoder zero [encoder offset]). This procedure is executed by the ""Auto commutation"" function after initial enabling of the control when the mains voltage has been switched on for the first time. It can also be forced during commissioning by changing a parameter, which causes a complete controller initialization (e.g. change of auto commutation parameters, change of control mode etc.). Owing to the differing requirements arising from the applications, various commutation methods are provided (P 390[0] - CON_ICOM).
+
+To check in commissioning whether the auto commutation has been successful, P 394 - CON_ICOM_Check is provided. It comprises the current commutation angle error P 394[1] - ActVal and a parameterizable limit value P 394[0] - Limit. If the commutation angle error exceeds the specified limit value, an error is generated.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 156
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 157
+
+CAUTION! Damage to the device as a result of incorrect operation!
+
+|ID|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|391|0|CON_ICOM_KpScale|%|commutation detection: scaling of control gain|
+|392| |CON_ICOM_Time|ms|commutation detection: times|
+|392|1|CON_ICOM_Time|ms| |
+|392|2|CON_ICOM_Time|ms| |
+|392|3|CON_ICOM_Time|ms| |
+|393| |CON_ICOM_Current|A|commutation detection: currents|
+|393|0|CON_ICOM_Current|A| |
+|393|1|CON_ICOM_Current|A| |
+|394| |CON_ICOM_Check| |Monitoring auto commutation|
+|394|0|LIMIT|degree|Auto commutation: Angle error limit|
+|394|1|ActVal|degree|Auto commutation: Angle error actual value|
+|365|0|CON_ICOM_AutoOn| |auto recommutation after selected event|
+|366|0|CON_ICOM_RefSpeed|rpm|commutation detection: scaling of control gain|
+|390|0|CON_ICOM| |Auto commutation: Control word for selection|
+| | |Off (0)| |Function disabled|
+| | |IENCC (1)| |Current injection|
+| | |LHMES (2)| |Saturation of inductance evaluated|
+| | |IECSC (3)| |Not yet implemented|
+| | |IECON (4)| |Current injection, minimized movement|
+| | |HALLS (5)| |Not yet implemented|
+| | |HALLSDIGITAL (6)| |Digital Hall sensor|
+
+Table 7.36: “Auto commutation” parameters
+
+# 7.8.1 IENCC(1) method
+
+In this method the rotor aligns in the direction of the injected current and thus in a defined position. The relatively large movement (up to half a rotor revolution) must be taken into consideration. ",What are the available auto commutation methods in the MSD ServoDrive?,"Methods include Off, IENCC, LHMES, IECSC, IECON, HALLS, and HALLSDIGITAL.",Options range from Off (disabled) to various techniques like IENCC and HALLSDIGITAL.,"The device supports multiple methods, including current injection (IENCC) and digital Hall sensor (HALLSDIGITAL).","Available selections encompass Off, IENCC, LHMES, and others for different commutation needs.",Diverse methods such as IENCC for current injection and HALLSDIGITAL for digital Hall sensors are provided.

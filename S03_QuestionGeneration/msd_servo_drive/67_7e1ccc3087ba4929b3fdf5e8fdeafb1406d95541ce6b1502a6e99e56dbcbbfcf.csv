@@ -1,0 +1,3301 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",What is the purpose of setting the table operating mode P 2862 - HydOpMode to 'Tab(4) = via motion block table' in the MSD ServoDrive - DeviceHelp?,To enable position and speed control by switching the table index via the motion block table using a timer.,It allows the system to switch between table index 0 for position control and table index 1 for speed control through the motion block table.,Setting HydOpMode to 'Tab(4)' facilitates the use of the motion block table for controlling the hydraulic operation mode by timer-based index switching.,This setting is crucial for dynamically changing control modes (position/speed) via the motion block table's timer mechanism.,"For hydraulic systems, 'Tab(4)' in HydOpMode ensures that control modes can be alternated based on the motion block table's indexed entries."
+1,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",How is valve control configured in the MSD ServoDrive - DeviceHelp for cylinder valve switchover?,Valve control is configured by setting P 2840[11] - CylValueSwSel to 'Tab(2) = valve control via motion block table'.,"By selecting 'Tab(2)' for CylValueSwSel, valve positions are specified in the motion block table for each table index.",Configuration involves specifying valve positions in the motion block table when CylValueSwSel is set to valve control via motion block table.,The setup requires defining valve positions in P 2863 - Hyd_TabCtrl for the respective table index as per CylValueSwSel's 'Tab(2)' setting.,"For cylinder valve switchover, 'Tab(2)' in CylValueSwSel mandates that valve positions are determined by entries in the motion block table."
+2,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",What parameters can be set in the motion block table according to the MSD ServoDrive - DeviceHelp?,"Reference values, ramps, valve positions, waiting times, and subsequent motion block settings.","The motion block table allows configuration of setpoints, acceleration rates, valve states, delay times, and next motion indices.","Parameters include hydraulic reference values, their derivatives, valve control words, wait times, and next or alternative motion block indices.","Settings encompass volumetric flow rate/pressure/speed/position references, jerk limitations, and switching conditions for hydraulic control.","It includes all necessary configurations for hydraulic operation modes, such as control modes, delay times, and transition conditions between motion blocks."
+3,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",What are the available hydraulic control modes in the MSD ServoDrive - DeviceHelp?,"Pressure control, Volume flow rate control (pressure limited), Speed control, Position control, Pump speed control, and Volume flow rate control (without pressure control).","Options include PressCon(0), VolConPlim(1), SpeedCon(2), PosCon(3), NPumpCon(4), and VolCon(5).","The system supports six modes: from pressure to volume flow rate control, with or without pressure limits, speed, position, and pump speed control.","Hydraulic operations can be configured in various modes, including limited and unlimited volume flow, alongside traditional pressure and speed controls.",Control modes range from basic pressure and speed settings to advanced options like pump speed and unrestricted volume flow control.
+4,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",How is the 'Hydraulic Wait time in Auto mode' configured in the MSD ServoDrive - DeviceHelp?,By setting P 2864 - HYD_TabWaitTime to define the delay time before transitioning to the next motion block.,"The wait time is specified in the hydraulic table delay time parameter, HYD_TabWaitTime, for automatic mode operations.",Configuring HYD_TabWaitTime allows the system to pause for a set duration in Auto mode before proceeding.,This parameter determines the interval the system waits in Auto mode before executing the subsequent motion block.,"HYD_TabWaitTime's value sets the pause duration in Auto mode, ensuring timed transitions between motion blocks."
+5,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",What is the function of the 'Hydraulic: Subsequent motion block' parameter in the MSD ServoDrive - DeviceHelp?,It defines the next default index in the motion block table to proceed after the current block's execution.,HYD_TabNextIdx specifies which motion block index follows the current one in the sequence.,This parameter ensures continuity by pointing to the next motion block index post current block completion.,"By setting HYD_TabNextIdx, the system knows which motion block to execute next in the hydraulic control sequence.","It acts as a pointer to the subsequent motion block index, facilitating seamless transitions in hydraulic operations."
+6,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",How does the 'Standard/CiA 402' profile assist in scaling definitions in the MSD ServoDrive - DeviceHelp?,It fully supports the scaling definition process for applications matching the Servo Drive's data.,The profile aids in aligning physical application data with the drive's parameters through a guided wizard.,"For 'Standard/CiA 402' or 'SERCOS' profiles, the wizard simplifies scaling setup, unlike custom scaling.",It ensures that scaling for interpolating operation modes via fieldbus adheres to CiA 402 standards.,"This profile provides comprehensive assistance in defining units, directions, and feed constants for accurate motion control."
+7,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",What is the significance of the 'Feed constant' in the 'Standard/CiA 402' profile of the MSD ServoDrive - DeviceHelp?,"It relates the path travelled to motor or gear output revolutions, essential for motion scaling.",The feed constant establishes a proportional relationship between motor revolutions and linear movement.,This parameter is key for converting rotational motion into linear displacement in the application.,It defines how much linear movement corresponds to one complete revolution of the motor or gear output.,"Essential for precise control, it links mechanical rotation to application-specific linear or angular movement."
+8,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",How is the 'Position controller single-turn resolution' configured in the MSD ServoDrive - DeviceHelp?,"It's variably adapted to the application, utilizing up to 32 bits, with 20 bits default for single-turn position.","The resolution is adjustable, allowing customization based on the precision requirements of the application.",Configuring this setting involves allocating bits for single-turn position accuracy within the 32-bit limit.,It enables fine-tuning of position detection accuracy per motor revolution for enhanced control.,This parameter adjusts how finely the system can measure and control position within a single motor turn.
+9,msd_servo_drive.txt,67,7e1ccc3087ba4929b3fdf5e8fdeafb1406d95541ce6b1502a6e99e56dbcbbfcf,"In this example, table index 0 is used for position control and table index 1 for speed control. The index is switched by means of the motion block table using a timer. To do so, the table operating mode P 2862 - HydOpMode must be set to ""Tab(4) = via motion block table"". “Tab(2) = valve control via motion block table” was selected for the valve control P 2840[11] - CylValueSwSel, meaning that the valve positions must be specified for the respective table index in the motion block table (P 2863 - Hyd_TabCtrl).
+
+# Table 7.102: Operation mode setting
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|2862|0|HYD_OpMode|TAB4|Hydraulics: Operation mode|
+|2840|11|CylValveSwSel|TAB2|Function selector for the valve switchover of the cylinder|
+
+Reference values, ramps, valve positions, the respective waiting time of the table index and the subsequent motion block can now be set in the motion block table.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 218
+
+# Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2857|HYD_Ref| |Hydraulic: Setpoint for volumetric flow rate/pressure/speed/position|
+
+Table 7.104: “Hydraulic - Reference value” parameters
+
+# 1st reference value derivative
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2858|HYD_dRef| |Hydraulic: 1st setpoint derivative|
+
+Table 7.105: “Hydraulic - 1st setpoint derivative” parameters
+
+# 2nd reference value derivative (jerk limitation or acceleration in the case of a position reference)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2859|HYD_d2Ref| |Hydraulic: 2nd setpoint derivative|
+
+Table 7.106: “Hydraulic - 2nd setpoint derivative” parameters
+
+# Hydraulic table control word valve position
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2863|HYD_TabCtrl| |Hydraulic Table control word|
+
+Table 7.107: Parameter “Hydraulic table control word”
+
+# Selecting the hydraulic control mode:
+
+- PressCon(0) = Pressure control
+- VolConPlim(1) = Volume flow rate control (pressure limited)
+- SpeedCon(2) = Speed control
+- PosCon(3) = Position control
+- NPumpCon(4) = Pump speed control
+- VolCon(5) = Volume flow rate control (without pressure control)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2860|HYD_ConMode| |Hydraulics: Control Mode|
+
+Table 7.103: “Hydraulic - Control mode” parameters
+
+Reference value (Pressure, volume, cylinder speed, cylinder position)
+
+# Hydraulic Wait time in Auto mode
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Table 7.108: Parameter “Hydraulic table delay time”
+
+# Hydraulic: Subsequent motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.109: Parameter “Hydraulic table next default index”
+
+# Hydraulic: Alternative motion block
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.110: Parameter “Hydraulic table next alternative index”
+
+# Hydraulic: Switching condition
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.111: Parameter “Hydraulic table state”
+
+# Hydraulic: Optional comparison value
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.112: Parameter “Hydraulic table comparison state”
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 220
+
+# Chapter overview
+
+# 8 Motion profile
+
+# Contents
+
+|8.1 Settings|222|
+|---|---|
+|8.2 Scaling / Units|223|
+|8.3 Basic settings|241|
+|8.4 Stop ramps|248|
+|8.5 Homing|249|
+|8.6 Jog mode|264|
+|8.7 Reference table|265|
+|8.8 Analog channel (ISA00 und ISA01)|270|
+|8.9 State machine|273|
+|8.10 Touch probe|275|
+|8.11 Synchronized motion|276|
+|8.12 Virtual Master|286|
+|8.13 Common master|287|
+|8.14 Cam group (CAM switch)|288|
+|8.15 Data handling|288|
+
+Brief description: This chapter describes the available motion profiles, as well as their basic and special settings.
+
+Navigation: ►Project tree ►Device setup ►Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 221
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 222
+
+# 8.1 Settings
+
+When it comes to the drive settings for motion profiles, the settings that need to be configured relate to the following: control, units, and commands.
+
+# Scaling profile
+
+- ① Standard/CiA 402
+- SERCOS
+- User defined
+
+# Setting of control and reference value channel:
+
+- l Control/Reference
+- l Profile
+
+# ②
+
+- l Interpolation
+- l Limitation
+- l Reference filter
+- l Smoothing
+
+# Stop ramps / Reaction
+
+- l to Shutdown
+- l to Disable
+- l to Halt
+
+# ③
+
+- l to Quick-stop
+- l For error
+
+Note: For control via an external PLC, BIT 4 must be set by P 155 - MPRO_DRVCOM_CFG if the drive is to adopt the error reaction (such as quick-stop). If this bit is not set, then the controller must assume the job of error handling!
+
+# Image 8.1: Motion profile screen
+
+Legend for “Motion profile” screen
+
+# 8.2 Scaling / Units
+
+- Homing method
+- Speeds (cam/zero point search)
+- Acceleration
+- Offset
+- Homing maximum distance
+
+# Jog speeds
+
+- Fast jog
+- Slow jog
+
+# Synchronized motion
+
+- Master configuration
+- Electronic gearing
+- Electronic cam plate
+
+# Details
+
+Additional settings for closed-loop control and reference
+
+Image 8.2: “Standardization profile selection” screen
+
+# Legend for “Motion profile” screen (continue)
+
+The wizard helps ensure that the application’s physical data will match the Servo Drive’s data. If you are using the ""Standard / CiA 402"" or ""SERCOS"" profile, the wizard will fully support the scaling definition process. If you use “custom” scaling instead, the wizard will close, as this type of configuration can only be set up directly in the parameter editor.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|283|0|MPRO_FG_Type|Factor group: Type selection DS402(0), Sercos (1), USER(2)|
+
+Table 8.1: Parameter """"
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 223
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 224
+
+# 8.2.1 Standard/CiA 402
+
+Image 8.3: “Standardization profile - Standard/CiA 402 - Units” screen
+
+Image 8.4: “Standardization profile - Standard/CiA 402 - Direction of rotation” screen
+
+NOTE
+
+l The scaling is entered using exponent syntax. Referred to the motor, the positive direction is clockwise as seen when looking at the motor shaft (A-side bearing plate).
+
+NOTE
+
+l When using interpolating operation modes (CSV, CSP, CST) via fieldbus, scaling must be performed using the CiA 402 scaling assistant.
+
+# Feed constant
+
+The path travelled is proportionate to one motor revolution or, when using a gear unit, to the output-side revolution.
+
+# Gear ratio (if available)
+
+Ratio of one motor revolution before the gearing to the number of revolutions on the gear output side. The values for the gear ratio are entered in the screen as integer fractions.
+
+# Position controller single-turn resolution
+
+The single-turn resolution of the position controller can be adapted variably to the application. A total of 32 bits are available. In the default setting, 20 of the bits are used for the single-turn position.
+
+# Image 8.5: “Standardization profile - Standard/CiA 402 - Feed/gearing/resolution/process format” screen
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 225
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 226
+
+|ID| | | | |Index Name| |Unit|Description|
+|---|---|---|---|---|---|---|---|---|
+| | | | |2252| |MPRO_402_|608FH|DS402 position encoder resolution|
+| | | | |2252|0|MPRO_402_|incr|Encoder increments|
+| | | | |2252|1|MPRO_402_|rev|Motor revolution|
+| | | | |2253| |MPRO_402_VelEncRes|6090H|DS402 velocity encoder resolution|
+| | | | |2253|0|MPRO_402_VelEncRes|incr/s|Encoder increments/s|
+| | | | |2253|1|MPRO_402_VelEncRes|rev/s|Motor revolution/s|
+| | | | |2254| |MPRO_402_GearRatio|6091H|DS402 gear ratio|
+| | | | |2254|0|MPRO_402_GearRatio|rev| |
+| | | | |2254|1|MPRO_402_GearRatio|rev| |
+| | | | |2255| |MPRO_402_|6092H|DS402 feed constant|
+| | | | |2255|0|Feed|mDegree|Feed|
+| | | | |2255|1|DriveShaftRev|rev|Drive train revolution|
+| | | | |2256| |MPRO_402_PosFact|6093H|DS402 position factor|
+| | | | |2256|0|MPRO_402_PosFact|incr| |
+| | | | |2256|1|MPRO_402_PosFact|mDegree| |
+| | | | |2257| |MPRO_402_VelFact|6094H|DS402 velocity encoder factor|
+| | | | |2257|0|MPRO_402_VelFact|incr/s| |
+| | | | |2257|1|MPRO_402_VelFact|rev/min| |
+| | | | |2258| |MPRO_402_VelFact1|6095H|DS402 velocity factor 1|
+| | | | |2258| |0|MPRO_402_VelFact1| |
+| | | | |2258| |1|MPRO_402_VelFact1| |
+| | | | |2259| |MPRO_402_VelFact2|6096H|DS402 velocity factor 2|
+| | | | |2259| |0|MPRO_402_VelFact2| |
+| | | | |2259|1|MPRO_402_VelFact2| | |
+| | | | |2260| |MPRO_402_AccFact|6097H|DS402 acceleration factor|
+| | | | |2260|0|MPRO_402_AccFact|incr/s/s| |
+| | | | |2260|1|MPRO_402_AccFact|rev/min/s| |
+
+Image 8.6: “‘Modulo (rotary table)’ process format” screen
+
+If you select “Modulo (rotary table)”, the indexing table function will be activated. For the circumferential length (= “upper position”), a limit value that defines the point at which a revolution is complete must be entered.
+
+# Table 8.2: “Standardization / units - Standard/CiA 402” parameter
+
+|163|0|MPRO_FG_Config|Factor group configuration|
+|---|---|---|---|
+|2236|0|MPRO_402_Polarity|607EH DS402 Polarity|
+|2246|0|MPRO_402_PosNotInd|6089H DS402 position notation index|
+|2247|0|MPRO_402_PosDimInd|608AH DS402 position dimension index|
+|2248|0|MPRO_402_VelNotInd|608BH DS402 velocity notation index|
+|2249|0|MPRO_402_VelDimInd|608CH DS402 velocity dimension index|
+|2250|0|MPRO_402_AccNotInd|608DH DS402 acceleration notation index|
+|2251|0|MPRO_402_AccDimInd|608EH DS402 acceleration dimension index|
+
+# 8.2.1.1 “As linear” process option
+
+The circumferential length is set to 360°. On reaching 360° the actual position is set to 0°. It is not necessary to set a negative setpoint for the direction reversal.
+
+Image 8.7: How the “as linear” indexing table function works
+
+Image 8.8: “‘Anticlockwise rotation’ process option” screen
+
+# 8.2.1.2 Process option “Left/right-hand rotation”
+
+Example of a revolution with a circumferential length of 360°, setting ""Direction of rotation left/right”:
+
+The circumferential length is set to 360°. In positive direction, after reaching 360° the actual position is set to 0°. ",What does the 'Modulo (rotary table)' process format enable in the MSD ServoDrive - DeviceHelp?,"It activates the indexing table function for applications requiring cyclic position reset, like rotary tables.","This format allows defining a circumferential length where the position resets upon completion, simulating endless rotation.",Enables continuous rotation control by resetting the position value after reaching a set upper limit.,"Ideal for rotary applications, it specifies when a revolution is complete, resetting the position to zero.",Facilitates operations like rotary indexing by marking revolution completion and automatically resetting position.

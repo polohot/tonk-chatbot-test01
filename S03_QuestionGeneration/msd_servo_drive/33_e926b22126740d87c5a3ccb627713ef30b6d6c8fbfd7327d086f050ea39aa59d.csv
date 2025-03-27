@@ -1,0 +1,2251 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",What is the default sampling cycle for the cyclical SSI encoder evaluation as described in the MSD ServoDrive - DeviceHelp document?,The default sampling cycle is 125 μs.,125 microseconds is the default setting for the cyclical SSI encoder evaluation.,"By default, the sampling cycle is set to 125 μs for encoder evaluation.","ENC_CH3_CycleCount defaults to 1, corresponding to a 125 μs sampling cycle.","For cyclical SSI encoder evaluation, the document specifies a default sampling cycle of 125 microseconds."
+1,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",How can SSI wire break monitoring be disabled according to the MSD ServoDrive - DeviceHelp document?,SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.,"To disable SSI wire break monitoring, set ENC_CH3_Mode to 0001h.",Disabling is achieved by configuring P 576[0] - ENC_CH3_Mode as 0001h.,The document states that setting ENC_CH3_Mode to 0001h disables SSI wire break monitoring.,P 576[0] - ENC_CH3_Mode must be set to 0001h to turn off SSI wire break monitoring.
+2,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",What are the two modes of an encoder as described in the MSD ServoDrive - DeviceHelp document?,The two modes are motor mode and field mode.,Encoders can operate in motor mode or field mode.,Motor mode and field mode are the two distinct encoder modes mentioned.,"The document distinguishes between motor mode, for motor commutation, and field mode, for additional encoders.","An encoder's operation is categorized into motor mode, synchronizing motor and encoder shafts, and field mode, used freely for scaling."
+3,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",What is the purpose of the test signal generator in sensorless control as per the MSD ServoDrive - DeviceHelp document?,The test signal generator ensures the Kalman filter can estimate position and speed information at low speeds.,"It enables position and speed estimation by the Kalman filter, even at very low speeds.","To facilitate the Kalman filter's estimation capabilities at low speeds, a test signal generator is used.",The generator is crucial for maintaining the Kalman filter's estimation accuracy down to a stop.,"Its role is to provide signals that allow the Kalman filter to estimate position and speed, especially at low speeds."
+4,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",What parameters must be configured for the test signal generator according to the MSD ServoDrive - DeviceHelp document?,"P 792[1] - Frequency, P 792[2] - d-Amplitude sinus, P 794[0] - SettlingTime, P 794[1] - ICOM_current, and P 794[2] - ICOM_time need to be configured.","Frequency, d-Amplitude sinus, SettlingTime, ICOM_current, and ICOM_time parameters must be set.","Configuring the test signal generator involves setting up frequency, amplitude, settling time, current, and time parameters.","The document specifies configuring frequency, amplitude on the d axis, settling time, current offset, and time for the test signal generator.","Essential parameters include the signal's frequency and amplitude, along with settling time, current, and activation time settings."
+5,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",What is the significance of the monoflop time in SSI wire break monitoring as described in the MSD ServoDrive - DeviceHelp document?,Monoflop time is when the SSI encoder must drive the data lines with a logic 0 for wire break monitoring.,"During monoflop time, data lines are driven with logic 0 to monitor for wire breaks.","It's the period the encoder actively drives data lines to logic 0, crucial for detecting wire breaks.","The document highlights monoflop time as critical for ensuring data lines are actively driven, enabling wire break detection.",Monoflop time allows the system to check if data lines are actively driven (no break) or open (break).
+6,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",What does the ENC_CH3_CycleCount parameter adjust in the MSD ServoDrive - DeviceHelp document?,ENC_CH3_CycleCount adjusts the timing for the cyclical SSI encoder evaluation.,"It modifies the sampling cycle for SSI encoder evaluation, defaulting to 125 μs.",This parameter allows slowing down the SSI encoder's evaluation timing.,The document states ENC_CH3_CycleCount can be used to extend the encoder evaluation cycle beyond the default 125 μs.,"Adjusting ENC_CH3_CycleCount changes the cyclical evaluation timing of the SSI encoder, with a default of 125 μs."
+7,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",How is encoder gearing utilized in motor mode according to the MSD ServoDrive - DeviceHelp document?,"In motor mode, encoder gearing synchronizes the motor shaft with the encoder shaft, defaulting to a 1:1 ratio.","Encoder gearing in motor mode ensures synchronization between motor and encoder shafts, typically at a 1:1 ratio.","The document describes motor mode usage of encoder gearing for shaft synchronization, with a default 1:1 setting.","It's used to align the motor shaft's position progress with the encoder's, usually at a 1:1 ratio.","Motor mode employs encoder gearing to match motor and encoder shaft movements, defaulting to a direct 1:1 correspondence."
+8,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",What are the recommended settings for a good test signal in sensorless control as per the MSD ServoDrive - DeviceHelp document?,A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis at about 400 Hz is recommended.,The document suggests a 400 Hz sinusoidal signal with 10% of the rated current on the d axis for optimal results.,"For an effective test signal, use a 400 Hz frequency and 10% of the rated current amplitude on the d axis.",Optimal settings include a sinusoidal signal at 400 Hz with a d axis current amplitude of 10% the rated current.,A good test signal configuration is a 400 Hz sinusoidal signal with 10% of the motor's rated current applied to the d axis.
+9,msd_servo_drive.txt,33,e926b22126740d87c5a3ccb627713ef30b6d6c8fbfd7327d086f050ea39aa59d,"The pseudo-standard described below has however been established for motor feedback interfaces. Moog supports this version first and foremost.
+
+|Parameter|Description|
+|---|---|
+|Clock and data inactive level|HIGH|
+|The current position must be internally stored|at the first falling clock edge|
+|No lengthened calculation time|(in first cycle)|
+|With the first rising clock edge|the encoder must shift the data to the first position bit to be transmitted (MSB)|
+|Rate|1 Mbps|
+|Data coding|Binary or Gray|
+|Reading data after the data bits end|is permissible|
+|Cycle|125 μs (i.e. internal position refresh rate ≪125 μs)|
+|Monoflop time|≥ 6 μs|
+|Data lines driven with logic 0|during monoflop time|
+|No parity bit| |
+|No error bits or other status bits| |
+|MultiTurn bits|≤14|
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 87
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+SSI wire break monitoring (bit monitoring during monoflop time) The Sel, Lines, MultiT and SingleT parameters are self-explanatory. If monitoring is enabled, the controller, as the SSI clock master, will read data for one more clock cycle after the data bits (reading data after the data bits end is permissible). The bit that the master reads in addition to the data bits this way comes from the SSI encoder’s monoflop time. At the time corresponding to this bit, the SSI encoder must drive the data lines with a logic 0. If the data lines on connector X8 are open, a logic 1 will be read here. The bit monitoring at this point makes it possible to determine whether the SSI data lines are being actively driven with a logic 0 at this point (no “wire break”) or are not (“wire break”). SSI wire break monitoring can be disabled by setting P 576[0] - ENC_CH3_Mode to 0001h.
+
+# Mode parameters and CycleCount parameters
+
+P 576[0] - ENC_CH3_Mode can be used to run a parity evaluation after the data. In addition, ENC_CH3_Mode makes it possible to run special SSI encoders that deliver one or more special bits after the data. In this case, the MSD Servo Drive will not evaluate these bits – this mode is meant to make it possible to work with SSI encoders that require for these bits to be sampled. P 636[0] - ENC_CH3_CycleCount makes it possible to run slower SSI encoders that cannot handle the required cycle of 125 μs. The control characteristics will deteriorate when using this type of SSI encoder, which is why doing so is not recommended.
+
+Following is a list of what some of the terms in the table below stand for:
+
+- Data = Sequence of all data bits
+- EncObs = Wire break bit
+- Nothing = No bit
+- POdd = Odd parity bit
+- PEven = Even parity bit
+- Free = A free bit
+
+**Table 6.25: Encoder configuration channel 3 (X8) - SSI parameters**
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|507|ENC_CH3_Sel = 2|=SSI(2)| |
+|573|ENC_CH3_MultiT|Number of MultiTurn bits (absolute encoder)| |
+|574|ENC_CH3_SingleT|Number of SingleTurn bits (absolute encoder)| |
+|575|ENC_CH3_Code|Code selection (SSI absolute encoder)| |
+|576|ENC_CH3_Mode|Mode selection (SSI absolute encoder)| |
+|584|ENC_CH3_MTBase|Minimum MultiTurn position (SSI absolute encoder)| |
+|585|ENC_CH3_MTEnable|encoder| |
+|600|ENC_CH3_Position|inc|Position encoder channel 1|
+|636|ENC_CH3_CycleCount|Channel 3: Position encoder sampling cycle (n x 125 μsec)| |
+
+# 6 Encoder
+
+# 6.7.7 Encoder gearing
+
+Encoder channels Ch1 to Ch3 each feature their own encoder gearing, while encoder channel Ch4 (virtual encoders) does not feature any encoder gearing.
+
+|ID|Value Name|
+|---|---|
+|576|ENC_CH3_Mode|
+|0000h|Data_EncObs|
+|0001h|Data_Nothing|
+|0002h|Data_POdd_EncObs|
+|0003h|Data_Free_POdd_EncObs|
+|0004h|Data_POdd|
+|0005h|Data_Free_POdd|
+|0006h|Data_Free_EncObs|
+|0007h|Data_Free_Free_EncObs|
+|000Ch|Data_PEven_EncObs|
+|000Dh|Data_Free_PEven_EncObs|
+|000Eh|Data_PEven|
+|000Fh|Data_Free_PEven|
+|001Fh|Data_Free|
+|0020h|Data_Free_Free|
+|0021h|Data_Free_Free_Free|
+|0022h|Data_Free_Free_Free_Free|
+
+Table 6.26: SSI mode parameters (all other values are reserved)
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): ENC_CH3_CycleCount can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, ENC_CH3_CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and must only be used when necessary.
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|510|0|ENC_CH1_Num|Denominator of channel 1|
+|511|0|ENC_CH1_Denom|Numerator of channel 1|
+|512|0|ENC_CH2_Num|Denominator of channel 2|
+|513|0|ENC_CH2_Denom|Numerator of channel 2|
+|514|0|ENC_CH3_Num|Denominator of channel 3|
+|515|0|ENC_CH3_Denom|Numerator of channel 3|
+
+NOTE
+
+Please read the general information on encoder gearing found in Section ""Introduction"" on page 52 beforehand.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 89
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+Parameters
+
+6.8 Channel 4: Virtual encoder
+
+- P 500[0] - ENC_CH1_ActVal[0].SingleTurn and
+- P 500[1] - ENC_CH1_ActVal[1].MultiTurn
+
+are used, for example, to indicate the current position value at the output for encoder channel Ch1. These parameters can also be used for checking purposes during commissioning.
+
+NOTE
+
+- This value at the encoder channel output...
+
+The encoder gearing ratio has a multiplicative effect on the position progress, i.e. either “expanding” or “compressing”.
+
+A distinction can be drawn between an encoder’s motor mode and field mode:
+
+- Motor mode: The encoder is the motor commutation encoder
+- Field encoder: The encoder is not the motor commutation encoder (instead, it is an additional encoder in the “field”, e.g. used for position control purposes)
+
+In motor mode, the encoder gearing is used exclusively to synchronize the motor shaft with the encoder shaft (default: 1:1 if the shaft is the same). In this case, a position progress value will be passed to the system at the encoder channel output. This value will be proportional to the position progress of the motor’s commutation (adjusted for the pole pair number).
+
+In field mode, the encoder gearing can be used “freely” for scaling purposes.
+
+Image 6.6: Virtual encoder screen
+
+# 6.8.1 Sensorless control synchronous motor
+
+NOTE
+
+Sensorless control with an expanded Kalman filter requires the following firmware versions:
+
+- MSD Servo Drive: V123-95 or higher
+- MSD Single-Axis Servo Drive Compact: V1.30-98
+
+|Value|Value replacement text|Description|
+|---|---|---|
+|4|START_KAL|Starts and initializes the Kalman filter without determining the noise covariance matrices and without configuring the test signal generator|
+|5|STOP_KAL|Stop encoder module CH4|
+|6|CALC_RQ|Calculates noise covariance matrices R and Q based on the configured motor parameters|
+|0|READY|Waits for input|
+|1|TAKEOVER_ENC CH1|Switches to encoder channel 1 in real-time|
+|2|TAKEOVER_ENC CH4|Switches to encoder channel 4 in real-time|
+|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|General initialization for encoder channel 4 with sensorless control; the following are carried out during this initialization routine:|
+|3|PRESET|The test signal generator is configured|
+|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|The Q matrix, R matrix are calculated. The Kalman filter is initialized.|
+
+# Table 6.28: Control word ENC_CH4_Ctrl (P783)
+
+|P No.|Index Name|Unit|Description|
+|---|---|---|---|
+|339|CON_SCON_Kalman| |Kalman: Setting|
+|0|Tf_Kalman|ms|Kalman: Integration time|
+|1|KpScale_Kalman|%|Kalman: Gain|
+|350|CON_SCALC_SEL| |Used to select the speed calculation method|
+|0|SEL_ObserverMethod| |Selection of speed calculation method|
+|508|ENC_CH4_Sel| |Selection of encoder type|
+|783|ENC_CH4_Ctrl| |Control|
+|790|ENC_CH4_Kalman_R| |Sensorless control: R-Matrix|
+|791|ENC_CH4_Kalman_Q| |Sensorless control: Q-Matrix|
+|791|Q[0,0]| |Sensorless control: Q-Matrix (id)|
+|791|Q[1,1]| |Sensorless control: Q-Matrix (iq)|
+|791|Q[2,2]| |Sensorless control: Q-Matrix (omega)|
+|791|Q[3,3]| |Sensorless control: Q-Matrix (epsilon)|
+|791|Q[4,4]| |Sensorless control: Q-Matrix (T Last)|
+
+# Table 6.29: “Sensorless synchronous motor control” parameters
+
+|ID No.|Date|Device|
+|---|---|---|
+|CB40859-001|11/2020|MSD ServoDrive - DeviceHelp|
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 92
+
+|P No.|Index Name| |Unit|Description| |
+|---|---|---|---|---|---|
+|792|2 d-Amplitude sinus|A|SC test signal: d current amplitude of sinusoidal signal| | |
+|792|3 q-Amplitude sinus|A|SC test signal: q current amplitude of sinusoidal signal| | |
+|792|4 PRBS time| |ms|SC test signal: PRBS signal time| |
+|792|5 d-Amplitude PRBS|A|SC test signal: d current amplitude of PRBS signal| | |
+|792|6 q-Amplitude PRBS|A|SC test signal: q current amplitude of PRBS signal| | |
+|792|7 Full signal range| |rpm|SC test signal: Full test signal amplitude range| |
+|792|8 Increasing signal range| |rpm|SC test signal: Linear transition range up until which the test signal is reduced to 0| |
+|792|9 d-current offset|A|SC test signal: d current offset of sinusoidal signal| | |
+|794|ENC_CH4_Kalman_ICOM| | |Sensorless control: Auto commutation| |
+|0 SettlingTime| | |ms|SC auto commutation: Rise time| |
+|794|1 ICOM_current| |A|SC auto commutation: Current offset| |
+|794|2 ICOM_time| |ms|SC auto commutation: Time (0 = OFF)| |
+|794|3 ICOM_1st_L_ident| |mH|SC auto commutation: First measured inductance| |
+|794|4 ICOM_2nd_L_ident| |mH|SC auto commutation: Second measured inductance| |
+|796|ENC_CH4_Kalman_isd_add|Sensorless control: Additive load-dependent d current| | | |
+|0 Amplitude|A| | |SC load-dependent d current: Amplitude| |
+|796|1 Full signal range| | |A|SC load-dependent d current: q current at which the maximum d current is injected|
+|796|2 Increasing signal range| | |A|SC load-dependent d current: Transition range up until which the d current is reduced to 0|
+|796|3 PT1_Tfil| |ms|SC load-dependent d current: Filter time for d current (PT1)| |
+|797|0 ENC_CH4_Kalman_| | |Sensorless control: Reference encoder| |
+
+Table 6.29: “Sensorless synchronous motor control” parameters (continue)
+
+P 792[1] - Frequency and P 792[2] - d-Amplitude sinus will be used as the measuring frequency and measuring amplitude. In addition, P 794[0] - SettlingTime, P 794[1] - ICOM_current and P 794[2] - ICOM_time need to be configured.
+
+# 6.8.1.2 Test signal generator
+
+The test signal generator is required in order to ensure that the Kalman filter will be able to estimate position and speed information even at low speeds (all the way to a stop). There are various signals available for this purpose.
+
+The forms available are a sinusoidal signal and a 32-bit PRBS signal. The frequencies can be freely selected within a range of 100 Hz to 1000 Hz. In addition, there is the option of subjecting the d or q axis to the signals either individually (in an additive manner) or in combination (in a multiplicative manner).
+
+P 792[0] - Signal: 0 = No measuring signal; 1 = Addition; 2 = Multiplication
+
+When using the additive solution, each signal will have its own amplitude. In contrast, when using the combination solution, only the amplitude value of the sinusoidal signal will be used.
+
+In addition, scaling for the test signal amplitudes has been implemented. This ensures that the signal can be applied gradually over a specified speed range. The following is recommended as a good test signal: A sinusoidal signal with a current amplitude of approx. 10% of the rated current on the d axis with a frequency of approx. 400 Hz. (P 792[0] = 1; P 792[1] = 400; P 792[2] = 10% Irated) can be defined as necessary.
+
+In the case of problematic motors, it can be useful to inject an additive d current. This current can be configured to be dependent on the speed (P 792[9] - d current offset) or load (796). The following two diagrams use examples to illustrate the influence that the ramp parameters have on the additive d components. Please note, however, that this current will also increase motor losses, meaning it should only be used in exceptional cases.
+
+",What distinguishes motor mode from field mode in encoder usage according to the MSD ServoDrive - DeviceHelp document?,"Motor mode uses the encoder for motor commutation, while field mode uses it for additional position control purposes.","In motor mode, the encoder serves commutation; in field mode, it's an extra encoder for position control.","The document differentiates motor mode, for commutation, from field mode, for supplementary position tracking.","Motor mode integrates the encoder with motor commutation, whereas field mode applies it freely for scaling in position control.","Encoders in motor mode are tied to commutation, while in field mode, they're utilized independently for position control scaling."

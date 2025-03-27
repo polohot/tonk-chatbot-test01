@@ -1,0 +1,2551 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A_NUMBER,A,helpfulness,correctness,coherence,complexity,verbosity
+0,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How can you disable wire break monitoring for SSI encoders?,A1,Set Mode=1 in the encoder parameters to disable wire break monitoring.,1.0234375,1.046875,3.15625,1.203125,0.10986328125
+1,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How can you disable wire break monitoring for SSI encoders?,A2,Wire break monitoring is disabled when Mode is set to 1 for SSI encoders.,2.046875,2.140625,3.53125,1.4453125,0.240234375
+2,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How can you disable wire break monitoring for SSI encoders?,A3,"To disable, configure Mode to 1 in the SSI encoder settings.",1.03125,1.0625,3.140625,1.21875,0.10009765625
+3,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How can you disable wire break monitoring for SSI encoders?,A4,Disabling is achieved by setting the Mode parameter to 1.,0.828125,0.91796875,3.171875,1.1875,0.12890625
+4,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How can you disable wire break monitoring for SSI encoders?,A5,Set Mode=1 to turn off wire break monitoring in SSI encoder configurations.,1.3359375,1.4765625,3.21875,1.234375,0.0693359375
+5,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How is Sin/Cos wire break monitoring disabled?,A1,Set EncObsMin to 0 to disable Sin/Cos wire break monitoring.,2.125,2.359375,3.5,1.25,0.296875
+6,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How is Sin/Cos wire break monitoring disabled?,A2,Disabling is done by setting the EncObsMin parameter to 0.,2.078125,2.15625,3.59375,1.234375,0.3671875
+7,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How is Sin/Cos wire break monitoring disabled?,A3,"To turn off, configure EncObsMin to 0 in the encoder settings.",2.046875,2.15625,3.484375,1.2890625,0.365234375
+8,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How is Sin/Cos wire break monitoring disabled?,A4,Sin/Cos wire break monitoring is disabled when EncObsMin is 0.,2.296875,2.359375,3.671875,1.2109375,0.396484375
+9,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",How is Sin/Cos wire break monitoring disabled?,A5,Set EncObsMin=0 to disable the monitoring of Sin/Cos wire breaks.,2.34375,2.359375,3.515625,1.390625,0.359375
+10,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the encoder type options available in parameter P 505[0] - ENC_CH1_Sel?,A1,"The options are OFF (0), SINCOS(1), SSI(2), TTL(3), EnDat(4), and HALL(5).",2.640625,2.609375,3.65625,1.40625,0.609375
+11,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the encoder type options available in parameter P 505[0] - ENC_CH1_Sel?,A2,"Available encoder types include OFF, SINCOS, SSI, TTL, EnDat, and HALL.",2.453125,2.40625,3.53125,1.453125,0.55859375
+12,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the encoder type options available in parameter P 505[0] - ENC_CH1_Sel?,A3,"P 505[0] offers six choices: OFF, SINCOS, SSI, TTL, EnDat, and HALL.",2.375,2.46875,3.515625,1.59375,0.486328125
+13,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the encoder type options available in parameter P 505[0] - ENC_CH1_Sel?,A4,"You can select from OFF, SINCOS, SSI, TTL, EnDat, or HALL in P 505[0].",2.40625,2.59375,3.515625,1.5390625,0.58984375
+14,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the encoder type options available in parameter P 505[0] - ENC_CH1_Sel?,A5,"Options in P 505[0] range from OFF to HALL, covering SINCOS, SSI, TTL, and EnDat.",1.9375,2.171875,3.328125,1.5234375,0.416015625
+15,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the parameters needed for linear encoders instead of MultiT and SingleT?,A1,PeriodLen and DigitalResolution are required for linear encoders.,2.296875,2.34375,3.578125,1.359375,0.00836181640625
+16,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the parameters needed for linear encoders instead of MultiT and SingleT?,A2,Linear encoders use PeriodLen and DigitalResolution in place of MultiT and SingleT.,2.609375,2.625,3.71875,1.5078125,0.2236328125
+17,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the parameters needed for linear encoders instead of MultiT and SingleT?,A3,"For linear encoders, specify PeriodLen and DigitalResolution instead.",2.578125,2.640625,3.796875,1.4765625,0.1171875
+18,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the parameters needed for linear encoders instead of MultiT and SingleT?,A4,PeriodLen and DigitalResolution replace MultiT and SingleT for linear encoders.,2.484375,2.5,3.640625,1.453125,0.1357421875
+19,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What are the parameters needed for linear encoders instead of MultiT and SingleT?,A5,"Linear encoders necessitate PeriodLen and DigitalResolution, not MultiT and SingleT.",2.34375,2.34375,3.703125,1.40625,0.1513671875
+20,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does parameter P 540[0] - ENC_CH1_Abs determine?,A1,"It selects the absolute position interface, with options like OFF, SSI, ENDAT, HIPER, and SSI_CONT.",2.296875,2.21875,3.65625,1.515625,0.54296875
+21,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does parameter P 540[0] - ENC_CH1_Abs determine?,A2,"P 540[0] determines the absolute value interface, including OFF, SSI, ENDAT, HIPER, and SSI_CONT.",2.5625,2.71875,3.703125,1.5078125,0.546875
+22,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does parameter P 540[0] - ENC_CH1_Abs determine?,A3,"This parameter sets the absolute position interface, offering OFF, SSI, ENDAT, HIPER, or SSI_CONT.",2.359375,2.34375,3.625,1.5703125,0.5546875
+23,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does parameter P 540[0] - ENC_CH1_Abs determine?,A4,"The absolute position interface is selected here, with choices such as OFF, SSI, ENDAT, HIPER, and SSI_CONT.",2.34375,2.40625,3.625,1.4765625,0.54296875
+24,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does parameter P 540[0] - ENC_CH1_Abs determine?,A5,"Determines the absolute value interface selection, options are OFF, SSI, ENDAT, HIPER, and SSI_CONT.",2.578125,2.65625,3.734375,1.578125,0.53125
+25,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does the default value of EncObsMin signify?,A1,The default value of 0.2 represents a 20% calculated amplitude value for wire break monitoring.,2.234375,2.296875,3.375,1.484375,0.52734375
+26,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does the default value of EncObsMin signify?,A2,0.2 default means a 20% amplitude threshold for monitoring Sin/Cos wire breaks.,1.9765625,1.9140625,3.125,1.453125,0.45703125
+27,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does the default value of EncObsMin signify?,A3,EncObsMin's default of 0.2 indicates a 20% amplitude value for break detection.,2.03125,2.0625,3.28125,1.40625,0.478515625
+28,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does the default value of EncObsMin signify?,A4,A default setting of 0.2 in EncObsMin stands for a 20% amplitude calculation.,1.796875,1.890625,3.296875,1.28125,0.36328125
+29,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What does the default value of EncObsMin signify?,A5,The 0.2 default value corresponds to a 20% amplitude for monitoring wire integrity.,2.34375,2.46875,3.421875,1.453125,0.37890625
+30,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What happens when MTEnable is set to 1?,A1,"A multi-turn encoder is used as a single-turn encoder, typically for testing.",0.69921875,0.240234375,2.9375,0.9375,0.306640625
+31,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What happens when MTEnable is set to 1?,A2,Setting MTEnable to 1 allows a multi-turn encoder to function as a single-turn encoder.,0.416015625,0.32421875,3.046875,0.984375,0.353515625
+32,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What happens when MTEnable is set to 1?,A3,It enables the use of a multi-turn encoder in single-turn mode for testing purposes.,1.5390625,1.5625,3.296875,1.140625,0.380859375
+33,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What happens when MTEnable is set to 1?,A4,"When set to 1, MTEnable makes a multi-turn encoder operate as a single-turn one.",1.28125,1.1484375,3.28125,1.15625,0.435546875
+34,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What happens when MTEnable is set to 1?,A5,"This setting converts a multi-turn encoder's operation to single-turn, mainly for tests.",0.92578125,0.89453125,3.296875,0.9296875,0.24609375
+35,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the effect of setting MTBase to 0?,A1,"Initialization starts from 0 to max, with the discontinuity at 0.",0.87890625,0.67578125,2.578125,1.0078125,0.267578125
+36,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the effect of setting MTBase to 0?,A2,"Setting MTBase to 0 initializes values from 0 to max, placing discontinuity at 0.",1.984375,2.015625,3.296875,1.3203125,0.494140625
+37,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the effect of setting MTBase to 0?,A3,"It causes initialization to range from 0 to max, with discontinuity at the start.",1.6328125,1.6171875,3.203125,1.2265625,0.353515625
+38,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the effect of setting MTBase to 0?,A4,"With MTBase at 0, the range is 0 to max, and discontinuity is at 0.",2.140625,2.34375,3.53125,1.15625,0.3828125
+39,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the effect of setting MTBase to 0?,A5,"Initialization spans 0 to max, and the point of discontinuity is at 0 when MTBase is 0.",1.4453125,1.4375,3.078125,1.1796875,0.50390625
+40,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the purpose of the MTBase parameter?,A1,MTBase adjusts the point of discontinuity in multi-turn absolute value initialization.,0.953125,0.640625,2.984375,1.296875,0.32421875
+41,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the purpose of the MTBase parameter?,A2,It defines where the discontinuity point is in multi-turn value initialization.,0.984375,0.55859375,2.921875,1.1953125,0.279296875
+42,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the purpose of the MTBase parameter?,A3,"MTBase changes how multi-turn values are initialized, affecting the discontinuity point.",1.375,0.98046875,3.015625,1.375,0.36328125
+43,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the purpose of the MTBase parameter?,A4,"This parameter sets the initialization range for multi-turn values, altering the discontinuity point.",1.3046875,1.0546875,3.03125,1.3359375,0.34765625
+44,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the purpose of the MTBase parameter?,A5,"MTBase modifies the multi-turn value initialization, impacting the discontinuity location.",1.5625,1.1796875,3.234375,1.3359375,0.37890625
+45,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the significance of the PeriodLen parameter for linear encoders?,A1,PeriodLen specifies the length of an analog Sin/Cos segment in nanometers.,2.1875,1.984375,3.3125,1.421875,0.2314453125
+46,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the significance of the PeriodLen parameter for linear encoders?,A2,It defines the length of each Sin/Cos segment in nm for linear encoders.,2.375,2.34375,3.375,1.4609375,0.25
+47,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the significance of the PeriodLen parameter for linear encoders?,A3,"For linear encoders, PeriodLen indicates the Sin/Cos segment length in nanometers.",2.484375,2.265625,3.4375,1.421875,0.3046875
+48,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the significance of the PeriodLen parameter for linear encoders?,A4,This parameter sets the Sin/Cos segment's length in nm for linear encoders.,2.421875,2.359375,3.3125,1.5,0.306640625
+49,msd_servo_drive.txt,18,703d9a68899ae89a915fd0c8f33b1e16771ec3056e666e908862d1ef998171df,"For details see Section ""Signal correction GPOC (Gain Phase Offset Correction)"" on page 74.
+
+|P No.|Index|Name / Settings|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Encoder type selection|
+| | |OFF (0)| |Function disabled|
+| | |SINCOS(1)| |Sin/Cos encoder|
+| | |SSI(2)| |Digital SSI encoder|
+| | |TTL(3)| |TTL encoder|
+| | |EnDat(4)| |Digital EnDat encoder (2.1 or 2.2)|
+| | |HALL(5)| |Digital Hall sensor|
+|540|0|ENC_CH1_Abs| |Absolute position interface selection|
+| | |OFF (0)| |No additional absolute value interface|
+| | |SSI(1)| |SSI interface|
+| | |ENDAT(2)| |EnDat interface|
+| | |HIPER(3)| |HIPERFACE® interface|
+| | |SSI_CONT(4)| |SSI-interface with 1ms continuous clock|
+|555|0|ENC_CH1_Info| |Encoder information|
+
+# 6.5.1 Main parameters for encoder channel Ch1
+
+The following table lists the most important parameters for the Ch1 encoder channel. These parameters are then described in the chapters for selecting a special encoder with P 505[0] - ENC_CH1_Sel and P 540[0] - ENC_CH1_Abs.
+
+- Some of the parameters are self-explanatory, such as Lines, MultiT and SingleT.
+- Code and Mode are used to set SSI modes. If Mode=1, wire break monitoring (if any) will be disabled, for example. If Mode = 0, it will be enabled instead (default).
+- In the case of linear encoders, PeriodLen and DigitalResolution will be needed instead of MultiT and SingleT.
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|505|0|ENC_CH1_Sel| |Main selection on encoder channel Ch1|
+|540|0|ENC_CH1_Abs| |Absolute value interface for one-time reading|
+|542|0|ENC_CH1_lines| |Number of analog Sin/Cos lines per revolution|
+|543|0|ENC_CH1_MultiT| |(TTL lines as well)|
+|544|0|ENC_CH1_SingleT| |Number of multi-turn bits for the digital interface|
+|545|0|ENC_CH1_Code| |Number of single-turn bits for the digital interface|
+|546|0|ENC_CH1_Mode| |Code selection (for SSI encoders) (binary, Gray)|
+|547|0|ENC_CH1_MTBase| |Mode selection (for SSI encoders) Definition of point of discontinuity in multi-turn|
+|548|0|ENC_CH1_MTEnable| |Enable MultiTurn use (negative logic, 1=MToff)|
+|551|0|ENC_CH1_EncObsMin| |Comparison value for Sin/Cos wire break monitoring|
+|553|0|ENC_CH1_PeriodLen|nm|Linear encoders: Length of an analog Sin/Cos segment in nm (nanometres)|
+|554|0|ENC_CH1_|nm|Linear encoders: Length of a digital increment in|
+|616|0|DigitalResolution|nm|(nanometres)|
+| | |ENC_CH1_CycleCount| |Sampling cycle in: n x 125 μ (microseconds)|
+
+MTBase, when used with its default setting, will ensure that the absolute value initialization “starts up with plus-minus”: I.e. the encoder’s multiturn value range from 0 to max will be mapped to -1/2max to +1/2max; the second half of the measuring range will be initialized as negative; in this case, the point of discontinuity will be found at 1/2max. --- This can be changed with MTBase! --- When MTBase=0, the absolute value initialization will, for example, “start up with zero to max”: I.e. the
+
+encoder’s multi-turn value range from 0 to max will be mapped to 0 to max; the second half of the measuring range will be initialized as positive; in this case, the point of discontinuity will be found at 0.
+
+If you set MTEnable to 1, you can use an available multi-turn encoder as a single-turn encoder (this is only needed for testing purposes).
+
+If you set EncObsMin to 0, Sin/Cos wire break monitoring will be disabled. The default value is 0.2 (20%) and stands for a calculated amplitude value (calculated using the two Sin/Cos signals) of x = sqrt(a2 + b2). ",What is the significance of the PeriodLen parameter for linear encoders?,A5,PeriodLen determines the analog Sin/Cos segment length in nanometers for linear encoders.,2.515625,2.3125,3.421875,1.4453125,0.271484375

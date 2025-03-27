@@ -1,0 +1,1031 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",How can the Windows taskbar be kept hidden during process mode when standalone applications are called?,Deactivate the 'Keep the taskbar on top of other windows' check box in 'Taskbar and Start Menu Properties' in the Windows operating system.,"To hide the taskbar during process mode, ensure the 'Keep the taskbar on top of other windows' option is unchecked in the Windows settings.",The taskbar remains hidden by disabling the 'Keep the taskbar on top of other windows' setting within the Windows operating system's taskbar properties.,"For a hidden taskbar during process mode, the Windows setting 'Keep the taskbar on top of other windows' must be turned off.",Ensure the taskbar doesn't appear over applications by unchecking 'Keep the taskbar on top of other windows' in Windows' taskbar settings.
+1,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",What is recommended to reduce the load for OS servers not used as operating stations?,Select the 'SIMATIC Server' server layout in the OS project editor and deactivate the graphics runtime in the startup list.,"To reduce load, use the 'SIMATIC Server' layout in the OS project editor and disable graphics runtime applications like SFCRT in the startup list.",Reducing server load involves choosing the 'SIMATIC Server' layout and turning off graphics runtime and related applications in the startup settings.,Opt for the 'SIMATIC Server' layout and deactivate graphics runtime applications to lessen the load on OS servers.,Minimize OS server load by selecting the 'SIMATIC Server' layout and disabling unnecessary graphics runtime applications.
+2,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",What are the recommended hard disk space and system performance values for OS Runtime operation?,"System partition (C) should have more than 20% free space, processor utilization under 30%, and available physical memory over 200 MB.","Ensure over 20% free space on system partition, CPU usage below 30% on average, and more than 200 MB of free physical memory.","For optimal operation, maintain >20% free disk space on C:, <30% CPU usage, and >200 MB available RAM.","Key requirements: System partition with >20% free space, average CPU usage <30%, and available memory >200 MB.","Keep system partition's free space above 20%, processor utilization under 30%, and ensure over 200 MB of physical memory is available."
+3,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",How can you check the load of messages for an OS server during OS Runtime?,Configure an Alarm Control as a hitlist in a process picture to ensure the load is less than 10 messages per second.,"Monitor message load by setting up an Alarm Control hitlist in a process picture, keeping it under 10 messages per second.","To verify message load, use an Alarm Control configured as a hitlist, ensuring it doesn't exceed 10 messages per second.",Ensure constant message load is below 10 per second by checking with an Alarm Control hitlist in a process picture.,An Alarm Control hitlist in a process picture can help confirm the message load stays under 10 messages per second.
+4,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",What is the recommended tag logging limit for an OS server during OS Runtime?,"Tag logging should be less than 1500 values per second, monitored via @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND.",Keep tag logging under 1500 values per second by watching the @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND tags.,Monitor @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND to ensure tag logging doesn't surpass 1500 values per second.,"For tag logging, maintain a limit below 1500 values per second, checked through specific internal tags.",Ensure the OS server's tag logging remains under 1500 values per second by monitoring designated internal tags.
+5,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",What factors affect the wait times when opening pictures/faceplates in AS-OS communication?,"Wait times depend on the AS load providing data for the picture/faceplate, leading to varying display times across automation systems.",The load of the automation system supplying data influences how long it takes to open pictures or faceplates.,Display delays for pictures/faceplates are affected by the data-providing AS's current load.,Variations in picture/faceplate display times are due to differences in the AS's load from which data is sourced.,The time taken to open pictures or faceplates can vary based on the load of the associated automation system.
+6,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",How many levels can the hierarchical structure of the plant have in the picture hierarchy?,"The plant's hierarchical structure can have up to 8 levels, with navigation between process pictures done via buttons.","Up to 8 levels are possible in the plant's hierarchical structure, using buttons for navigating process pictures.",Navigation buttons allow movement through up to 8 levels in the plant's hierarchical picture structure.,The picture hierarchy supports a plant structure with a maximum of 8 navigable levels.,"Buttons facilitate navigation through the plant's hierarchical structure, which can extend up to 8 levels."
+7,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",Where are process pictures assigned during AS engineering for navigation?,"Process pictures are assigned in the SIMATIC Manager during AS engineering, with the option to change the displayed OS area name.","During AS engineering, the SIMATIC Manager is where process pictures are assigned for navigation, including naming adjustments.","The SIMATIC Manager handles the assignment of process pictures for navigation, allowing for name changes of the OS area.","Navigation assignments for process pictures are made in the SIMATIC Manager, with flexibility in naming the OS area.",AS engineering in the SIMATIC Manager includes assigning process pictures for navigation and setting the OS area name.
+8,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",How is the picture hierarchy (Picture Tree) generated?,The Picture Tree is automatically created during OS compilation based on the plant hierarchy settings in the SIMATIC Manager.,OS compilation automatically generates the Picture Tree according to the SIMATIC Manager's plant hierarchy configurations.,"Based on SIMATIC Manager settings, the Picture Tree is automatically formed during the OS compilation process.",The automatic generation of the Picture Tree during OS compilation reflects the plant hierarchy defined in the SIMATIC Manager.,"During OS compilation, the Picture Tree is auto-generated, mirroring the plant hierarchy from the SIMATIC Manager."
+9,pcs7_compendium_part_a_en-US_en-US.txt,97,05e181f06fbbb7bd7f7a9d205df3583616980146f21339d470c4a265dee4bfa6,"To ensure the Windows taskbar remains hidden during process mode even when standalone applications are called (e.g. ""Picture selection by name"", ""Picture selection by process tag"", ""User permission"", or ""SFC visualization""), the ""Keep the taskbar on top of other windows"" check box must be deactivated in the Windows operating system under ""Taskbar and Start Menu Properties"".
+
+# 10.1.9 Graphics Runtime on the OS servers
+
+The following alternative measures are recommended for the purpose of reducing the load for OS servers which are not used as operating stations at the same time:
+
+- Selecting the ""SIMATIC Server"" server layout in the OS project editor in the ""Layout"" tab. Generally applies to all OS servers, in particular OS servers with more than 4 OS clients. Granting of rights in accordance with the User Administrator and locking to prevent unauthorized key combinations is possible with this.
+- Deactivation of the graphics runtime and the associated applications, e.g. SFCRT (visualization of SFC blocks) in the startup list in ""Computer properties"". Additional applications that have been added through the individual WinCC editors of the startup list cannot be removed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.1 Project settings
+
+# 10.1.10 OS resource utilization
+
+The limiting values recommended in this section for OS servers or OS single stations are based on empirical values. They are listed as OS quantity structures in the event of Alarm Logging and Tag Logging in the PCS 7 catalog.
+
+# Work station
+
+After completion of the OS engineering, check while OS Runtime is running to see if enough hard disk space is available for operation of the Microsoft SQL Server.
+
+System partition (C): The available hard disk space must be greater than 20%.
+
+# Task Manager
+
+After completion of the OS engineering, check while OS Runtime is running to see if the following values are adhered to within the Task Manager:
+
+- System performance: Processor utilization less than 30% on average
+- System performance: Available physical memory greater than 200 MB
+
+# Alarm Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the constant load of messages for an OS server is less than 10 messages per second. The check can be made by additional configuration of an Alarm Control as a hitlist in a process picture.
+
+# Tag Logging
+
+After completion of the OS engineering, check while OS Runtime is running to see if the tag logging for an OS server is less than 1500 values per second. For this monitor the internal tags @TLGRT_TAGS_PER_SECOND and @TLGRT_AVERAGE_TAGS_PER_SECOND in the TagLoggingRT group.
+
+# Note
+
+Check the configuration as well as the associated infrastructure if these limiting values are being reached or even exceeded.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+239
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# AS-OS communication
+
+The wait times when opening pictures/faceplates depend on, among other things, the load of the AS from which the data for the corresponding picture/faceplate is obtained. A faceplate can therefore have different display times in two different automation systems when the associated block is activated.
+
+You can find further information on diagnosing the reasons and on taking corrective actions in the ""How do you shorten any delays in the display of screens/faceplates in the PCS 7 OS?"" FAQ.
+
+# Increased availability as part of Lifecycle agreements
+
+When limits are exceeded, appropriate measures must be taken to reduce the load of the OS server and to guarantee the performance of OS Runtime.
+
+# 10.2.1 Structure of the picture hierarchy
+
+You can create a hierarchical structure for the plant with up to 8 levels. Buttons are used to navigate between the process pictures.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 10.2 Visualization interface
+
+The process pictures are assigned during AS engineering of the navigation in the SIMATIC Manager. The name displayed for the OS area can also be changed in the SIMATIC Manager. As a rule, however, the same name as that shown in the plant view is used.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+241
+
+# 10.2 Visualization interface
+
+The picture hierarchy (Picture Tree) is automatically generated during OS compilation in accordance with the plant hierarchy settings in the SIMATIC Manager.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.2 Visualization interface
+
+# 10.2.2 Design of process pictures
+
+# Introduction
+
+In general, process pictures are created in accordance with a set of specifications which are drawn up in close collaboration with the customer. Sector- and company-specific standards and guidelines must be taken into account.
+
+",What considerations are important when designing process pictures?,"Design should follow customer-collaborated specifications, incorporating sector- and company-specific standards and guidelines.","Process pictures must adhere to specifications developed with the customer, including relevant industry and company standards.",Creating process pictures requires alignment with customer specifications and compliance with applicable standards and guidelines.,Designing process pictures involves adhering to jointly developed specifications and observing sector-specific standards.,The design of process pictures should be guided by customer agreements and incorporate necessary standards and guidelines.

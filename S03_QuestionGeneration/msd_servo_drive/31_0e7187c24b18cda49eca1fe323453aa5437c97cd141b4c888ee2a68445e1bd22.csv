@@ -1,0 +1,341 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",What happens when EncObsMin is set to 0 in the context of Sin/Cos wire break monitoring?,Sin/Cos wire break monitoring will be disabled.,Setting EncObsMin to 0 disables the monitoring for Sin/Cos wire breaks.,The system will no longer monitor for Sin/Cos wire breaks if EncObsMin is set to 0.,Disabling Sin/Cos wire break monitoring occurs when EncObsMin is configured to 0.,EncObsMin set to 0 means the Sin/Cos wire break monitoring feature is turned off.
+1,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",What are the purposes of P 582[0] and P 583[0] in the context of linear EnDat encoders?,"P 582[0] defines the length of an analog Sin/Cos signal period in nanometres, and P 583[0] defines the length of a digital increment of the position from the absolute value interface in nanometres for linear EnDat encoders.","For linear EnDat encoders, P 582[0] specifies the Sin/Cos signal period length in nanometres, while P 583[0] specifies the digital increment length from the absolute value interface, also in nanometres.","The parameters P 582[0] and P 583[0] are used to define the Sin/Cos signal period length and digital increment length, respectively, for linear EnDat encoders.","In linear EnDat encoders, P 582[0] and P 583[0] serve to determine the analog signal period length and digital position increment length in nanometres.","P 582[0] and P 583[0] are crucial for linear EnDat encoders, setting the analog period length and digital increment length in nanometres."
+2,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",How are linear SSI encoders treated in the system?,Linear SSI encoders are treated as rotary SSI encoders because the system cannot determine that they are linear based on the encoder head.,"The system treats linear SSI encoders similarly to rotary SSI encoders, as it cannot identify them as linear from the encoder head.","Due to the inability to distinguish them based on the encoder head, linear SSI encoders are processed as rotary SSI encoders.","Linear SSI encoders are handled as rotary encoders within the system, lacking differentiation based on the encoder head.","In the system's view, linear SSI encoders are indistinguishable from rotary ones based on the encoder head, hence treated similarly."
+3,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",What determines that a Sin/Cos encoder system is linear and not rotary?,"For Sin/Cos encoders with distance-coded reference marks, the system determines they are linear if PeriodLen is greater than 0.",A PeriodLen value greater than 0 indicates that a Sin/Cos encoder with distance-coded reference marks is linear.,The system identifies Sin/Cos encoders with distance-coded reference marks as linear when PeriodLen exceeds 0.,Linear Sin/Cos encoders with distance-coded reference marks are recognized by the system through a positive PeriodLen.,"The criterion for a Sin/Cos encoder system being linear is a PeriodLen setting above 0, especially with distance-coded reference marks."
+4,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",What are the different modes for absolute value initialization?,"The modes include DIG_ANA(0) for standard initialization using both digital and analog components, DIG(1) for digital-only initialization, SEK_SEL37(2) for automatic selection based on ST bits, and SSI_180(3) for standard with a 180-degree offset in SSI.","Absolute value initialization can be performed in DIG_ANA(0) mode (standard), DIG(1) mode (digital-only), SEK_SEL37(2) mode (automatic), or SSI_180(3) mode (standard with SSI offset).","Options for initialization are standard (DIG_ANA(0)), digital-only (DIG(1)), automatic (SEK_SEL37(2)), and standard with SSI offset (SSI_180(3)).","Initialization modes vary from standard mixed digital and analog (DIG_ANA(0)) to digital-only (DIG(1)), automatic (SEK_SEL37(2)), and SSI-specific (SSI_180(3)).","The system supports multiple initialization modes: standard, digital-only, automatic, and a special SSI mode with a 180-degree offset."
+5,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",What is the purpose of P 580[0] - ENC_CH3_Info?,P 580[0] allows users to enter a descriptive text (up to 31 characters) about the encoder on channel Ch3.,The ENC_CH3_Info parameter enables users to describe the encoder on channel Ch3 with a text of up to 31 characters.,Users can utilize P 580[0] to provide a brief description (max 31 characters) of the encoder connected to channel Ch3.,"This parameter serves as a user-defined field to note details about the Ch3 encoder, limited to 31 characters.","P 580[0] is designed for encoder description on channel Ch3, accepting a text entry of no more than 31 characters."
+6,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",How does the CycleCount parameter affect SSI encoder evaluation timing?,"CycleCount adjusts the timing for cyclical SSI encoder evaluation, with a default of 1 corresponding to 125 μs sampling cycles. Higher values slow down the evaluation.","The default CycleCount setting of 1 equates to 125 μs sampling cycles for SSI encoder evaluation, and increasing it slows the process.","Adjusting CycleCount from its default value of 1 alters the SSI encoder evaluation timing, slowing it down for values greater than 1.","CycleCount modifies the cyclical evaluation timing of SSI encoders, with 1 being the default (125 μs) and higher numbers extending the cycle.","For SSI encoder evaluation, CycleCount dictates the sampling cycle length, defaulting to 125 μs at 1 and increasing with higher settings."
+7,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",What is the significance of NominalIncrementA and NominalIncrementB for Sin/Cos incremental encoders?,"These parameters enable the use of Sin/Cos incremental encoders with analog distance-coded reference marks by specifying signal periods, e.g., 1000 and 1001 for specific setups.",NominalIncrementA and B allow Sin/Cos incremental encoders to work with distance-coded reference marks by defining necessary signal periods.,"For encoders like the Heidenhain ROD280C, NominalIncrementA and B must be set to specific values (e.g., 1000 and 1001) to support distance-coded reference marks.","These parameters are essential for configuring Sin/Cos incremental encoders with distance-coded marks, requiring precise period settings.",Setting NominalIncrementA and B correctly is crucial for operating Sin/Cos incremental encoders with analog distance-coded reference marks.
+8,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",Under what condition is the functionality for distance-coded absolute encoders enabled?,The functionality is enabled when NominalIncrementA is set to a value greater than 0.,A NominalIncrementA value exceeding 0 activates the distance-coded absolute encoder functionality.,Enabling the feature requires NominalIncrementA to be greater than 0.,The system enables distance-coded absolute encoder features only if NominalIncrementA is positive.,Functionality for distance-coded absolute encoders becomes active with NominalIncrementA set above 0.
+9,msd_servo_drive.txt,31,0e7187c24b18cda49eca1fe323453aa5437c97cd141b4c888ee2a68445e1bd22,"1 Vss). If EncObsMin is set to 0, Sin/Cos wire break monitoring will be disabled (also see Section ""Channel 3: Interface X8 (optional)"" on page 76).
+
+P 581[0] - ENC_CH3_AbsEncStatus = Error and status codes (absolute encoder)
+
+P 582[0] - ENC_CH3_PeriodLen = Sin/Cos linear encoder and P 583[0] - ENC_CH3_DigitalResolution = linear absolute encoder are the length of an analog Sin/Cos signal period in nanometres and the length of a digital increment of the position from the absolute value interface in nanometres. Both parameters are used for linear EnDat encoders (instead of MultiT and SingleT bits (rotary)). In contrast, linear SSI encoders are
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+treated as rotary SSI encoders (in this case, it is impossible to determine that the system is a linear encoder system based on the encoder head). Likewise, linear Sin/Cos encoders without an absolute value interface are treated as “rotary” encoders (if run as commutation encoders, the number of tracks, or lines (Lines) and the encoder gearing (Num, Denom) must be used to establish the relationship to the linear motor’s magn. pole pair subdivision). Only in the case of Sin/Cos encoders with distance-coded reference marks will the system determine, based on PeriodLen > 0, that the encoder system is linear and not rotary.
+
+# Value Initialization:
+
+- DIG_ANA(0) - Standard: Absolute value initialization using a mix of the digital and analog components (this is the default mode)
+- DIG(1) - Digital: Only the digital component will be used for the absolute value initialization.
+- SEK_SEL37(2) - Automatic: Digital if ST bits > (LineBits + 8); otherwise standard
+- SSI_180(3) - Same as Standard, except: In the case of SSI, the quadrant alignment of the digital value relative to the analog Sin/Cos tracks is not the same as with EnDat, but is instead offset by 180 degrees relative to EnDat, i.e. in the “natural Q alignment” for the digital value relative to the tracks.
+
+# Encoder Information
+
+P 580[0] - ENC_CH3_Info = Encoder Information. This parameter is available to the user so that they can enter a text of their choice (max. 31 characters). This text should be used to describe the encoder on channel Ch3.
+
+# Sampling Cycle
+
+P 636[0] - ENC_CH3_CycleCount = Sampling cycle in: n x 125 μs (microseconds): The CycleCount parameter can be used to slow down the timing for the cyclical SSI encoder evaluation. By default, CycleCount = 1, i.e. the default setting corresponds to 125 μs sampling and cycles for the encoder evaluation. Different settings must be viewed as special cases and accordingly must only be used when necessary. (see Section ""SSI (cyclical) X8"" on page 87).
+
+# Distance Coded Absolute Encoder
+
+P 630[0] - ENC_CH3_NominalIncrementA = distance coded absolute encoder
+
+P 631[0] - ENC_CH3_NominalIncrementB = distance coded absolute encoder. The NominalIncrementA and NominalIncrementB parameters make it possible to run Sin/Cos incremental encoders (without an absolute value interface) with analog distance-coded reference marks. E.g. If you were using the Heidenhain ROD280C with 18000 Sin/Cos tracks per revolution and 36 distance-coded reference marks, you would need to set NominalIncrementA to 1000 signal periods and NominalIncrementB to 1001 signal periods. This functionality is enabled if NominalIncrementA > 0. ",What is the default sampling cycle for SSI encoder evaluation?,"The default sampling cycle is 125 μs, corresponding to a CycleCount of 1.","With CycleCount set to 1, the default evaluation cycle is 125 microseconds.",A CycleCount of 1 means the SSI encoder is evaluated every 125 μs by default.,"Default evaluation timing for SSI encoders is 125 μs, achieved with CycleCount at 1.",The system defaults to a 125 μs sampling cycle for SSI encoder evaluation when CycleCount is 1.

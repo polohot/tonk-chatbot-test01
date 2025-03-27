@@ -1,0 +1,721 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",What is the minimum value for the TIMEOUT parameter in the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups?,The minimum value for the TIMEOUT parameter is 500 ms.,500 ms is the required minimum setting for TIMEOUT in F_RBO and F_R_R F-FBs.,"For F_RBO and F_R_R F-FBs, set TIMEOUT to at least 500 ms.",TIMEOUT must be no less than 500 ms in the configuration of F_RBO and F_R_R F-FBs.,Ensure the TIMEOUT parameter is set to a minimum of 500 ms for F_RBO and F_R_R F-FBs.
+1,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",What parameters are needed to calculate the 'TIMEOUT' parameter for the F_RBO and F_R_R F-FBs?,"You need TCImax1 and TCImax2, the maximum cycle times of the cyclic interrupt OBs for the send and receive blocks.","TCImax1 and TCImax2, representing the maximum cycle times for the send and receive blocks' cyclic interrupt OBs, are required.",The calculation requires TCImax1 (send block's max cycle time) and TCImax2 (receive block's max cycle time).,"To calculate TIMEOUT, obtain TCImax1 and TCImax2 from the cyclic interrupt OBs' maximum cycle times.",Required parameters: TCImax1 for the send block and TCImax2 for the receive block's cyclic interrupt OB max cycle times.
+2,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",Where can the values for TCImax1 and TCImax2 be found?,"They are found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block.",Look in the @F_CycCo-OBxx chart under the MAX_CYC input of the F_CYC_CO-OBxx F function block.,The values are located in the MAX_CYC input of the F_CYC_CO-OBxx F function block within the @F_CycCo-OBxx chart.,Find TCImax1 and TCImax2 at the MAX_CYC input in the F_CYC_CO-OBxx F function block's @F_CycCo-OBxx chart.,Check the @F_CycCo-OBxx chart's F_CYC_CO-OBxx F function block for the MAX_CYC input values.
+3,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",What is the definition of response time in the context of safety functions?,It's the time between detecting an input signal and changing a linked output signal.,Response time is defined as the duration from input signal detection to output signal change.,The interval from when an input signal is detected until a connected output signal changes is the response time.,"For safety functions, response time spans from input signal detection to output signal alteration.",Response time refers to the period between input signal detection and subsequent output signal modification.
+4,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",What must the maximum response time of a safety function be in relation to the process safety time?,It must be shorter than the process safety time.,The maximum response time should not exceed the process safety time.,Ensure the maximum response time is less than the process safety time.,A safety function's maximum response time needs to be below the process safety time.,The process safety time must be longer than the maximum response time of a safety function.
+5,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",What is the process safety time?,It's the time the process can be left uncontrolled without creating danger.,Process safety time is the duration a process can safely operate without control.,The time during which a process may operate unsupervised without risk is the process safety time.,It defines how long a process can run without control before becoming hazardous.,Process safety time is the safe period for uncontrolled process operation.
+6,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",How is the actual response time of a safety function characterized?,It is always between a minimum and a maximum response time.,Actual response time falls within a range from minimum to maximum.,Characterized by being within the bounds of minimum and maximum response times.,"It varies, bounded by the lowest and highest possible response times.",The actual response time is a value between the defined minimum and maximum limits.
+7,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",What must be assumed when configuring a plant in terms of response time?,Always assume the maximum response time.,Configuration should be based on the maximum response time.,"The worst-case scenario, i.e., maximum response time, must be considered.",Plant configuration requires assuming the longest possible response time.,Use the maximum response time as the basis for plant configuration.
+8,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",What tool can be used to determine the lowest value for the timeout?,S7ftime.xls.,The S7ftime.xls tool is recommended for finding the minimum timeout value.,Use S7ftime.xls to calculate the minimum required timeout.,"For determining the lowest timeout value, refer to S7ftime.xls.",S7ftime.xls is the tool for identifying the smallest permissible timeout.
+9,pcs7_compendium_part_b_en-US_en-US.txt,70,1f5e10bfa22dbe339729f1b984671d161eae88cca7c849c634e5b2fee7e99e34,"disabling time for priority classes [ms]:|800|Use only|
+|Min. VO retention time [ms]:|calculated|values|
+
+# Redundant VO
+
+|Data block no:| |
+|---|---|
+|Passivation behavior|channels|
+|Cancel|Help|
+
+The value should be taken from the transmitting or receiving CPU.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.5 Monitoring communication between F-shutdown groups
+
+Time monitoring is implemented in the F_R_BO or F_R_RF FBs and configured at the ""TIMEOUT"" input parameter of the receive block.
+
+To prevent time monitoring being triggered when no errors are pending, the TIMEOUT monitoring time must be set to a value which is at least equal to the higher of the two maximum cyclic interrupt cycle times of F_S_R or F_S_BO and F_R_R or F_R_BO. The lowest value for the timeout can be determined using S7ftime.xls.
+
+# Configuration of the TIMEOUT input of the F_RBO and F_R_R F-FBs for data exchange between F-shutdown groups
+
+|minimum value for TIMEOUT|500 ms|
+|---|---|
+|Eshutdoun qoup|2. Eshutdoun qoup|
+|Tcnat|Tcac|
+|300m5|s00m5|
+
+You will need the following parameters to calculate the ""TIMEOUT"" parameter:
+
+- TCImax1 Maximum cycle time of the cyclic interrupt OB in which the associated send block F_S_BO or F_S_R is called.
+- TCImax2 Maximum cycle time of the cyclic interrupt OB in which the receive block F_R_BO or F_R_R is called.
+
+The values for TCImax1 /TClmax2 can be found in chart @F_CycCo-OBxx, at input MAX_CYC of the F_CYC_CO-OBxx F function block (xx = Number of the cyclic interrupt OB with the send/receive block).
+
+# 7.11.6 Response times of safety functions
+
+# Definition of response time
+
+The response time is the time between the detection of an input signal and the changing of a linked output signal.
+
+The actual response time is always between a minimum and a maximum response time. When configuring your plant, you must always assume the maximum response time.
+
+The maximum response time of a safety function must be shorter than the process safety time.
+
+# Definition of process safety time
+
+The process safety time is the time within which the process can be left to its own devices without creating a dangerous situation.
+
+Within the process safety time, the S7 F/FH system controlling the process is not under control; in other words, it might malfunction or fail completely. The process safety time depends on the type of process and must be specified individually.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# How to calculate the response time
+
+In S7ftime.xlsm, the path of a signal from the sensor from the system to the actuator is divided into five possible sections:
+
+1. Input:
+- Runtime from sensor to user program
+2. ",What are the five sections into which the path of a signal is divided in S7ftime.xlsm?,1. Input: Runtime from sensor to user program.,The signal path includes: 1. Input (sensor to user program runtime).,"Divided into five parts, starting with Input: sensor to user program runtime.","First section is Input, covering the sensor to user program duration.","Initial segment is Input, detailing the sensor's signal journey to the user program."

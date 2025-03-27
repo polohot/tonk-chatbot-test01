@@ -1,0 +1,2351 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A_NUMBER,A,helpfulness,correctness,coherence,complexity,verbosity
+0,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How can the compensation (feed forward control) be activated in the MSD ServoDrive device?,A1,The compensation can be activated by setting P 382[0] - CON_TCoggComp > 0.,1.796875,1.8203125,3.546875,1.3984375,0.298828125
+1,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How can the compensation (feed forward control) be activated in the MSD ServoDrive device?,A2,"To activate the feed forward control, adjust the parameter P 382[0] - CON_TCoggComp to a value greater than 0.",2.0625,2.0625,3.71875,1.484375,0.392578125
+2,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How can the compensation (feed forward control) be activated in the MSD ServoDrive device?,A3,Activation of compensation involves modifying P 382[0] - CON_TCoggComp to exceed zero.,1.84375,1.6875,3.421875,1.4765625,0.39453125
+3,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How can the compensation (feed forward control) be activated in the MSD ServoDrive device?,A4,Set the CON_TCoggComp parameter under P 382[0] to a positive value to enable compensation.,1.8515625,1.6875,3.390625,1.453125,0.3359375
+4,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How can the compensation (feed forward control) be activated in the MSD ServoDrive device?,A5,Compensation is enabled when the value of P 382[0] - CON_TCoggComp is set above 0.,2.015625,2.078125,3.625,1.4921875,0.25
+5,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How does the isq feed forward control effect fade out in the MSD ServoDrive device?,A1,"The effect fades out linearly with increasing speed, using a ramp to ensure no effect at the ending speed.",2.0,1.953125,3.5,1.1328125,0.3125
+6,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How does the isq feed forward control effect fade out in the MSD ServoDrive device?,A2,"A linear fadeout occurs as speed increases, reaching zero effect at the specified ending speed.",1.8671875,1.765625,3.515625,1.1796875,0.283203125
+7,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How does the isq feed forward control effect fade out in the MSD ServoDrive device?,A3,"From the starting speed, the control's impact decreases linearly, vanishing completely by the ending speed.",1.96875,2.03125,3.46875,1.2890625,0.408203125
+8,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How does the isq feed forward control effect fade out in the MSD ServoDrive device?,A4,"The fadeout is managed linearly via a ramp, eliminating any effect once the ending speed is attained.",2.4375,2.421875,3.578125,1.28125,0.349609375
+9,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How does the isq feed forward control effect fade out in the MSD ServoDrive device?,A5,"Linear reduction in effect is applied with speed increase, ensuring complete cessation at the ending speed.",1.84375,1.734375,3.46875,1.2265625,0.328125
+10,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching activated and what is required for the teaching routine in the MSD ServoDrive device?,A1,"Teaching is activated by P 385[0] - CON_TCoggTeachCon, requiring a slow run of <= 1 rpm for at least one revolution.",1.671875,1.7734375,3.40625,1.4296875,0.38671875
+11,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching activated and what is required for the teaching routine in the MSD ServoDrive device?,A2,"Activate teaching with P 385[0] - CON_TCoggTeachCon, initiating a slow run (<=1 rpm) for learning travel.",1.234375,0.9453125,2.859375,1.2578125,0.36328125
+12,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching activated and what is required for the teaching routine in the MSD ServoDrive device?,A3,"The teaching routine begins with a slow run, activated by setting the appropriate parameter, ensuring at least one revolution.",1.6015625,1.34375,3.171875,1.3671875,0.306640625
+13,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching activated and what is required for the teaching routine in the MSD ServoDrive device?,A4,"For teaching, set P 385[0] - CON_TCoggTeachCon and perform a slow run (<=1 rpm) covering at least one revolution.",1.6015625,1.671875,3.265625,1.4375,0.48046875
+14,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching activated and what is required for the teaching routine in the MSD ServoDrive device?,A5,"Teaching mode is enabled via P 385[0] - CON_TCoggTeachCon, necessitating a slow speed run for effective learning.",1.3828125,1.3203125,3.140625,1.46875,0.5625
+15,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching stopped and the compensation table calculated in the MSD ServoDrive device?,A1,"Teaching is stopped by calling CALC1(3) or CALC2(8) with P 385[0] - CON_TCoggTeachCon, calculating the compensation table.",2.0625,2.078125,3.40625,1.71875,0.333984375
+16,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching stopped and the compensation table calculated in the MSD ServoDrive device?,A2,"To stop teaching and calculate the table, use P 385[0] - CON_TCoggTeachCon with CALC1(3) or CALC2(8).",1.796875,1.7265625,3.390625,1.5078125,0.515625
+17,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching stopped and the compensation table calculated in the MSD ServoDrive device?,A3,"Stopping teaching involves invoking a calculation function via P 385[0] - CON_TCoggTeachCon, which then computes the compensation table.",1.34375,1.1875,3.078125,1.6015625,0.44140625
+18,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching stopped and the compensation table calculated in the MSD ServoDrive device?,A4,"The process concludes by executing CALC1(3) or CALC2(8) through P 385[0] - CON_TCoggTeachCon, generating the compensation table.",1.3125,1.234375,3.171875,1.578125,0.39453125
+19,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",How is the teaching stopped and the compensation table calculated in the MSD ServoDrive device?,A5,"Finalize teaching by applying CALC1(3) or CALC2(8) to P 385[0] - CON_TCoggTeachCon, resulting in the compensation table calculation.",1.796875,1.9296875,3.296875,1.5234375,0.318359375
+20,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What are the units and descriptions for the parameters CON_TAB_PosStart and CON_TAB_PosDelta in the MSD ServoDrive device?,A1,"CON_TAB_PosStart is in specific units depending on the source signal, indicating the table's start position. CON_TAB_PosDelta, also in specific units, represents the position delta.",2.625,2.734375,3.46875,1.7421875,0.84765625
+21,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What are the units and descriptions for the parameters CON_TAB_PosStart and CON_TAB_PosDelta in the MSD ServoDrive device?,A2,"CON_TAB_PosStart defines the compensation table's start position in source-dependent units, while CON_TAB_PosDelta specifies the position change in similar units.",2.5625,2.59375,3.53125,1.7421875,0.703125
+22,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What are the units and descriptions for the parameters CON_TAB_PosStart and CON_TAB_PosDelta in the MSD ServoDrive device?,A3,The start position (CON_TAB_PosStart) and position delta (CON_TAB_PosDelta) are both measured in units that vary based on the source signal.,1.6015625,1.734375,3.234375,1.421875,0.396484375
+23,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What are the units and descriptions for the parameters CON_TAB_PosStart and CON_TAB_PosDelta in the MSD ServoDrive device?,A4,"Units for CON_TAB_PosStart and CON_TAB_PosDelta are source-specific, describing the table's initial position and incremental changes, respectively.",1.90625,1.90625,3.203125,1.6328125,0.64453125
+24,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What are the units and descriptions for the parameters CON_TAB_PosStart and CON_TAB_PosDelta in the MSD ServoDrive device?,A5,Both parameters use source-dependent units: CON_TAB_PosStart for the table's beginning and CON_TAB_PosDelta for position increments.,1.796875,1.859375,3.265625,1.4921875,0.45703125
+25,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What caution is advised regarding compensation parametrization in the MSD ServoDrive device?,A1,Not every compensation parametrization is compatible with every previous teaching parametrization.,1.859375,2.140625,3.484375,1.21875,0.31640625
+26,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What caution is advised regarding compensation parametrization in the MSD ServoDrive device?,A2,Caution is advised as compatibility between compensation and teaching parametrizations is not universal.,1.578125,1.75,3.40625,1.1796875,0.314453125
+27,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What caution is advised regarding compensation parametrization in the MSD ServoDrive device?,A3,Ensure compatibility between compensation and teaching parametrizations as not all combinations work.,1.5234375,1.7265625,3.359375,1.2265625,0.2333984375
+28,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What caution is advised regarding compensation parametrization in the MSD ServoDrive device?,A4,Parametrization mismatches can occur; not all compensation settings fit with prior teaching configurations.,1.6328125,1.78125,3.390625,1.3125,0.359375
+29,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What caution is advised regarding compensation parametrization in the MSD ServoDrive device?,A5,Be cautious: compensation and teaching parametrizations must be matched carefully.,1.2734375,1.328125,3.171875,1.1171875,0.1826171875
+30,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What does the parameter P 385[0] - CON_TCoggTeachCon control in the MSD ServoDrive device?,A1,"It selects the position source for teaching and sets the teach modes, including rotary or absolute.",2.109375,2.046875,3.53125,1.421875,0.4921875
+31,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What does the parameter P 385[0] - CON_TCoggTeachCon control in the MSD ServoDrive device?,A2,"This parameter determines the teaching position source and modes, such as rotary or absolute.",2.046875,2.03125,3.46875,1.484375,0.46875
+32,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What does the parameter P 385[0] - CON_TCoggTeachCon control in the MSD ServoDrive device?,A3,"P 385[0] - CON_TCoggTeachCon configures the teaching position source and modes, enabling rotary or absolute settings.",2.421875,2.484375,3.625,1.59375,0.58984375
+33,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What does the parameter P 385[0] - CON_TCoggTeachCon control in the MSD ServoDrive device?,A4,Controls include the selection of the teaching position source and the establishment of teach modes (rotary/absolute).,2.40625,2.4375,3.515625,1.4765625,0.44921875
+34,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What does the parameter P 385[0] - CON_TCoggTeachCon control in the MSD ServoDrive device?,A5,"It is responsible for setting up the teaching position source and modes, offering options like rotary or absolute.",2.140625,2.046875,3.546875,1.421875,0.54296875
+35,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the purpose of the 'Detent torque compensation' parameters listed in the MSD ServoDrive device?,A1,These parameters configure the anti-cogging compensation table and control its behavior.,2.125,2.046875,3.515625,1.4140625,0.2578125
+36,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the purpose of the 'Detent torque compensation' parameters listed in the MSD ServoDrive device?,A2,They are used to set up and manage the anti-cogging compensation table's properties and operations.,2.5,2.359375,3.65625,1.484375,0.400390625
+37,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the purpose of the 'Detent torque compensation' parameters listed in the MSD ServoDrive device?,A3,"The parameters define the anti-cogging compensation table's structure, values, and operational controls.",2.109375,2.0625,3.59375,1.4453125,0.263671875
+38,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the purpose of the 'Detent torque compensation' parameters listed in the MSD ServoDrive device?,A4,"Purpose includes defining the compensation table's index, values, start position, delta, and other operational specifics.",1.15625,0.98046875,3.1875,1.3046875,0.373046875
+39,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the purpose of the 'Detent torque compensation' parameters listed in the MSD ServoDrive device?,A5,They enable the configuration and fine-tuning of the anti-cogging compensation table for optimal performance.,2.296875,2.171875,3.515625,1.6015625,0.349609375
+40,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the significance of the 'Compensation table fine-tuning' parameters in the MSD ServoDrive device?,A1,"They allow for adjustments in time delay, position shift, amplitude scaling, and fadeout speeds for the compensation table.",2.40625,2.25,3.546875,1.53125,0.384765625
+41,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the significance of the 'Compensation table fine-tuning' parameters in the MSD ServoDrive device?,A2,"Fine-tuning parameters enable customization of delay compensation, position adjustments, scaling, and speed-dependent fadeout.",1.7578125,1.4921875,3.28125,1.546875,0.2890625
+42,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the significance of the 'Compensation table fine-tuning' parameters in the MSD ServoDrive device?,A3,"These parameters provide control over phase shift compensation, positional shifts, amplitude factors, and fadeout thresholds.",1.8203125,1.7109375,3.28125,1.5859375,0.3203125
+43,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the significance of the 'Compensation table fine-tuning' parameters in the MSD ServoDrive device?,A4,"Significance lies in their ability to adjust the compensation table's timing, positioning, scaling, and fadeout characteristics.",2.265625,2.125,3.546875,1.6171875,0.421875
+44,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What is the significance of the 'Compensation table fine-tuning' parameters in the MSD ServoDrive device?,A5,They are crucial for optimizing the compensation table's performance through precise adjustments in various operational aspects.,1.6328125,1.546875,3.265625,1.484375,0.44921875
+45,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What signals can be observed during the teaching routine and compensation in the MSD ServoDrive device?,A1,"Signals 156_eps_comp, 157_eps_comp.tune, 440_CON_TAB_TabIdx, and 446_CON_TAB_OutVal can be observed.",1.90625,2.0,3.40625,1.3515625,0.24609375
+46,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What signals can be observed during the teaching routine and compensation in the MSD ServoDrive device?,A2,"During these processes, monitor 156_eps_comp for raw input position and 157_eps_comp.tune for tuned input position, along with table index and output signals.",1.8671875,1.890625,3.40625,1.3984375,0.50390625
+47,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What signals can be observed during the teaching routine and compensation in the MSD ServoDrive device?,A3,The device allows observation of input positions and table outputs via specific scope signals during teaching and compensation.,1.484375,1.4375,3.109375,1.390625,0.158203125
+48,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What signals can be observed during the teaching routine and compensation in the MSD ServoDrive device?,A4,"Key signals include the current raw input position, tuned input position, table index, and table output value.",1.609375,1.46875,3.28125,1.1484375,0.1416015625
+49,msd_servo_drive.txt,48,79deb5293e966e8b2b0e293b93b572129d9d2e1800f6e88e202aa42a0666723c,"It will later be used for the compensation once again in exactly the same manner.
+
+The compensation (feed forward control) can now be activated using: P 382[0] - CON_TCoggComp > 0.
+
+Caution: Of course, not every compensation parametrization fits with every previous teaching parametrization.
+
+The input and output variables can be observed via scope signals during the teaching routine and the compensation. The signal 156_eps_comp. shows the current raw input position (source) both during the teaching routine and later during the compensation. The signal 157_eps_comp.tune gives the current input position including the input tuning (only for the functions 1). The table index and the table output can both be accessed via the scope signals 440_CON_TAB_TabIdx and 446_CON_TAB_OutVal.
+
+Image 7.10: Detent torque compensation schematic
+
+The parameter P 385[0] - CON_TCoggTeachCon selects the position source for the teaching and sets the teach modes (including: rotary or absolute): the teaching is activated and the compensation is deactivated. With ‘start control’ in the speed control mode, the teaching (teaching routine) begins with a slow run: e.g. <= 1 rpm (at least one revolution of ‘learning’ travel).
+
+With the control still operating (and a slow run), the teaching is then stopped by calling the calculation function once: with P 385[0] - CON_TCoggTeachCon=CALC1(3) or with P 385[0] - CON_TCoggTeach- Con = CALC2(8). It ‘calculates’ the corresponding compensation table (which can be saved) from.
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 116
+
+# 7 Control
+
+# 7 Control
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 117
+
+# 7.3.5.1 “Detent torque compensation” parameters
+
+table. àrecurring, infinite
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|380|CON_TCoggAddTab|A|Anti cogging compensation table|
+|380|0 to CON_TCoggAddTab|A|Delta in number of input increments per table section (one index spacing distance).|
+|382|251| |à absolute|
+|0|CON_TCoggComp| |Anti cogging enable compensation|
+|0|CON_TCoggTeachCon| |Anti cogging control word|
+|440|CON_TAB_TabIndex| |Compensation table: index|
+|441|CON_TAB_TabVal|A|Compensation table: Value at CON_TAB index|
+|442|CON_TAB_PosStart|specific|Comp. table start position (unit depends on source signal)|
+|443|CON_TAB_PosDelta|specific|Compensation table delta position|
+|445|CON_TAB_TeachDir| |Compensation table teaching direction (sign of speed)|
+|446|CON_TAB_OutVal|A|Compensation table: output value|
+|447|CON_TAB_Tune| |Compensation table fine-tuning|
+|447|0 TimeDelayComp|specific/rpm|Time delay compensation for speed dependent phase shift|
+|447|1 PosShift|specific|Compensation table position shift|
+|447|2 ScaleFactor| |Compensation table amplitude scaling|
+|447|3 FadeOutStart|rpm|Speed value, where cogging compensation fadeout starts|
+|447|4 FadeOutEnd|rpm|Speed value, where cogging compensation fadeout ends|
+
+As of the starting speed, the effect of the isq feed forward control is faded out linearly with the increase of the ‘slow’ speed. A ramp is used which ensures that at the ending speed, the isq feed forward control no longer has any effect (=0). ",What signals can be observed during the teaching routine and compensation in the MSD ServoDrive device?,A5,Observation during teaching and compensation includes input positions and table-related outputs through designated signals.,1.5703125,1.484375,3.1875,1.21875,0.1533203125

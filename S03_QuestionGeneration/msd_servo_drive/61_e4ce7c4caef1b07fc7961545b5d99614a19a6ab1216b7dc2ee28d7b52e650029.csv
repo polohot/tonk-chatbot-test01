@@ -1,0 +1,731 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",Which control modes implement the scaling function for pressure limit according to Table 7.73?,"PressCon(0), VolConPlim(1), and SpdCon_pLimit implement the scaling function for pressure limit.","The scaling function for pressure limit is implemented in PressCon(0), VolConPlim(1), and SpdCon_pLimit modes.","According to Table 7.73, PressCon(0), VolConPlim(1), and SpdCon_pLimit have the scaling function for pressure limit.","Three control modes implement the pressure limit scaling: PressCon(0), VolConPlim(1), and SpdCon_pLimit.","For pressure limit scaling, look to PressCon(0), VolConPlim(1), and SpdCon_pLimit in Table 7.73."
+1,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",What happens after the waiting time expires in Auto mode according to the text?,"After the waiting time expires, the system branches to the motion block specified in 'subsequent motion block Time Ctrl' (2865 HYD_TabNextIdx).",The system moves to the motion block defined in HYD_TabNextIdx (2865) once the waiting time in Auto mode is over.,Expiration of the waiting time triggers a transition to the motion block indicated by HYD_TabNextIdx (2865).,"Upon waiting time expiration, the next motion block is activated as per HYD_TabNextIdx (2865).",The specified motion block in HYD_TabNextIdx (2865) becomes active after the Auto mode waiting time ends.
+2,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",What is the purpose of the parameter 'Hydraulic table next alternative index' (HYD_TabAltIdx)?,HYD_TabAltIdx specifies the motion block to switch to if the transition switching condition P 2867 - Hyd_TabCondType is true.,It defines the alternative motion block for transition when Hyd_TabCondType's condition is met.,The parameter HYD_TabAltIdx (2866) is used to indicate the next motion block if Hyd_TabCondType's condition is satisfied.,HYD_TabAltIdx (2866) serves as the index for the alternative motion block upon meeting Hyd_TabCondType's condition.,"When Hyd_TabCondType's condition is true, the system switches to the motion block at HYD_TabAltIdx (2866)."
+3,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",How does the pressure control system adjust for pumps with variable displacement volume?,"The system uses a volumetric flow rate output and an underlying volume flow control that accounts for the pump's displacement volume, keeping the control circuit gain unchanged.","By selecting PressCon_VolFlow(2), the system maintains consistent control circuit gain without needing to adjust controller parameters for variable displacement pumps.","PressCon_VolFlow(2) mode includes a volumetric flow rate output and volume flow control, adjusting for the pump's displacement volume automatically.","For variable displacement pumps, PressCon_VolFlow(2) ensures the control circuit gain remains stable by accounting for displacement volume in its flow control.","The pressure control system adapts to variable displacement pumps through PressCon_VolFlow(2), which integrates displacement volume into its flow control mechanism."
+4,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",What are the two controller structures available for pressure control as mentioned in the text?,"The two structures are PressCon_nPump(0), which outputs a pump speed, and PressCon_VolFlow(2), which has a volumetric flow rate output.","PressCon_nPump(0) provides a pump speed output, while PressCon_VolFlow(2) offers a volumetric flow rate output.",Available structures include PressCon_nPump(0) for direct pump speed output and PressCon_VolFlow(2) for volumetric flow rate control.,The text mentions PressCon_nPump(0) and PressCon_VolFlow(2) as the two pressure control structures.,"PressCon_nPump(0) and PressCon_VolFlow(2) are the two controller structures for pressure control, differing in their output types."
+5,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",What prioritizes over the configured speed limits for the pump in pressure control?,"The configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority.",Pump speed limits defined in P 2851.5 nMin and P2851.6 nMax have the highest priority.,"In pressure control, the pump's speed limits at P 2851.5 nMin and P2851.6 nMax are prioritized.","The priority is given to the pump's configured speed limits, P 2851.5 nMin and P2851.6 nMax.","P 2851.5 nMin and P2851.6 nMax, the pump's speed limits, override other configurations in pressure control."
+6,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",How can the actual pressure values be scaled for a differential cylinder?,"Actual pressure values can be scaled using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale) to account for the area ratio.","Scaling is achieved through UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale) for the differential cylinder's area ratio.","To scale pressure values for a differential cylinder, use P 2850.12 pActScale and P 2850.13 pAct2Scale.",The parameters P 2850.12 pActScale and P 2850.13 pAct2Scale allow scaling of pressure values based on the area ratio.,"For differential cylinders, scaling pressure values involves P 2850.12 pActScale and P 2850.13 pAct2Scale to adjust for area ratio."
+7,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",What is the significance of the 'Hydraulic table state' parameter (HYD_TabCondType)?,HYD_TabCondType determines the mode for transition switching to the next motion block.,It specifies the condition type for switching to the subsequent or alternative motion block.,The parameter HYD_TabCondType (2867) defines the transition switching condition's mode.,HYD_TabCondType (2867) is crucial for selecting the transition mode to the next motion block.,"Transition switching modes are set by HYD_TabCondType (2867), affecting motion block progression."
+8,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",What is the role of the 'Hydraulic table comparison state' parameter (HYD_TabCondVal)?,HYD_TabCondVal provides an optional comparison value for the transition switching condition.,It serves as the comparison value needed for evaluating the transition switching condition.,The parameter HYD_TabCondVal (2868) is used as a comparison value in transition conditions.,HYD_TabCondVal (2868) acts as a benchmark for the transition switching condition's evaluation.,"For transition conditions, HYD_TabCondVal (2868) offers a necessary comparison value."
+9,msd_servo_drive.txt,61,e4ce7c4caef1b07fc7961545b5d99614a19a6ab1216b7dc2ee28d7b52e650029,"The scaling is switched over dynamically with the respective control mode that is set. The following table shows for which control modes the scaling function is implemented.
+
+|Control mode|Pressure limit|Volumetric flow rate limit|
+|---|---|---|
+|NPumpCon(4)| | |
+|PressCon(0)|x| |
+|VolCon(5)| | |
+|VolConPlim(1)|x| |
+|SpdCon(2)| | |
+|- SpdCon_QFF| | |
+|- SpdCon_pLimit|x| |
+
+# Table 7.73: Hydraulic Limitations-
+
+# Table 7.74: Parameter “Hydraulic - Limitations table""
+
+# Table 7.75: Parameter “Hydraulic table delay time”
+
+Wait time in Auto mode
+
+After expiration of the waiting time, there is a branch to the motion block specified in the “subsequent motion block Time Ctrl” (2865 HYD_TabNextIdx). The respective motion block is only active for the duration of the waiting time, regardless of whether or not the target has been reached.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2864|HYD_TabWaitTime| |Hydraulic table delay time|
+
+Subsequent motion block Time Ctrl
+
+The motion block index provided here becomes active after expiration of the waiting time. (0 ms = No timed transition switching)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2865|HYD_TabNextIdx| |Hydraulic table next default index|
+
+Table 7.76: Parameter “Hydraulic table next default index”
+
+Subsequent motion block Event Ctrl
+
+If the transition switching condition P 2867 - Hyd_TabCondType is true, a switchover is made to the motion block specified here.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2866|HYD_TabAltIdx| |Hydraulic table next alternative index|
+
+Table 7.77: Parameter “Hydraulic table next alternative index”
+
+NOTE
+
+If a subsequent motion block and an alternative motion block are entered, the branch always leads to the motion block for which the condition is met first.
+
+Switching condition
+
+There are two different modes to choose from for the transition switching to the next motion block.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2867|HYD_TabCondType| |Hydraulic table state|
+
+Table 7.78: Parameter “Hydraulic table state”
+
+Optional comparison value
+
+Comparison value for the transition switching condition (ConAddr)
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2868|HYD_TabCondVal| |Hydraulic table comparison state|
+
+Table 7.79: Parameter “Hydraulic table comparison state”
+
+# 7.11.7 Pressure control
+
+The pressure is controlled by a PI pressure controller using P 2850 - HYD_PressCon based on the pressure setpoint. Here you can choose between two controller structures using P 2840 [16] AltPressCon. The selection PressCon_nPump(0) outputs a pump speed at the output of the controller which is directly forwarded to the speed controller (see Image 7.67: Mask of pressure control with pump speed output). The selection PressCon_VolFlow(2) has a volumetric flow rate output in l/min and an underlying volume flow control which takes the displacement volume of the pump into account (see Image 7.68: Mask of pressure control with volumetric flow rate output.). This can be helpful for pumps with a variable displacement volume, as this means the control circuit gain remains unchanged and the controller parameters do not need to be adjusted. If during operation of the pressure control one of the specified limit values P 2850 [7] - Qmin or P 2850 [8] - Qmax is reached due to the pump speed, the actuating variable (motor speed) is limited accordingly. Moreover, the configured speed limits (P 2851.5 nMin, P2851.6 nMax) for the pump always take priority. In addition, it is possible to set the minimum and maximum system pressure via a pressure limitation. To take into account the different area ratio of a differential cylinder, the actual pressure values can be scaled to the respective area ratio using UnitScale_pAct and UnitScale_pAct2 (P 2850.12 pActScale, P 2850.13 pAct2Scale). For control systems with high dynamic performance, it may be necessary to take into account a pressure-dependent compressibility in the control system. ",Under what condition does the system switch to the alternative motion block?,The system switches to the alternative motion block if the condition specified by P 2867 - Hyd_TabCondType is true.,"When Hyd_TabCondType's condition is met, the alternative motion block at HYD_TabAltIdx is activated.",Transition to the alternative block occurs upon Hyd_TabCondType's condition being satisfied.,The alternative motion block is engaged once the Hyd_TabCondType condition evaluates to true.,A true evaluation of Hyd_TabCondType's condition triggers the switch to the alternative motion block.

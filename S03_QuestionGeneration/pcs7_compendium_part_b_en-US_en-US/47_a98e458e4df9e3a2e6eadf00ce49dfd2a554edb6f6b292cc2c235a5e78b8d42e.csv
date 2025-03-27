@@ -1,0 +1,791 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",What is the purpose of the 'MAX_TIME' input in the sequence of operations on the OS?,The 'MAX_TIME' input sets the maximum time allowed for the sequence of operations on the OS.,It specifies the upper limit of time for completing operations on the OS.,"To ensure operations are completed within a set timeframe, 'MAX_TIME' is configured on the OS.",'MAX_TIME' is used to define the longest duration permitted for the sequence of operations on the OS.,Configuring 'MAX_TIME' on the OS limits how long the sequence of operations can take.
+1,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",Under what condition is the 'IDENT' input not required to be configured?,The 'IDENT' input does not need configuration if a plant designation was assigned in the CPU's properties.,"When a plant designation is set in the CPU properties, configuring 'IDENT' is unnecessary.","If the CPU's properties include a plant designation, skipping the 'IDENT' input configuration is allowed.",No need to configure 'IDENT' input when the CPU has a plant designation in its properties.,The 'IDENT' input configuration can be omitted if the CPU properties specify a plant designation.
+2,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",What does the Maintenance Override Switch (SWC_MOS) allow in the PCS 7 OS?,SWC_MOS allows setting bypasses in the safety program and changing F-parameters from the OS.,It enables bypasses and safety-oriented modifications of F-parameters in the safety program via the OS.,"With SWC_MOS, you can set bypasses and adjust F-parameters in the safety program from the OS.",The Maintenance Override Switch permits bypasses and F-parameter changes in the safety program through the OS.,SWC_MOS provides the functionality to implement bypasses and modify F-parameters in the safety program from the OS.
+3,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",What safety integrity level does the special safety protocol for changing F-parameters meet?,The protocol meets Safety Integrity Level requirements up to SIL3 according to IEC 61508.,It satisfies SIL3 standards as per IEC 61508 for changing F-parameters.,Up to SIL3 in IEC 61508 is achieved by the safety protocol for F-parameter modifications.,The safety protocol for altering F-parameters complies with SIL3 under IEC 61508.,"According to IEC 61508, the safety protocol for F-parameter changes meets up to SIL3."
+4,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",What blocks are offered by S7 F-systems for Maintenance Override Switch (MOS)?,"S7 F-systems offers F_SWC_P, F_SWC_BO, F_SWC_R, and SWC_MOS blocks for MOS.","For MOS, S7 F-systems provides four F-blocks: F_SWC_P, F_SWC_BO, F_SWC_R, and SWC_MOS.","The blocks available for MOS include F_SWC_P, F_SWC_BO, F_SWC_R, and SWC_MOS in S7 F-systems.","S7 F-systems includes F_SWC_P, F_SWC_BO, F_SWC_R, and SWC_MOS blocks for MOS functionality.","MOS in S7 F-systems is supported by F_SWC_P, F_SWC_BO, F_SWC_R, and SWC_MOS blocks."
+5,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",What is a 'transaction' in the context of modifying an F-parameter in the safety program?,A 'transaction' refers to the specific sequence of operations performed on the OS within a set time to modify an F-parameter.,"It's the entire change operation, involving a sequence of OS actions within a specified period, to adjust an F-parameter.",Modifying an F-parameter through a defined sequence of OS operations within a certain timeframe is called a 'transaction'.,A 'transaction' is the process of changing an F-parameter by executing a series of operations on the OS in a given time.,The term 'transaction' describes the complete operation of altering an F-parameter via OS actions within a limited time.
+6,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",What types of F-parameters can be changed using the F_SWC_R block?,The F_SWC_R block is used for processing an F_REAL data type parameter for operation via the OS.,F_SWC_R facilitates the modification of F-parameters of the F_REAL data type through the OS.,"For F-parameters with F_REAL data type, the F_SWC_R block enables changes via the OS.",Changes to F_REAL data type parameters are processed by the F_SWC_R block for OS operation.,The F_SWC_R block allows the OS to operate on F-parameters defined as F_REAL data type.
+7,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",What is the role of the SWC_TR template in the context of MOS?,The SWC_TR template provides a temporal limitation for the change operations in MOS.,It serves to limit the time duration for which changes can be made using the MOS functionality.,SWC_TR is a template that enforces time constraints on modifications performed via MOS.,"For MOS, the SWC_TR template is used to apply time limits to change operations.",The purpose of the SWC_TR template is to restrict the timeframe of changes allowed by MOS.
+8,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",How does the faceplate for changing a REAL value assist the operator?,"The faceplate allows the operator to specify and view process values, including current and new values for a REAL parameter.",It provides an interface for the operator to input new values and see the current value of a REAL parameter.,"By displaying current and new values, the faceplate helps the operator in modifying REAL parameters.",The faceplate facilitates the operator's task of changing REAL values by showing relevant information.,Operators use the faceplate to enter new values and confirm changes for REAL parameters easily.
+9,pcs7_compendium_part_b_en-US_en-US.txt,47,a98e458e4df9e3a2e6eadf00ce49dfd2a554edb6f6b292cc2c235a5e78b8d42e,"At the ""MAX_TIME"" input, the maximum time for the sequence of operations is set on the OS. If a plant designation was assigned in the properties of the CPU, the ""IDENT"" input does not have to be configured.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Example
+
+The following figure shows how an F parameter of type BOOL and REAL can be changed in the AS:
+
+|T_Suc|SVC_CHG|
+|---|---|
+|:Proce|03pa|
+|SVC_CHG_BOOL|ChG_BOOL|
+|SSuc_CB|ED4|
+|:Pcoce|ISIT_ADR|
+|INIT_ADRI|Cs_7al|
+|RT| |
+|SUC_CHG_RE_?|:Pcoce|
+|OSPA|SVC_chG_REAL|
+|SUC_CR|:Proce|
+|#RERL|INIT_ADR|
+|AT_val|7100|
+|DELTA|Cs_al|
+|ODE|HODE|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+125
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+This implementation in the CFC allows the operator to specify the process values. The faceplate for changing a REAL value is shown here.
+
+|SDw_Swc/Swc_chG_R_01|Processing of - Parameter BoolReab| |
+|---|---|---|
+|Identifier|Change Value| |
+|Tag name|Current Value|New Value|
+|SWC_R_01|20,75 'C| |
+| |Command successfully completed| |
+|Inmiale|Cancel| |
+
+# 7.10.3 Maintenance Override Switch (SWC_MOS)
+
+Maintenance Override gives you the option to set bypasses in the safety program from the OS as well as the safety-oriented changing of F-parameters in the safety program of an F-CPU from an OS.
+
+A special safety protocol is used to make changes to F-parameters in safety mode. This meets Safety Integrity Level requirements up to SIL3 in accordance with IEC 61508.
+
+S7 F-systems offers the following for MOS:
+
+- Four F-blocks, which you integrate into the CFC charts in your safety program:
+- F_SWC_P: Central control of operation via the OS
+- F_SWC_BO: Processing of an F_BOOL data type parameter for operation via the OS
+- F_SWC_R: Processing of an F_REAL data type parameter for operation via the OS
+- SWC_MOS: Interface for the display of the MOS function on the OS.
+- A template for the temporal limitation of the change (SWC_TR)
+- Associated faceplates, which you integrate into your OS.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.10 Operating and changing safety-related parameters on a PCS 7 OS
+
+Transaction for MOS
+
+You can use MOS to modify an F-parameter in the safety program of an F-CPU if you perform a specific sequence of operations on the OS within a specified period of time. The entire change operation is known as a ""transaction"".
+
+",What documentation version and manual are referenced for the process safety compendium?,"The referenced documentation is the Compendium Part B - Process Safety (V9.0), Operating Manual, 04/2018, A5E43228905-AA.","It's the Operating Manual from 04/2018, identified as A5E43228905-AA, for Compendium Part B - Process Safety version 9.0.","Version 9.0 of the Compendium Part B - Process Safety, detailed in the Operating Manual dated 04/2018, A5E43228905-AA.","The manual is the 04/2018 edition, A5E43228905-AA, covering Compendium Part B - Process Safety version 9.0.",Referenced is the Operating Manual A5E43228905-AA from April 2018 for the Compendium Part B - Process Safety V9.0.

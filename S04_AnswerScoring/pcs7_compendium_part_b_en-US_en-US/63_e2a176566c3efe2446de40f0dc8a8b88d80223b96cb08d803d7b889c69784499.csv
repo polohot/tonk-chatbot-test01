@@ -1,0 +1,4401 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A_NUMBER,A,helpfulness,correctness,coherence,complexity,verbosity
+0,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How does the 'Compendium Part B - Process Safety (V9.0)' specify the setting for TCImax in non-redundant S7 F/FH systems?,A1,TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.,1.3984375,1.7734375,3.5,1.6328125,0.2177734375
+1,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How does the 'Compendium Part B - Process Safety (V9.0)' specify the setting for TCImax in non-redundant S7 F/FH systems?,A2,"For non-redundant systems, the minimum TCImax setting is equal to the cyclic interrupt OB's execution time.",1.671875,1.921875,3.515625,1.7265625,0.392578125
+2,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How does the 'Compendium Part B - Process Safety (V9.0)' specify the setting for TCImax in non-redundant S7 F/FH systems?,A3,The execution time of the cyclic interrupt OB dictates the TCImax setting in non-redundant configurations.,1.2265625,1.3359375,3.171875,1.6328125,0.328125
+3,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How does the 'Compendium Part B - Process Safety (V9.0)' specify the setting for TCImax in non-redundant S7 F/FH systems?,A4,"In non-redundant setups, TCImax should not be less than the cyclic interrupt OB's execution time to ensure proper monitoring.",1.875,2.09375,3.625,1.734375,0.51953125
+4,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How does the 'Compendium Part B - Process Safety (V9.0)' specify the setting for TCImax in non-redundant S7 F/FH systems?,A5,The manual specifies matching TCImax to the cyclic interrupt OB's execution time for non-redundant S7 F/FH systems.,2.21875,2.234375,3.484375,1.7734375,0.478515625
+5,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How is the 'Max communication delay [ms]' configured in the 'Compendium Part B - Process Safety (V9.0)'?,A1,It is set to 320 ms in the provided example.,0.92578125,0.89453125,3.265625,1.0078125,0.1611328125
+6,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How is the 'Max communication delay [ms]' configured in the 'Compendium Part B - Process Safety (V9.0)'?,A2,The example configuration specifies a maximum communication delay of 320 milliseconds.,0.9296875,0.8828125,3.234375,1.1953125,0.2353515625
+7,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How is the 'Max communication delay [ms]' configured in the 'Compendium Part B - Process Safety (V9.0)'?,A3,320 ms is the defined upper limit for communication delays in the manual's example.,0.86328125,0.66796875,2.96875,1.1953125,0.28125
+8,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How is the 'Max communication delay [ms]' configured in the 'Compendium Part B - Process Safety (V9.0)'?,A4,"In the illustrated scenario, the max communication delay parameter is 320 ms.",0.453125,0.390625,2.921875,1.1640625,0.314453125
+9,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",How is the 'Max communication delay [ms]' configured in the 'Compendium Part B - Process Safety (V9.0)'?,A5,The manual shows a 'Max communication delay' setting of 320 ms for the given configuration.,0.7421875,0.7109375,3.125,1.1484375,0.32421875
+10,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What action is recommended in case of a RAM/PIQ comparison error according to the 'Compendium Part B - Process Safety (V9.0)'?,A1,STOP the standby CPU.,0.734375,0.494140625,2.921875,0.58203125,0.031005859375
+11,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What action is recommended in case of a RAM/PIQ comparison error according to the 'Compendium Part B - Process Safety (V9.0)'?,A2,The manual advises stopping the standby CPU upon detecting a RAM/PIQ comparison error.,1.5234375,1.8046875,3.5625,1.2265625,0.4609375
+12,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What action is recommended in case of a RAM/PIQ comparison error according to the 'Compendium Part B - Process Safety (V9.0)'?,A3,"In the event of such an error, the prescribed action is to halt the standby CPU's operation.",1.7109375,1.9375,3.609375,1.2265625,0.5
+13,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What action is recommended in case of a RAM/PIQ comparison error according to the 'Compendium Part B - Process Safety (V9.0)'?,A4,Halting the standby CPU is the recommended response to RAM/PIQ comparison errors.,1.625,1.8671875,3.6875,1.2265625,0.38671875
+14,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What action is recommended in case of a RAM/PIQ comparison error according to the 'Compendium Part B - Process Safety (V9.0)'?,A5,"To address RAM/PIQ comparison errors, the procedure involves stopping the standby CPU immediately.",1.1796875,1.34375,3.421875,1.171875,0.4375
+15,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What additional consideration is required for TCImax in redundant S7 F/FH systems according to the 'Compendium Part B - Process Safety (V9.0)'?,A1,The maximum disabling time for priority classes > 15 (TP15) must be taken into account.,1.859375,2.03125,3.578125,1.4296875,0.328125
+16,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What additional consideration is required for TCImax in redundant S7 F/FH systems according to the 'Compendium Part B - Process Safety (V9.0)'?,A2,"Redundant systems require accounting for TP15, the max disabling time for high-priority classes, in TCImax calculations.",1.625,1.6328125,3.40625,1.5234375,0.53515625
+17,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What additional consideration is required for TCImax in redundant S7 F/FH systems according to the 'Compendium Part B - Process Safety (V9.0)'?,A3,"For redundant systems, TCImax settings must include the impact of TP15 on cyclic interrupt OBs with safety programs.",1.484375,1.5234375,3.40625,1.53125,0.447265625
+18,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What additional consideration is required for TCImax in redundant S7 F/FH systems according to the 'Compendium Part B - Process Safety (V9.0)'?,A4,Including TP15 ensures that high-priority cyclic interrupt OBs in redundant systems are accurately monitored.,0.89453125,0.6640625,3.109375,1.3359375,0.478515625
+19,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What additional consideration is required for TCImax in redundant S7 F/FH systems according to the 'Compendium Part B - Process Safety (V9.0)'?,A5,The manual highlights the necessity of considering TP15 when configuring TCImax for redundant S7 F/FH systems.,1.4765625,1.3984375,3.390625,1.6328125,0.51171875
+20,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is parameter TP15 referred to as in the H parameters of the CPU according to the 'Compendium Part B - Process Safety (V9.0)'?,A1,'Max. disabling time for priority classes > 15'.,2.484375,2.65625,3.5,1.21875,0.390625
+21,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is parameter TP15 referred to as in the H parameters of the CPU according to the 'Compendium Part B - Process Safety (V9.0)'?,A2,TP15 is identified as the maximum disabling time for priority classes exceeding 15 in H parameters.,1.796875,2.046875,3.5625,1.484375,0.515625
+22,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is parameter TP15 referred to as in the H parameters of the CPU according to the 'Compendium Part B - Process Safety (V9.0)'?,A3,"In CPU H parameters, TP15 denotes the maximum time high-priority classes (>15) can be disabled.",2.34375,2.421875,3.5,1.484375,0.671875
+23,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is parameter TP15 referred to as in the H parameters of the CPU according to the 'Compendium Part B - Process Safety (V9.0)'?,A4,The manual equates TP15 with the 'Max. disabling time for priority classes > 15' in CPU settings.,2.734375,2.984375,3.546875,1.484375,0.5703125
+24,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is parameter TP15 referred to as in the H parameters of the CPU according to the 'Compendium Part B - Process Safety (V9.0)'?,A5,TP15's equivalent in H parameters is the maximum disabling time allocated to priority classes above 15.,1.828125,1.953125,3.390625,1.4140625,0.5546875
+25,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the default setting for TCiRmax as mentioned in the 'Compendium Part B - Process Safety (V9.0)'?,A1,1 s.,1.8984375,2.1875,3.5625,0.90625,0.07861328125
+26,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the default setting for TCiRmax as mentioned in the 'Compendium Part B - Process Safety (V9.0)'?,A2,The default upper limit for CiR synchronization time is set to 1 second.,1.453125,1.5625,3.515625,1.1875,0.3125
+27,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the default setting for TCiRmax as mentioned in the 'Compendium Part B - Process Safety (V9.0)'?,A3,TCiRmax is preset to 1 second unless configured otherwise.,2.3125,2.703125,3.75,1.359375,0.337890625
+28,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the default setting for TCiRmax as mentioned in the 'Compendium Part B - Process Safety (V9.0)'?,A4,"By default, the maximum CiR synchronization time is 1 s.",1.359375,1.2890625,3.515625,1.1953125,0.337890625
+29,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the default setting for TCiRmax as mentioned in the 'Compendium Part B - Process Safety (V9.0)'?,A5,The manual specifies a default TCiRmax value of 1 second for CiR synchronization.,2.125,2.375,3.703125,1.3125,0.26171875
+30,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the purpose of setting MAX_CYC higher than TCImax for a cyclic interrupt OB in the 'Compendium Part B - Process Safety (V9.0)'?,A1,To prevent monitoring from being triggered when no errors are present.,1.6875,1.796875,3.390625,1.3359375,0.33203125
+31,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the purpose of setting MAX_CYC higher than TCImax for a cyclic interrupt OB in the 'Compendium Part B - Process Safety (V9.0)'?,A2,Setting MAX_CYC higher than TCImax ensures that the system does not falsely detect errors during normal operation.,1.890625,2.046875,3.359375,1.6875,0.396484375
+32,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the purpose of setting MAX_CYC higher than TCImax for a cyclic interrupt OB in the 'Compendium Part B - Process Safety (V9.0)'?,A3,It avoids unnecessary monitoring triggers by ensuring MAX_CYC exceeds the calculated TCImax for the cyclic interrupt OB.,1.453125,1.3984375,3.234375,1.5546875,0.51171875
+33,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the purpose of setting MAX_CYC higher than TCImax for a cyclic interrupt OB in the 'Compendium Part B - Process Safety (V9.0)'?,A4,"This configuration prevents the system from interpreting normal operational times as errors, thus maintaining operational integrity.",2.21875,2.203125,3.46875,1.6015625,0.49609375
+34,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the purpose of setting MAX_CYC higher than TCImax for a cyclic interrupt OB in the 'Compendium Part B - Process Safety (V9.0)'?,A5,Ensures that the monitoring system only activates when actual errors exceed the expected operational time limits.,1.359375,1.2265625,3.1875,1.359375,0.466796875
+35,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the significance of the 'Max. scan cycle time extension [ms]' setting in the 'Compendium Part B - Process Safety (V9.0)'?,A1,It defines the maximum allowable extension for the scan cycle time.,1.0234375,0.9453125,3.0,1.21875,0.1904296875
+36,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the significance of the 'Max. scan cycle time extension [ms]' setting in the 'Compendium Part B - Process Safety (V9.0)'?,A2,This parameter sets the upper limit for how much the scan cycle time can be extended.,1.3046875,1.46875,3.21875,1.375,0.34375
+37,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the significance of the 'Max. scan cycle time extension [ms]' setting in the 'Compendium Part B - Process Safety (V9.0)'?,A3,"Determines the greatest permissible increase in scan cycle duration, set to 8000 ms in the example.",1.21875,1.2890625,3.234375,1.328125,0.41796875
+38,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the significance of the 'Max. scan cycle time extension [ms]' setting in the 'Compendium Part B - Process Safety (V9.0)'?,A4,The 'Max. scan cycle time extension' controls the maximum delay tolerated in cycle times.,1.3671875,1.4921875,3.21875,1.4453125,0.193359375
+39,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What is the significance of the 'Max. scan cycle time extension [ms]' setting in the 'Compendium Part B - Process Safety (V9.0)'?,A5,"It ensures that scan cycle extensions do not exceed the specified limit, maintaining system stability.",1.328125,1.5,3.4375,1.390625,0.455078125
+40,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What must be set to 'Yes' for a cyclic interrupt OB with special handling in the 'Compendium Part B - Process Safety (V9.0)'?,A1,Special handling.,0.85546875,0.859375,2.953125,0.828125,0.04736328125
+41,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What must be set to 'Yes' for a cyclic interrupt OB with special handling in the 'Compendium Part B - Process Safety (V9.0)'?,A2,The 'Special handling' option must be enabled for such OBs.,1.640625,1.609375,3.265625,1.21875,0.375
+42,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What must be set to 'Yes' for a cyclic interrupt OB with special handling in the 'Compendium Part B - Process Safety (V9.0)'?,A3,"For cyclic interrupt OBs requiring special handling, 'Yes' should be selected under special handling.",1.3828125,1.3515625,3.328125,1.2578125,0.478515625
+43,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What must be set to 'Yes' for a cyclic interrupt OB with special handling in the 'Compendium Part B - Process Safety (V9.0)'?,A4,The manual instructs to affirmatively set special handling for applicable cyclic interrupt OBs.,0.74609375,0.7578125,2.953125,1.078125,0.41015625
+44,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",What must be set to 'Yes' for a cyclic interrupt OB with special handling in the 'Compendium Part B - Process Safety (V9.0)'?,A5,Selecting 'Yes' under special handling is mandatory for cyclic interrupt OBs with unique requirements.,0.828125,0.80859375,2.90625,1.2109375,0.392578125
+45,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",Where can the value for TCI be found in the CPU properties as per the 'Compendium Part B - Process Safety (V9.0)'?,A1,In the 'Execution' column of the relevant cyclic interrupt OB on the 'Cyclic Interrupts' tab.,2.25,2.09375,3.453125,1.515625,0.62890625
+46,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",Where can the value for TCI be found in the CPU properties as per the 'Compendium Part B - Process Safety (V9.0)'?,A2,The 'Cyclic Interrupts' tab in CPU properties lists TCI under the 'Execution' column for each OB.,1.328125,1.3515625,3.171875,1.484375,0.69140625
+47,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",Where can the value for TCI be found in the CPU properties as per the 'Compendium Part B - Process Safety (V9.0)'?,A3,TCI values are located in the 'Execution' column within the 'Cyclic Interrupts' section of CPU properties.,1.4921875,1.5078125,3.453125,1.546875,0.55078125
+48,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",Where can the value for TCI be found in the CPU properties as per the 'Compendium Part B - Process Safety (V9.0)'?,A4,"For each cyclic interrupt OB, the TCI is specified in the 'Execution' column on the 'Cyclic Interrupts' tab.",1.765625,1.6015625,3.28125,1.5859375,0.65625
+49,pcs7_compendium_part_b_en-US_en-US.txt,63,e2a176566c3efe2446de40f0dc8a8b88d80223b96cb08d803d7b889c69784499,"- Special handling: If the OB is entered as a cyclic interrupt OB with special handling, set ""Yes"" here.
+- TProg: Program runtime of the cyclic interrupt OB
+- TCiR: CiR synchronization time
+- TCiRmax: Upper limit of the CiR synchronization time (default setting: 1 s)
+- TCImax: Shortest possible time for scan cycle monitoring of the cyclic interrupt OB
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Extract from the Excel file ""s7ftime.xlsm"":
+
+|Configuring the monitoring time of the F-cycle time|300 ms| |
+|---|---|---|
+|Tet5|800 ms| |
+|Special handling| | |
+|Runtime of the program execution in the cyclic interrupt OB| | |
+|TcR|Tcara|880 ms|
+|Minimum value for MAX_CYC|Tcitar| |
+
+To prevent monitoring from being triggered when no errors are present, MAX_CYC must be set higher than the TCImax calculated for the corresponding cyclic interrupt OB.
+
+- For non-redundant S7 F/FH systems:
+- The setting for TCImax must be at least as high as the configured execution time (TCI) of the cyclic interrupt OB.
+- For redundant S7 F/FH systems:
+- A priority > 15 is used in the S7 F/FH-system for cyclic interrupt OBs with a safety program. The maximum disabling time for priority classes > 15 (TP15) must also be taken into account for updating here.
+
+You can find the value for TCI in the ""Execution"" column of the relevant cyclic interrupt OB, located on the ""Cyclic Interrupts"" tab in the CPU properties.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retertive Memory|Memory|Intenupts|
+|---|---|---|---|---|---|---|
+|Time -of-Day|Intenupts|Cyclic Intenupts|Diagnostics /Clock|Protection|Parameters| |
+|OB3:|6000| |PIP1| | | |
+|OB31:|z000| |PIP2| | | |
+|B32:|1CCO| |PIP3| | | |
+|OB33;|600| |PIPA| | | |
+| |200| | | | | |
+|B35:|100| |PIP6| | | |
+|OB36:| | |PIP7| | | |
+|OB3Z:|300| |PIP?| | | |
+|OB3g:| | |PIP9| | | |
+
+Cancel Help
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+141
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TP15 is the same as the ""Max. disabling time for priority classes > 15"" parameter from the H parameters of the CPU.
+
+# Properties CPU 410-SH (R0/53)
+
+|General|Startup|Cycle/Clock|Memory|Retentive Memory|Interrupts|
+|---|---|---|---|---|---|
+|Time -of-Day|Interrupts|Cyclic Interrupts|Diagnostics /Clock|Protection|Parameters|
+
+# Parameters for Expanded CPU Test
+
+Test scan time [min]:
+
+Reaction - RAM/PIQ comparison error: STOP the standby CPL
+
+Update the Standby CPU
+
+Maximum number of attempts:
+
+Cyclic interrupt OB with special handling:
+
+Waiting time between two attempts [s]:
+
+# Monitoring times
+
+|Max. scan cycle time extension [ms]:|8000|Calculate|
+|---|---|---|
+|Max communication delay [ms]:|320| |
+|Max. ",Where can the value for TCI be found in the CPU properties as per the 'Compendium Part B - Process Safety (V9.0)'?,A5,The manual directs users to the 'Execution' column under 'Cyclic Interrupts' in CPU properties for TCI values.,1.9375,2.015625,3.3125,1.453125,0.7109375

@@ -1,0 +1,3901 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A_NUMBER,A,helpfulness,correctness,coherence,complexity,verbosity
+0,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can performance data of the AS load be analyzed using 'CPU_RT'?,A1,"Performance data can be read via 'CPU_RT' if the CPU firmware supports SFC78, specifically in CPU FW V4.5 and above.",1.234375,1.5234375,3.046875,1.46875,0.40234375
+1,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can performance data of the AS load be analyzed using 'CPU_RT'?,A2,"By utilizing 'CPU_RT' with a compatible CPU firmware (V4.5+), the AS load's performance data is accessible and displayed in PCS 7 Asset Management's diagnostic area.",2.171875,2.515625,3.375,1.6796875,0.640625
+2,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can performance data of the AS load be analyzed using 'CPU_RT'?,A3,"Analysis depends on CPU firmware; with V4.5+, SFC78 enables 'CPU_RT' to fetch performance metrics for the AS load.",1.625,1.7890625,3.28125,1.6796875,0.419921875
+3,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can performance data of the AS load be analyzed using 'CPU_RT'?,A4,"'CPU_RT' facilitates AS load performance analysis by leveraging SFC78 in firmware versions V4.5 and newer, showcasing data in PCS 7 Asset Management.",1.3828125,1.4609375,3.15625,1.7890625,0.490234375
+4,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can performance data of the AS load be analyzed using 'CPU_RT'?,A5,"For CPUs running firmware V4.5 or higher, 'CPU_RT' uses SFC78 to retrieve and display performance data in the diagnostic section of PCS 7 Asset Management.",1.59375,1.8125,3.25,1.8046875,0.609375
+5,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can the maximum F-cycle time be modified in the F_CYC_CO block?,A1,Modify it directly at the F_CYC_CO block within the automatically generated @F_CycCo-OB3x chart.,1.859375,2.046875,3.46875,1.4921875,0.29296875
+6,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can the maximum F-cycle time be modified in the F_CYC_CO block?,A2,Adjust the MAX_CYC value in the F_CYC_CO block located in the @F_CycCo-OB3x chart to change the maximum F-cycle time.,2.65625,2.90625,3.65625,1.7421875,0.47265625
+7,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can the maximum F-cycle time be modified in the F_CYC_CO block?,A3,The maximum F-cycle time can be altered by editing the F_CYC_CO block's MAX_CYC parameter in the @F_CycCo-OB3x chart.,2.5,2.640625,3.53125,1.7265625,0.46875
+8,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can the maximum F-cycle time be modified in the F_CYC_CO block?,A4,"To change the default 3000 ms, update the MAX_CYC setting in the F_CYC_CO block found in the @F_CycCo-OB3x chart.",2.6875,2.84375,3.625,1.7421875,0.57421875
+9,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",How can the maximum F-cycle time be modified in the F_CYC_CO block?,A5,Direct modification of the F_CYC_CO block's MAX_CYC in the @F_CycCo-OB3x chart allows adjustment of the maximum F-cycle time.,2.40625,2.515625,3.40625,1.8125,0.44921875
+10,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What does the F-CPU monitor for cyclic interrupt OBs containing F-runtime groups?,A1,The F-CPU monitors execution time for every cyclic interrupt OB (OB 30 - OB 38) that contains F-runtime groups.,2.390625,2.40625,3.34375,1.3828125,0.5703125
+11,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What does the F-CPU monitor for cyclic interrupt OBs containing F-runtime groups?,A2,Execution time monitoring is performed by the F-CPU on cyclic interrupt OBs (OB30-OB38) with F-runtime groups.,2.390625,2.28125,3.390625,1.46875,0.55859375
+12,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What does the F-CPU monitor for cyclic interrupt OBs containing F-runtime groups?,A3,"For OBs 30 to 38 with F-runtime groups, the F-CPU keeps track of execution times.",1.9765625,2.046875,3.296875,1.3828125,0.6015625
+13,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What does the F-CPU monitor for cyclic interrupt OBs containing F-runtime groups?,A4,Monitoring execution times is the F-CPU's task for cyclic interrupt OBs 30 through 38 that include F-runtime groups.,2.125,2.203125,3.296875,1.4453125,0.63671875
+14,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What does the F-CPU monitor for cyclic interrupt OBs containing F-runtime groups?,A5,The F-CPU ensures execution time is monitored for cyclic interrupt OBs 30-38 when they contain F-runtime groups.,2.390625,2.4375,3.390625,1.515625,0.64453125
+15,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What happens if the default maximum cycle time is not suitable for a process?,A1,The value can be modified directly at the F_CYC_CO block in the @F_CycCo-OB3x chart.,1.9921875,2.09375,3.5625,1.4921875,0.283203125
+16,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What happens if the default maximum cycle time is not suitable for a process?,A2,Adjust the MAX_CYC parameter in the F_CYC_CO block within the @F_CycCo-OB3x chart to suit the process needs.,1.6171875,1.640625,3.3125,1.484375,0.55859375
+17,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What happens if the default maximum cycle time is not suitable for a process?,A3,Process requirements can be met by changing the MAX_CYC setting in the F_CYC_CO block found in the @F_CycCo-OB3x chart.,2.390625,2.46875,3.5625,1.5390625,0.546875
+18,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What happens if the default maximum cycle time is not suitable for a process?,A4,"If 3000 ms isn't appropriate, update the maximum cycle time in the F_CYC_CO block located in the @F_CycCo-OB3x chart.",2.46875,2.59375,3.546875,1.640625,0.60546875
+19,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What happens if the default maximum cycle time is not suitable for a process?,A5,Directly editing the F_CYC_CO block's MAX_CYC in the @F_CycCo-OB3x chart allows customization of the cycle time.,1.8359375,1.984375,3.5,1.53125,0.439453125
+20,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the default maximum F-cycle time set in the F_CYC_CO block?,A1,The default maximum F-cycle time is 3000 ms.,2.28125,2.34375,3.578125,1.25,0.1787109375
+21,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the default maximum F-cycle time set in the F_CYC_CO block?,A2,3000 milliseconds is the preset maximum cycle time between calls to the cyclic interrupt OB in the F_CYC_CO block.,2.375,2.484375,3.46875,1.5625,0.51171875
+22,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the default maximum F-cycle time set in the F_CYC_CO block?,A3,"Initially, the F_CYC_CO block sets the MAX_CYC parameter to 3000 ms as the default maximum cycle time.",2.5625,2.734375,3.609375,1.59375,0.453125
+23,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the default maximum F-cycle time set in the F_CYC_CO block?,A4,"For the F_CYC_CO block, 3000 ms is the standard maximum duration allowed between cyclic interrupt OB calls.",2.90625,3.0,3.6875,1.59375,0.439453125
+24,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the default maximum F-cycle time set in the F_CYC_CO block?,A5,The F_CYC_CO block defaults to a 3000 ms maximum cycle time (MAX_CYC) for monitoring cyclic interrupt OB calls.,3.015625,3.109375,3.703125,1.65625,0.515625
+25,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the purpose of the 'CPU_RT' diagnostic block in the safety program?,A1,The 'CPU_RT' diagnostic block implements a new controller and cycle behavior in the overload range to manage cycle overloads in the CPU.,2.140625,2.15625,3.375,1.7265625,0.490234375
+26,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the purpose of the 'CPU_RT' diagnostic block in the safety program?,A2,"It adjusts the time intervals between calls of interrupt OBs during CPU cycle overloads, reducing the number of calls to prevent I/O module passivation or F-STOP triggers.",2.734375,2.765625,3.59375,1.8359375,0.72265625
+27,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the purpose of the 'CPU_RT' diagnostic block in the safety program?,A3,"To avoid safety program issues during CPU overload, 'CPU_RT' allows disabling the cyclic interrupt OB by setting its OBxx_ATT input to '0'.",2.21875,2.296875,3.5,1.7421875,0.71484375
+28,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the purpose of the 'CPU_RT' diagnostic block in the safety program?,A4,"'CPU_RT' serves to modify cycle behavior under overload, specifically by increasing intervals between interrupt OB calls to mitigate safety program disruptions.",2.25,2.1875,3.515625,1.6640625,0.59765625
+29,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the purpose of the 'CPU_RT' diagnostic block in the safety program?,A5,Its main function is to ensure the safety program's integrity during CPU overload by adjusting interrupt OB call frequencies and enabling performance analysis.,2.3125,2.390625,3.59375,1.6484375,0.66015625
+30,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the significance of the OBxx_ATT input in the 'CPU_RT' block?,A1,The OBxx_ATT input controls whether the cyclic interrupt OB with the safety program is enabled ('1') or disabled ('0').,2.5625,2.84375,3.765625,1.7265625,0.484375
+31,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the significance of the OBxx_ATT input in the 'CPU_RT' block?,A2,"Setting OBxx_ATT to '0' disables the cyclic interrupt OB, reducing calls during CPU overload to prevent safety issues.",2.046875,1.9453125,3.40625,1.5546875,0.53125
+32,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the significance of the OBxx_ATT input in the 'CPU_RT' block?,A3,It determines the activation state of the cyclic interrupt OB; '0' disables it to mitigate overload effects.,2.5,2.578125,3.75,1.484375,0.53125
+33,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the significance of the OBxx_ATT input in the 'CPU_RT' block?,A4,OBxx_ATT input's value ('0' or '1') enables or disables the cyclic interrupt OB to manage CPU overload scenarios.,2.140625,2.359375,3.515625,1.625,0.5390625
+34,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What is the significance of the OBxx_ATT input in the 'CPU_RT' block?,A5,This input's setting ('0' for disable) is crucial for managing interrupt OB calls and avoiding safety program disruptions.,2.21875,2.203125,3.546875,1.5078125,0.54296875
+35,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What must be done to avoid I/O module passivation or an F-STOP during CPU overload?,A1,Disable the cyclic interrupt OB containing the safety program by setting the OBxx_ATT input at the 'CPU_RT' block to '0'.,1.3359375,1.1171875,3.015625,1.375,0.40625
+36,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What must be done to avoid I/O module passivation or an F-STOP during CPU overload?,A2,"To prevent passivation or F-STOP, reduce calls to the interrupt OB by disabling it via the 'CPU_RT' block's OBxx_ATT input set to '0'.",2.390625,2.4375,3.5,1.7265625,0.67578125
+37,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What must be done to avoid I/O module passivation or an F-STOP during CPU overload?,A3,Setting the OBxx_ATT input to '0' in 'CPU_RT' for the relevant cyclic interrupt OB avoids safety program disruptions during overload.,1.8671875,1.7734375,3.28125,1.4453125,0.53125
+38,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What must be done to avoid I/O module passivation or an F-STOP during CPU overload?,A4,"Avoid disruptions by disabling the safety program's cyclic interrupt OB through 'CPU_RT' configuration, specifically OBxx_ATT set to '0'.",1.6015625,1.59375,3.1875,1.3984375,0.59765625
+39,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What must be done to avoid I/O module passivation or an F-STOP during CPU overload?,A5,"Mitigate overload effects by configuring 'CPU_RT' to disable the cyclic interrupt OB (OBxx_ATT='0'), preventing I/O passivation or F-STOP.",2.390625,2.203125,3.375,1.7265625,0.60546875
+40,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What parameters are needed to calculate the scan cycle monitoring time for a cyclic interrupt OB?,A1,"TCI: Configured execution time of the cyclic interrupt OB, and TP15: Configured 'max.' parameter.",2.125,2.203125,3.578125,1.6484375,0.4765625
+41,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What parameters are needed to calculate the scan cycle monitoring time for a cyclic interrupt OB?,A2,"Essential parameters include TCI, the OB's execution time, and TP15, the configured maximum value.",2.265625,2.5,3.609375,1.7109375,0.474609375
+42,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What parameters are needed to calculate the scan cycle monitoring time for a cyclic interrupt OB?,A3,Calculating monitoring time requires TCI (OB execution time) and TP15 (a configured maximum parameter).,2.28125,2.328125,3.59375,1.6875,0.41796875
+43,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What parameters are needed to calculate the scan cycle monitoring time for a cyclic interrupt OB?,A4,Two key parameters are needed: TCI for the interrupt OB's execution time and TP15 for the maximum setting.,2.421875,2.59375,3.703125,1.625,0.431640625
+44,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",What parameters are needed to calculate the scan cycle monitoring time for a cyclic interrupt OB?,A5,"The calculation depends on TCI, representing the OB's execution time, and TP15, a maximum configured value.",1.671875,1.796875,3.390625,1.65625,0.365234375
+45,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",Where can additional information on 'CPU_RT' be found?,A1,"Additional information is available in the 'SIMATIC Process Control System PCS 7 Basic Library' manual, under the 'Family: @System' section.",1.9453125,2.328125,3.671875,1.078125,0.453125
+46,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",Where can additional information on 'CPU_RT' be found?,A2,Refer to the 'SIMATIC Process Control System PCS 7 Basic Library' manual's 'Family: @System' section for more details on 'CPU_RT'.,1.8359375,2.109375,3.578125,1.2890625,0.61328125
+47,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",Where can additional information on 'CPU_RT' be found?,A3,The manual at https://support.industry.siemens.com/cs/ww/en/view/109738089 provides further 'CPU_RT' insights in the '@System' family section.,1.5625,1.6875,3.28125,1.3515625,0.6171875
+48,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",Where can additional information on 'CPU_RT' be found?,A4,"For comprehensive 'CPU_RT' details, consult the '@System' family part of the PCS 7 Basic Library manual accessible online.",2.046875,2.421875,3.703125,1.1953125,0.392578125
+49,pcs7_compendium_part_b_en-US_en-US.txt,61,6c8e203454deb2ac9fbb7d5996114bb3604617fded291c9faa133bddc70d1d86,"The ""CPU_RT"" diagnostic block implements a new controller and cycle behavior in the overload range. When there is a cycle overload in the CPU, the time intervals between two calls of the interrupt OBs are increased (the number of calls are reduced). In the safety program, this may cause I/O modules to be passivated or an F-STOP to be triggered, depending on the setting of the subsequently calculated monitoring times. To avoid this, the cyclic interrupt OB with security program must be disabled to reduce the calls. To do this, set the OBxx_ATT input (xx = no. of the cyclic interrupt OB with safety program) at the CPU_RT block to ""0"".
+
+A performance analysis of the AS load is also possible. The performance analysis depends on the CPU firmware (CPU FW V4.5 and above). If the CPU FW supports SFC78, the performance data can be read via ""CPU_RT"". The performance data is shown in the diagnostic area of PCS 7 Asset Management.
+
+CFC [@CPU_RT KONP_V81OO_CPU81 [CPU4IOF |CPU 410-SHI-]
+Chart Edit Insert CPU Debug View Options Wvindow Help
+0 B       @B          21           Gx8       60"" % 4     5
+0B3*_AII      3et2e2 fur den      Iit Sicherheitaprograrn.
+Set 0B3*_AII       for    vith 3afety Icgic
+@CFU RI
+CFU RI         CBiog
+CFU Fezf
+50 _ YAX RIRG      IDLE CYC
+75.0_  YAX LIX     C330N $
+95.0-  YAX VAL     0B31_N_5
+HYS         0B32_N_
+RESET       0B33_N_5
+RSTYAX      0334 N $
+0330 ATI    C335
+0331        0336
+0B32_ATI    0B37_N_S
+0333 AII    C338
+0B34_ATI    C330
+0B35_AII    0B31_N_c
+0336 ATI    0B32_N_
+0B37AiI     C333
+0338_ATI    0B34_N_
+REQ_ER      0B35_N_c
+UNDC CYC    CB36_N_c
+0B37_N
+C338
+DAT FLAU
+SFC7?_
+SL_CB
+SL_CB_EX
+N_C31_
+YAXCYCII
+ICIALCUR
+ICIALAV
+ICIALMAX
+ICIALKIN
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+139
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Note
+
+You can find additional information on ""CPU_RT"" in the section ""Family: @System"" of the ""SIMATIC Process Control System PCS 7 Basic Library"" (https://support.industry.siemens.com/cs/ww/en/view/109738089) manual.
+
+# 7.11.2 Calculating the F-cycle monitoring time (for block F_CYC_CO)
+
+The F-CPU runs execution time monitoring for every cyclic interrupt OB (OB 30 - OB 38) containing F-runtime groups.
+
+F_CrC_CC-0337
+
+CrC_ C337
+
+ingerted 41
+
+YX CYC FRILED @@F_ShutOn (4,1} !CR_CB37 INI
+
+# Procedure
+
+The first time the F-program is compiled, you will be prompted to enter a value for the maximum cycle time (MAX_CYC) which may elapse between two calls to this cyclic interrupt OB. The default for the maximum F-cycle time is 3000 ms.
+
+Should this default value not be suitable for your process, you can modify it directly at the F_CYC_CO block (located in the automatically generated @F_CycCo-OB3x chart).
+
+You will need the following parameters for an exact calculation of the scan cycle monitoring time for a cyclic interrupt OB:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F_CYC_CO F-function block is called.
+- TP15: Configured ""max. ",Where can additional information on 'CPU_RT' be found?,A5,"Detailed 'CPU_RT' documentation is found in the PCS 7 Basic Library's '@System' family section, available at Siemens' support site.",2.34375,2.703125,3.78125,1.21875,0.4296875

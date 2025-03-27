@@ -1,0 +1,2641 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",What actions are determined by the 'shutdown option code' parameter in the MSD ServoDrive?,The 'shutdown option code' parameter determines the action executed at the transition from 'Operation enable' to 'Ready to Switch on' (state machine state 5 to 3).,"In the MSD ServoDrive, transitioning from 'Operation enable' to 'Ready to Switch on' involves actions specified by the 'shutdown option code'.",Actions during the transition from state 5 to 3 in the state machine are defined by the 'shutdown option code' parameter.,The 'shutdown option code' parameter in the MSD ServoDrive specifies what happens when moving from 'Operation enable' to 'Ready to Switch on'.,"For the MSD ServoDrive, the 'shutdown option code' sets the action for the state change from 'Operation enable' to 'Ready to Switch on'."
+1,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",How does the 'Quickstop' function differ from normal braking in the MSD ServoDrive?,"The 'Quickstop' function brakes an ongoing movement differently from the normal braking ramp, used when the drive needs to be shut down rapidly due to a malfunction.","Unlike normal braking, 'Quickstop' in the MSD ServoDrive is for emergency shutdowns, braking the drive to speed zero on an appropriate ramp.","In the MSD ServoDrive, 'Quickstop' provides a rapid shutdown mechanism distinct from standard braking procedures.","The 'Quickstop' function is designed for fast shutdowns in emergencies, differing from the MSD ServoDrive's regular braking ramp.","For emergency malfunctions, the MSD ServoDrive uses 'Quickstop' to brake differently and more quickly than normal braking."
+2,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",What parameters define the homing movement in the MSD ServoDrive?,"The homing movement is defined by speed (velocity) V1 and V2, the acceleration, and the maximum positioning range.","In the MSD ServoDrive, homing movement parameters include speeds V1 and V2, acceleration, and the max positioning range.","Speeds V1 and V2, acceleration, and maximum positioning range are key to defining the homing movement in the MSD ServoDrive.","The MSD ServoDrive's homing movement is dictated by specified speeds, acceleration, and the furthest it can position.","Defining the homing movement in the MSD ServoDrive involves setting two speeds, acceleration, and the maximum range for positioning."
+3,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",What is the purpose of the 'MPRO_402_HomeOffset' parameter in the MSD ServoDrive?,The 'MPRO_402_HomeOffset' parameter is used to define the machine zero point or offset relative to the encoder’s absolute position during homing.,"In the MSD ServoDrive, 'MPRO_402_HomeOffset' sets the home offset for establishing the machine zero point during homing procedures.",Setting the machine zero point or an offset from the encoder's absolute position is the role of 'MPRO_402_HomeOffset' in the MSD ServoDrive.,The 'MPRO_402_HomeOffset' parameter in the MSD ServoDrive is crucial for defining offsets or zero points during the homing process.,"For homing in the MSD ServoDrive, 'MPRO_402_HomeOffset' specifies the offset or zero point relative to the encoder's position."
+4,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",How does method (-13) differ from method (-5) in homing with absolute encoders in the MSD ServoDrive?,"Method (-13) uses the home offset to define the machine zero point directly, whereas method (-5) uses it to define an offset relative to the encoder’s absolute position.","In the MSD ServoDrive, method (-13) simplifies homing by directly setting the machine zero point with the home offset, unlike method (-5) which requires determining the encoder's absolute position first.",The difference between method (-13) and (-5) in the MSD ServoDrive lies in how the home offset is applied to define the machine zero point versus an offset from the encoder's position.,"Method (-13) in the MSD ServoDrive directly establishes the machine zero point with the home offset, while method (-5) involves an additional step of referencing the encoder's absolute position.","For absolute encoders, method (-13) offers a simpler approach by using the home offset to set the machine zero point directly, contrasting with method (-5)'s more complex process in the MSD ServoDrive."
+5,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",What is the significance of the 'MPRO_REF_HOMING_MaxDistance' parameter in the MSD ServoDrive?,The 'MPRO_REF_HOMING_MaxDistance' parameter specifies the positioning range in which to search for the block during homing procedures.,"In the MSD ServoDrive, 'MPRO_REF_HOMING_MaxDistance' defines the search area for the block when performing homing operations.","During homing, the 'MPRO_REF_HOMING_MaxDistance' parameter in the MSD ServoDrive sets the maximum distance to look for the block.",The 'MPRO_REF_HOMING_MaxDistance' parameter is crucial for determining how far the MSD ServoDrive will search for the block during homing.,"For homing to a block, the MSD ServoDrive uses 'MPRO_REF_HOMING_MaxDistance' to establish the search range."
+6,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",What happens during the 'Halt' command in the MSD ServoDrive?,"The 'Halt' command interrupts a movement, with the drive remaining in the 'Operation enable' state, and the interrupted movement is completed once the command is cancelled.","In the MSD ServoDrive, executing a 'Halt' command stops the current movement but keeps the drive operational, allowing the movement to resume after cancellation.","When the 'Halt' command is issued in the MSD ServoDrive, it pauses the ongoing movement without changing the drive's operational state, ready to continue once halted.","The MSD ServoDrive's 'Halt' command temporarily stops movements, maintaining 'Operation enable' status for resumption post-cancellation.","Interrupting a movement without disabling operation, the 'Halt' command in the MSD ServoDrive allows for paused actions to be later completed."
+7,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",How is the machine homing point set using method (-12) in the MSD ServoDrive?,"Method (-12) involves moving the rotor or linear axis to the machine homing point, writing the desired position to 'MPRO_402_Homeoffset', and then referencing the axis.","In the MSD ServoDrive, method (-12) sets the homing point by positioning the axis, updating the 'MPRO_402_Homeoffset', and performing a reference operation.","Setting the machine homing point with method (-12) in the MSD ServoDrive requires moving to the point, adjusting the home offset, and referencing.","The MSD ServoDrive's method (-12) for homing involves positioning, setting 'MPRO_402_Homeoffset', and then initiating a reference to establish the homing point.","For method (-12) in the MSD ServoDrive, the homing point is established by moving to the desired location, configuring the offset, and referencing the axis."
+8,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",What role does the 'MPRO_REF_HOMING_TMaxScale' parameter play during homing in the MSD ServoDrive?,"The 'MPRO_REF_HOMING_TMaxScale' parameter allows for the reduction of the maximum permissible torque specifically during the homing operation, set in the range of 0-100%.","In the MSD ServoDrive, 'MPRO_REF_HOMING_TMaxScale' is used to adjust the maximum torque allowed during homing, enhancing safety and control.","During homing, the MSD ServoDrive's 'MPRO_REF_HOMING_TMaxScale' parameter can limit torque to a specified percentage, replacing 'CON_SCON_TMaxScale' temporarily.",The 'MPRO_REF_HOMING_TMaxScale' parameter in the MSD ServoDrive temporarily overrides the maximum torque setting during homing for precise control.,"For homing operations, the MSD ServoDrive utilizes 'MPRO_REF_HOMING_TMaxScale' to set a temporary maximum torque limit, ensuring safe and controlled movement."
+9,msd_servo_drive.txt,73,328518a795ad216cacc5ad732e5a32d8b69033c1a03df06d65f5196c4bfb190d,"The ramp functions are only effective in certain system states. The required settings can be selected from the screen. Clicking the ""Error/Error reactions"" button directly accesses the screen for the error reactions.
+
+# Stop ramps in torque control
+
+When in torque control mode (TCON), if one of the following occurs:
+
+- The control is shut down
+- The setpoint is disabled
+- Stop
+- Quick stop
+- Error
+
+the set ramps will be performed in rpm.
+
+# Reaction to “Control Shutdown”
+
+The ""shutdown option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Ready to Switch on"" (state machine state 5 to 3).
+
+# Reaction to “Disable Operation""
+
+The ""disable operation option code"" parameter determines which action is to be executed at the transition from ""Operation enable"" to ""Switched on"" (state machine state 5 to 4).
+
+# Reaction to ""Halt""
+
+The ""Halt"" command interrupts a movement. The drive remains in the ""Operation enable"" state. When the ""Halt"" command is cancelled the interrupted movement is completed.
+
+# Reaction to “Quickstop”
+
+If the drive needs to be shut down as rapidly as possible due to a malfunction, it must be run down to speed zero on an appropriate ramp. The ""Quickstop"" function brakes an ongoing movement differently from the normal braking ramp. The servo drive is in the ""Quickstop"" system state. This state can be quit during or after braking, depending on the status of the quick-stop command and the respective reaction.
+
+# 8.5.1 Homing screen
+
+The homing movement is dictated by the speed (velocity) V1 and V2, the acceleration and the maximum positioning range.
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2218|0 MPRO_402_QuickStopOC| |605AH DS402 quick-stop option code|
+|2219|0 MPRO_402_ShutdownOC| |605BH DS402 reaction to control shutdown|
+|2220|0 MPRO_402_DisableOpOC| |605CH DS402 disable operation option code|
+|2221|0 MPRO_402_HaltOC| |605DH DS402 halt option code|
+|2222|0 MPRO_402_FaultReactionOC| |605EH DS402 fault reaction option code|
+|2242|0 MPRO_402_QuickStopDec|rev/min/s|6085H DS402 quickstop deceleration|
+
+Table 8.19: “Motion profile - Stop ramps” parameters
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 249
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 250
+
+NOTE
+
+l The reference mark signal can be optionally linked to one of the ISD05 and ISD06 fast digital inputs.
+
+# 8.5.1.1 Homing to a limit switch:
+
+The digital input must be set to the available selection parameter LCW(5) for a positive limit switch or to LCCW(6) for a negative limit switch.
+
+# 8.5.1.2 Homing to a cam
+
+Set digital input to HOMSW(10) (P 106 - MPRO_INPUT_FS_ISD06 to P 107- MPRO_INPUT_FS_ISD07).
+
+Image 8.38: Selection of homing method
+
+NOTE
+
+l The homing methods (-1) to (-12) are manufacturer-specific. Homing methods (0) to (35) are defined according to CiA 402.
+
+1. Selection of homing methods (-12) to (35)
+2. Speed V1: Speed during cam search Speed V2: Speed during zero point search
+3. Acceleration for V1 and V2
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|169|MPRO_REF_HOMING_MaxDistance|mDegree|Homing: Maximum travel (homing to block: block detection)|
+|170|MPRO_REF_HOMING_Ctrl| |Homing method Control word|
+|171|HOMING_Ctrl| | |
+|225|MPRO_REF_HOMING_BackupPos|mDegree|Homing: backup position|
+|2234|MPRO_402_HomeOffset|mDegree|607CH DS402 home offset|
+|2261|MPRO_402_HomingMethod| |6098H DS402 homing method|
+| | | |Limitation of positioning range for homing. On exiting the positioning range, the axis is stopped with the error message ""Overrun"".|
+
+# Legend for ‘Homing method’ screen figure
+
+# Table 8.20: “Homing” parameters
+
+# 8.5.2 Method (-13): Absolute encoder
+
+|ID|Index Name| |Unit|Description| | |
+|---|---|---|---|---|---|---|
+|2262| |MPRO_402_|6099H|DS402 homing speeds| | |
+|2262|0|SpeedSwitch|rev/min|Cam search speed| | |
+|2262|1|SpeedZero|rev/min|Zero pulse search speed| | |
+|2263|0|MPRO_402_|rev/min/s|609AH DS402 homing acceleration| | |
+
+Table 8.20: “Homing” parameters (continue)
+
+Method (-13) works in a similar way to method (-5) (see Section ""Method (-5): Absolute encoder"" on page 254). However, in this method the home offset is used to define the machine zero point, while in method (-5) it is used to define the offset relative to the encoder’s absolute position.
+
+The following is the difference between the machine zero points for each method:
+
+- Method (-13): Actual value = Home offset
+- Method (-5): Actual value = Absolute encoder position (first needs to be determined with home offset = 0) + new home offset
+
+Method (-13) is significantly easier to use, as it eliminates the need to determine the encoder’s absolute position at the machine zero point and back-calculate the actual position.
+
+Image 8.39: Set the machine homing point
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 251
+
+# 8 Motion profile
+
+# 8.5.3 Method (-12): Set absolute position (absolute measuring system)
+
+To set the machine homing point, the rotor or the linear axis is moved to the machine homing point. The desired actual position is written to the parameter ""Offset"" P 2234 MPRO_402_Homeoffset. Afterward, the axis must be referenced once. Every time the axis is started thereafter, the absolute position is calculated automatically. Every time a new homing operation is initiated, the machine homing point is reset to the current position.
+
+# 8.5.4 Method (-10) and Method (-11): Move to block with zero pulse
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.4.1 Method (-10): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Image 8.40: Set the machine homing point
+
+Image 8.41: Move to block, direction of movement right with zero pulse
+
+# 8.5.4.2 Method (-11): Leftward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the positioning range in which to search for the block is specified. After approaching the block, the drive reverses the direction of rotation until a zero pulse is detected. The first zero pulse
+
+# 8 Motion profile
+
+# 8.5.5 Method (-8) and (-9): Move to block
+
+after reversing direction corresponds to the zero point. An offset can be programmed in the screen.
+
+Tracking error monitoring is switched off during the homing procedure. The maximum permissible torque can be reduced specifically during the homing operation. To do so, parameter P 0225 MPRO_REF_HOMING_TMaxScale must be set in the range of 0-100%. Note that this parameter replaces parameter P 0332 CON_SCON_TMaxScale during the homing run.
+
+# 8.5.5.1 Method (-8): Rightward direction of travel
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+Image 8.42: Approach block, direction of travel left, with zero pulse
+
+Image 8.43: Approach block, direction right
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 253
+
+# 8 Motion profile
+
+# 8.5.5.2 Method (-9): Leftward direction of travel
+
+# 8.5.6 Method (-7) to (0)
+
+With P 0169 MPRO_REF_HOMING_MaxDistance the tracking error is specified in the positioning range in which the block is detected. When the block is detected, the system disengages by half the value in parameter P 0169 MPRO_REF_HOMING_MaxDistance) and the zero point is defined. An offset can be programmed in the screen.
+
+# 8.5.6.1 Homing method for increment-coded encoders
+
+- Method (-6): Movement in negative direction
+- Method (-7): Movement in positive direction
+
+See also Section ""Increment-coded reference marks"" on page 105.
+
+# 8.5.6.2 Method (-5): Absolute encoder
+
+These homing methods are suitable for absolute encoders (e.g. SSI multi-turn encoders). Referencing is performed immediately after a mains power up. The reference position is calculated on the basis of the encoder absolute position plus zero offset. In the case of a SSI multi-turn encoder, homing with zero point offset = 0 gives the absolute position of the SSI encoder. Referencing again without changing the setting for the zero point offset does not cause a change of the position. To set the machine reference point homing method (-12) should be used.
+
+# 8.5.6.3 Method (-4) and method (-3): Not defined
+
+# 8.5.6.4 Method (-2): No homing
+
+No homing will be performed. The zero point offset is added to the current position. When the power stage is first switched on, “Homing completed” is set as the status. This method is suitable for absolute encoders, provided that no offset compensation is required. For an offset compensation, please select method (-5).
+
+# 8.5.6.5 Method (-1): Actual position = 0
+
+The actual position corresponds to the zero point; it is set to 0, meaning the controller performs an actual position reset. The zero offset is added.
+
+Image 8.44: Approach block, direction left
+
+# 8.5.7 Method (1) and Method (2): limit switch and zero pulse
+
+# 8.5.7.1 Method 1: Negative limit switch and zero pulse
+
+- Start movement left; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+# 8.5.7.2 Method 2: Positive limit switch and zero pulse
+
+- Start movement right; at this time the hardware limit switch is inactive.
+- The direction of movement reverses on an active hardware limit switch edge.
+- First zero pulse after falling limit switch edge corresponds to zero/reference point.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 255
+
+# 8 Motion profile
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 256
+
+# 8.5.8 Method (3) and (4): Positive reference mark and zero pulse
+
+# 8.5.8.1 Method (3): Start movement in direction of positive (right) hardware limit switch
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.48: Start condition for negative limit switch
+
+# 8.5.8.2 Method 4: Start movement in direction of negative (left) hardware limit switch
+
+- Start movement in direction of negative (left) hardware limit switch; at this time the reference mark is inactive.
+- The direction of movement reverses on an active edge from the reference mark.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+
+Image 8.47: Start condition for positive limit switch
+
+# 8.5.9 Homing methods 5 and 6: Negative reference mark
+
+The first zero pulse after a rising edge from the reference mark is the zero point/homing point.
+
+# 8.5.9.1 Method (5): Start movement in direction of positive (right) hardware limit switch with zero pulse
+
+- Start movement in direction of positive (right) hardware limit switch; at this time the reference mark is inactive.
+- The first zero pulse after a falling edge from the reference mark is the zero point/homing point.
+- The direction of movement reverses on an active edge from the reference mark.
+- Start movement in direction of the negative limit switch if the reference mark is inactive.
+
+Image 8.49: Positive (right) hardware limit switch and zero pulse
+
+# 8.5.9.2 Method 5: Start movement in direction of negative (left) hardware limit switch with zero pulse
+
+- Start movement in direction of negative (left) hardware limit switch.
+- The direction of movement reverses on an inactive edge from the reference mark.
+
+Image 8.50: Negative (left) hardware limit switch and zero pulse
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 257
+
+# 8 Motion profile
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 258
+
+# 8.5.10 Method (7) to (10):
+
+# 8.5.10.1 Method (7): Reference mark, zero pulse and positive limit switch
+
+- The start movement is in the direction of the positive, right hardware limit switch. Both it and the reference mark are inactive.
+",What distinguishes method (-1) homing in the MSD ServoDrive?,"Method (-1) sets the actual position to 0, performing an actual position reset with the zero offset added, effectively defining the zero point.","In the MSD ServoDrive, method (-1) for homing involves resetting the actual position to zero and applying the zero offset to establish the reference point.","The distinguishing feature of method (-1) in the MSD ServoDrive is its direct reset of the actual position to zero, plus any offset, for homing.",Method (-1) in the MSD ServoDrive simplifies homing by resetting the current position to zero and adjusting by the zero offset.,"For quick homing, method (-1) in the MSD ServoDrive resets the position to zero and adds the offset, setting the zero point directly."

@@ -1,0 +1,2721 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",What are the typical application areas of WinCC/WebUX as described in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"Service-relevant information on plant unit/process device with the option of acknowledging alarms, Quality assurance to monitor important production data, and Management for inspecting key production figures (KPI, Key Performance Indicators).","The typical application areas include monitoring service-relevant information, ensuring quality by tracking production data, and management tasks focusing on key performance indicators.","Three main areas: 1) Service information and alarm acknowledgment, 2) Quality monitoring of production data, 3) Management review of KPIs.","WinCC/WebUX is used for service information, quality assurance, and management oversight, specifically for alarms, production data, and KPIs.","Applications include handling alarms, overseeing production quality, and evaluating key performance indicators for management purposes."
+1,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",How can different languages be assigned to logon profiles according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,Different languages configured in the OS system can be assigned in the User Administrator for different logon profiles.,Languages set up in the operating system are assignable to various logon profiles via the User Administrator.,The User Administrator allows the assignment of OS-configured languages to individual logon profiles.,"Assigning languages to logon profiles is done through the User Administrator, based on the OS's language settings.","For logon profiles, languages are assigned in the User Administrator, utilizing the OS's configured language options."
+2,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",What standard interfaces are available for data exchange from OpenPCS 7 stations as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"OPC UA, OPC DA, OPC HDA, OPC A&E, OPC 'H' A&E, and OLE/DB for OLE-enabled applications.","The interfaces include OPC UA, Data Access, Historical Data Access, Alarm & Events, Historical Alarm & Events, and OLE/DB.","Available interfaces: 1) OPC UA, 2) OPC DA, 3) OPC HDA, 4) OPC A&E, 5) OPC 'H' A&E, 6) OLE/DB.","OpenPCS 7 supports OPC UA, DA, HDA, A&E, 'H' A&E, and OLE/DB interfaces for data exchange.","For exchanging data, OpenPCS 7 utilizes various OPC standards and OLE/DB for compatibility with applications like MS Office."
+3,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",What are the components of SIMATIC Logon as described in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"SIMATIC Logon Service, SIMATIC Logon Role Management, SIMATIC Logon Event Log Viewer, SIMATIC Electronic Signature, and SIMATIC Logon Development Kit.","The system includes a Service for access protection, Role Management for authorization, an Event Log Viewer, Electronic Signature for BATCH, and a Development Kit.","Components: 1) Logon Service, 2) Role Management, 3) Event Log Viewer, 4) Electronic Signature, 5) Development Kit.","SIMATIC Logon comprises five main components focusing on access control, role management, event logging, electronic signatures, and development integration.","Key parts include the Logon Service, Role Management, Event Log Viewer, Electronic Signature feature, and tools for developers."
+4,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",What is the purpose of the 'Logon_Administrator' Windows group in SIMATIC Logon according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,It authorizes members to access the 'Configure SIMATIC Logon' dialog box for configuration purposes.,Members of this group are allowed to configure SIMATIC Logon settings via its dialog box.,"The group grants configuration access to SIMATIC Logon, specifically to its setup dialog.",Purpose: To enable certain users to configure SIMATIC Logon by including them in this Windows group.,This group is essential for users who need to perform configuration tasks within SIMATIC Logon.
+5,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",How does WinCC Logon verify user access to OS functionalities as per the 'Compendium Part A - Configuration Guidelines (V9.0)'?,It checks the user's authorizations when they attempt to access a protected OS functionality.,"Upon accessing a protected function, the User Administrator verifies if the user has the necessary permissions.",Verification involves confirming the user's rights to use specific OS functions based on their authorizations.,The system denies access if the user lacks the required authorizations for the requested functionality.,Access to OS functionalities is granted or denied based on the user's assigned authorizations in the User Administrator.
+6,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",What are the differences between SIMATIC Logon and WinCC Logon highlighted in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"SIMATIC Logon is suitable for multiple applications and central administration, while WinCC Logon is not.","SIMATIC Logon supports client/server projects and central user management, unlike WinCC Logon.","Key differences include SIMATIC Logon's compatibility with multiple applications and its central administration feature, which WinCC Logon lacks.","SIMATIC Logon is recommended for its broader applicability and no additional costs, offering more benefits than WinCC Logon.","The main distinctions are SIMATIC Logon's versatility across applications and centralized management, making it preferable over WinCC Logon."
+7,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",What information can be found in the 'SIMATIC Process Control System PCS 7 OpenPCS 7' manual according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A detailed description of how to use the OpenPCS 7 solution.,The manual provides comprehensive instructions on utilizing the OpenPCS 7 interface.,It covers the application and operation of the OpenPCS 7 standard interfaces for data exchange.,Detailed guidance on implementing OpenPCS 7 in higher-level systems is included.,The manual explains the use of OpenPCS 7 for exchanging data with plant management levels.
+8,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",What is the significance of the 'Audible Alarms for PCS 7 Web Clients' application example mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,It provides information on emitting an audible signal on a Web client for new messages.,The example demonstrates configuring audible alerts for notifications in Web clients.,It details how to implement sound notifications for incoming messages in PCS 7 Web clients.,This example is a guide for setting up audible alarms to alert users of new messages.,Significance lies in its instructions for enabling sound-based alerts for message notifications in Web environments.
+9,pcs7_compendium_part_a_en-US_en-US.txt,105,9932d2208deb94f45849a268dbb4ec66fc5636c828d6814d257947eae2670603,"- Different languages, which have been configured in the OS system, can be assigned in the User Administrator for different logon profiles.
+- It is also possible to emit an audible signal on a Web client when new messages occur. You can find additional information on this in the ""Audible Alarms for PCS 7 Web Clients"" (https://support.industry.siemens.com/cs/ww/en/view/29088810) application example.
+
+Note
+
+You can find important information on the subject of performance improvement of clients and systems, the Certification Authority (CA), or Certificate Revocation List (CRL) in the ""What can cause the start of SIMATIC PCS 7 applications being delayed?"" (https://support.industry.siemens.com/cs/ww/en/view/87057037) FAQ.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.6 WinCC/WebUX
+
+Additional information
+
+You will find a detailed description of how to use the Web solution in the ""SIMATIC PCS 7 OS Web Option for OS"" manual.
+
+Additional relevant information can be found in the ""PCS 7 Security Concept Recommendations and Notes""  and ""PCS 7 Security Concept and WinCC – Basic Document"" .
+
+# 10.6 WinCC/WebUX
+
+WinCC/WebUX allows access to process pictures especially created and released for WebUX via a browser capable of supporting HTML 5 on a computer or mobile device.
+
+Typical application areas are:
+
+- Service-relevant information on plant unit/process device with the option of acknowledging alarms
+- Quality assurance to monitor important production data
+- Management for inspecting key production figures (KPI, Key Performance Indicators)
+
+Note
+
+You can find additional information on WebUX in the ""WinCC Basic Options V7.4 SP1: WebNavigator, DataMonitor, WebUX, Connectivity Pack"" manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.7 OpenPCS 7
+
+# Introduction
+
+Data from PCS 7 is also available to higher-level systems with Open PCS 7 (e.g. plant management level). The following standard interfaces can be used to exchange data from OpenPCS 7 stations:
+
+- OPC UA (Unified Architecture)
+- OPC DA (Data Access)
+- OPC HDA (Historical Data Access)
+- OPC A&E (Alarm & Events)
+- OPC ""H"" A&E (Historical Alarm & Events)
+- OLE/DB for OLE-enabled applications (e.g. MS Office products) and for accessing historical values, alarms and messages via standardized database access.
+
+Note
+
+System description
+
+You will find a detailed description of how to use the OpenPCS 7 solution in the ""SIMATIC Process Control System PCS 7 OpenPCS 7"" (https://support.industry.siemens.com/cs/ww/en/view/109746548) manual.
+
+# 10.8 SIMATIC PDM server/client structure
+
+The server/client structure is supported starting in SIMATIC PDM V9.0. This means you can access the interactive PDM portal of the webserver via the browser on a PC or mobile device without SIMATIC software. The PDM portal makes various filters available thanks to the revised process device plant view and allows individual process devices to be retrieved for diagnosis and parameter assignment. The access rights are configured specific to requirements via the PDM Role Management.
+
+Note
+
+You can find additional information on using the server/client structure with SIMATIC PDM V9.1 in the ""SIMATIC Process Control System PCS 7 Help with SIMATIC PDM (V9.1)"" (https://support.industry.siemens.com/cs/ww/en/view/109482406) manual.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.1 User Administrator
+
+# Scope of functions
+
+The ""User Administrator"" editor of the ""WinCC Configuration Studio"" is used to establish user
+administration.
+
+The editor is used to assign access rights to users for individual editors in the configuration
+system and to functions in process mode, as well as to monitor these rights. To this end,
+access rights, also known as authorizations, are assigned for OS functions in the User
+Administrator. These authorizations can be assigned to individual users or to user groups;
+they can also be assigned during process mode.
+
+Other characteristics of the User Administrator:
+
+- Configuration functions for ""variable logon"", which a user can employ to log on to the OS
+client. This can be achieved by means of a variable value, for example, which is set via a
+key-operated switch.
+- Automatic user logoff after a certain period of time
+- User logon via a smart card
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+289
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+You can choose between two user administration options:
+
+- WinCC Logon
+- SIMATIC Logon
+
+Note: You have the option of exporting or importing the entire configuration or selected parts of the user administrator (e.g. in *.csv format).
+
+# Selection guide for WinCC Logon and SIMATIC Logon
+
+|Criterion|SIMATIC Logon|WinCC Logon|
+|---|---|---|
+|In process mode, the operator must be authenticated on a PC for multiple applications (OS, SIMATIC BATCH, Route Control, Automation License Manager, SIMATIC Manager, SIMATIC PDM).|Suitable|Not suitable|
+|A client/server project with multiple OS clients is used.|Suitable|Not suitable|
+|A single station is used, or a client/server project with just a few OS clients.|Suitable|Suitable|
+|The OS clients are referenced OS clients.|Suitable|Not suitable|
+|Web access as PDM client via browser / MS client via diagnostics faceplate|Suitable|Not suitable|
+|One central administration for users/user groups is required.|Suitable|Not suitable|
+|No central administration for users/user groups is required.|Suitable|Suitable|
+|Logon and logoff procedures are to be logged.|Suitable|Not suitable|
+
+SIMATIC Logon is supplied with ""Contract License"" in SIMATIC PCS 7 V7.1 and above. This means there are no further licensing costs for SIMATIC Logon within PCS 7. As a result, we generally recommend that SIMATIC Logon is used, as it provides more benefits than WinCC Logon and is not associated with any additional costs.
+
+Note: SIMATIC Logon and the User Administrator write different user information to a smart card. SIMATIC Logon also requires the information as to which logon computer or domain controller should be used for user authentication. This is why the Smart card must be specified again with any change from SIMATIC Logon to WinCC Logon or vice-versa.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# 10.9.2 WinCC Logon
+
+# Method of operation
+
+When a user logs on to the system with a user name and password, the User Administrator checks whether that user has been created in the OS. If the user has not been created, he/she will not be assigned any authorizations in the OS; the same applies if an incorrect password is entered.
+
+This means that the user will not be able to monitor or control the process in process mode. If a properly logged-on user calls an OS functionality which is protected by an authorization, the User Administrator checks whether the relevant authorizations permit this function to be accessed. If the appropriate authorizations are not in place, the User Administrator denies the user access to the requested functionality.
+
+User groups, users, and their passwords are managed in the ""User Administrator"" editor. The user groups, users, and passwords must be created separately in every OS client. In order to avoid having to duplicate creation work in the OS clients, you can work with referenced OS clients. For referenced OS clients, however, the user administration configurations must be exactly the same for every client.
+
+1. The user logs on to OS client 1.
+2. The User Administrator of the OS client 1 checks the user name and password, and determines the authorizations that are met by the user.
+3. The user logs on to OS client 2.
+4. The User Administrator of the OS client 2 checks the user name and password, and determines the authorizations that are met by the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+291
+
+# 10.9 User administration
+
+# Configuring user administration
+
+The example below shows how to configure the user administration system using WinCC Logon:
+
+1. Use the SIMATIC Manager to open the OS client project, then open the ""User Administrator"" editor from there.
+2. Select the ""User > Create Group"" menu command to create a new ""Operators"" user group and assign the relevant authorizations.
+3. Create a new user named ""Operator1"" within the ""Operators"" group and assign a password to the user.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+Note
+
+A distinction is made between uppercase and lowercase letters for user names and passwords as of PCS 7 V8.0 SP1.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+293
+
+# 10.9 User administration
+
+# 10.9.3 SIMATIC Logon
+
+Introduction
+
+SIMATIC Logon is a Windows-based central user management system with access protection for the SIMATIC PCS 7 system components.
+
+SIMATIC Logon consists of the following components:
+
+|Software component|Area of application|PCS 7 system component which uses the software component|
+|---|---|---|
+|SIMATIC Logon Service|Central access protection for SIMATIC applications|All components which use SIMATIC Logon|
+|SIMATIC Logon Role Management|Role management for applications and their assignment to Windows groups, including assignment of authorizations|SIMATIC BATCH, SIMATIC Manager|
+|SIMATIC Logon Event Log Viewer|The SIMATIC Logon Event Log Viewer is a component which handles the logging and visualization of events for an application.|All components which use SIMATIC Logon|
+|SIMATIC Electronic Signature|Creation of electronic signatures for status changes in the process and for accessing the process|SIMATIC BATCH|
+|SIMATIC Logon Development Kit|The Development Kit is for programmers who want to integrate SIMATIC Logon in customer applications.|None|
+
+# SIMATIC Logon Service
+
+The SIMATIC Logon Service is the central access protection for SIMATIC applications. In the SIMATIC Logon Service you logon with your user name and password before the SIMATIC applications are opened.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# SIMATIC Logon Role Management
+
+SIMATIC Logon Role Management is used to assign roles to Windows groups and to give authorizations. SIMATIC Logon Role Management is started from the individual applications (e.g. SIMATIC BATCH, ALM).
+
+# SIMATIC Logon Event Log Viewer
+
+SIMATIC Logon Eventlog Viewer is a SIMATIC Logon component for recording and displaying events.
+
+# SIMATIC Electronic Signature
+
+Electronic signatures can be used for status changes in the process or with events in the process. This function is only available in SIMATIC BATCH.
+
+# SIMATIC Logon Development Kit
+
+The Development Kit is a function for programmers who want to integrate SIMATIC Logon into a customer application.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+295
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+""Logon_Administrator"" Windows group
+
+To configure SIMATIC Logon, a Windows group called ""Logon_Administrator"" is required. In version V1.5 and above this group is set up automatically when installing SIMATIC Logon on the local computer. All users who are stipulated as members of the Windows ""Logon_Administrator"" group are authorized to access the logon dialog box ""Configure SIMATIC Logon"".
+
+The following image shows an example of the ""Logon_Administrator"" group where the user ""logon"" has been added:
+
+Note
+
+SIMATIC Logon users must be direct members of a Windows group. These users may not be members of a subgroup of a Windows group.
+
+You can find information on Windows users and groups, for example, at the following link: http://technet.microsoft.com/en-us/library/dd861336.aspx
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Configuring OS functions
+
+# 10.9 User administration
+
+# Method of operation
+
+Information on the logon process and functional mechanism of SIMATIC Logon can be found in the
+""SIMATIC Logon"" manual.
+
+The following image shows an authentication scenario with SIMATIC Logon:
+
+1. ",What does the 'SIMATIC Logon Development Kit' offer as per the 'Compendium Part A - Configuration Guidelines (V9.0)'?,Tools for programmers to integrate SIMATIC Logon into customer applications.,It provides development resources for custom integration of SIMATIC Logon functionalities.,The kit enables the incorporation of SIMATIC Logon features into bespoke software solutions.,Offers programming tools to embed SIMATIC Logon's access control into third-party applications.,The Development Kit is designed for developers needing to add SIMATIC Logon capabilities to their applications.

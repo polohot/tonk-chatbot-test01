@@ -1,0 +1,1111 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",What is the default value of TCiRmax in the system and how can it be changed?,"The default value of TCiRmax is set to 1 s in the system, and it can be changed by calling SFC 104.","TCiRmax is initially set to 1 second. To modify this value, use SFC 104.","In the system, TCiRmax defaults to 1 s. Adjustment is possible through SFC 104.","1 s is the system's default for TCiRmax, with SFC 104 enabling its modification.","The system sets TCiRmax at 1 s by default, changeable via SFC 104."
+1,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",Where can the parameter TCiR be found when the CiR function is activated?,The parameter TCiR can be found in the 'Properties' dialog of the CiR object created in the singular system with the CiR function activated.,"With CiR function active, locate TCiR in the 'Properties' dialog of the created CiR object within the singular system.","In the singular system where CiR is activated, TCiR is accessible via the 'Properties' dialog of the CiR object.",Access TCiR by opening the 'Properties' dialog of the CiR object in the singular system with activated CiR function.,The 'Properties' dialog of the CiR object in the singular system with CiR function activated contains the TCiR parameter.
+2,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",What is the purpose of setting the F-monitoring time TPSTO to a sufficiently high value?,Setting the F-monitoring time TPSTO to a sufficiently high value prevents monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present.,"To avoid false triggers in the F-module driver or F-signal module monitoring, TPSTO must be set high enough.",A sufficiently high TPSTO ensures that neither F-module driver nor F-signal module monitoring is activated without actual errors.,Preventing unnecessary triggers in monitoring systems requires setting TPSTO to an adequately high value.,The F-monitoring time TPSTO needs to be sufficiently high to prevent erroneous activation of monitoring mechanisms.
+3,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",How can the lowest possible F monitoring time be determined?,The lowest possible F monitoring time can be determined with the tool S7tftime.xlsm.,Use S7tftime.xlsm to find out the minimum F monitoring time possible.,Determination of the minimal F monitoring time is achievable through S7tftime.xlsm.,S7tftime.xlsm is the tool recommended for identifying the lowest feasible F monitoring time.,"For ascertaining the least possible F monitoring time, employ S7tftime.xlsm."
+4,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",What are the variants distinguished by S7ftime.xlsm for hardware configuration?,"S7ftime.xlsm distinguishes 8 variants: single-channel F I/Os via PROFIBUS-DP or PROFINET IO, single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO, single-channel F PA field device via DP/PA coupler, single channel F PA device via DP/PA Link, single-channel switched F PA device via DP/PA Link, single-channel switched F I/O via Y-Link, single-channel F I/Os via IE/PB link, and single-channel F PA field device via CFU.","There are 8 hardware configuration variants in S7ftime.xlsm, including various single-channel and redundantly switched F I/Os and PA field devices through different links and couplers.","S7ftime.xlsm categorizes hardware configurations into 8 variants, covering single-channel and redundant setups across PROFIBUS-DP, PROFINET IO, DP/PA coupler, DP/PA Link, Y-Link, IE/PB link, and CFU.","Eight variants are identified by S7ftime.xlsm, ranging from single-channel F I/Os to redundantly switched F I/Os and PA field devices via multiple connection methods.","The tool S7ftime.xlsm differentiates among 8 configuration variants, including single-channel and redundant F I/Os and PA devices connected via various interfaces."
+5,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",What parameters are needed for calculating the F-monitoring time for each variant?,"Parameters needed include TCI, TPROG, TCImax, TDP_DLY, TTR/TR1, TTR2, TDPPA_L_DLY, TY_L_DLY, TSlave, TDAT, and settings for inputs and outputs, TDP_FD, TDP_SO, and TSLAVE_SO depending on the variant.","For F-monitoring time calculation, essential parameters vary by variant but generally include TCI, TPROG, TCImax, and specific delay and switchover times.","Calculation requires TCI, TPROG, TCImax, along with various delay and maximum times like TDP_DLY, TTR/TR1, and others based on the configuration variant.","Depending on the variant, parameters such as TCI, TPROG, and several maximum and delay times are necessary for determining the F-monitoring time.","The F-monitoring time calculation for each variant demands a set of parameters including TCI, TPROG, and specific delay, switchover, and maximum times relevant to the hardware configuration."
+6,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",What is the significance of the 'Properties FAI6xISBit HART (R-/57)' table in the context of F-monitoring time?,"The 'Properties FAI6xISBit HART (R-/57)' table provides specific parameters like source address, target_address, DIP switch setting, and monitoring time (ms) which are crucial for configuring the F-monitoring time.",This table lists essential settings such as monitoring time (ms) and DIP switch configurations necessary for accurate F-monitoring time setup.,"In configuring F-monitoring time, the table offers key details including source and target addresses alongside monitoring time values.","Parameters within the table, like monitoring time and DIP switch settings, play a vital role in establishing the correct F-monitoring time.","The table is instrumental for F-monitoring time configuration, detailing necessary parameters such as monitoring duration and device settings."
+7,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",How is time monitoring of PROFIsafe or PROFINET communication implemented in F-signal modules and F-CPU?,"Time monitoring is implemented using F-module drivers in F-signal modules and F-CPU, with the value entered during F-signal module parameter assignment in HW Config as the 'F_monitoring time' parameter.","Implementation involves F-module drivers, where the 'F_monitoring time' parameter in HW Config automatically applies upon F-module driver generation.","Through F-module drivers, the system monitors time by applying the 'F_monitoring time' parameter set in HW Config for F-signal modules.","F-module drivers facilitate time monitoring, with the 'F_monitoring time' parameter from HW Config being automatically applied.","The mechanism relies on F-module drivers, with the 'F_monitoring time' parameter in HW Config ensuring proper time monitoring implementation."
+8,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",What is the minimum PROFIsafe monitoring time Tpsto mentioned in the manual?,The minimum PROFIsafe monitoring time Tpsto mentioned is 670 ms.,Tpsto's minimum value is specified as 670 ms in the manual.,"According to the manual, the least PROFIsafe monitoring time Tpsto is 670 ms.",670 ms is the documented minimum for Tpsto in PROFIsafe monitoring.,The manual states that Tpsto must be at least 670 ms for PROFIsafe monitoring.
+9,pcs7_compendium_part_b_en-US_en-US.txt,65,752b6e867d9804d08e5f56edadc4152f03fa9ddb72a16927f503b2ab8ee7671f,"If you are not using CiR, enter 0 for both values.
+
+TCiRmax is set to 1 s in the system, but can be changed by calling SFC 104.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+Parameter TCiR can be found in the singular system with the CiR function activated, in the ""Properties"" dialog of the CiR object created.
+
+# CiR object properties
+
+|General| | |
+|---|---|---|
+|The additional number of the DP slaves limited to:| | |
+|Guaranteed:| | |
+|Maximum:| | |
+|CR Synchronization time|100| |
+|Extra Settings| | |
+|Sum of address ranges| | |
+|Input bytes:|3660| |
+|Output bytes|3660| |
+|Bus parameters|146.2 ms| |
+|Ttr typical:| | |
+|Watchdog:|353.4 ms| |
+|OK|Cancel|Help|
+
+Note
+
+For more information on CiR, refer to the ""SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR"" (https://support.industry.siemens.com/cs/ww/en/view/45531308) manual.
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+143
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+# 7.11.3 Communication monitoring time for F CPU/F signal modules
+
+Time monitoring of PROFIsafe or PROFINET communication is implemented in the F-signal modules and in the F-CPU using F-module drivers. The value is entered while assigning parameters for the F-signal modules in HW Config (""F_monitoring time"" parameter) and applied automatically when the F-module drivers are generated.
+
+|Properties FAI6xISBit HART (R-/57)|Properties FAI6xISBit HART (R-/57)|
+|---|
+|General Addresses|Parameters|
+|Identification|Redundancy|
+|Parameters|Value|
+|source address|CPU 410-5H|
+|target_address|1021|
+|DIP switch setting to o)|111101 PSTO|
+|monitoring time (ms)|2500|
+
+To prevent either monitoring in the F-module driver or monitoring in the F-signal module from being triggered when no errors are present, the F-monitoring time TPSTO must be set to a sufficiently high value. The lowest possible F monitoring time can be determined with S7tftime.xlsm.
+
+# Configuring the PROFIsafe monitoring time
+
+|minimum PROFIsafe monitoring time|Variants|
+|---|---|
+|Tpsto|670 ms|
+
+S7ftime.xlsm distinguishes 7 possibilities depending on the hardware configuration:
+
+- Version 1: Single-channel F I/Os via PROFIBUS-DP or PROFINET IO
+- Version 2: Single-channel switched F I/Os or redundantly switched F I/Os via PROFIBUS-DP or PROFINET IO
+- Variant 3: Single-channel F PA field device via DP/PA coupler
+- Variant 4: Single channel F PA device via DP/PA Link
+- Variant 5: Single-channel switched F PA device via DP/PA Link
+- Variant 6: Single-channel switched F I/O via Y-Link
+- Version 7: Single-channel F I/Os via IE/PB link
+- Variant 8: Single-channel F PA field device via CFU
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+The F-monitoring time must be calculated for the relevant variant of each F-signal module type or each device, and the values for the cyclic interrupt OB must be calculated as well. To do this, select the appropriate configuration variant and enter the parameters in the corresponding line.
+
+|Variant 2;| | |proriruS-np| | |
+|---|---|---|---|---|---|
+|singi0_~channel swilchedVO|Tcnn| | |F-Orihinputs| |
+|redundant svatched F-IIO| | |Jo| | |
+|PROFIBUS-DP|300 mS|500 ms|E0 ms|25 ms|20 Ms|
+|PROFINETIO| |Joo Ms|Ic0m|30 m| |
+
+You need the following parameters for the calculation depending on the variant:
+
+- TCI: Configured execution time of the cyclic interrupt OB in which the F-module driver is processed
+- TPROG: Program runtime of the cyclic interrupt OB in which the F-module driver is processed
+- TCImax: Time set at the F_CYC_CO block for scan cycle monitoring of the cyclic interrupt OB
+- TDP_DLY: Additional delay time with external DP interface (via CP 443-5 Extended)
+- TTR/TR1: Maximum target rotation time for the DP master system
+- TTR2: Maximum target rotation time for the subordinate DP master system on the Y link, or maximum target rotation time for the subordinate PA master system on the DP/PA coupler
+- TDPPA_L_DLY: Delay time with a DP/PA link
+- TY_L_DLY: Delay time with a Y link
+- TSlave: Maximum delay time with IM 153-2 / IM 153-4 (typical value for ET 200M = 1 ms)
+- TDAT: Maximum acknowledgment time of the fail-safe I/O module in safety mode (F signal module group data sheet)
+- With inputs and outputs: If you are using F-signal modules with inputs and outputs, set ""Yes"" here (e.g. ET 200pro). If you are using an ET 200M, set ""No"".
+- TDP_FD: Maximum DP error detection time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TDP_SO: Maximum DP switchover time. Only relevant for redundant IM 153-2 (switched I/O). Enter 0 if you are not using a redundant IM.
+- TSLAVE_SO: Max. switchover time of the slaves. Only relevant for redundant IM 153-2 (switched I/O). ",What manual is referenced for more information on CiR?,"For more information on CiR, the 'SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR' manual is referenced, available at https://support.industry.siemens.com/cs/ww/en/view/45531308.","The referenced manual is 'SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR', accessible via the provided URL.","Additional CiR details can be found in the 'SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR' manual, linked in the document.",The document points to the 'SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR' manual for further CiR information.,"Refer to the 'SIMATIC STEP7 V5.5 Modifying the System during Operation via CiR' manual, as indicated, for comprehensive CiR insights."

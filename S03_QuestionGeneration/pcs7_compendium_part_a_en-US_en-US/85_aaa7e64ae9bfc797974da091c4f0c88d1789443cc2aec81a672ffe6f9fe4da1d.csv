@@ -1,0 +1,1051 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",What conditions prevent online downloads of changes in the user program according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,"Structural changes in a block type, compression of DB and FC number areas, downloading a modified program to a different CPU before changes, and resorting to an archived program not from the most recent download prevent online downloads.","Online downloads are blocked if there are structural changes in block types, DB and FC number areas are compressed, a modified program was previously downloaded to another CPU, or an archived program not matching the latest download's time stamp is used.","Four main conditions prevent online downloads: block type structural changes, DB/FC number compression, prior download of modified program to another CPU, and use of a non-recent archived program.","The inability to download changes online occurs with block type structural updates, compressed DB/FC numbers, mismatched time stamps from prior debug downloads, and outdated archived programs.","Preventing online downloads are scenarios like added I/Os in block types, 'Compress' option use, debug-related CPU downloads, and accessing old program archives."
+1,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",How does the CPU 410-5H process automation with firmware version V8.1 or higher handle interface changes of a function or a block?,"It supports 'Type Change in Run' (TCiR), allowing downloads without losing the ability to make changes, unlike other conditions that require a full download.","With firmware V8.1 or higher, CPU 410-5H enables 'Type Change in Run' (TCiR), facilitating interface changes without necessitating a full program download.","The CPU 410-5H, from firmware V8.1, permits interface modifications via TCiR, avoiding the full download requirement for such changes.","Interface changes in functions or blocks don't always require full downloads on CPU 410-5H V8.1+, thanks to the TCiR feature.",TCiR functionality in CPU 410-5H V8.1+ allows for seamless interface updates without the full download mandate.
+2,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",What is the recommended action before a complete download from the ES to avoid overwriting parameters changed in OS runtime?,"It's advised to read back only the parameters changed by the OS or other communication partners, selecting 'Operational and observable parameters'.","Before a full download, opt to read back OS-changed parameters via 'Operational and observable parameters' to prevent undesired overwrites.",Selecting 'Operational and observable parameters' for read back ensures only relevant OS changes are preserved before a complete ES download.,"To safeguard OS runtime parameter changes, prefer reading back 'Operational and observable parameters' prior to executing a full download.",Avoid overwriting OS modifications by reading back specific parameters ('Operational and observable') before proceeding with a complete download.
+3,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",What does the 'Auto-archiving' function in PCS 7 version V8.1 or higher entail?,"It automatically archives the project after a successful download, provided the 'Archive project after successful download' option is activated in a versioned project.","Auto-archiving, available from PCS 7 V8.1, initiates project archiving post-download when enabled in the download dialog for versioned projects.","The function enables automatic project archiving after downloads, requiring activation in the download dialog and a versioned project selection.","Post-download archiving is automated with the 'Auto-archiving' feature, activated under specific conditions in PCS 7 V8.1+.","For projects managed with Version Trail, 'Auto-archiving' ensures immediate archiving following successful downloads in PCS 7 V8.1+."
+4,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",How can one verify if the current configuration has been downloaded to the AS?,By comparing time stamps in the CFC Editor or checking for a small arrow in the chart folder symbol of the component view.,The 'Compare time stamp' function in the CFC Editor or the presence of a small arrow in the chart folder symbol indicates download status.,"A match in compilation and download time stamps, or no arrow in the chart folder symbol, confirms the current configuration's download.",Verification involves time stamp comparison or visual cues in the component view to ascertain the download of the latest configuration.,Download confirmation is achieved through time stamp alignment or the absence of an arrow in the relevant component view symbol.
+5,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",What is the purpose of the 'Selective Download' function in PCS 7?,"It allows downloading specific modified CFCs or SFCs to a CPU, enabling targeted updates and parallel subsystem configurations.","Selective Download facilitates the transfer of chosen chart modifications to the CPU, supporting focused updates and multi-subsystem testing.","This function enables the selective application of changes to the CPU, ideal for testing specific subsystems or modifications.","Targeted updates to the CPU are possible with Selective Download, useful for parallel development and testing scenarios.","By allowing specific chart downloads, Selective Download streamlines updates and testing in complex system configurations."
+6,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",What are dependent charts in the context of selective downloading?,Charts that contain instances of a modified SFC type or blocks in the same runtime group as the chart to be downloaded.,Dependent charts include those with SFC type instances or shared runtime group blocks related to the chart selected for download.,They are automatically selected for download if they're linked to the modified chart through SFC instances or runtime group blocks.,"Dependency arises from SFC type changes or runtime group affiliations, necessitating their inclusion in the selective download.","Charts become dependent due to SFC instance relationships or block runtime group memberships, triggering automatic download selection."
+7,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",What caution is advised before performing a selective download?,"Ensure no dangerous system states can arise from the download, as selective changes might affect system behavior.",Pre-download checks are crucial to prevent potential hazardous conditions resulting from selective updates.,Assess the impact of selective downloads to avoid unintended or unsafe system operations.,Safety evaluations are recommended before selective downloads to mitigate risks of adverse system states.,Prioritize system safety by evaluating selective download implications to prevent dangerous outcomes.
+8,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",What is the significance of the 'Download to Test CPU' option in the 'Download S7' dialog box?,"It retains the download ID and comparison time stamp, allowing subsequent changes to be transferred to the original CPU.","This option preserves essential identifiers, enabling future updates to the original CPU without time stamp mismatches.","By maintaining download IDs and time stamps, it facilitates debugging without compromising original CPU update capabilities.",The option ensures debug downloads don't hinder the ability to later update the original CPU with changes.,Debugging flexibility is enhanced as 'Download to Test CPU' keeps the path open for original CPU updates.
+9,pcs7_compendium_part_a_en-US_en-US.txt,85,aaa7e64ae9bfc797974da091c4f0c88d1789443cc2aec81a672ffe6f9fe4da1d,"The system recognizes the changes in the program and completes a compilation first of all.
+
+A full download is required when the user program is downloaded for the first time. For this the CPU switches from RUN to STOP mode following corresponding notification. Interface changes to a function or a function block also require a full download of the program.
+
+Note
+
+With PCS 7 V8.1 or higher and CPU 410-5H (firmware V8.1) an interface change of a function or a block does not necessarily mean you lose the ability to download changes (see section ""Updating block types (Page 174)""). Downloading the changes is then normally sufficient for any program expansions.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+What situations will prevent online downloads of changes?
+
+It is no longer possible to download changes if the following conditions are present:
+
+- A used block type has been replaced by a new version that contains structural changes, for example, due to the addition of I/Os and/or messages. An exception to this is the CPU 410-5H process automation with a firmware version from V8.1 which supports the function ""Type Change in Run"" (TCiR). For more information, refer to the section ""Updating block types (Page 174)"".
+- DB and FC number areas have been compressed during compilation using the menu command Options > Settings > Compile/Download… > Option: ""Compress"". DBs and FCs will be assigned a new numbering sequence in this case.
+- When a modified program was downloaded to a different CPU prior to the download of changes, for example, for debugging purposes. In this case, the time stamp no longer matches the time stamp of the original CPU. An exception to this is provided where the ""Download to Test CPU"" option is used in the ""Download S7"" dialog box. In this case the download ID and the comparison time stamp are retained. You can still therefore transfer the program to the original CPU by downloading changes.
+- If you resort to an archived program that is not the original from the most recent download (time stamp comparison).
+
+Note
+
+Refer to the online help for the CFC Editor and to the ""Downloading changes online (Page 305)"" section for additional information.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+Downloading to the target system
+
+The following image shows the dialog box for downloading the target system:
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+205
+
+# 9.2 Downloading the user program
+
+By confirming with ""OK"" the following notice is displayed with a query on whether the parameters need to be read back.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.2 Downloading the user program
+
+If the parameters for a controller are changed in OS runtime, for example, they are written directly to the AS. If a complete download is made from the ES, the parameters changed on the OS will be overwritten by the ES. A prompt appears therefore before a complete download asking if you want to read back the parameters from the AS to the ES.
+
+It is recommended that only parameters changed by the OS (or other communication partners if applicable) should be read back. This can be selected via the ""Operational and observable parameters"" option. If the ""All parameters"" option is activated, the entire current program state of the AS is read back, including the status of the logic. This may lead to undesired program states and, as a result, plant states during subsequent complete downloads.
+
+If read back of the parameters is confirmed with ""OK"", then the updated S7 program is downloaded in full to the AS following the read back.
+
+Work can continue with compiling and downloading changes as soon as the AS is in RUN mode again.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+207
+
+# 9.2 Downloading the user program
+
+Comparing Time Stamps
+
+To check whether the AS has downloaded with the current configuration status you can run the ""Compare time stamp"" function in the CFC Editor via ""PLC > Compare"". The program currently configured has been downloaded if the time stamp of the last compilation is the same as the time stamp of the program downloaded and the time stamp of the last download-related change is dated before the two other time stamps. An easier check can be made directly via the symbol for the chart folder of the component view. If a small arrow is shown there in the symbol then the current configuration has not been downloaded.
+
+Auto-archiving after successful download
+
+Starting with PCS 7 version V8.1, the ""Auto-archiving"" function is available to you in the ""Download to target system"" dialog box. Archiving is performed automatically after downloading by activating the ""Archive project after successful download"" option. The option can only be activated if a versioned project was selected via the ""Browse versioned project"" button. Archiving is performed automatically using a version trail by activating the ""Archive project after successful download"" option. Archiving starts only after a successful download. Version Trail is opened for this purpose.
+
+Note
+
+The ""Archive project after successful download"" option requires that the Version trail options package is installed on the ES.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 9.3 Selective download
+
+The ""Selective Download"" function can be used to download one or more modified CFCs or SFCs to a CPU. You can use selective downloading to specifically select which configured changes should be transferred to the target system and enabled. A parallel configuration of multiple subsystems onto one target system is possible in this regard, for example. In such a case, the changes can be compiled, downloaded, and tested for the individual subsystems.
+
+# Selecting the charts
+
+A dialog box displays all charts that can be selectively downloaded. Select the charts that you want to download in this dialog. Dependent charts are automatically selected from the system.
+
+The charts that are not selected but affected by the changes are not transferred. System charts with the prefix ""@"" are not displayed. These are transferred automatically if they are affected by the changes.
+
+# Note
+
+Dependent charts arise due to one of the following conditions:
+
+- Change to an SFC type > all charts that contain an instance of this SFC type are dependent and are also downloaded when the SFC type is downloaded.
+- A dependent chart is a chart that contains at least one block which is in the same runtime group as a block of the chart to be downloaded.
+
+# CAUTION
+
+Make sure that no dangerous system states can arise before downloading. ",Under what condition is the 'Archive project after successful download' option available?,When a versioned project is selected and the Version Trail options package is installed on the ES.,Availability requires both a versioned project selection and the installation of the Version Trail package on the ES.,The option activates for versioned projects with the Version Trail package present on the engineering station.,Only with a versioned project and Version Trail package can the auto-archiving feature be utilized post-download.,Auto-archiving post-download is contingent on project versioning and Version Trail package installation.

@@ -1,0 +1,991 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",What is the effect of further cooling on power output in gas turbines operating at constant gas generator speed?,Further cooling results in only a small increase in power output due to the constant operation speed of the gas generator.,Minimal power output increase is observed with additional cooling because the gas generator's speed remains unchanged.,"Due to constant gas generator speed, the benefit of further cooling on power output is limited to a slight enhancement.","The power output sees a negligible rise with more cooling, as the gas generator operates at a steady speed.","A marginal boost in power output is achievable with extra cooling, given the gas generator's fixed operational speed."
+1,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",Why is the cooler size optimization important for turbine inlet cooling?,Optimizing cooler size is crucial to maximize the power output gain from turbine inlet cooling.,"To achieve the highest possible increase in power output, the cooler's dimensions must be carefully optimized for turbine inlet cooling.",The importance of cooler size optimization lies in its ability to enhance power output through effective turbine inlet cooling.,Maximizing power output improvements from turbine inlet cooling requires precise optimization of the cooler's size.,Optimal cooler sizing is essential for leveraging the maximum power output benefits provided by turbine inlet cooling.
+2,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",At what ambient temperature does a single-shaft gas turbine reach its maximum power limit?,A single-shaft gas turbine reaches its maximum power limit at about 2 degrees Celsius ambient temperature.,The peak power capacity of a single-shaft gas turbine is achieved at approximately 2 degrees Celsius.,Around 2 degrees Celsius is the ambient temperature where single-shaft gas turbines hit their maximum power limit.,Single-shaft gas turbines attain their highest power output at an ambient temperature near 2 degrees Celsius.,The maximum power limit for single-shaft gas turbines is reached when the ambient temperature is about 2 degrees Celsius.
+3,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",What is the recommended lower limit for turbine inlet cooling to avoid ice formation?,Turbine inlet cooling should not go much lower than 10 degrees Celsius to prevent ice formation.,"To avoid the risk of ice formation, cooling the turbine inlet air below 10 degrees Celsius is not advisable.",The practical lower limit for turbine inlet cooling is around 10 degrees Celsius to mitigate ice formation risks.,Keeping turbine inlet cooling above 10 degrees Celsius is recommended to prevent ice from forming.,Ice formation can be avoided by ensuring turbine inlet cooling does not significantly drop below 10 degrees Celsius.
+4,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",How does the VIGV reduce starting power requirements in a single-shaft gas turbine?,The VIGV reduces starting power by decreasing the mass flow rate through the compressor when closed.,"Closing the VIGV during startup lowers the compressor's mass flow rate, thus reducing the power needed to start.","A decrease in mass flow rate through the compressor, achieved by closing the VIGV, minimizes starting power requirements.","The starting power demand is lessened as the VIGV, when closed, reduces the compressor's mass flow rate.","By closing the VIGV, the mass flow through the compressor is reduced, leading to lower starting power needs."
+5,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",What role does the VIGV play in maintaining the exhaust gas temperature (EGT) in a single-shaft gas turbine?,"The VIGV modulates to maintain the EGT at a certain set point, fully opening or closing based on the EGT level.","To keep the EGT at a desired level, the VIGV adjusts its position, opening fully if the EGT is above the set point and closing if below.","The VIGV controls the EGT by opening when the temperature exceeds the set point and closing when it falls below, ensuring optimal operation.","Maintenance of EGT at a specific value is achieved through VIGV modulation, which responds to temperature variations by adjusting its position.",The VIGV ensures the EGT remains at the set point by fully opening above this temperature and fully closing below it.
+6,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",What happens to the compressor's flow capacity when the VIGV opens in a single-shaft gas turbine?,"Opening the VIGV increases the compressor's flow capacity, enhancing the mass flow rate through the engine.","The compressor's ability to handle flow improves with the VIGV opening, leading to a higher mass flow rate.","An open VIGV results in greater compressor flow capacity, which boosts the engine's mass flow rate.","With the VIGV open, the compressor's flow capacity rises, allowing for an increased mass flow through the engine.","The opening of the VIGV elevates the compressor's flow capacity, thereby increasing the mass flow rate in the engine."
+7,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",What is the significance of the EGT set point in VIGV control for a single-shaft gas turbine?,"The EGT set point determines when the VIGV starts to open or close, maintaining engine performance and protection.","In VIGV control, the EGT set point is crucial for initiating the opening or closing of the VIGV to safeguard engine operation.",Setting the EGT at a specific point ensures the VIGV modulates correctly to maintain engine efficiency and prevent damage.,"The EGT set point guides the VIGV's operation, ensuring the engine operates within safe and efficient parameters.","By defining an EGT set point, the VIGV can adjust its position to optimize engine performance and avoid exceeding limits."
+8,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",How does the opening of the VIGV affect the compressor characteristic in a single-shaft gas turbine?,"Opening the VIGV shifts the compressor characteristic, increasing its capacity and non-dimensional flow.","The compressor characteristic changes with the VIGV opening, showing enhanced capacity and flow rates.","A shift in the compressor characteristic occurs as the VIGV opens, reflecting increased flow capacity and efficiency.","With the VIGV open, the compressor's performance curve adjusts, indicating higher flow capacity and operational range.","The opening of the VIGV alters the compressor characteristic, leading to improved flow capacity and system performance."
+9,Industrial_Gas_Turbines_AMY_Razak.txt,300,80b02227a9bd5865ed84994da27aefee0491414de007c16c5d26411a8d6db7ea,"Any further cooling will only result in a small increase in power output due to constant gas generator speed operation. Therefore, the cooler size has to be optimised for maximum gain in power output due to turbine inlet cooling.
+
+In a single-shaft gas turbine, the maximum power limit is reached at a lower ambient temperature (at about 2 degrees Celsius). Thus a greater benefit from turbine inlet cooling would be achieved with the single-shaft gas turbine by cooling the turbine inlet air down to 10 degrees Celsius. Cooling the compressor inlet air to lower temperatures increases the risk of the formation of ice, particularly at high humidity, which occurs due to turbine inlet cooling. Such ice formation can break away and enter the compressor, which may damage the engine. Therefore, in practice, it is unlikely that we would consider turbine inlet cooling much lower than 10 degrees Celsius.
+
+# Simulation of engine control system performance
+
+In Chapter 10 the principles of engine control and its function in preventing the engine from exceeding maximum limiting values, thereby protecting the engine from damage, were discussed. The principles of engine controls using the two-shaft gas turbine simulator were illustrated. Much of what was discussed using the two-shaft gas turbine simulator can be demonstrated with the single-shaft gas turbine simulator and similar conclusions drawn with respect to the performance of the fuel control system. However, it is the control of the VIGV in a single-shaft gas turbine that differs primarily from the two-shaft gas turbine. The problems associated with the control of the VIGV will therefore be demonstrated and the means to overcome these difficulties using the single-shaft gas turbine simulator, as discussed in Chapter 10, will be described.
+
+# 20.1 VIGV control system simulation
+
+One of the advantages of using a VIGV is that it reduces the starting power requirement due to the decreased mass flow rate through the compressor when the VIGV is closed. The VIGV is full opened during the normal operating range so that the mass flow rate through the engine is increased, so helping to achieve the designed power output of the gas turbine. This is accomplished by controlling the VIGV system independently of the fuel control system, where the VIGV modulates to maintain a certain value for the exhaust gas temperature (EGT). The limit or set point for the EGT may be at a value below the maximum/limiting value for the EGT needed to protect the engine. When the EGT is above the set point for VIGV control, the VIGV will be fully opened, enabling the engine to achieve its designed power output. When the EGT is below this set point, the VIGV will be fully closed, hence reducing starting power requirements.
+
+The operation of the VIGV control system is illustrated by subjecting the single-shaft gas turbine simulator to a step change in power demand from the
+
+# Industrial gas turbines – single-shaft
+
+generator by increasing the power demand from 1 MW to 60 MW. The EGT set point for the VIGV control is 650 K and the maximum EGT limit is 825 K. The increase in power demand from the generator results in an increase in the EGT, which corresponds to T₄, as shown in Fig. 20.1, where it exceeds the VIGV set point after 23 seconds. Since the EGT exceeds the set point for VIGV control, the VIGV starts to open just after 23 seconds (Fig. 20.2) in order to maintain the EGT at 650 K (set point). The VIGV continues to open as the EGT increases to achieve the power demand by the generator and is fully opened after about 28 seconds. The continuous increase in EGT can be seen in Fig. 20.1, but the rate of increase decreases during the period when the VIGV is opening. In fact, the EGT falls slightly during the period when the VIGV is opening, before increasing to the maximum limiting value of 825 K. Figure 20.2 also shows the trend in the turbine non-dimensional speed, where a decrease in the turbine non-dimensional speed, N/√T₃, is observed, due to the increase in the turbine entry temperature, T₃, since the turbine speed, N, remains constant. The compressor non-dimensional speed, N/√T₁, remains constant since the ambient temperature, and hence T₁, do not change during this simulation.
+
+The opening of the VIGV results in a change in the compressor characteristic, where the capacity of the compressor increases. This is shown in Fig. 20.3 where the operating points for when the VIGV is fully closed, fully opened and the period when the VIGV is opening are marked clearly on the compressor characteristic. Note that the compressor non-dimensional flow and hence flow capacity increase as the VIGV opens.
+
+The increase in flow capacity results in an increase in the compressor flow rate, shown as a trend in Fig. 20.4.
+
+|Temperature (K)|0|10|20|30|40|50|60|70|
+|---|---|---|---|---|---|---|---|---|
+|1600|Turbine entry temperature T₃| | | | | | | |
+|1400| | | | | | | | |
+|1200| | | | | | | | |
+|1000|Exhaust gas temperature limit| | | | | | | |
+|800|Exhaust gas temperature T₄| | | | | | | |
+|600|Exhaust gas temperature set point for VIGV control|Compressor discharge temperature T₂| | | | | | |
+|400| | | | | | | | |
+
+20.1 Trends in temperature due to a step change in power demand.
+
+# Simulation of engine control system performance
+
+|Pressure ratio|VIGV position (%) opened|
+|---|---|
+|120|180|
+|100|170|
+|80|160|
+|60|150|
+|40|Turbine non-dimensional speed|
+|20|130|
+|0|0|
+
+Time (seconds)
+
+20.2 Trends in VIGV position and non-dimensional speed for a step change in power demand.
+
+|16.0|VIGV fully opened|
+|---|---|
+|12.0|Shift in surge line due to VIGV opening|
+|8.0|VIGV opening|
+|4.0|Change in the compressor characteristic due to the opening of the VIGV|
+|0.0|VIGV fully closed|
+
+0.5       0.6        0.7       0.8       0.9       1.0        1.1        1.2
+
+Non-dimensional flow (W1√T1/P1)
+
+20.3 Change in compressor characteristic due to opening of VIGV resulting from increased power demand.
+
+Turbine non-dimensional speed
+
+# Industrial gas turbines – single-shaft
+
+| |Fuel flow (kg/s)|Airflow|Fuel valve position (%)|Air–fuel ratio| | | | |
+|---|---|---|---|---|---|---|---|---|
+|0|0|10|20|30|40|50|60|70|
+|50|0.5|1.0|1.5|2.0|2.5|3.0| | |
+
+20.4 Increase in air flow through the compressor due to opening of the VIGV.
+
+| | |Turbine power output| | | | | | | | | | | |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|Power (MW)|100|90|80| |70|60|50|40|30|20|10|0| |
+| | | | | |89|88|87|86|85|84|83|82|81|
+
+20.5 Increase in compressor power absorbed due to opening of the VIGV.
+
+Also results in an increase in the compressor power absorbed. This power increases substantially from about 28 MW to about 45 MW, as shown in Fig. 20.5 due to the opening of VIGV. The turbine produces the power required by the compressor during normal operation; however, during starting of the gas turbine, the turbine power output is very small and a significant amount.
+
+# Simulation of engine control system performance
+
+|Power output (MW)|Thermal efficiency (%)|
+|---|---|
+|70|35|
+|60|30|
+|50|25|
+|40|20|
+|30|15|
+|20|10|
+|10|5|
+|0|0|
+
+Change in power demand from generator and variation of gas turbine thermal efficiency due to increased power demand.
+
+of starting power must be provided by an external source as discussed in Chapter 10. Thus, closing the VIGV during starting will result in a significant decrease in the starting power requirements. The increase in the gas turbine and generator power output is shown in Fig. ",What impact does the VIGV have on the compressor power absorbed during operation?,"The VIGV's opening significantly increases the compressor power absorbed, from about 28 MW to 45 MW.","Opening the VIGV leads to a substantial rise in the power the compressor absorbs, enhancing engine performance.","A notable increase in compressor power absorption, up to 45 MW, is observed when the VIGV is opened.","The power absorbed by the compressor jumps significantly with the VIGV open, optimizing the gas turbine's output.","When the VIGV opens, the compressor's power absorption sees a major boost, supporting higher engine efficiency and output."

@@ -1,0 +1,391 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",What is the requirement for downloading changes online to a PCS 7 OS?,"Runtime mode must be activated on the corresponding PC, and for redundant servers, both stations must be in runtime mode.","To download changes online to a PCS 7 OS, the corresponding PC must have runtime mode activated, with both stations in runtime mode if they are redundant servers.","The requirement includes having runtime mode activated on the PC for PCS 7 OS changes, and both stations in runtime mode in case of redundancy.","Activating runtime mode on the PC is necessary for downloading changes online to a PCS 7 OS, especially with both stations in runtime mode for redundancy.","For online changes download to PCS 7 OS, ensure the PC is in runtime mode, and if servers are redundant, both must be in runtime mode."
+1,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",What must be done before using the function for downloading changes online to a PCS 7 OS?,The entire project must have been compiled and downloaded without errors at least once.,"Before using the online changes download function, ensure the project has been successfully compiled and fully downloaded once.",A prerequisite is that the project has undergone a complete and error-free compilation and download at least once.,Ensure the project's full compilation and download without errors has been completed once before downloading changes online.,The project needs to be compiled and downloaded in full without any errors previously to enable online changes download.
+2,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",How can the update procedure be performed according to the 'SIMATIC Process Control System PCS 7 Operator Station' manual?,"The update procedure can be performed in stages or automatically, using the 'Compile and Download Objects' dialog box.","According to the manual, updates can be done step-by-step or automatically via the 'Compile and Download Objects' dialog.",The manual describes performing updates either in stages or automatically with the help of a specific dialog box for compiling and downloading objects.,"Updates are possible either stepwise or automatically, facilitated by the 'Compile and Download Objects' dialog as per the manual.","The manual specifies two methods for updates: staged or automatic, utilizing the 'Compile and Download Objects' dialog."
+3,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",What is the significance of the 'Details' button in the OS download dialog box?,"It displays the number of changes made, helping decide between downloading changes or executing a complete download.","The 'Details' button shows how many changes were made, aiding in the decision to download changes or perform a full download.","By showing the number of changes, the 'Details' button assists in determining whether a partial or complete download is necessary.","It provides a count of changes, which the system uses to suggest whether downloading changes suffices or a full download is needed.","The button reveals the quantity of changes, guiding the choice between downloading changes and a complete download."
+4,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",Why should changes not be made directly to OS projects on individual OS servers and OS client stations?,"Direct changes disable the 'Download changes' function, necessitating a complete download.","Making changes directly prevents using the 'Download changes' feature, requiring a full download instead.","Direct modifications to OS projects on servers or clients make the 'Download changes' function unusable, forcing a complete download.","The 'Download changes' option becomes unavailable if changes are made directly, making a full download the only option.","Altering OS projects directly on servers or clients invalidates the 'Download changes' function, leaving a complete download as the sole method."
+5,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",What are the exceptions to making changes on the ES before downloading to various OS stations?,The redundancy settings for OS servers and the settings for the Web server are exceptions.,Exceptions include the redundancy configurations for OS servers and Web server settings.,Only the redundancy settings of OS servers and Web server configurations are exempt from the ES-first change rule.,Changes to OS server redundancy and Web server settings do not need to be made on the ES before downloading.,The rule of changing on the ES first does not apply to OS server redundancy and Web server settings.
+6,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",What is the procedure for compiling and downloading in stages?,1. Compile the S7 program. 2. Download the S7 program into the AS. 3. Compile the OS project. 4. Download the OS project to the servers.,"The staged procedure involves compiling the S7 program, downloading it to the AS, compiling the OS project, and then downloading it to the servers.","First, compile the S7 program, then download it to the AS, followed by compiling the OS project, and finally downloading it to the servers.","Steps include S7 program compilation, AS download, OS project compilation, and server download.","Process entails compiling S7, downloading to AS, compiling OS, and downloading to servers in sequence."
+7,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",What is the importance of performing the update steps promptly?,To prevent inconsistencies for operators between AS changes and OS changes.,Prompt execution avoids discrepancies for operators during the transition from AS to OS changes.,Timely steps ensure no operational inconsistencies arise from the delay between AS and OS updates.,Quick action is needed to maintain consistency for operators between AS and OS modifications.,Avoiding operator inconsistencies during AS and OS updates requires swift execution of steps.
+8,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",How does the system handle downloading changes to a redundant OS server pair?,"It first downloads changes to the standby OS, then to the master OS, regardless of current master configuration.","Changes are first applied to the standby OS, followed by the master OS, irrespective of which is currently master.","The system prioritizes the standby OS for changes before the master OS, no matter the current master setup.","Initially, changes go to the standby OS, then to the master OS, even if their roles are reversed.","Downloading starts with the standby OS, then proceeds to the master OS, independent of the present master designation."
+9,pcs7_compendium_part_a_en-US_en-US.txt,108,5af8c051df84f00c870f81d14b9b96fb2a34c2e99480da1db9533227ffe58587,"Runtime mode must be stopped for a complete download of the OS.
+
+The OS clients are updated automatically. The OS client must be explicitly downloaded only where changes have been made to the OS client project (permissions in the User Administrator, for example). An OS client can only be downloaded in full.
+
+Note
+
+Never make changes to the OS projects on the individual OS servers and OS client stations directly, as you will not be able to use the ""Download changes"" function. In this event you must execute a complete download.
+
+All changes are made on the ES and are then downloaded to the various OS stations. The redundancy settings for OS servers and the settings for the Web server are exceptions. The background to this and further information on downloading changes can be found in the section ""Downloading Changes to a Project"" in the ""SIMATIC Process Control System PCS 7 Operator Station"" (https://support.industry.siemens.com/cs/ww/en/view/109746516) manual.
+
+There is an option for displaying the number of changes made via the ""Details"" button in the dialog box for starting the OS download. Based on the number of changes the system suggests whether downloading the changes is sufficient or whether a complete download needs to be executed.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# Changing projects in process mode
+
+# 11.1 Downloading changes online
+
+# Requirement
+
+You can only download changes online to a PCS 7 OS when runtime mode is activated on the corresponding PC. Both stations must be in runtime mode for redundant servers. In order to use the function for downloading changes online, the entire project must have been compiled and downloaded without errors at least once. Exactly the same project data must have been downloaded in full to redundant OS servers.
+
+# Procedure
+
+The update procedure can be performed in stages or automatically, with the help of the ""Compile and Download Objects"" dialog box.
+
+# 11.1.1 Compiling and downloading in stages
+
+# Procedure
+
+1. Compile the S7 program in the CFC or SFC editor or in the plan directory of the component view. It makes no difference whether the ""Changes only"" or ""Entire program"" option is selected in terms of the AS's capacity to download changes.
+2. Download the S7 program into the AS, which is in the RUN-P state, using the ""Changes"" option.
+3. Compile the OS project of the master OS, using the ""Changes only"" option. This setting also ensures that the server data corresponding to the OS is updated automatically.
+4. Download the OS project from the ES to the servers. Once the OS runtime is activated on the target station the ""OS-Download"" dialog box offers the option of downloading the changes. When downloading changes to a redundant OS server pair, the function first downloads the changes to the configured standby OS. Once this procedure has been executed in full and confirmed with ""OK"", the process of downloading changes to the configured master OS is started. This order is observed regardless of which of the two OS servers is currently configured as the master.
+
+Note
+The steps described should be performed promptly to ensure that no inconsistencies arise for operators between the time when the AS is changed and the time when the OS is changed. ",What does the 'Compendium Part A - Configuration Guidelines (V9.0)' document specify about OS downloads?,It details the procedures and requirements for downloading changes and complete downloads in the PCS 7 OS environment.,The document outlines the steps and prerequisites for executing changes and full downloads within PCS 7 OS.,Specifications include methodologies and conditions for changes and complete downloads in PCS 7 OS operations.,It provides guidelines on how to perform both partial and full downloads in the PCS 7 OS system.,"The guidelines cover the execution of downloads, whether for changes or complete, in the PCS 7 OS context."

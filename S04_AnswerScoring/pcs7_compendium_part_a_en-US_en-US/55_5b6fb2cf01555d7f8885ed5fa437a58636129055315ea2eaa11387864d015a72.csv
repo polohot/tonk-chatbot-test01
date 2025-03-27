@@ -1,0 +1,2001 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A_NUMBER,A,helpfulness,correctness,coherence,complexity,verbosity
+0,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","How does the ATR property affect the ALARM, ALARM_8, and ALARM_8P blocks according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?",A1,"These blocks only report signal changes if the previous message has been acknowledged, regardless of PCS 7 settings.",0.99609375,1.0078125,3.15625,1.390625,0.330078125
+1,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","How does the ATR property affect the ALARM, ALARM_8, and ALARM_8P blocks according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?",A2,"ATR imposes a sequential acknowledgment requirement on message reporting, overriding individual block configurations.",0.953125,0.99609375,3.203125,1.4609375,0.30078125
+2,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","How does the ATR property affect the ALARM, ALARM_8, and ALARM_8P blocks according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?",A3,"The property ensures that no new signals are reported until prior ones are acknowledged, affecting all signals on these blocks.",1.7265625,1.828125,3.421875,1.4375,0.56640625
+3,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","How does the ATR property affect the ALARM, ALARM_8, and ALARM_8P blocks according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?",A4,"This behavior is uniform across all signals on the blocks, independent of the 'Acknowledgment required' property in PCS 7.",1.0625,1.1484375,3.203125,1.4375,0.36328125
+4,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","How does the ATR property affect the ALARM, ALARM_8, and ALARM_8P blocks according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?",A5,ATR's influence on these blocks underscores the importance of consistent message management strategies.,0.474609375,0.53515625,2.75,1.3203125,0.298828125
+5,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",How is the reserve CPU updated in an H system according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A1,"The reserve CPU is updated during the transition from 'RUN solo mode' to 'RUN redundant' system mode, involving a link-up and update process.",1.2421875,1.2890625,3.28125,1.3359375,0.443359375
+6,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",How is the reserve CPU updated in an H system according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A2,"Updating occurs through 'link-up and update', where the running CPU copies all blocks to the stopped CPU, followed by updating changed data block values.",1.2265625,1.15625,3.1875,1.2890625,0.5234375
+7,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",How is the reserve CPU updated in an H system according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A3,"During link-up, the active CPU duplicates all blocks to the reserve CPU; in update, it synchronizes the altered data block values.",1.875,2.046875,3.515625,1.4296875,0.466796875
+8,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",How is the reserve CPU updated in an H system according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A4,"This process ensures the reserve CPU mirrors the active CPU's state, maintaining system redundancy and reliability.",1.2578125,1.40625,3.3125,1.34375,0.5546875
+9,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",How is the reserve CPU updated in an H system according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A5,"The update mechanism is crucial for keeping the reserve CPU in sync, enabling seamless failover if needed.",1.15625,1.1640625,3.140625,1.0546875,0.41796875
+10,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What are the purposes of the four monitoring times during the update phase of the reserve CPU in H systems?,A1,They prevent the update phase from adversely affecting the ongoing process by allowing cancellation if a monitoring time is exceeded.,1.9453125,1.9609375,3.515625,1.2890625,0.515625
+11,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What are the purposes of the four monitoring times during the update phase of the reserve CPU in H systems?,A2,These times safeguard the process integrity during updates by enabling phase termination upon exceeding set limits.,1.375,1.3203125,3.078125,1.3203125,0.390625
+12,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What are the purposes of the four monitoring times during the update phase of the reserve CPU in H systems?,A3,Monitoring times are calculated based on hardware configuration and user program info to ensure timely update completion.,0.65625,0.734375,2.78125,1.0703125,0.13671875
+13,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What are the purposes of the four monitoring times during the update phase of the reserve CPU in H systems?,A4,They provide a fail-safe mechanism to halt updates that might disrupt process operations due to prolonged durations.,1.5078125,1.484375,3.25,1.2578125,0.375
+14,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What are the purposes of the four monitoring times during the update phase of the reserve CPU in H systems?,A5,"By setting these times, the system can automatically manage update durations, minimizing operational disruptions.",1.2890625,1.3203125,3.140625,1.171875,0.32421875
+15,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What function does the H CPU offer regarding memory errors as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A1,"It can detect memory errors, fix simple ones, and automatically return to 'RUN redundant' mode.",2.484375,2.671875,3.625,1.2578125,0.55078125
+16,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What function does the H CPU offer regarding memory errors as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A2,"The H CPU is equipped to identify memory issues, correct minor errors, and resume redundant operation without manual input.",2.265625,2.4375,3.640625,1.3359375,0.6328125
+17,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What function does the H CPU offer regarding memory errors as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A3,"Automatic detection and correction of memory errors are key features, ensuring continuous system availability.",2.46875,2.484375,3.59375,1.3046875,0.58203125
+18,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What function does the H CPU offer regarding memory errors as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A4,This functionality minimizes downtime by addressing memory faults and restoring redundancy autonomously.,1.9375,1.921875,3.40625,1.2734375,0.4765625
+19,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What function does the H CPU offer regarding memory errors as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A5,"By automatically handling memory errors, the H CPU enhances system reliability and operational continuity.",2.234375,2.234375,3.578125,1.28125,0.55859375
+20,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the consequence of not setting the ATR property to the same value for all CPUs in a system?,A1,"It results in inconsistent message behavior for the operator, as different CPUs may handle messages differently.",2.453125,2.578125,3.5625,1.3984375,0.56640625
+21,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the consequence of not setting the ATR property to the same value for all CPUs in a system?,A2,Varied ATR settings across CPUs can lead to unpredictable message acknowledgment and reporting patterns.,2.578125,2.625,3.4375,1.4296875,0.54296875
+22,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the consequence of not setting the ATR property to the same value for all CPUs in a system?,A3,Operators may face confusion due to disparate message handling mechanisms among CPUs.,2.078125,1.953125,3.28125,1.21875,0.470703125
+23,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the consequence of not setting the ATR property to the same value for all CPUs in a system?,A4,This inconsistency undermines system reliability and operator response effectiveness.,2.75,2.78125,3.484375,1.2890625,0.396484375
+24,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the consequence of not setting the ATR property to the same value for all CPUs in a system?,A5,Uniform ATR settings are crucial for coherent message management and operational clarity.,1.21875,1.203125,3.09375,1.078125,0.201171875
+25,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the process called when an H system transitions from 'RUN solo mode' to 'RUN redundant' system mode?,A1,It is referred to as 'link-up and update'.,2.734375,2.84375,3.71875,1.0,0.33203125
+26,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the process called when an H system transitions from 'RUN solo mode' to 'RUN redundant' system mode?,A2,This transition involves a two-phase process known as 'link-up and update' for synchronizing the reserve CPU.,2.453125,2.640625,3.515625,1.4140625,0.3203125
+27,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the process called when an H system transitions from 'RUN solo mode' to 'RUN redundant' system mode?,A3,'Link-up and update' describes the mechanism of copying blocks and updating data to achieve redundancy.,2.609375,2.640625,3.546875,1.2890625,0.53515625
+28,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the process called when an H system transitions from 'RUN solo mode' to 'RUN redundant' system mode?,A4,The term encapsulates the steps taken to ensure the reserve CPU mirrors the active CPU's state post-transition.,0.97265625,1.0859375,3.140625,1.2109375,0.390625
+29,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the process called when an H system transitions from 'RUN solo mode' to 'RUN redundant' system mode?,A5,This process is essential for maintaining system redundancy and is commonly termed 'link-up and update'.,2.703125,2.75,3.625,1.234375,0.60546875
+30,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What is the recommended setting for 'Reaction to RAM/PAA comparison error' in H systems as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A1,It should remain set to 'TROUBLESHOOTING' operating mode.,2.46875,2.875,3.921875,1.2734375,0.37890625
+31,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What is the recommended setting for 'Reaction to RAM/PAA comparison error' in H systems as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A2,The manual advises keeping the 'Reaction to RAM/PAA comparison error' in 'TROUBLESHOOTING' mode for automatic error handling.,2.796875,2.890625,3.78125,1.5234375,0.68359375
+32,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What is the recommended setting for 'Reaction to RAM/PAA comparison error' in H systems as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A3,'TROUBLESHOOTING' mode is recommended because it allows the H CPU to detect and fix simple memory errors automatically.,2.4375,2.53125,3.703125,1.375,0.75
+33,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What is the recommended setting for 'Reaction to RAM/PAA comparison error' in H systems as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A4,The setting ensures the system can automatically return to 'RUN redundant' mode after addressing memory errors.,0.78515625,0.984375,3.21875,1.1171875,0.447265625
+34,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ","What is the recommended setting for 'Reaction to RAM/PAA comparison error' in H systems as per the 'Configuration Manual, 03/2018, A5E43228900-AA'?",A5,Maintaining 'TROUBLESHOOTING' mode supports the H CPU's function in error detection and correction without manual intervention.,2.40625,2.546875,3.59375,1.4375,0.7734375
+35,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the significance of the 'Acknowledge error' OS function mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A1,It provides an alternative method to block fluttering messages during commissioning or when a process tag is faulty.,2.125,2.171875,3.53125,1.4765625,0.375
+36,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the significance of the 'Acknowledge error' OS function mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A2,This function allows operators to manage message fluttering without relying on the ATR property.,1.65625,1.6015625,3.3125,1.40625,0.314453125
+37,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the significance of the 'Acknowledge error' OS function mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A3,"It's a flexible tool for addressing specific message issues, complementing or substituting ATR in certain scenarios.",1.015625,1.1953125,3.171875,1.34375,0.2158203125
+38,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the significance of the 'Acknowledge error' OS function mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A4,The 'Acknowledge error' function enhances message management by offering targeted control over fluttering messages.,1.9296875,1.9375,3.4375,1.578125,0.330078125
+39,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",What is the significance of the 'Acknowledge error' OS function mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A5,"By utilizing this OS function, systems can maintain operational clarity without the drawbacks of ATR activation.",1.421875,1.46875,3.234375,1.3359375,0.40625
+40,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Where can detailed information about link-up and update in H systems be found as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A1,In the manuals for CPU 410H 'SIMATIC PCS 7 Process Control System CPU 410 Process Automation' and S7-400H 'SIMATIC Fault-tolerant Systems S7-400H'.,2.78125,3.109375,3.8125,1.53125,0.6640625
+41,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Where can detailed information about link-up and update in H systems be found as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A2,Detailed guidelines are available in specific Siemens manuals linked in the compendium for CPU 410H and S7-400H systems.,1.640625,1.96875,3.5625,1.3515625,0.365234375
+42,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Where can detailed information about link-up and update in H systems be found as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A3,The compendium references external Siemens documentation for in-depth understanding of link-up and update processes.,1.515625,1.7109375,3.3125,1.15625,0.1123046875
+43,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Where can detailed information about link-up and update in H systems be found as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A4,"For comprehensive details, consult the provided URLs to Siemens support pages for CPU 410H and S7-400H manuals.",0.61328125,0.77734375,3.140625,1.1796875,0.29296875
+44,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Where can detailed information about link-up and update in H systems be found as mentioned in the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A5,The referenced manuals offer extensive insights into the mechanisms and best practices for system updates and redundancy management.,1.2578125,1.296875,3.140625,1.375,0.51953125
+45,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Why is it recommended to leave ATR deactivated according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A1,"ATR can cause the plant operator to ignore non-fluttering messages, leading to unrecognized recurring events.",1.7265625,1.796875,3.390625,1.21875,0.248046875
+46,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Why is it recommended to leave ATR deactivated according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A2,Leaving ATR deactivated is advised because it requires uniform setting across all CPUs to avoid inconsistent message behaviors.,1.3203125,1.390625,3.328125,1.1953125,0.279296875
+47,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Why is it recommended to leave ATR deactivated according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A3,"The recommendation stems from ATR's property that blocks ALARM, ALARM_8, and ALARM_8P blocks from reporting new signals until previous ones are acknowledged, regardless of the 'Acknowledgment required' setting in PCS 7.",2.265625,2.375,3.609375,1.6484375,0.703125
+48,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Why is it recommended to leave ATR deactivated according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A4,"ATR's setting, once applied, necessitates a complete CPU download for any changes, making it inflexible for dynamic operational needs.",1.53125,1.3828125,3.328125,1.265625,0.419921875
+49,pcs7_compendium_part_a_en-US_en-US.txt,55,5b6fb2cf01555d7f8885ed5fa437a58636129055315ea2eaa11387864d015a72,"However, we recommend that you leave ATR deactivated, for the following reasons:
+
+- It can cause the plant operator to stop acknowledging messages, even those which are not ""fluttering messages"". If this is the case, the operator will not realize that the event causing the message is recurring.
+- The ATR property is a property of the CPU, which must be explicitly set for each CPU. If this property is not set to the same value for all CPUs, this can result in varying message behavior for the operator.
+- The ALARM (SFB 33), ALARM_8 (SFB 34), and ALARM_8P (SFB 35) blocks then only report a change of signal if the previous change of signal (the previous incoming message) has been acknowledged. This property applies to all signals on these blocks, irrespective of the ""Acknowledgment required"" property in PCS 7.
+- The setting can only be subsequently changed by performing a complete CPU download.
+- ""Fluttering messages"" which appear during commissioning or when a process tag is faulty can also be blocked using the ""Acknowledge error"" OS function.
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+The following images shows the default settings on the ""H Parameters"" tab:
+
+# Parameters for the advanced CPU test
+
+""Reaction to RAM/PAA comparison error"" should remain set to the ""TROUBLESHOOTING"" operating mode. The H CPU offers a function for detecting a memory error, fixing simple memory errors, and automatically returning to the ""RUN redundant"" system mode.
+
+# Update of the reserve
+
+The reserve CPU is updated each time an H system goes from the ""RUN solo mode"" to ""RUN redundant"" system mode. This process is often referred to as ""link-up and update"". In the link-up phase, the CPU in RUN copies all blocks to the stopped CPU. In the update phase, the data block values that have changed since copying are updated.
+
+Note
+
+You can find detailed information about link-up and update in the following manuals:
+
+- CPU 410H ""SIMATIC PCS 7 Process Control System CPU 410 Process Automation (https://support.industry.siemens.com/cs/ww/en/view/109748473)""
+- S7-400H ""SIMATIC Fault-tolerant Systems S7-400H (https://support.industry.siemens.com/cs/ww/en/view/82478488)""
+
+Compendium Part A - Configuration Guidelines (V9.0)
+
+Configuration Manual, 03/2018, A5E43228900-AA
+
+# 6.2 Special settings for H systems
+
+Calculating monitoring times for updating the reserve CPU
+
+To avoid influencing the ongoing process during the critical update phase, four monitoring times are provided that can cancel the update phase where a monitoring time is exceeded. A dialog box is opened via the ""Calculate"" button where the monitoring times are calculated using the hardware configuration and the information on the user program. ",Why is it recommended to leave ATR deactivated according to the 'Compendium Part A - Configuration Guidelines (V9.0)'?,A5,"Alternative methods like the 'Acknowledge error' OS function can manage fluttering messages during commissioning or process tag faults, reducing the need for ATR.",1.640625,1.7109375,3.1875,1.4296875,0.36328125

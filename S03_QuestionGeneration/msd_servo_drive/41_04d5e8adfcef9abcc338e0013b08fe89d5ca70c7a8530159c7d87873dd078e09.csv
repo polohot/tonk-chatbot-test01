@@ -1,0 +1,471 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",What are the possible causes of deviations mentioned in the text?,"Inaccuracy of the measuring system, slack in mechanical elements, and thermal expansion of machine components.","The text lists three causes: measuring system inaccuracies, mechanical slack, and thermal expansion.","Deviations can arise from measurement inaccuracies, mechanical slack (like in gearing or couplings), and thermal expansion.","Three main causes are identified: inaccurate measurements, slack in parts like gears or spindles, and expansion due to heat.","Possible causes include measurement errors, mechanical component slack, and thermal expansion effects."
+1,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",What is the purpose of parameter P 0593 ENC_ACOR_PosDelta in the MSD ServoDrive?,It defines the interpolation point pitch for plotting correction interpolation points.,P 0593 sets the distance between points where correction values are plotted.,This parameter specifies the spacing for correction interpolation points.,Used to determine the positions for correction interpolation points.,Defines the pitch between interpolation points for correction calculations.
+2,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",How are correction values calculated between interpolation points in the MSD ServoDrive?,By cubic spline interpolation.,Values are interpolated using cubic spline method between points.,Cubic spline interpolation is used to calculate values between points.,The system employs cubic spline interpolation for calculating intermediate correction values.,"Between interpolation points, correction values are derived through cubic spline interpolation."
+3,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",What parameters define the correction range in the MSD ServoDrive?,P 0591 ENC_ACOR_PosStart and P 0592 ENC_ACOR_PosEnd.,The range is set by start position P 0591 and end position P 0592.,"Start and end positions are defined by P 0591 and P 0592, respectively.",Correction range boundaries are specified in P 0591 (start) and P 0592 (end).,P 0591 and P 0592 parameters outline the correction range's start and end.
+4,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",What is the function of P 590 ENC_ACOR_Sel in the MSD ServoDrive?,It selects the encoder whose actual position value is to be changed.,P 590 is used to choose which encoder's position value will be adjusted.,This parameter allows selection of the encoder for position value correction.,Determines which encoder's actual position value is subject to change.,Used to specify the encoder for modifying the actual position value.
+5,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",How are the correction values for the MSD ServoDrive determined?,Using a reference measurement system like a laser interferometer.,By measuring position errors at interpolation points with a reference system.,A reference measurement system measures errors at points for correction values.,Correction values come from measuring position errors at specified points.,Determined by approaching interpolation points and measuring errors with a reference system.
+6,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",What tables are used to enter correction values in the MSD ServoDrive?,P 595 ENC_ACOR_VnegTab for negative direction and P 596 ENC_ACOR_VposTab for positive direction.,"Negative direction values go in P 595, positive in P 596.",Correction values are entered into P 595 (negative) and P 596 (positive) tables.,"P 595 and P 596 tables store correction values for negative and positive directions, respectively.","For negative and positive directions, use P 595 and P 596 tables, respectively."
+7,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",What is the significance of the MOOG ID No. CB40859-001 mentioned in the text?,"It identifies the document or manual, dated November 2020.",The MOOG ID No. CB40859-001 is a unique identifier for the document from November 2020.,"This number, along with the date 11/2020, specifies the document version.","CB40859-001 is the document's identification number, with a release date of November 2020.",The MOOG ID and date provide document identification and version information.
+8,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",What steps are involved in the position control process for the MSD ServoDrive?,"Select encoder channels, choose the encoder for correction, set interpolation pitch, measure errors, and enter correction values.","The process includes selecting encoders, setting parameters, measuring position errors, and inputting corrections.","Steps: encoder selection, parameter configuration, error measurement, and correction entry.","Involves choosing encoders, defining correction parameters, measuring errors, and applying corrections.","Position control entails encoder selection, setting up correction parameters, and entering measured corrections."
+9,msd_servo_drive.txt,41,04d5e8adfcef9abcc338e0013b08fe89d5ca70c7a8530159c7d87873dd078e09,"# Possible cause of deviations
+
+- Inaccuracy of the measuring system
+- Slack in mechanical elements such as the gearing, coupling, feed spindle etc.
+- Thermal expansion of machine components.
+
+# Table 6.35: Axis correction parameters (continue)
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|593|0|ENC_ACOR_PosDelta| |Interpolation point pitch: The positions at which the correction interpolation points are plotted are defined via parameters P 0593 ENC_ACOR_PosDelta Interpolation point pitch and P 0591 ENC_ACOR_PosStart Start position. Between the correction interpolation points, the correction values are calculated by cubic spline interpolation.|
+|594|0|ENC_ACOR_Val| |Actual position|
+|595|0-250|ENC_ACOR_VnegTab| |Values of the correction table for negative direction of rotation in user units.|
+|596|0-250|ENC_ACOR_VposTab| |Values of the correction table for positive direction of rotation in user units.|
+
+# Table 6.35: Axis correction parameters
+
+|P No.|Index|Name / Setting|Unit|Description|
+|---|---|---|---|---|
+|530|0|ENC_Encoder1Sel| |Channel selection for the 1st encoder used|
+|531|0|ENC_Encoder2Sel| |Channel selection for the 2nd encoder used|
+|590|0|ENC_ACOR_Sel| |0 (= OFF) No encoder selected 1 (= 1st Encoder) 1. encoder selected 2 (= 2nd Encoder) 2. encoder selected|
+|591|0|ENC_ACOR_PosStart| |Definition of correction range: The range is defined by parameters P 0591 ENC_ACOR_PosStart Start position and P 0592 ENC_ACOR_PosEnd end position.|
+|592|0|ENC_ACOR_PosEnd| |The start position is user-specified; the end position is determined on the device side from the maximum value of correction table interpolation points used and the interpolation point pitch.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 101
+
+# 6 Encoder
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+# Step Action
+
+# Position control
+
+1. Use P 530 - ENC_Encoder1Sel to select the channel for SERCOS: 1st encoder
+2. Use P 531 - ENC_Encoder2Sel to select the channel for SERCOS: 2nd encoder
+3. Selection of the encoder whose actual position value is to be changed, with P 590 - ENC_ACOR_Sel
+4. Enter interpolation point pitch in P 593 - ENC_ACOR_PosDelta
+5. The correction values are determined using a reference measurement system (e.g. laser interferometer). The interpolation points for the various directions within the desired correction range are approached one after another and the corresponding position error is measured.
+6. The interpolation point-specific correction values are entered manually in tables P 595 - ENC_ACOR_VnegTab (neg. direction) and P 596 - ENC_ACOR_VposTab (pos. ",What is the role of P 530 and P 531 in the MSD ServoDrive setup?,"P 530 selects the channel for the 1st encoder, and P 531 for the 2nd encoder.",They are used to choose SERCOS channels for the first and second encoders.,P 530 and P 531 define the encoder channels for SERCOS communication.,These parameters assign SERCOS channels to the first and second encoders.,"P 530 and P 531 configure the SERCOS channels for encoder 1 and encoder 2, respectively."

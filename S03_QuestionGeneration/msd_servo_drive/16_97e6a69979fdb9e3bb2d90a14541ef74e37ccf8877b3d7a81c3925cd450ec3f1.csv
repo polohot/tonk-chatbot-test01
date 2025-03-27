@@ -1,0 +1,3601 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",What are the two types of motor filters mentioned in the 'MSD ServoDrive - DeviceHelp' document?,"The two types are motor chokes and LC filters, also referred to as 'sine wave filters'.",Motor chokes and sine wave filters are the two types discussed.,"In the document, motor filters are categorized into motor chokes and LC (sine wave) filters.",The document specifies motor chokes and sine wave filters as the two main types of motor filters.,"Two types: 1) Motor chokes, 2) LC filters or sine wave filters."
+1,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",How is the capacitor current (ic) calculated when using a sine wave filter according to the 'MSD ServoDrive - DeviceHelp' document?,"The capacitor current components are calculated as isd,Cf = -2 • π • fS • Cf • usq,mot and isq,Cf = 2 • π • fS • Cf • usd,mot.","isd,Cf = -2 • π • fS • Cf • usq,mot and isq,Cf = 2 • π • fS • Cf • usd,mot are the formulas provided.","For sine wave filters, ic is calculated using the frequency (fS), capacitance (Cf), and motor voltage components (usd,mot, usq,mot).",The document outlines the calculation of ic with specific equations involving stator frequency and capacitance.,"Calculated via isd,Cf and isq,Cf equations based on stator frequency and motor voltage."
+2,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",What is the purpose of the encoder gearing as described in the 'MSD ServoDrive - DeviceHelp' document?,Encoder gearing adjusts the encoder position for motor commutation or scales it for application needs.,It adjusts the encoder position for commutation or initial scaling for the application.,To make necessary adjustments for commutation or to scale the encoder position for the application.,The document states it's used for commutation adjustments or scaling the position as required.,Adjusts encoder position for motor commutation or scales it for the actual application requirements.
+3,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",What parameters are used to view the actual values at the encoder channel outputs in the 'MSD ServoDrive - DeviceHelp' document?,"P 500 - ENC_CH1_ActVal for Ch1, P 501 - ENC_CH2_ActVal for Ch2, P 502 - ENC_CH3_ActVal for Ch3, and P 503 - ENC_CH4_ActVal for Ch4.","The parameters are ENC_CH1_ActVal, ENC_CH2_ActVal, ENC_CH3_ActVal, and ENC_CH4_ActVal for channels 1 to 4 respectively.","For each encoder channel (Ch1-Ch4), specific parameters like ENC_CH1_ActVal are used to view actual values.",Actual values at encoder outputs are viewed through parameters ENC_CH1_ActVal to ENC_CH4_ActVal.,"Ch1: ENC_CH1_ActVal, Ch2: ENC_CH2_ActVal, Ch3: ENC_CH3_ActVal, Ch4: ENC_CH4_ActVal."
+4,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",How is the commutation offset determined for third-party motors according to the 'MSD ServoDrive - DeviceHelp' document?,By running the motor in 'Current control' mode at rated current and using a wizard to determine the offset.,The offset is determined with a wizard while the motor operates in current control mode at rated current.,"For third-party motors, a wizard is used in current control mode to find the commutation offset.",The document specifies using a wizard during current control operation to determine the offset.,Determined via a wizard in current control mode at the motor's rated current.
+5,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",What are the effects of using a sine wave filter on the current control circuit’s dynamic performance as per the 'MSD ServoDrive - DeviceHelp' document?,It results in resonances and may require reducing the current controller’s gain for stability.,"Sine wave filters can cause resonances, necessitating a decrease in the current controller’s gain.","The use leads to resonances, potentially requiring lower gain in the current controller for stability.",Document mentions resonances and possible need to reduce current controller gain when using sine wave filters.,"Causes resonances, often requiring reduced current controller gain to maintain stability."
+6,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",What is the significance of the MOT_Filt_Sel parameter in the 'MSD ServoDrive - DeviceHelp' document?,"It enables filter support by selecting between no filter, motor choke, or sine wave filter compensation.",MOT_Filt_Sel parameter is used to enable and select the type of motor filter support.,"This parameter allows selection of filter compensation type, including options for no filter, motor choke, or sine wave filter.",The document outlines MOT_Filt_Sel as crucial for activating and choosing filter compensation methods.,"Determines the filter compensation type: none, motor choke, or sine wave filter."
+7,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",What is the purpose of the 'Detect' button in the 'Encoder selection' screen according to the 'MSD ServoDrive - DeviceHelp' document?,To determine and set the current commutation offset value for the encoder used in commutation and torque control.,The 'Detect' button is used to find and apply the current commutation offset for the MCON encoder.,It automatically detects and sets the commutation offset for the selected encoder in commutation and torque control.,"Pressing 'Detect' calculates the commutation offset, updating P 349[0] - CON_FM_MConOffset.","Used for detecting the commutation offset, which is then stored in CON_FM_MConOffset."
+8,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",What are the encoder channels available on the MSD Servo Drive as per the 'MSD ServoDrive - DeviceHelp' document?,"Ch1: X7, Ch2: X6, Ch3: X8 (optional), and Ch4: Virtual encoder.","The drive supports four encoder channels: Ch1 (X7), Ch2 (X6), Ch3 (X8 optional), and Ch4 (Virtual).","Available channels include Ch1 through Ch4, with Ch1 to Ch3 corresponding to physical interfaces and Ch4 being virtual.","Document lists Ch1 (X7), Ch2 (X6), Ch3 (X8 optional), and Ch4 (Virtual) as the encoder channels.","Four channels: Ch1 (X7), Ch2 (X6), Ch3 (X8 optional), Ch4 (Virtual encoder)."
+9,msd_servo_drive.txt,16,97e6a69979fdb9e3bb2d90a14541ef74e37ccf8877b3d7a81c3925cd450ec3f1,"The defaults relate to 100 % of the rated quantities.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.9: “I²T monitoring” screen for a synchronous motor
+
+# 5.5.3 Asynchronous motor I²t monitoring
+
+If the I2t type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+The following diagram shows a typical characteristic setting for an internally cooled asynchronous motor. For third-party motors the motor manufacturer's specifications apply. It is necessary to adapt the I2t characteristic because the factory setting mostly does not exactly map the present motor. For servomotors, it is advisable to set a constant characteristic. The switch-off point defines the permissible current/time area up to switching off 150 % x IN for 120 s. If the I2xt type is set to ""THERM(1) = Thermal time constant dependent"", all settings apart from the thermal time constant are disabled.
+
+Calculation of capacity utilization via exponential function with thermal time constant of motor:
+
+# Setting of I2t type:
+
+- P 735[0] = “FREQ(0)=Output frequency-dependent"": Moog-specific i(f) evaluation
+- P 735[0] = “THERM(1)=Thermal time constant-dependent”: Evaluation based on thermal time constant i(Tth)
+- Thermal time constant P 733[7] - Ttherm in [s]
+- The shut-off threshold is 110% (reduction in current noise)
+
+Image 5.10: “I²T monitoring” screen for an asynchronous motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 44
+
+# 5 Motor
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# 5.6 Motor identification
+
+Image 5.12: “Motor identification"" screen for a linear synchronous motor
+
+Image 5.11: “Motor identification"" screen for a rotary synchronous motor
+
+# 5.6.1 Synchronous motor identification (rotary and linear)
+
+- Enter the motor data.
+- Click ""Identification"" button
+- Current controller tuning: optimization of the current controller is done automatically.
+
+# 5.6.2 Asynchronous motor identification
+
+- Current controller tuning
+- Measurement of:
+- P 470[0] - MOT_Rstat: Stator resistance
+- P 476[0] - MOT_Rrot: Rotor resistance
+- P 471[0] - MOT_Lsig: Leakage inductance
+- Maximum effective current Idmax P 474[0] - MOT_LmagIdNom
+- Operating point calculation:
+- P 462[0] - MOT_FluxNom: Nominal flux
+- P 340[0] - CON_FM_Imag: Magnetizing current
+- Calculation of: current, speed and position control parameters
+- Click the ""Start calculation"" button to determine the rotor resistance P 476[0] - MOT_Rrot and leakage inductance P 471[0] - MOT_Lsig.
+- Measurement of the saturation characteristic (table values of the stator inductance P 472 - MOT_LSigDiff);
+
+Measurements are taken up to four times rated current, provided the power stage current permits it at standstill. If this is not the case, the measurement is made using a correspondingly smaller current.
+
+When the Rating plate data have been entered in the screen, identification is started by clicking the ""Start identification"" button. A safety notice must be confirmed with a tick (check mark).
+
+**Table 5.9: “Motor identification” parameters**
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|1531|0|SCD_Action_Sel|Self-commissioning action selection| |
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 46
+
+# 5 Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 47
+
+# 5.7 Support for motor filters when using PMSM motors
+
+# 5.7.1 General functional description
+
+In applications involving high-speed drives in particular, the use of filters between the inverter output and the motor is widespread as a measure designed to attenuate current harmonics. The following two are used for this purpose:
+
+- Motor chokes
+- LC filters, also referred to as “sine wave filters”
+
+A motor choke basically increases the stator inductance and, in the case of current-controlled drives, simply results in a higher inductive voltage consumption. Accordingly, it is not necessary to take motor chokes into account separately when calculating current setpoints.
+
+Meanwhile, as a result of the additional capacitor current (ic) resulting from their use, sine wave filters result in a change to the current vector between the inverter output (iinv) and the motor (is). Accordingly, these filters must be taken into account when calculating current setpoints in order to ensure that the motor will be run at the desired operating point (normally with q current operation) at all speeds.
+
+Image 5.15: Phasor diagram for a sine wave filter
+
+Image 5.14: Single-phase equivalent circuit diagram for a sine wave filter
+
+Current
+
+The inverter output current is equal to the sum of the motor current (is) and capacitor current (ic). Accordingly, (ic) needs to be taken into account when calculating current setpoints. Disregarding resistances, the following applies to the capacitor current components:
+
+isd,Cf = -2 • π • fS • Cf • usq,mot
+
+isq,Cf = 2 • π • fS • Cf • usd,mot
+
+# Voltage
+
+In this case, the motor voltage for the desired current setpoint vector (isd,ref, isq,ref) is calculated using specified motor parameters LS and Psi_P as a function of stator frequency (fS):
+
+usd,mot = -2 • π • fS • LS • isq,ref
+
+usq,mot = 2 • π • fS • (LS • isd,ref + Psi_P)
+
+# Dynamic performance
+
+In addition to the described effect of motor filters on the current phasor in steady-state operation, there is also an effect on the current control circuit’s dynamic performance. Among other things, the use of a sine wave filter will result in resonances.
+
+In order to avoid exciting oscillations, the current control circuit’s decoupling network is always deactivated when configuring the motor filter support. In addition, the current controller’s gain may have to be significantly reduced in order to achieve stability. Because of this, the use of sine wave filters is not recommended for drives that require a high dynamic performance.
+
+Filter support can be enabled by setting P 2900[0] - MOT_Filt_Sel to one of the following settings:
+
+|MOT_Filt_Sel|(OFF)0|
+|---|---|
+|No filter compensation. The current controller decoupling network will be active.|No filter compensation. The current controller decoupling network will be active.|
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 48
+
+# 5 Motor
+
+# Motor
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 49
+
+MOT_Filt_Sel = (MCHOKE)1 2πfs
+
+Has no effect on the current setpoint calculation. Instead, it just deactivates the current controller decoupling network. If necessary, the calculated motor terminal voltage components (before the voltage drop caused by the motor choke) can be viewed using scope signals usdmot_SinFilt, usqmot_SinFilt. If there are no negative influences on the current control stability, it is recommended not to use this setting. Instead, you can select MOT_Filt_Sel = 0 and add the motor choke’s inductance to the value in MOT_Lsig.
+
+MOT_Filt_Sel = (SINFILT)2
+
+Ensures that the capacitor current components will be calculated based on the above equations and that they will be added to current setpoint components isdref, isqref. Moreover, the current controller decoupling network will be deactivated. The calculated values of the motor terminal voltage and capacitor current components can be viewed with scope signals usdmot_SinFilt, usqmot_SinFilt and isdpre_SinFilt, isqpre_SinFilt respectively.
+
+Image 5.17: Diagram of additive current setpoint calculation for sine wave filters
+
+# 5.7.3 Parameters
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|462|0|MOT_FluxNom|Vs|
+|471|0|MOT_Lsig|mH|
+|2900|0|MOT_Filt_Sel|Motor filter: selector|
+|2901| |MOT_Filt_Para|Motor filter: Settings|
+|2901|0|L_Filt|mH Motor filter: Choke or filter inductance|
+|2901|1|C_Filt|nF Motor filter: Capacitance (delta configuration)|
+
+Table 5.10: “Motor filter” parameters
+
+# NOTE
+
+Filter capacitance P 2901[1] - C_Filt is specified as the capacitance value of the capacitors when using a delta configuration! In order to calculate the capacitance per phase as per the circuit diagram above, the device will internally multiply the value by 3 (delta-wye transform). If the capacitors are connected in a wye configuration, or if the capacitance of the single-phase equivalent circuit is known, the corresponding capacitance value must first be divided by 3 and then entered into the parameter.
+
+# 5.7.4 Scope signals
+
+|ID|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|2500|0|isdpre_SinFilt|A|Calculated filter capacitor current d components (isdCf in the formula above)|
+|2501|0|isqpre_SinFilt|A|Calculated filter capacitor current q components (isqCf in the formula above)|
+|2502|0|usdmot_SinFilt|V|Calculated motor terminal voltage d components|
+|2503|0|usqmot_SinFilt|V|Calculated motor terminal voltage q components|
+
+Table 5.11: “Motor filter” scope signals
+
+MOOG ID No.:CB40859-001 Date:11/2020 MSD ServoDrive - DeviceHelp 50
+
+# 5 Motor
+
+# Chapter overview
+
+# 6 Encoder
+
+# 6.8 Channel 4: Virtual encoder
+
+90
+
+# 6.9 Redundant encoder
+
+100
+
+# 6.10 Axis correction
+
+100
+
+# 6.11 Oversampling
+
+104
+
+# 6.12 Multi-turn encoder as a single-turn encoder
+
+104
+
+# 6.13 Increment-coded reference marks
+
+105
+
+# 6.14 Overflow in multi-turn range
+
+106
+
+# 6.15 Zero pulse test
+
+107
+
+# Navigation
+
+►Project tree ►Device setup ►Encoder
+
+# Brief description
+
+This chapter describes...
+
+1. ... how to select an encoder channel for each of the following control levels (channel selection):
+- MCON (commutation and torque control)
+- SCON (Speed control)
+- PCON (Position control).
+2. ... the encoder selection options for individual encoder channels Ch1 – Ch4 (type selection).
+
+# Contents
+
+1. 6.1 Introduction - 52
+2. 6.2 Encoder selection - 53
+3. 6.3 Encoder offset - 55
+4. 6.4 Connections and pin assignations - 55
+5. 6.5 Channel 1: Interface X7 - 59
+6. 6.6 Channel 2: Interface X6 - 72
+7. 6.7 Channel 3: Interface X8 (optional) - 76
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 51
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 52
+
+# 6.1 Introduction
+
+The MSD Servo Drive groups individual encoders (supported encoder interfaces) into what are referred to as “encoder channels”. Within each encoder channel, a maximum of one encoder can be active at any one time, meaning that the number of encoder channels also defines the maximum number of encoders that can be active simultaneously. The encoder channels are Ch1, Ch2, Ch3 and Ch4.
+
+To select a specific encoder for a control level (e.g. for speed control), you must first select an encoder channel for that control level, after which you will be able to select a specific encoder for the selected channel.
+
+The supported encoder interfaces are distributed among the four encoder channels as follows:
+
+- Ch1: X7 (Sin/Cos, TTL, cyclical SSI, cyclical EnDAT, etc.) (see Section ""Channel 1: Interface X7"" on page 59)
+- Ch2: X6 (resolver, low-frequency Sin/Cos input as well if applicable)
+- Ch3: X8 (various option modules, including, but not limited to, various encoder modules) (see Section ""Channel 3: Interface X8 (optional)"" on page 76)
+- Ch4: Virtual encoder
+
+# 6.1.1 Limiting for EnDat and SSI
+
+“Cyclical EnDat"" means a cyclical, purely digital EnDat evaluation without Sin/Cos signal evaluation.
+
+On the MSD Servo Drive, EnDat and SSI can be selected simultaneously only once. Even though there is an additional option for EnDat/SSI at X8, the following cannot be operated simultaneously on the MSD Servo Drive:
+
+- two EnDat encoders
+- or two SSI encoders
+
+# 6.1.2 Encoder gearing
+
+The encoder gearing is an integral part of the encoder evaluation system. Whenever, for example, the “Ch1 encoder position” is described below, it already includes the encoder gearing. The relevant encoder position is always delivered together with the encoder gearing ratio to the mechanisms in charge of further processing in the Servo Drive.
+
+The encoder gearing can be used, for example, to make adjustments if the encoder is a motor encoder (commutation encoder) but is not directly on the motor shaft: In this case, it would be necessary to make an adjustment to the pure encoder position in line with the motor’s commutation (pole pair subdivision). In the case of linear motor drives, for instance, this adjustment is required without fail.
+
+The encoder gearing can also be used, for instance, to perform initial scaling for the position as required for the actual application: For example, in cases in which the encoder is not the motor encoder (i.e. in which it is not needed as a commutation encoder), but just a field encoder (another encoder in the field).
+
+For more details regarding the encoder gearing, see Section ""Encoder gearing"" on page 89.
+
+# 6.1.3 Actual values at the encoder channel outputs
+
+The relevant encoder positions will be delivered at the encoder channel outputs to the mechanisms in charge of further processing in the Servo Drive. At these points, the actual value will be passed to one parameter per encoder channel.
+
+# 6.2 Encoder selection
+
+Speaking, these actual encoder channel values are not actual position values (in terms of position control), these parameters are assigned to the “Encoder” screen and not the “Actual values” screen.
+
+The parameters for the actual values at the encoder channel outputs are used for indication purposes only and are...
+
+- P 500 - ENC_CH1_ActVal for Ch1
+- P 501 - ENC_CH2_ActVal for Ch2
+- P 502 - ENC_CH3_ActVal for Ch3
+- P 503 - ENC_CH4_ActVal for Ch4
+
+The parameters are field parameters with...
+
+- Index 0 (single-turn component) and
+- Index 1 (multi-turn component)
+
+Image 6.1: Encoder channel selection screen
+
+The MSD Servo Drive’s control is subdivided into three levels...
+
+- MCON (Commutation and Torque control)
+- SCON (Speed control)
+- PCON (Position control).
+
+This screen is used to select the encoder channel for each of the control levels.
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 53
+
+# 6 Encoder
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+To assign the encoder channel for...
+
+- Commutation and torque control, use P 520[0] - ENC_MCon
+- Speed control, use P 521[0] - ENC_SCon
+- Position control, use P 522[0] - ENC_PCon
+
+For the encoder for commutation and torque control, P 349[0] - CON_FM_MConOffset can be used to set an offset. For details see Section ""Encoder offset"" on page 55.
+
+Once you select an encoder channel for a control level, you can click on the “Options...” button to access the encoder selection menu for that encoder channel. You can use the lines underneath each selection field to enter your own information for describing the respective encoder channels (maximum of 31 characters). This information will be stored in...
+
+- P 555[0] - ENC_CH1_Info for commutation and torque control
+- P 564[0] - ENC_CH2_Info for speed control
+- P 580[0] - ENC_CH3_Info for position control
+
+**Table 6.1: Encoder channel selection parameters**
+|P No.|Index|Name|Unit|Description|
+|---|---|---|---|---|
+|520|0|ENC_MCon| |Selection of encoder channel for commutation angle|
+|521|0|ENC_SCon| |Selection of encoder channel for speed control|
+|522|0|ENC_PCon| |Selection of encoder channel for position control|
+|555|0|ENC_CH1_Info| |Encoder information Channel 1|
+|564|0|ENC_CH2_Info| |Encoder information Channel 2|
+|580|0|ENC_CH3_Info| |Encoder information Channel 3|
+
+NOTE
+
+- When you select a specific encoder with the “Options..."" button, wire break monitoring will be enabled if the encoder and the encoder interface support wire break monitoring.
+
+# 6.3 Encoder offset
+
+“Encoder offset” refers to the commutation offset. This offset is the angular offset between the motor’s electromechanical layout (U phase orientation) and the zero position of the commutation encoder (depends on the encoder’s position and alignment on the motor shaft) in “electrical degrees”. If the encoder’s zero position is aligned with the direction of the motor’s U phase, the commutation offset is 0 degrees.
+
+The “Encoder selection” screen (see Section ""Encoder selection"" on page 53) will show the currently set commutation offset as the “encoder offset” based on the encoder used for the “commutation and torque control"" (MCON) control level. To determine the offset value again, click on the “Detect” button. In order for this function to work correctly, the selected encoder for “commutation and torque control” must be the motor encoder (commutation encoder).
+
+The process takes about 10 seconds. Then the current value of the offset is entered in the P 349[0] - CON_FM_MConOffset and the original parameter setting is restored. In order to store the commutation offset in the device in a non-volatile manner, the device setting must be stored in non-volatile memory.
+
+It is not necessary to determine the commutation offset for standard Moog motors, as the encoders are aligned. In the case of third-party motors that are not aligned, the commutation offset needs to be determined with the help of a wizard. For the definition, the motor is run in ""Current control"" mode (at rated current). ",What is the recommended setting for MOT_Filt_Sel when using a motor choke without negative influences on stability in the 'MSD ServoDrive - DeviceHelp' document?,It is recommended to select MOT_Filt_Sel = 0 and add the motor choke’s inductance to MOT_Lsig.,"For stable operation with a motor choke, set MOT_Filt_Sel to 0 and adjust MOT_Lsig accordingly.",The document advises setting MOT_Filt_Sel to 0 and incorporating the choke's inductance into MOT_Lsig for stability.,Opt for MOT_Filt_Sel = 0 and include the motor choke’s inductance in MOT_Lsig as recommended.,Set MOT_Filt_Sel to 0 and add the choke's inductance to MOT_Lsig for optimal stability.

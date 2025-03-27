@@ -1,0 +1,2801 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A_NUMBER,A,helpfulness,correctness,coherence,complexity,verbosity
+0,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the acknowledgment time compare between 1oo1 and 1oo2 sensor evaluations for the SM326; DI x 24 DC 24V module?,A1,"1oo1 is 29 ms, and 1oo2 is 30 ms for the 6ES7326-1BK01-0AB0.",1.0703125,1.2578125,3.40625,1.2421875,0.36328125
+1,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the acknowledgment time compare between 1oo1 and 1oo2 sensor evaluations for the SM326; DI x 24 DC 24V module?,A2,"The 1oo1 evaluation has a max of 29 ms, while 1oo2 goes up to 30 ms.",2.3125,2.46875,3.84375,1.203125,0.369140625
+2,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the acknowledgment time compare between 1oo1 and 1oo2 sensor evaluations for the SM326; DI x 24 DC 24V module?,A3,"For this module, 1oo1 is slightly faster at 29 ms compared to 1oo2's 30 ms.",2.90625,3.046875,3.890625,1.3046875,0.4296875
+3,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the acknowledgment time compare between 1oo1 and 1oo2 sensor evaluations for the SM326; DI x 24 DC 24V module?,A4,Acknowledgment times are 29 ms for 1oo1 and 30 ms for 1oo2 evaluations.,2.359375,2.5,3.6875,1.3515625,0.3203125
+4,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the acknowledgment time compare between 1oo1 and 1oo2 sensor evaluations for the SM326; DI x 24 DC 24V module?,A5,The difference is minimal: 29 ms for 1oo1 versus 30 ms for 1oo2.,2.640625,2.859375,3.84375,1.28125,0.283203125
+5,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the response time per activated channel change for the SM336; AI 6 x 13Bit module when the frequency is increased to 60 Hz?,A1,It increases to a max of 60 ms.,1.0625,0.8203125,3.375,0.83984375,0.1533203125
+6,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the response time per activated channel change for the SM336; AI 6 x 13Bit module when the frequency is increased to 60 Hz?,A2,"At 60 Hz, the maximum response time per channel is 60 ms.",0.74609375,0.8046875,3.296875,0.89453125,0.2275390625
+7,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the response time per activated channel change for the SM336; AI 6 x 13Bit module when the frequency is increased to 60 Hz?,A3,The response time per channel rises to 60 ms at 60 Hz.,0.9609375,0.96484375,3.421875,0.8828125,0.1865234375
+8,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the response time per activated channel change for the SM336; AI 6 x 13Bit module when the frequency is increased to 60 Hz?,A4,Increasing the frequency to 60 Hz ups the response time to 60 ms per channel.,1.1640625,1.03125,3.515625,0.98046875,0.326171875
+9,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",How does the response time per activated channel change for the SM336; AI 6 x 13Bit module when the frequency is increased to 60 Hz?,A5,60 Hz operation sees a max response time of 60 ms per channel.,1.1796875,1.03125,3.375,0.94921875,0.1806640625
+10,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What factors determine the acknowledgment time for the SM336; AI 6 x 13Bit module?,A1,It's based on the maximum response time per channel times the number of activated channels plus the maximum basic response time.,2.015625,2.25,3.65625,1.5234375,0.3828125
+11,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What factors determine the acknowledgment time for the SM336; AI 6 x 13Bit module?,A2,"Acknowledgment time equals maximum response time per channel multiplied by N plus maximum basic response time, where N is the number of activated channels.",2.1875,2.34375,3.671875,1.5703125,0.58984375
+12,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What factors determine the acknowledgment time for the SM336; AI 6 x 13Bit module?,A3,"For this module, the acknowledgment time is calculated by multiplying the maximum response time per channel by the number of activated channels and adding the maximum basic response time.",2.265625,2.46875,3.703125,1.6328125,0.59765625
+13,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What factors determine the acknowledgment time for the SM336; AI 6 x 13Bit module?,A4,"The formula involves the response time per activated channel, the number of channels, and a basic response time.",1.3515625,1.4609375,3.25,1.421875,0.298828125
+14,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What factors determine the acknowledgment time for the SM336; AI 6 x 13Bit module?,A5,"It's a function of per-channel response time, activated channels count, and a base response time.",2.015625,2.234375,3.734375,1.3671875,0.26171875
+15,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; DI x 24 DC 24V module with sensor evaluation 1oo1 (1v1)?,A1,The maximum acknowledgment time is 29 ms.,2.078125,2.078125,3.625,1.046875,0.17578125
+16,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; DI x 24 DC 24V module with sensor evaluation 1oo1 (1v1)?,A2,"For the SM326; DI x 24 DC 24V module with 1oo1 evaluation, it's up to 29 ms.",2.53125,2.609375,3.59375,1.359375,0.5625
+17,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; DI x 24 DC 24V module with sensor evaluation 1oo1 (1v1)?,A3,29 ms is the max acknowledgment time for this module under 1oo1 sensor evaluation.,2.59375,2.6875,3.671875,1.3984375,0.5234375
+18,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; DI x 24 DC 24V module with sensor evaluation 1oo1 (1v1)?,A4,"Under 1oo1 sensor evaluation, the SM326; DI x 24 DC 24V module has a maximum acknowledgment time of 29 ms.",2.53125,2.75,3.765625,1.4296875,0.6328125
+19,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; DI x 24 DC 24V module with sensor evaluation 1oo1 (1v1)?,A5,"With 1oo1 sensor evaluation, expect a max acknowledgment time of 29 ms for the SM326; DI x 24 DC 24V.",2.6875,2.75,3.578125,1.5,0.59375
+20,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; F-DO 10 x DC 24V/2A PP module?,A1,It's 10 ms.,1.5859375,1.5625,3.5625,0.6796875,-0.001434326171875
+21,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; F-DO 10 x DC 24V/2A PP module?,A2,The SM326; F-DO 10 x DC 24V/2A PP module has a max acknowledgment time of 10 ms.,2.15625,2.171875,3.765625,1.34375,0.59375
+22,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; F-DO 10 x DC 24V/2A PP module?,A3,"For this F-DO module, the maximum acknowledgment time is 10 ms.",2.359375,2.203125,3.65625,1.140625,0.404296875
+23,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; F-DO 10 x DC 24V/2A PP module?,A4,10 ms is the highest acknowledgment time recorded for this module.,1.78125,1.5234375,3.5625,1.1484375,0.3203125
+24,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the maximum acknowledgment time for the SM326; F-DO 10 x DC 24V/2A PP module?,A5,This module's acknowledgment time peaks at 10 ms in safety mode.,2.390625,2.453125,3.65625,1.1875,0.4296875
+25,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the purpose of the table showing the max. acknowledgment time of selected F-signal groups?,A1,To provide reference for the maximum acknowledgment times of various F-signal modules in safety mode.,2.265625,2.15625,3.453125,1.359375,0.337890625
+26,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the purpose of the table showing the max. acknowledgment time of selected F-signal groups?,A2,It serves as a guide for the highest acknowledgment times expected from certain F-signal modules.,2.28125,2.28125,3.515625,1.265625,0.28125
+27,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the purpose of the table showing the max. acknowledgment time of selected F-signal groups?,A3,The table is meant to inform users about the max acknowledgment times for safety mode operations.,2.484375,2.421875,3.515625,1.25,0.359375
+28,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the purpose of the table showing the max. acknowledgment time of selected F-signal groups?,A4,Its aim is to list the upper limits of acknowledgment times for specific F-signal groups.,2.515625,2.421875,3.421875,1.2265625,0.2265625
+29,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the purpose of the table showing the max. acknowledgment time of selected F-signal groups?,A5,To detail the peak acknowledgment times for selected F-signal modules during safety mode.,1.4765625,1.140625,3.09375,1.1875,0.2890625
+30,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the response time per activated channel for the SM336; AI 6 x 13Bit module at 50 Hz?,A1,Max. 50 ms.,1.7734375,1.7109375,3.390625,0.98828125,0.08740234375
+31,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the response time per activated channel for the SM336; AI 6 x 13Bit module at 50 Hz?,A2,"At 50 Hz, it's up to 50 ms per channel.",1.765625,1.875,3.46875,1.078125,0.349609375
+32,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the response time per activated channel for the SM336; AI 6 x 13Bit module at 50 Hz?,A3,The maximum response time per channel is 50 ms at 50 Hz.,1.5859375,1.5546875,3.40625,1.0703125,0.3046875
+33,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the response time per activated channel for the SM336; AI 6 x 13Bit module at 50 Hz?,A4,"For each activated channel, expect a max of 50 ms at 50 Hz.",1.734375,1.6640625,3.453125,1.0390625,0.423828125
+34,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the response time per activated channel for the SM336; AI 6 x 13Bit module at 50 Hz?,A5,50 ms is the ceiling for response time per channel at 50 Hz.,1.5234375,1.5,3.421875,1.0703125,0.291015625
+35,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the total I/O bytes for the 4 F-AI HART. Ex module when one module is used?,A1,16 bytes.,1.28125,1.25,3.078125,0.8359375,0.11572265625
+36,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the total I/O bytes for the 4 F-AI HART. Ex module when one module is used?,A2,Using one 4 F-AI HART. Ex module totals 16 I/O bytes.,1.359375,1.5859375,3.453125,1.140625,0.255859375
+37,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the total I/O bytes for the 4 F-AI HART. Ex module when one module is used?,A3,"For a single module, the total is 16 bytes.",1.6328125,1.5859375,3.328125,1.1796875,0.287109375
+38,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the total I/O bytes for the 4 F-AI HART. Ex module when one module is used?,A4,One module of 4 F-AI HART. Ex contributes 16 bytes to the total I/O.,1.96875,2.03125,3.40625,1.4140625,0.484375
+39,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",What is the total I/O bytes for the 4 F-AI HART. Ex module when one module is used?,A5,16 bytes is the sum for one 4 F-AI HART. Ex module.,2.234375,2.375,3.515625,1.2734375,0.373046875
+40,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Where can one find the maximum acknowledgment time for an I/O module not listed in the provided table?,A1,In the corresponding data sheet for the I/O module concerned.,3.203125,3.125,3.703125,1.234375,0.353515625
+41,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Where can one find the maximum acknowledgment time for an I/O module not listed in the provided table?,A2,Check the specific data sheet of the I/O module in question.,2.953125,2.984375,3.671875,1.0703125,0.26171875
+42,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Where can one find the maximum acknowledgment time for an I/O module not listed in the provided table?,A3,The data sheet for the respective I/O module will have this information.,3.015625,3.046875,3.75,1.1171875,0.341796875
+43,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Where can one find the maximum acknowledgment time for an I/O module not listed in the provided table?,A4,Refer to the module's individual data sheet for its maximum acknowledgment time.,3.21875,3.078125,3.703125,1.1015625,0.388671875
+44,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Where can one find the maximum acknowledgment time for an I/O module not listed in the provided table?,A5,Maximum acknowledgment times for unlisted modules are available in their respective data sheets.,3.09375,3.0,3.71875,1.1171875,0.37890625
+45,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Which module has the longest acknowledgment time listed in the table?,A1,The SM326; DI 8 x NAMUR with a max of 68 ms.,2.609375,2.609375,3.8125,1.0,0.458984375
+46,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Which module has the longest acknowledgment time listed in the table?,A2,SM326; DI 8 x NAMUR tops the list at 68 ms.,2.375,2.453125,3.6875,0.9375,0.451171875
+47,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Which module has the longest acknowledgment time listed in the table?,A3,"At 68 ms, the SM326; DI 8 x NAMUR has the longest acknowledgment time.",2.6875,2.84375,3.90625,1.1484375,0.58984375
+48,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Which module has the longest acknowledgment time listed in the table?,A4,The longest is 68 ms for the SM326; DI 8 x NAMUR module.,2.875,2.953125,3.875,0.953125,0.50390625
+49,pcs7_compendium_part_b_en-US_en-US.txt,67,7aa37d71cff93a6c81b2e7d0cb57f25db4a69ad7f149e9dea61a0de6050bab85,"# Example for determining all input/output bytes with F-modules
+
+The table is only intended as an example and does not include all ET 200iSP modules. You need to add the modules used as required. Existing standard modules in ET 200iSP must also be taken into account (see the manual ""SIMATIC Distributed I/O ET 200iSP"" (https://support.industry.siemens.com/cs/ww/en/view/98821323)).
+
+|Electronics module|Number of I/O bytes|Number of modules|Total I/O bytes|
+|---|---|---|---|
+|4 F-AI HART. Ex|12/4|1|16|
+|6ES7 138-7FA00-0AB0| | | |
+|8 F-DI NAMUR, Ex|6/4|1|10|
+|6ES7 138-7FN00-0AB0| | | |
+|4 F-DO 40mA, Ex|5/5|1|10|
+|6ES7 138-7FD00-0AB0| | | |
+|4 AI without HART|8|1|8|
+|6ES7134-7TD00-0AB0| | | |
+|4 AI with HART|28(max.)|1|28|
+|6ES7134-7TD00-0AB0| | | |
+|8 DI NAMUR with digital inputs|3|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|8 DI NAMUR with counter inputs|7|-|-|
+|6ES7131-7RF00-0AB0| | | |
+|Sum|Sum|Sum|36|
+
+Compendium Part B - Process Safety (V9.0)
+
+Operating Manual, 04/2018, A5E43228905-AA
+
+# Configuring the safety program
+
+# 7.11 Monitoring times and system response times
+
+TDAT parameter
+
+You can find the maximum acknowledgment time of the F-signal modules in the corresponding data sheet for the I/O module concerned. The following table shows the max. acknowledgment time of selected F-signal groups:
+
+|Module|Acknowledgment time in safety mode|
+|---|---|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK01-0AB0|With sensor evaluation 1oo2 (2v2): Max. 30 ms|
+|SM326; DI x 24 DC 24V|With sensor evaluation 1oo1 (1v1): Max. 29 ms|
+|6ES7326-1BK02-0AB0|With sensor evaluation 1oo2 (2v2): Max. 29 ms|
+|SM326; DI 8 x NAMUR|Max. 68 ms|
+|6ES7326-1RF00-0AB0| |
+|6ES7326-1RF01-0AB0| |
+|SM326; DO 10 x DC 24V/2A|Max. 20 ms|
+|6ES7326-2BF01-0AB0| |
+|SM326; F-DO 10 x DC 24V/2A PP|Max. 10 ms|
+|6ES7326-2BF10-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 14 ms|
+|6ES7326-2BF40-0AB0| |
+|SM326; F-DO 8 x DC 24V/2A PM|Max. 18 ms|
+|6ES7326-2BF41-0AB0| |
+|SM336; AI 6 x 13Bit|Acknowledgment time = Maximum response time|
+|6ES7336-1HE00-0AB0|= Maximum response time per channel x N + maximum basic response time (N = Number of activated channels)|
+| |• Response time per activated channel:|
+| |– At 50 Hz: Max. 50 ms|
+| |– At 60 Hz: Max. ",Which module has the longest acknowledgment time listed in the table?,A5,SM326; DI 8 x NAMUR leads with a 68 ms acknowledgment time.,1.8046875,2.0,3.71875,0.93359375,0.375

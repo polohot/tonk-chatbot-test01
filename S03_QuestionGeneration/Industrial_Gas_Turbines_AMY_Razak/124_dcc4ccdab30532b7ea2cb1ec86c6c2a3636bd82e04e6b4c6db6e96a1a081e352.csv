@@ -1,0 +1,861 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+","What is the significance of the HP compressor inlet temperature, T₃, in the performance prediction of a gas turbine?",T₃ is crucial as it affects the compressor's efficiency and the overall performance of the gas turbine.,"The HP compressor inlet temperature, T₃, plays a key role in determining the compressor's pressure ratio and the gas turbine's thermal efficiency.","In gas turbine performance prediction, T₃ influences the power balance and flow compatibility within the HP compressor.","T₃, the HP compressor inlet temperature, is essential for calculating the compressor's non-dimensional speed and its impact on variable geometry devices.","The HP compressor inlet temperature, T₃, is a critical parameter that affects the combustor inlet temperature and, subsequently, the turbine entry temperature."
+1,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+",How does variable geometry in compressors affect the off-design performance of gas turbines?,"Variable geometry in compressors adjusts the air flow, improving efficiency and preventing instabilities like stall and surge.","By altering the guide vane angle, variable geometry compressors can maintain optimal exhaust gas temperatures at low power outputs.","Variable geometry devices, such as VIGVs and VSVs, change the compressor's flow capacity and pressure ratio, enhancing off-design performance.","In single-shaft gas turbines, variable geometry compressors reduce starting power requirements by controlling air flow.","Variable geometry in compressors ensures the fuel–air ratio remains constant, benefiting DLE combustion systems."
+2,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+",What role does the HP turbine flow compatibility play in gas turbine performance prediction?,HP turbine flow compatibility ensures the turbine's operational parameters align with the compressor's output for efficient performance.,It is a check vector that verifies the alignment between the HP turbine's flow characteristics and the compressor's exit conditions.,HP turbine flow compatibility is essential for maintaining the balance between the turbine's power output and the compressor's power requirement.,This compatibility criterion helps in predicting the off-design performance by ensuring the turbine's flow capacity matches the compressor's output.,It acts as a critical parameter in the iterative process of predicting the gas turbine's performance under varying operational conditions.
+3,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+",Why is the exhaust gas temperature important in single-shaft gas turbines with variable geometry compressors?,The exhaust gas temperature is controlled to maintain thermal efficiency and reduce starting power requirements.,"It is crucial for ensuring the fuel–air ratio remains constant, especially in DLE combustion systems.",Maintaining the exhaust gas temperature at its design value at low power outputs enhances the gas turbine's efficiency.,"In single-shaft gas turbines, the exhaust gas temperature is a key parameter for controlling the air flow through the compressor.",The exhaust gas temperature's control is vital for the performance of combined cycle plants and those with heat exchangers.
+4,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+",How does variable geometry in power turbines improve off-design thermal efficiency?,"By adjusting the NGV angle, variable geometry power turbines can optimize flow capacity and efficiency at low power outputs.",Variable geometry allows for improved acceleration and engine braking by altering the turbine's flow characteristics.,"It enhances thermal efficiency by maintaining optimal exhaust gas temperatures, especially in systems with heat exchangers.","The ability to change the NGV angle enables the turbine to adapt to varying operational demands, improving overall performance.",Variable geometry in power turbines ensures the gas turbine operates efficiently across a wide range of power outputs.
+5,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+",What is the purpose of intercooling in a two-shaft gas turbine with a free power turbine?,"Intercooling reduces the temperature between compressor stages, improving efficiency and power output.",It allows for higher pressure ratios across the compressor stages by cooling the air before it enters the next stage.,Intercooling is used to enhance the thermal efficiency of the gas turbine by lowering the compressor's work requirement.,"In gas turbines, intercooling can be omitted, but it significantly benefits performance when included.","The primary purpose of intercooling is to increase the density of the air entering the HP compressor, improving combustion efficiency."
+6,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+",What are the benefits of regeneration in gas turbine cycles?,Regeneration improves thermal efficiency by recovering heat from the exhaust gases to preheat the compressor discharge air.,"It allows for lower fuel consumption by utilizing waste heat, enhancing the overall efficiency of the gas turbine.","Regeneration can maintain higher exhaust gas temperatures at low power outputs, benefiting combined cycle plants.","By preheating the air entering the combustor, regeneration reduces the required fuel input for the same power output.",The inclusion of a heat exchanger for regeneration can significantly improve the off-design performance of gas turbines.
+7,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+",How does the LP turbine power balance affect the performance of a gas turbine?,"The LP turbine power balance ensures the power generated matches the compressor's power requirement, maintaining operational stability.","It is a critical parameter in predicting the off-design performance, affecting the turbine's efficiency and power output.",The balance between the LP turbine's power output and the compressor's power demand influences the gas turbine's overall efficiency.,LP turbine power balance is essential for the accurate prediction of performance in cycles with intercooling and reheat.,"This balance acts as a check vector in the iterative process of performance prediction, ensuring the turbine meets the engine's power needs."
+8,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+","What is the significance of the combustor inlet temperature, T₅, in gas turbine performance?","T₅ directly impacts the combustion efficiency and the turbine entry temperature, affecting the overall performance.","The combustor inlet temperature, T₅, is crucial for determining the fuel–air ratio and the combustor's thermal efficiency.",Higher T₅ values can lead to increased thermal efficiency but may require advanced materials for the combustor and turbine.,T₅ influences the HP turbine's power balance and the gas turbine's ability to maintain optimal performance under varying conditions.,Maintaining an optimal T₅ is essential for achieving the desired power output while ensuring the longevity of turbine components.
+9,Industrial_Gas_Turbines_AMY_Razak.txt,124,dcc4ccdab30532b7ea2cb1ec86c6c2a3636bd82e04e6b4c6db6e96a1a081e352,"LP compressor pressure ratio, P₂/P₁
+3. HP compressor inlet temperature, T₃
+4. HP compressor pressure ratio, P₃/P₂
+5. combustor inlet temperature, T₅
+6. HP turbine entry temperature, T₄
+7. HP turbine pressure ratio, P₄/P₅
+8. LP turbine pressure ratio, P₅/P₆.
+
+Check vectors are:
+
+⌈ W₄   R T   /γ   ⌉
+
+(1) HP turbine flow compatibility,  ⌊       4  4   4  ⌋
+
+⎜       P₄        ⎝
+
+# Off-design performance prediction
+
+# 199
+
+|1|HP|Fuel input|7|8|Reheater|9|
+|---|---|---|---|---|---|---|
+|2|3|compressor|Combustor|6| | |
+|LP|11|turbine|LP|compressor| | |
+|Heat exchanger|turbine|10| | | | |
+|1|LP compressor inlet| | | | | |
+|2|LP compressor exit/intercooler inlet| | | | | |
+|3|Intercooler exit/HP compressor inlet| | | | | |
+|4|HP compressor exit/heat exchanger inlet (cold side)| | | | | |
+|5|Heat exchanger exit (cold side)/combustor inlet| | | | | |
+|6|Combustor exit/HP turbine inlet| | | | | |
+|7|LP turbine inlet| | | | | |
+|8|LP turbine exit/reheater inlet| | | | | |
+|9|Reheater exit/power turbine inlet| | | | | |
+|10|Power turbine exit/heat exchanger inlet (hot side)| | | | | |
+|11|Heat exchanger exit (hot side)| | | | | |
+
+7.13 Schematic representation of a two-shaft gas turbine including intercooling, regeneration and reheating operating with a free power turbine.
+
+(2) HP turbine power balance, (W₂ × cpa × (T₃ – T₂) – W₃ × cpg × (T₄ – T₅))
+
+⌈ W₅   R T   /γ  ⌉
+
+(3) LP turbine flow compatibility  ⌊          5 5   5 ⌋
+
+⎜       P₅       ⎝
+
+(4) LP turbine power balance (W₁ × cpa × (T₂ – T₁) – W₅ × cpg × (T₅ – T₆))
+
+⌈ W₆   R T   /γ   ⌉
+
+(5) power turbine flow compatibility     ⌊       6  6   6  ⌋
+
+⎜       P₆        ⎝
+
+(6) difference between the estimated heat exchanger air exit temperature and that calculated by the heat exchanger in Equation 2.35 given in Chapter 2
+
+(7) difference between the estimated cooler exit temperature, T₃, and that calculated from the cooler effectiveness in Equation 7.27
+
+(8) comparison between the power output from the power turbine and the power required.
+
+Intercooling may be ignored, in which case estimated vector (3) and check vector (7) can be omitted. If intercooling and regeneration are ignored and only reheat considered, then the estimated and check vectors are the same as shown in Section 7.5.
+
+# 200 Industrial gas turbines – principles of performance
+
+Similarly, the off-design performance of two- and three-shaft gas turbines may be predicted as discussed in Sections 7.6 and 7.7 using intercooling and reheat, and the reader is left to develop the necessary vector data to predict the off-design performance of these cycles.
+
+# 7.11 Variable geometry compressors
+
+The use of variable geometry in compressors has been discussed in Chapter 4 (variable inlet guide vanes and stators, VIGVs and VSVs, respectively) to prevent compressor instabilities such as compressor stall and surge. Although the compressor characteristic will indeed change with the position of such variable geometry devices (guide vane angle), the control philosophy of these devices applied to a two- or three-shaft gas turbine operating with a free power turbine is such that the compressor non-dimensional speed is used in determining the position of the VIGV and VSV. Thus, for a given compressor non-dimensional speed, there is a unique VIGV and VSV position or guide vane angle which, in turn, fixes the compressor flow capacity, pressure ratio and efficiency. Provided the compressor characteristic employed in the prediction of the off-design performance of such engine configurations includes the effect of the position of these variable geometry devices in the compressor, then no change in the procedures given previously for predicting the off-design performance of such engines is necessary.
+
+Single-shaft gas turbines, particularly generating large power outputs (above about 50 MW), also employ variable geometry in the compressor, usually VIGVs. The purpose of variable geometry in compressors employed by single-shaft gas turbines is to control the air flow through the compressor, such that the turbine exit temperature (also known as the exhaust gas temperature) is maintained at some predetermined value. Controlling the exhaust gas temperature by such means results in a reduction in the compressor flows at low power outputs, thus significantly decreasing the starting power requirements of the gas turbine. Variable geometry may also be employed to maintain the exhaust gas temperature at its design value at low power. Maintaining the exhaust gas temperature at the design value at low powers is particularly beneficial to the thermal efficiency at these powers when a heat exchanger is added or when the gas turbine is part of a combined cycle plant. Furthermore, the fuel–air ratio remains approximately constant at constant exhaust gas temperature operation, which is particularly useful in DLE combustion systems, as discussed in Chapter 6 on gas turbine combustion.
+
+Unlike the case of a free power turbine discussed above, the compressor characteristic needs to be known for each VIGV and VSV setting (angle). Furthermore, an additional estimate and check is necessary when predicting the off-design performance of a single-shaft gas turbine operating with variable geometry compressors. This estimate and check corresponds to the guide
+
+# 7.12 Variable geometry turbines
+
+Turbines may also incorporate variable geometry and this is usually applied to power turbines where the nozzle guide vanes (NGVs) are turned to alter the flow capacity and thus the turbine characteristic. Variable geometry has been employed in turbines operating with free power turbines to improve the off-design thermal efficiency (i.e. low power outputs), particularly when a heat exchanger is added. Variable geometry power turbines also provide improved acceleration when the NGVs are full opened and can also be used to provide substantial engine braking when the NGVs are rotated sufficiently, such that the gases leaving the NGV impinge on the turbine rotor in the opposite direction.
+
+The prediction of the off-design performance of gas turbines employing variable geometry turbines requires an additional estimate and check vector, which correspond to the NGV angle and the required exhaust gas temperature, respectively. The exhaust gas temperature may be measured downstream of the gas generator turbine rather than at the power turbine exit. It is also necessary to know the change in the turbine characteristic with NGV angle, and the appropriate turbine characteristic must be used as the NGV angle changes during the iterations described above.
+
+# 7.13 References
+
+1. Gas Turbine Theory, 5th Edition, Saravanamuttoo, H.I.H., Rogers, C.F.G. and Cohen, H., Longman (2001).
+2. Gas Turbine Performance, 2nd Edition, Walsh, P.P. and Fletcher, P., Blackwell Publishing (2004).
+",How do variable geometry turbines contribute to engine braking in gas turbines?,"By rotating the NGVs sufficiently, variable geometry turbines can direct gases to impinge on the turbine rotor in the opposite direction, providing braking.","Variable geometry allows for the adjustment of flow capacity, enabling effective engine braking when needed.","The ability to alter the NGV angle in power turbines facilitates rapid deceleration, enhancing operational flexibility.","Engine braking is achieved by changing the turbine's flow characteristics, a feature enabled by variable geometry turbines.",Variable geometry turbines improve safety and control by offering substantial engine braking capabilities during operation.

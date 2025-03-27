@@ -1,0 +1,891 @@
+,NODE_FILE_NAME,NODE_NUMBER,NODE_HASH,NODE_TEXT,Q,A1,A2,A3,A4,A5
+0,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",What are the functions of the encoder in the system described in the 'MSD ServoDrive - DeviceHelp' document?,"The encoder is used for commutation and torque control, speed control for the motor, and position control for cylinder-position and cylinder-speed control.","In the system, encoders serve multiple purposes: managing motor commutation and torque, controlling motor speed, and overseeing cylinder position and speed.","Encoders in this setup have three main roles: facilitating motor commutation and torque control, regulating motor speed, and ensuring accurate cylinder position and speed control.","The document outlines encoder functions as essential for motor operations (commutation, torque, and speed control) and precise cylinder management (position and speed control).","For the motor, encoders handle commutation, torque, and speed. For cylinders, they manage position and speed, as detailed in the 'MSD ServoDrive - DeviceHelp'."
+1,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",What parameters are listed under 'Pump parameters' in the 'MSD ServoDrive - DeviceHelp' document?,"The parameters include displ, cTorque, pNom, nNom, etaVol, nMin, nMax, and nCritical, each with specific values and units.","Under 'Pump parameters', you'll find details like displacement (displ), torque constant (cTorque), nominal pressure (pNom), rated speed (nNom), volumetric efficiency (etaVol), minimum speed (nMin), maximum speed (nMax), and critical speed (nCritical).","Listed pump parameters cover operational specs such as displ (5.4 ccm/rev), cTorque (0.0859437 Nm/bar), pNom (250 bar), nNom (1500 rpm), etaVol (80%), nMin (0 rpm), nMax (2000 rpm), and nCritical (200 rpm).","The 'Pump parameters' section details essential metrics: displacement, torque constant, nominal pressure, rated speed, efficiency, and speed limits (min, max, critical).","Key pump settings in the document are displ, cTorque, pNom, nNom, etaVol, nMin, nMax, and nCritical, specifying pump performance and limits."
+2,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",What settings are required for the SSI protocol according to the 'MSD ServoDrive - DeviceHelp' document?,"Required settings include SingleTurn and MultiTurn bits, encoding type, and minimum MultiTurn position.","For the SSI protocol, it's necessary to specify the number of SingleTurn and MultiTurn bits, the encoding (e.g., GRAY), and the minimum MultiTurn position.","The document mandates configuring SingleTurn bits (19), MultiTurn bits (5), encoding (GRAY), and the minimum MultiTurn position for SSI protocol setup.","SSI protocol configuration involves setting up SingleTurn (19 bits) and MultiTurn (5 bits) parameters, choosing an encoding method (GRAY), and defining the minimum MultiTurn position.","Essential SSI protocol configurations include SingleTurn and MultiTurn bit counts, encoding selection, and establishing the minimum MultiTurn position, as outlined in the document."
+3,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",How is the volumetric flow rate value determined in the system described in the 'MSD ServoDrive - DeviceHelp' document?,It can be taken from a sensor (MEAS(0)) or calculated using cylinder speed and pump displacement volume (CYL(1)).,The volumetric flow rate is either measured directly by a sensor or derived from cylinder speed and pump displacement volume calculations.,"Determination methods include sensor measurement (MEAS(0)) or calculation based on cylinder speed and pump displacement (CYL(1)), as per parameter P 2840[8] - QActCal.","Options for determining volumetric flow rate are sensor-based measurement or calculation using cylinder speed and pump displacement, selected via P 2840[8] - QActCal.",The document specifies two methods for volumetric flow rate determination: direct sensor measurement or calculation from cylinder speed and pump displacement volume.
+4,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",What are the key parameters for the 'Hydraulic - position control' in the 'MSD ServoDrive - DeviceHelp' document?,"Key parameters include gain of position controller, position control integration time constant, speed feedforward scaling, and position tracking error monitoring.","The 'Hydraulic - position control' section lists parameters such as controller gain, integration time constant, feedforward scaling, and error monitoring.","Important settings under 'Hydraulic - position control' are gain (1/s), integration time constant (ms), feedforward scaling (%), and tracking error monitoring (um).","Parameters for hydraulic position control encompass controller gain, integration time, feedforward scaling, and tracking error limits, each with specific units.","The document highlights position controller gain, integration time, speed feedforward, and error monitoring as crucial for hydraulic position control."
+5,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",What is the purpose of the 'Scaling / Units' button mentioned in the 'MSD ServoDrive - DeviceHelp' document?,It provides a scaling assistant for unit scaling in the motion profile of the standard motor control.,The 'Scaling / Units' button offers assistance in adjusting unit scaling within the motor control's motion profile.,This button facilitates the scaling of units in the standard motor control's motion profile through an assistant tool.,"For scaling units in the motion profile, the 'Scaling / Units' button acts as a helpful assistant, as mentioned in the document.",The document describes the 'Scaling / Units' button as a tool to aid in the scaling of units for the motor control motion profile.
+6,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",What does the 'Motion profile' screen in the 'MSD ServoDrive - DeviceHelp' document entail?,It involves configuring the cylinder geometry for CYL(1) mode and setting up the motion block table for reference value generation.,The 'Motion profile' screen includes cylinder geometry configuration for CYL(1) mode and motion block table setup to generate reference values.,Configuring cylinder geometry for CYL(1) mode and arranging the motion block table for reference values are key aspects of the 'Motion profile' screen.,"This screen is about setting up cylinder geometry in CYL(1) mode and using the motion block table to create reference values, as per the document.",The document outlines the 'Motion profile' screen's focus on cylinder geometry configuration and motion block table arrangement for reference values.
+7,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",What is the significance of the 'Position control' screen in the 'MSD ServoDrive - DeviceHelp' document?,"It allows for the configuration of position controller parameters such as gain, integration time constant, speed feedforward scaling, and position tracking error monitoring.","The 'Position control' screen is crucial for setting up controller parameters including gain, integration time, feedforward scaling, and error monitoring.","Significance lies in its role in configuring key position control settings: gain, integration time, feedforward, and error monitoring.","This screen is important for adjusting position controller parameters like gain, integration time, feedforward scaling, and tracking error limits.",The document emphasizes the 'Position control' screen's importance in setting up essential parameters for effective position management.
+8,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",How is the cylinder geometry configured according to the 'MSD ServoDrive - DeviceHelp' document?,"It must be configured for the CYL(1) mode, as detailed in the 'Cylinder configuration' section.","Configuration involves setting up the cylinder geometry in CYL(1) mode, referencing the 'Cylinder configuration' section.","The document specifies configuring cylinder geometry in CYL(1) mode, with further details available in the 'Cylinder configuration' section.","For proper setup, cylinder geometry should be configured in CYL(1) mode, as instructed in the document's 'Cylinder configuration' part.","Cylinder geometry configuration requires setting it to CYL(1) mode, with additional guidance found in the 'Cylinder configuration' section."
+9,msd_servo_drive.txt,66,e3519bb290ed4a6ddaf277eecee9285a6d8f95048f52241597a224bd1f0580d4,"Sin/Cos, channel 1) via the function selector in the encoder screen.
+
+# NOTE
+
+- The encoder for commutation and torque control as well as speed control are used for the motor.
+- The encoder for position control is used for cylinder-position and cylinder-speed control.
+
+Image 7.90: “Pump settings” screen
+
+| | | | | |ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|---|---|---|---|---|
+|2851| |HYD_Pump| | |Pump parameters| | | | |
+|2851|0|displ|5.4|ccm/rev|Offset| | | | |
+|2851|1|cTorque|0.0859437|Nm/bar|Torque constant| | | | |
+|2851|2|pNom|250|bar|Nominal pressure| | | | |
+|2851|3|nNom|1500|rpm|Rated speed| | | | |
+|2851|4|etaVol|80|%|Volumetric efficiency at nominal pressure, rated speed| | | | |
+|2851|5|nMin|0|rpm|Minimum speed| | | | |
+|2851|6|nMax|2000|rpm|Maximum speed| | | | |
+|2851|7|nCritical|200|rpm|Critical speed (@ nominal pressure)| | | | |
+
+Table 7.99:   Pump data settings
+
+# Image 7.92: Encoder configuration channel 1 (X7) screen
+
+The settings for the SSI protocol can be made in the following parameters. The following must be specified here: the SingleTurn and MultiTurn bits, die encoding, and the minimum MultiTurn position.
+
+|ID|Index|Name|Value|Unit|Description|
+|---|---|---|---|---|---|
+|543|0|ENC_CH1_MultiT|5| |Number of multi-turn bits (absolute encoder)|
+|544|0|ENC_CH1_SingleT|19| |Number of single-turn bits (absolute encoder)|
+|545|0|ENC_CH1_Code|GRAY| |Selection of the encoding of the SSI absolute encoder|
+|546|0|ENC_CH1_Mode|0001h| |Mode selection: SSI absolute encoder|
+|547|0|ENC_CH1_MTBase|-| |Minimum MultiTurn position (SSI absolute encoder)|
+|548|0|ENC_CH1_MTEnable|1| |Channel 1: Multi-turn as single-turn|
+
+# Table 7.100: SSI encoder settings
+
+MOOG ID No.:CB40859-001 Date:11/2020
+
+MSD ServoDrive - DeviceHelp 216
+
+# 7 Control
+
+# 7 Control
+
+# MOOG
+
+ID No.: CB40859-001 Date: 11/2020
+
+# MSD ServoDrive - DeviceHelp
+
+|ID|Index Name|Value|Unit|Description|
+|---|---|---|---|---|
+|598|0|ENC_CH1_Position|4909|Channel 1: Position|
+|616|0|ENC_CH1_CycleCount|8|Channel 1: Position encoder sampling cycle (n x 125µs)|
+|617|0|ENC_CH1_AbsInitMode|DIG|Channel 1: Mode of absolute value initialization|
+
+# Table 7.100: SSI encoder settings (continue)
+
+The scaling of the units is performed in the motion profile of the standard motor control. A scaling assistant is available for this purpose (“Scaling / Units” button).
+
+Image 7.94: Volumetric flow rate control screen
+
+NOTE
+
+Image 7.93: “Motion profile” screen
+
+The cylinder geometry must be configured for the CYL(1) mode (see also section ""Cylinder configuration"" on page 188).
+
+Because a volumetric flow rate control underlies the position control, the following settings must be made beforehand.
+
+The parameter P 2840[8] - QActCal can be used to select whether the volumetric flow rate value is to be taken from a sensor (MEAS(0) = From measurement) or, as in this example, determined by means of a calculation using the cylinder speed and the pump displacement volume (CYL(1) = From cylinder speed).
+
+# Image 7.95: “Position control” screen
+
+|ID|Index Name|Unit|Description|
+|---|---|---|---|
+|2848|HYD_PosCon| |Position Controller Parameters|
+|2848|0|1/s|Gain of position controller|
+|2848|1|ms|Position control integration time constant|
+|2848|2|%|Speed feedforward scaling|
+|2848|3|um|Position tracking error monitoring|
+
+# Table 7.101: “Hydraulic - position control” parameters
+
+# Image 7.96: “Hydraulic Motion profile” screen
+
+The reference values are generated using the hydraulic motion profile. This configuration is set up using the motion block table. ",What information does the 'Volumetric flow rate control screen' provide in the 'MSD ServoDrive - DeviceHelp' document?,It details the settings and controls for managing volumetric flow rate within the system.,This screen offers insights into configuring and controlling the system's volumetric flow rate.,The 'Volumetric flow rate control screen' outlines the necessary configurations for effective flow rate management.,It provides a comprehensive overview of the settings required to control the system's volumetric flow rate accurately.,The document describes this screen as a crucial interface for setting up and adjusting volumetric flow rate controls.
